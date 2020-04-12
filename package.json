@@ -7,7 +7,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
-    "cy:open": "yarn start --silent & cypress open"
+    "cy:open": "./node_modules/.bin/cypress open"
   },
   "jest": {
     "preset": "jest-expo"
