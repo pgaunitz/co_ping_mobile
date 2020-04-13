@@ -1,17 +1,7 @@
 import * as React from "react";
-import { View, Text, Image, StyleSheet} from "react-native";
+import { View, Image, StyleSheet} from "react-native";
 import Logo from "./assets/images/co_ping_Logo2.png";
-
-const App = () => {
-  return (
-    <>
-    <View style={styles.mainpage}>
-    <Image style={styles.Logo} source={Logo} alt="where is my Logo!?!!!?!!"/>
-      <Text>New Trip</Text>
-    </View>
-    </>
-  );
-};
+import HomeScreen from "./screens/HomeScreen"
 
 const styles = StyleSheet.create({
   mainpage: {
@@ -19,10 +9,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#134E5E',
   },
   logo: {
-    width: 66,
-    height: 58,
+    width: 250,
+    height: 100,
+    alignSelf: 'center',
+    margin: 20 
   }
 });
+
+const App = () => {
+  return (
+    <>
+    <View style={styles.mainpage}>
+    <Image style={styles.logo} source={Logo} alt="where is my Logo!?!!!?!!"/>
+    <HomeScreen/>
+    </View>
+    </>
+  );
+};
 
 export default App;
 
