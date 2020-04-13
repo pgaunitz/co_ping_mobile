@@ -1,0 +1,2 @@
+export const NEW_TRIP_FORM = "NEW_TRIP_FORM"
+export const CLOSE_NEW_TRIP_FORM = "CLOSE_NEW_TRIP_FORM"
