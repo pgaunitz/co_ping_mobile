@@ -1,16 +1,24 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { TouchableHighlight, View, StyleSheet, Text } from "react-native";
-import {NEW_TRIP_FORM} from "../state/actions/actionTypes"
+import { NEW_TRIP_FORM, SHOW_LOGIN_FORM } from "../state/actions/actionTypes"
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
   const newTrip = () => {
     dispatch({type: NEW_TRIP_FORM})
   };
+  const login = () => {
+    dispatch({type: SHOW_LOGIN_FORM})
+  }
 
   return (
     <View>
+      <TouchableHighlight style={styles.button} onPress={login}>
+        <Text id="login-button" style={styles.buttonText}>
+          Login
+        </Text>
+      </TouchableHighlight>
       <TouchableHighlight style={styles.button} onPress={newTrip}>
         <Text id="new-trip-button" style={styles.buttonText}>
           New Trip

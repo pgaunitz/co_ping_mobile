@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import configureStore from "./state/store/configureStore";
 import NewTripForm from "./screens/NewTripForm";
 import axios from "axios"
+import LoginForm from "./screens/LoginForm"
 
 // axios.default.baseURL = "http://localhost:3000"
 axios.defaults.baseURL = "https://co-ping.herokuapp.com"
@@ -36,6 +37,7 @@ const App = () => {
           alt="Co-Ping logo"
         />
         <HomeScreen />
+        <LoginForm />
         <NewTripForm />
       </View>
     </Provider>

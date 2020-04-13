@@ -13,6 +13,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         showTripForm: false,
+      };
+    case actionTypes.SHOW_LOGIN_FORM:
+      return {
+        ...state,
+        showLoginForm: true 
       }
     default:
       return state;
