@@ -1,31 +1,27 @@
 import JtockAuth from "j-tockauth";
 import { AUTHENTICATE } from "../state/actions/actionTypes";
-import {useDispatch} from "react-redux"
 
 const auth = new JtockAuth({
-  host: "https://co-ping.herokuapp.com/"
+  host: "https://co-ping.herokuapp.com"
 });
 
-const onLogin = async (email, password) => {
-  const dispatch = useDispatch()
+const onLogin = async (email, password, dispatch) => {
   try {
     event.preventDefault();
-    let response = await auth.signIn(
-      event.target.email.value,
-      event.target.password.value
-    );
+    let response = await auth.signIn(email.email, password.password);
+
     dispatch({
       type: AUTHENTICATE,
       payload: {
         authenticated: true,
         userEmail: response.data.email,
         userName: response.data.name,
-        loginMessage: `Welcome back ${response.data.name}`,
-        showLoginForm: false
+        loginMessage: `Welcome back ${response.data.name}`
       }
     });
   } catch (error) {
     let errorMessage = error.response.data.errors[0];
+
     dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage } });
   }
 };

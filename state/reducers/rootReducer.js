@@ -7,18 +7,28 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.payload,
-        showTripForm: true,
+        showTripForm: true
       };
     case actionTypes.CLOSE_NEW_TRIP_FORM:
       return {
         ...state,
-        showTripForm: false,
+        showTripForm: false
       };
     case actionTypes.SHOW_LOGIN_FORM:
       return {
         ...state,
-        showLoginForm: true 
-      }
+        showLoginForm: true
+      };
+    case actionTypes.AUTHENTICATE:
+      return {
+        ...state,
+        ...action.payload
+      };
+    case actionTypes.CLOSE_LOGIN_FORM:
+      return {
+        ...state,
+        showLoginForm: false
+      };
     default:
       return state;
   }

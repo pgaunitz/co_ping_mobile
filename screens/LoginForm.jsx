@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { CLOSE_LOGIN_FORM } from "../state/actions/actionTypes";
 import {
@@ -8,20 +8,20 @@ import {
   Text,
   TouchableHighlight,
   TextInput,
-  View,
+  View
 } from "react-native";
-import {onLogin} from "../modules/authentication"
+import { onLogin } from "../modules/authentication";
 
 const LoginForm = () => {
-  const dispatch = useDispatch()
-  const loginMessage = useSelector(state => state.loginMessage)
-  const showLoginForm = useSelector(state => state.showLoginForm)
+  const dispatch = useDispatch();
+  const loginMessage = useSelector(state => state.loginMessage);
+  const showLoginForm = useSelector(state => state.showLoginForm);
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
 
-  const login = (email, password) => {
-    onLogin(email, password)
-  }
+  const login = e => {
+    onLogin({ email }, { password }, dispatch);
+  };
 
   return (
     <View>
@@ -43,20 +43,20 @@ const LoginForm = () => {
               style={styles.loginInput}
               id="email"
               value={email}
-              onChangeText={(email) => onChangeEmail(email)}
+              onChangeText={email => onChangeEmail(email)}
             />
             <TextInput
               placeholder="Password"
               style={styles.loginInput}
               id="password"
               value={password}
-              onChangeText={(password) => onChangePassword(password)}
+              onChangeText={password => onChangePassword(password)}
             />
 
             <TouchableHighlight
               style={styles.button}
-              onPress={(email, password) => {
-                login(email, password);
+              onPress={e => {
+                login(e);
               }}
             >
               <Text id="submit-login" style={styles.buttonText}>
@@ -79,12 +79,12 @@ const LoginForm = () => {
         </Modal>
       )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   formModal: {
-    alignSelf: "center",
+    alignSelf: "center"
   },
   modalView: {
     margin: 20,
@@ -95,22 +95,22 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 5
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "center"
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 25,
+    fontSize: 25
   },
   loginInput: {
     textAlign: "left",
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     padding: 18,
     margin: 2,
     borderColor: "black",
-    borderWidth: 2,
+    borderWidth: 2
   },
   button: {
     borderRadius: 5,
@@ -126,14 +126,13 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10,
+    padding: 10
   },
   buttonText: {
     color: "#black",
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: "500"
   }
-})
+});
 
-
-export default LoginForm
+export default LoginForm;
