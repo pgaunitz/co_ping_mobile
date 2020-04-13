@@ -11,14 +11,12 @@ describe("Vistor can", () => {
 
   it("sucessfully create a new trip ping", () => {
     cy.get("#new-trip-button").click();
-    cy.get("#trip-form").within(() => {
-      cy.get("#time").type("YYMMDD HHMM");
-      cy.get("#store").type("ICA");
-      cy.get("button").contains("Create Trip").click();
-    });
+    cy.get("#time").type("YYMMDD HHMM");
+    cy.get("#store").type("ICA");
+    cy.get("#create-trip-button").contains("Create").click();
     cy.get("#new-trip-message").should(
       "contain",
-      "You have successfully create a new shopping trip."
+      "Your new trip is now active"
     );
   });
 });
@@ -29,22 +27,18 @@ describe("Vistor can", () => {
     cy.route({
       method: "POST",
       url: "**/**",
-      status: 400,
-      response: {
-        errors: ["You MUST enter a shopping time."]
-      }
+      response: "fixture:new_trip_error_response.json",
     });
     cy.visit("/");
   });
   it("not create a new trip without a time", () => {
     cy.get("#new-trip-button").click();
-    cy.get("#trip-form").within(() => {
-      cy.get("#store").type("ICA");
-      cy.get("button").contains("Create Trip").click();
-    });
-    cy.get("#trip-error-message").should(
+    cy.get("#time").type(" ");
+    cy.get("#store").type("ICA");
+    cy.get("#create-trip-button").contains("Create").click();
+    cy.get("#new-trip-message").should(
       "contain",
-      "You MUST enter a shopping time."
+      "You need to set a time for your new trip"
     );
   });
 });

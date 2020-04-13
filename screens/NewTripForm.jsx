@@ -5,13 +5,39 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  TextInput,
   View,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios"
+import { NEW_TRIP_FORM } from "../state/actions/actionTypes"
 
 const NewTripForm = () => {
-  // const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch()
+
   const showTripForm = useSelector((state) => state.showTripForm);
+  const currentUserID = useSelector((state) => state.currentUserID);
+  const newTripCreatedMessage = useSelector((state) => state.newTripCreatedMessage);
+
+  const [timevalue, onChangeText] = React.useState('')
+  const [storevalue, onChangeStore] = React.useState('')
+
+  const createNewTrip = async e => {
+    e.preventDefault();
+    let response = await axios.post(
+      "/pings",
+      {
+        pings: {
+          id: { currentUserID },
+          time: { timevalue },
+          store: { storevalue }
+        }
+      },
+      { headers: { "Content-Type": "application/json" } }
+    )
+    dispatch({ type: NEW_TRIP_FORM, payload: { newTripCreatedMessage: response.data.message } });
+  }
+
   return (
     <View>
       {showTripForm && (
@@ -25,10 +51,18 @@ const NewTripForm = () => {
             Alert.alert("Modal has been closed.");
           }}
         >
-          <View style={styles.modalView}>
+          <View style={styles.modalView} id="trip-form">
             <Text style={styles.modalText}>
-              Hello World!Hello World!Hello World!Hello World!
+              New Shopping Trip Details
             </Text>
+            <TextInput placeholder="Date and Time" style={styles.dateInput} id="time" value={timevalue} onChangeText={time => onChangeText(time)} />
+            <TextInput placeholder="Store" style={styles.storeInput} id="store" value={storevalue} onChangeText={store => onChangeStore(store)} />
+            <TouchableHighlight style={styles.button} onPress={(e) => { createNewTrip(e) }}>
+              <Text id="create-trip-button" style={styles.buttonText}>
+                Create
+              </Text>
+            </TouchableHighlight>
+            <Text id="new-trip-message" style={styles.modelText}>{newTripCreatedMessage}</Text>
           </View>
         </Modal>
       )}
@@ -63,7 +97,39 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 25
   },
+  dateInput: {
+    textAlign: "left",
+    fontSize: 18,
+    padding: 18,
+    margin: 2,
+    borderColor: "black",
+    borderWidth: 2
+
+  },
+  storeInput: {
+    textAlign: "left",
+    fontSize: 18,
+    padding: 18,
+    margin: 2,
+    borderColor: "black",
+    borderWidth: 2
+  },
+  button: {
+    borderRadius: 5,
+    backgroundColor: "#71B280",
+    margin: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10
+  },
+  buttonText: {
+    color: "#black",
+    fontSize: 18,
+    fontWeight: "500",
+  }
 });
 
 export default NewTripForm;
