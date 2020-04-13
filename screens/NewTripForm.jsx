@@ -6,41 +6,42 @@ import {
   Text,
   TouchableHighlight,
   TextInput,
-  View
+  View,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import {
   NEW_TRIP_FORM,
-  CLOSE_NEW_TRIP_FORM
+  CLOSE_NEW_TRIP_FORM,
 } from "../state/actions/actionTypes";
 
 const NewTripForm = () => {
   const dispatch = useDispatch();
 
-  const showTripForm = useSelector(state => state.showTripForm);
+  const showTripForm = useSelector((state) => state.showTripForm);
   const newTripCreatedMessage = useSelector(
-    state => state.newTripCreatedMessage
+    (state) => state.newTripCreatedMessage
   );
 
   const [timevalue, onChangeText] = React.useState("");
   const [storevalue, onChangeStore] = React.useState("");
 
-  const createNewTrip = async e => {
+  const createNewTrip = async (e) => {
     e.preventDefault();
     let response = await axios.post(
-      "/pings",
+      "http://localhost:3000/pings",
       {
-        pings: {
-          time: { timevalue },
-          store: { storevalue }
-        }
+        ping: {
+          time: timevalue,
+          store: storevalue,
+        },
       },
       { headers: { "Content-Type": "application/json" } }
     );
+    debugger;
     dispatch({
       type: NEW_TRIP_FORM,
-      payload: { newTripCreatedMessage: response.data.message }
+      payload: { newTripCreatedMessage: response.data.message },
     });
   };
 
@@ -63,20 +64,21 @@ const NewTripForm = () => {
               placeholder="Date and Time"
               style={styles.dateInput}
               id="time"
+              type="time"
               value={timevalue}
-              onChangeText={time => onChangeText(time)}
+              onChangeText={(time) => onChangeText(time)}
             />
             <TextInput
               placeholder="Store"
               style={styles.storeInput}
               id="store"
               value={storevalue}
-              onChangeText={store => onChangeStore(store)}
+              onChangeText={(store) => onChangeStore(store)}
             />
 
             <TouchableHighlight
               style={styles.button}
-              onPress={e => {
+              onPress={(e) => {
                 createNewTrip(e);
               }}
             >
@@ -105,7 +107,7 @@ const NewTripForm = () => {
 
 const styles = StyleSheet.create({
   formModal: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
   modalView: {
     margin: 20,
@@ -116,22 +118,22 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 25
+    fontSize: 25,
   },
   dateInput: {
     textAlign: "left",
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
     padding: 18,
     margin: 2,
     borderColor: "black",
-    borderWidth: 2
+    borderWidth: 2,
   },
   storeInput: {
     textAlign: "left",
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
     padding: 18,
     margin: 2,
     borderColor: "black",
-    borderWidth: 2
+    borderWidth: 2,
   },
   button: {
     borderRadius: 5,
@@ -155,13 +157,13 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10
+    padding: 10,
   },
   buttonText: {
     color: "#black",
     fontSize: 18,
-    fontWeight: "500"
-  }
+    fontWeight: "500",
+  },
 });
 
 export default NewTripForm;
