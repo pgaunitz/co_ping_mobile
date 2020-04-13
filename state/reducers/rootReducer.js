@@ -9,6 +9,11 @@ const rootReducer = (state = initialState, action) => {
         ...action.payload,
         showTripForm: true,
       };
+    case actionTypes.CLOSE_NEW_TRIP_FORM:
+      return {
+        ...state,
+        showTripForm: false,
+      }
     default:
       return state;
   }

@@ -6,20 +6,25 @@ import {
   Text,
   TouchableHighlight,
   TextInput,
-  View,
+  View
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios"
-import { NEW_TRIP_FORM } from "../state/actions/actionTypes"
+import axios from "axios";
+import {
+  NEW_TRIP_FORM,
+  CLOSE_NEW_TRIP_FORM
+} from "../state/actions/actionTypes";
 
 const NewTripForm = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const showTripForm = useSelector((state) => state.showTripForm);
-  const newTripCreatedMessage = useSelector((state) => state.newTripCreatedMessage);
+  const showTripForm = useSelector(state => state.showTripForm);
+  const newTripCreatedMessage = useSelector(
+    state => state.newTripCreatedMessage
+  );
 
-  const [timevalue, onChangeText] = React.useState('')
-  const [storevalue, onChangeStore] = React.useState('')
+  const [timevalue, onChangeText] = React.useState("");
+  const [storevalue, onChangeStore] = React.useState("");
 
   const createNewTrip = async e => {
     e.preventDefault();
@@ -32,9 +37,12 @@ const NewTripForm = () => {
         }
       },
       { headers: { "Content-Type": "application/json" } }
-    )
-    dispatch({ type: NEW_TRIP_FORM, payload: { newTripCreatedMessage: response.data.message } });
-  }
+    );
+    dispatch({
+      type: NEW_TRIP_FORM,
+      payload: { newTripCreatedMessage: response.data.message }
+    });
+  };
 
   return (
     <View>
@@ -50,17 +58,44 @@ const NewTripForm = () => {
           }}
         >
           <View style={styles.modalView} id="trip-form">
-            <Text style={styles.modalText}>
-              New Shopping Trip Details
-            </Text>
-            <TextInput placeholder="Date and Time" style={styles.dateInput} id="time" value={timevalue} onChangeText={time => onChangeText(time)} />
-            <TextInput placeholder="Store" style={styles.storeInput} id="store" value={storevalue} onChangeText={store => onChangeStore(store)} />
-            <TouchableHighlight style={styles.button} onPress={(e) => { createNewTrip(e) }}>
+            <Text style={styles.modalText}>New Shopping Trip Details</Text>
+            <TextInput
+              placeholder="Date and Time"
+              style={styles.dateInput}
+              id="time"
+              value={timevalue}
+              onChangeText={time => onChangeText(time)}
+            />
+            <TextInput
+              placeholder="Store"
+              style={styles.storeInput}
+              id="store"
+              value={storevalue}
+              onChangeText={store => onChangeStore(store)}
+            />
+
+            <TouchableHighlight
+              style={styles.button}
+              onPress={e => {
+                createNewTrip(e);
+              }}
+            >
               <Text id="create-trip-button" style={styles.buttonText}>
                 Create
               </Text>
             </TouchableHighlight>
-            <Text id="new-trip-message" style={styles.modelText}>{newTripCreatedMessage}</Text>
+            <TouchableHighlight
+              style={styles.button}
+              onPress={() => dispatch({ type: CLOSE_NEW_TRIP_FORM })}
+            >
+              <Text id="close-trip-form" style={styles.buttonText}>
+                Close
+              </Text>
+            </TouchableHighlight>
+
+            <Text id="new-trip-message" style={styles.modelText}>
+              {newTripCreatedMessage}
+            </Text>
           </View>
         </Modal>
       )}
@@ -70,7 +105,7 @@ const NewTripForm = () => {
 
 const styles = StyleSheet.create({
   formModal: {
-    alignSelf: "center",
+    alignSelf: "center"
   },
   modalView: {
     margin: 20,
@@ -81,16 +116,16 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 5
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "center"
   },
   modalText: {
     marginBottom: 15,
@@ -105,7 +140,6 @@ const styles = StyleSheet.create({
     margin: 2,
     borderColor: "black",
     borderWidth: 2
-
   },
   storeInput: {
     textAlign: "left",
@@ -126,7 +160,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#black",
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: "500"
   }
 });
 
