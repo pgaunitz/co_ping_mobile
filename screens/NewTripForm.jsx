@@ -29,7 +29,7 @@ const NewTripForm = () => {
   const createNewTrip = async (e) => {
     e.preventDefault();
     let response = await axios.post(
-      "http://localhost:3000/pings",
+      "https://co-ping.herokuapp.com/pings",
       {
         ping: {
           time: timevalue,
@@ -38,7 +38,6 @@ const NewTripForm = () => {
       },
       { headers: { "Content-Type": "application/json" } }
     );
-    debugger;
     dispatch({
       type: NEW_TRIP_FORM,
       payload: { newTripCreatedMessage: response.data.message },

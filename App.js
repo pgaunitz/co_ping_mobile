@@ -7,7 +7,8 @@ import configureStore from "./state/store/configureStore";
 import NewTripForm from "./screens/NewTripForm";
 import axios from "axios"
 
-axios.default.baseURL = "http://localhost:3000"
+// axios.default.baseURL = "http://localhost:3000"
+axios.defaults.baseURL = "https://co-ping.herokuapp.com"
 
 const styles = StyleSheet.create({
   mainpage: {
