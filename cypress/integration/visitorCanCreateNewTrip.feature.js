@@ -10,7 +10,7 @@ describe("Vistor can", () => {
   });
 
   it("sucessfully create a new trip ping", () => {
-    cy.get("button").contains("New Trip").click();
+    cy.get("#new-trip-button").click();
     cy.get("#trip-form").within(() => {
       cy.get("#time").type("YYMMDD HHMM");
       cy.get("#store").type("ICA");
@@ -37,7 +37,7 @@ describe("Vistor can", () => {
     cy.visit("/");
   });
   it("not create a new trip without a time", () => {
-    cy.get("button").contains("New Trip").click();
+    cy.get("#new-trip-button").click();
     cy.get("#trip-form").within(() => {
       cy.get("#store").type("ICA");
       cy.get("button").contains("Create Trip").click();
