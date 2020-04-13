@@ -16,7 +16,6 @@ const NewTripForm = () => {
   const dispatch = useDispatch()
 
   const showTripForm = useSelector((state) => state.showTripForm);
-  const currentUserID = useSelector((state) => state.currentUserID);
   const newTripCreatedMessage = useSelector((state) => state.newTripCreatedMessage);
 
   const [timevalue, onChangeText] = React.useState('')
@@ -28,7 +27,6 @@ const NewTripForm = () => {
       "/pings",
       {
         pings: {
-          id: { currentUserID },
           time: { timevalue },
           store: { storevalue }
         }
