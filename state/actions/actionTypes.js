@@ -1,0 +1,1 @@
+export const NEW_TRIP_FORM = "NEW_TRIP_FORM"

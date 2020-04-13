@@ -1,10 +1,12 @@
 import * as React from "react";
 import { useDispatch } from "react-redux";
 import { TouchableHighlight, View, StyleSheet, Text } from "react-native";
+import {NEW_TRIP_FORM} from "../state/actions/actionTypes"
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
   const newTrip = () => {
+    dispatch({type: NEW_TRIP_FORM})
   };
 
   return (
