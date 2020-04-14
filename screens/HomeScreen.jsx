@@ -1,10 +1,9 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TouchableHighlight, View, StyleSheet, Text } from "react-native";
-import { NEW_TRIP_FORM, SHOW_LOGIN_FORM, GET_TRIP_LIST } from "../state/actions/actionTypes";
+import { NEW_TRIP_FORM, SHOW_LOGIN_FORM } from "../state/actions/actionTypes";
 import { onLogout } from "../modules/authentication";
-import axios from "axios"
-import { fetchTrips } from "../state/actions/tripActions"
+import { fetchTrips } from "../modules/tripActions"
 
 
 const HomeScreen = () => {
@@ -49,11 +48,13 @@ const HomeScreen = () => {
           </Text>
         </TouchableHighlight>
       )}
-      <TouchableHighlight style={styles.button} onPress={() => fetchTrips(dispatch)}>
+      {authenticated && (
+        <TouchableHighlight style={styles.button} onPress={() => fetchTrips(dispatch)}>
           <Text id="trip-list-button" style={styles.buttonText}>
             Trip List
           </Text>
         </TouchableHighlight>
+      )}
     </View>
   );
 };

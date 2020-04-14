@@ -1,27 +1,33 @@
-import React, { useEffect } from 'react';
-import axios from "axios";
-import { GET_TRIP_LIST } from "../state/actions/actionTypes"
-import { useSelector, useDispatch } from "react-redux"
-import { View, Text } from "react-native"
-
-
+import React from 'react';
+import { useSelector } from "react-redux"
+import { View, Text, StyleSheet } from "react-native"
 
 const TripsList = () => {
 
-
-   const trips = useSelector(state => state.trips)
-
-  // let tripsDisplay = trips.map(trip => {
-  //   return (
-  //     trip.time,
-  //     trip.store,
-  //     trip.id
-  //   )
-  // })
+  const trips = useSelector(state => state.trips)
+  let tripsDisplay
+  if (Array.isArray(trips)) {
+    tripsDisplay = trips.map(trip => {
+      return (
+        <View id="trip-list" key={trip.id}>
+          <Text >{trip.time}</Text>
+          <Text >{trip.name}</Text>
+          <Text >{trip.store}</Text>
+          <Text>{trip.id}</Text>
+        </ View >
+      )
+    })
+  }
 
   return (
-    <View><Text>{trips}</Text></View>
+    <>
+      {tripsDisplay}
+    </>
   )
 }
+
+const styles = StyleSheet.create({
+  
+})
 
 export default TripsList

@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import Logo from "./assets/images/co_ping_Logo2.png";
 import HomeScreen from "./screens/HomeScreen.jsx";
-import { Provider } from "react-redux";
+import { Provider, useSelector } from "react-redux";
 import configureStore from "./state/store/configureStore";
 import NewTripForm from "./screens/NewTripForm";
 import axios from "axios";
@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
 const store = configureStore();
 window.store = store;
 const App = () => {
-
   return (
     <Provider store={store}>
       <View style={styles.mainpage}>
@@ -39,13 +38,18 @@ const App = () => {
           end={{ x: 1, y: 0 }}
         >
           <Image style={styles.logo} source={Logo} alt="Co-Ping logo" />
-          <HomeScreen />
           <LoginForm />
           <NewTripForm />
-          <TripsList/>
+          <HomeScreen />
+          <TripsList />
         </LinearGradient>
       </View>
     </Provider>
   );
 };
+
+if (window.Cypress) {
+  window.store = store
+}
+
 export default App;
