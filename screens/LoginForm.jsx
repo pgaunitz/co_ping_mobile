@@ -10,7 +10,7 @@ import {
   TextInput,
   View
 } from "react-native";
-import { onLogin } from "../modules/authentication";
+import { onLogin, onLogout } from "../modules/authentication";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -19,9 +19,9 @@ const LoginForm = () => {
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
 
-  const login = e => {
-    onLogin({ email }, { password }, dispatch);
-  };
+  // const login = e => {
+  //   onLogin({ email }, { password }, dispatch);
+  // };
 
   return (
     <View>
@@ -55,9 +55,7 @@ const LoginForm = () => {
 
             <TouchableHighlight
               style={styles.button}
-              onPress={e => {
-                login(e);
-              }}
+              onPress={onLogin(email, password, dispatch)}
             >
               <Text id="submit-login" style={styles.buttonText}>
                 Submit
