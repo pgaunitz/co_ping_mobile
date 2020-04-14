@@ -29,6 +29,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         showLoginForm: false
       };
+    case actionTypes.GET_TRIP_LIST:
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }

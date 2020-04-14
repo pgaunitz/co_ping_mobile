@@ -8,6 +8,8 @@ import NewTripForm from "./screens/NewTripForm";
 import axios from "axios";
 import LoginForm from "./screens/LoginForm";
 import { LinearGradient } from "expo-linear-gradient";
+import TripsList from "./screens/TripsList";
+
 
 // axios.default.baseURL = "http://localhost:3000";
 axios.defaults.baseURL = "https://co-ping.herokuapp.com";
@@ -26,6 +28,7 @@ const styles = StyleSheet.create({
 const store = configureStore();
 window.store = store;
 const App = () => {
+
   return (
     <Provider store={store}>
       <View style={styles.mainpage}>
@@ -39,6 +42,7 @@ const App = () => {
           <HomeScreen />
           <LoginForm />
           <NewTripForm />
+          <TripsList/>
         </LinearGradient>
       </View>
     </Provider>
