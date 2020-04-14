@@ -10,7 +10,7 @@ import {
   TextInput,
   View
 } from "react-native";
-import { onLogin, onLogout } from "../modules/authentication";
+import { onLogin } from "../modules/authentication";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -19,18 +19,14 @@ const LoginForm = () => {
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
 
-  // const login = e => {
-  //   onLogin({ email }, { password }, dispatch);
-  // };
-
   return (
     <View>
       {showLoginForm && (
         <Modal
           style={styles.formModal}
-          presentationStyle="FullScreen"
+          fullScreen={true}
           animationType="fade"
-          transparent={false}
+          transparent={true}
           visible={true}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
@@ -55,7 +51,7 @@ const LoginForm = () => {
 
             <TouchableHighlight
               style={styles.button}
-              onPress={(e) => onLogin(email, password, dispatch)}
+              onPress={e => onLogin(email, password, dispatch)}
             >
               <Text id="submit-login" style={styles.buttonText}>
                 Submit
@@ -85,7 +81,6 @@ const styles = StyleSheet.create({
     alignSelf: "center"
   },
   modalView: {
-    margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,

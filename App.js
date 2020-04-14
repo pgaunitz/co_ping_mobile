@@ -7,19 +7,19 @@ import configureStore from "./state/store/configureStore";
 import NewTripForm from "./screens/NewTripForm";
 import axios from "axios";
 import LoginForm from "./screens/LoginForm";
-import { LinearGradient } from 'expo-linear-gradient';
-axios.default.baseURL = "http://localhost:3000"
+import { LinearGradient } from "expo-linear-gradient";
+axios.default.baseURL = "http://localhost:3000";
 // axios.defaults.baseURL = "https://co-ping.herokuapp.com";
 const styles = StyleSheet.create({
   mainpage: {
-    flex: 1,
+    flex: 1
   },
   logo: {
     width: 250,
     height: 100,
     alignSelf: "center",
-    margin: 20,
-  },
+    marginTop: 40
+  }
 });
 const store = configureStore();
 window.store = store;
