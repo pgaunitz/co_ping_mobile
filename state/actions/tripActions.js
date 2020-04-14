@@ -1,9 +1,10 @@
 import axios from "axios"
 import { GET_TRIP_LIST } from "./actionTypes"
 
-const fetchTrips = () => {
-  return async dispatch => {
-    let response = await axios.get("/pings")
+const fetchTrips = (dispatch) => {
+  return async () => {
+    debugger
+    let response = await axios.get("http://localhost:3000/pings")
     debugger
     return dispatch(dispatchTrips(response.data))
   }

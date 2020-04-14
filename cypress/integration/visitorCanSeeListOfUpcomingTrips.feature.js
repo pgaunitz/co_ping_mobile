@@ -3,7 +3,7 @@ describe("Visitor can see list of all upcoming active trips", () => {
     cy.server();
     cy.route({
       method: "GET",
-      url: "**/pings",
+      url: "**/**",
       response: "fixture:trip_list.json",
     });
     cy.visit("/");

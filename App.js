@@ -11,8 +11,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import TripsList from "./screens/TripsList";
 
 
-// axios.default.baseURL = "http://localhost:3000";
-axios.defaults.baseURL = "https://co-ping.herokuapp.com";
+ axios.default.baseURL = "http://localhost:3000";
+//axios.defaults.baseURL = "https://co-ping.herokuapp.com";
 
 const styles = StyleSheet.create({
   mainpage: {
