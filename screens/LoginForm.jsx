@@ -42,6 +42,7 @@ const LoginForm = () => {
               onChangeText={email => onChangeEmail(email)}
             />
             <TextInput
+              secureTextEntry={true}
               placeholder="Password"
               style={styles.loginInput}
               id="password"

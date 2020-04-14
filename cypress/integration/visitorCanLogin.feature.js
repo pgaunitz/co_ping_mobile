@@ -34,8 +34,6 @@ describe("User can log in", () => {
     );
     cy.get("#close-login-form").click();
     cy.get("#email").should("not.exist");
-    //add test that unauthenticated user can not see new trip and after close they can
-    //add test to logout and that new trip disappears
   });
 
   it("is possible for user to logout and end session", () => {
