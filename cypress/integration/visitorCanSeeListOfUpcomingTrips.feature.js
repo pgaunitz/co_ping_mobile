@@ -18,17 +18,17 @@ describe("Visitor can see list of all upcoming active trips", () => {
   it("sucessfully.", () => {
     cy.get("#trip-list-button").click();
     cy.wait(1000);
-    cy.get("#trip-list").should("contain", "Coop");
-    cy.get("#trip-list").should("contain", "2020-04-14 14:00");
-    cy.get("#trip-list").should("contain", "Systembolaget");
-    cy.get("#trip-list").should("contain", "2020-04-14 10:00");
+    cy.get(".trip-list").should("contain", "Coop");
+    cy.get(".trip-list").should("contain", "2020-04-14 14:00");
+    cy.get(".trip-list").should("contain", "Systembolaget");
+    cy.get(".trip-list").should("contain", "2020-04-14 10:00");
   });
 
   it("unsuccessfully", () => {
     cy.get("#trip-list-button").click();
-    cy.get("#trip-list").should(
+    cy.get(".trip-list").should(
       "contain",
-      "Sorry, no active trips at this time."
+      "Unfortunately no one has planned to go shopping, so maybe you can?"
     );
   });
 });
