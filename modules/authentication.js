@@ -8,8 +8,7 @@ const auth = new JtockAuth({
 const onLogin = async (email, password, dispatch) => {
   try {
     event.preventDefault();
-    let response = await auth.signIn(email, password);
-    debugger;
+    let response = await auth.signIn(email.email, password.password);
     dispatch({
       type: AUTHENTICATE,
       payload: {

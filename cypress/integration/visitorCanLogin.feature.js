@@ -11,6 +11,11 @@ describe("User can log in", () => {
       url: "**/auth/**",
       response: "fixture:user_login.json",
     })
+    cy.route({
+      method: "DELETE",
+      url: "**/auth/**",
+      response: "fixture:user_login.json",
+    })
     cy.visit("/");
   });
 
@@ -23,13 +28,13 @@ describe("User can log in", () => {
       "contain",
       "Welcome back Awesome Possumsson"
     );
-    cy.get("#close-login-form").contains("Close").click();
+    cy.get("#close-login-form").click();
     cy.get("#email").should("not.exist");
     //add test that unauthenticated user can not see new trip and after close they can
     //add test to logout and that new trip disappears
   });
 
-  xit("is possible for user to logout and end session", () => {
+  it("is possible for user to logout and end session", () => {
     cy.get("#login-button").contains("Login").click();
     cy.get("#email").type("user@mail.com");
     cy.get("#password").type("password");
@@ -38,8 +43,7 @@ describe("User can log in", () => {
       "contain",
       "Welcome back Awesome Possumsson"
     );
-    cy.wait(1000)
-    cy.get("#close-login-form").contains("Close").click();
+    cy.get("#close-login-form").click();
     cy.get("#logout-button").click();
     cy.get("#new-trip-button").should("not.exist");
   });
@@ -60,7 +64,7 @@ describe("User can not log in", () => {
     cy.visit("/");
   });
 
-  xit("with invalid credentials", () => {
+  it("with invalid credentials", () => {
     cy.get("#login-button").contains("Login").click();
     cy.get("#email").type("wrongmail.com");
     cy.get("#password").type("wrong");

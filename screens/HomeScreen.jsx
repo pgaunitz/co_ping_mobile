@@ -18,19 +18,18 @@ const HomeScreen = () => {
   return (
     <View>
       <Text>{!authenticated && logoutMessage}</Text>
-      {authenticated ? (
-        <TouchableHighlight style={styles.button}>
-          <Text id="logout-button" style={styles.buttonText}>
-            Logout
+      {authenticated && <TouchableHighlight style={styles.button} onPress={()=>onLogout(dispatch)}>
+        <Text id="logout-button" style={styles.buttonText}>
+          Logout
           </Text>
-        </TouchableHighlight>
-      ) : (
-        <TouchableHighlight style={styles.button} onPress={login}>
-          <Text id="login-button" style={styles.buttonText}>
-            Login
+      </TouchableHighlight>}
+
+      {!authenticated && <TouchableHighlight style={styles.button} onPress={login}>
+        <Text id="login-button" style={styles.buttonText}>
+          Login
           </Text>
-        </TouchableHighlight>
-      )}
+      </TouchableHighlight>}
+
       {authenticated && (
         <TouchableHighlight style={styles.button} onPress={newTrip}>
           <Text id="new-trip-button" style={styles.buttonText}>

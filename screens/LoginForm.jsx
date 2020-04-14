@@ -55,7 +55,7 @@ const LoginForm = () => {
 
             <TouchableHighlight
               style={styles.button}
-              onPress={onLogin(email, password, dispatch)}
+              onPress={(e) => onLogin(email, password, dispatch)}
             >
               <Text id="submit-login" style={styles.buttonText}>
                 Submit
