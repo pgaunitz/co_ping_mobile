@@ -1,0 +1,14 @@
+{
+  "pings": [
+    {
+      "id": 1,
+      "time": "2020-04-14 14:00",
+      "store": "Coop"
+    },
+    {
+      "id": 2,
+      "time": "2020-04-14 10:00",
+      "store": "Systembolaget"
+    }
+  ]
+}
