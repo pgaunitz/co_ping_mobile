@@ -1,29 +1,46 @@
-import React from 'react';
-import { useSelector, useDispatch } from "react-redux"
-import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableHighlight } from "react-native"
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  FlatList,
+  TouchableHighlight
+} from "react-native";
 import NewTripForm from "./NewTripForm";
 import { NEW_TRIP_FORM } from "../state/actions/actionTypes";
 import { LinearGradient } from "expo-linear-gradient";
 
-const TripsList = () => {
-  const dispatch = useDispatch()
+const TripsList = ({ navigation }) => {
+  const dispatch = useDispatch();
   const authenticated = useSelector(state => state.authenticated);
-  const trips = useSelector(state => state.trips)
-  const tripMessage = useSelector(state => state.tripMessage)
+  const trips = useSelector(state => state.trips);
+  const tripMessage = useSelector(state => state.tripMessage);
   const newTrip = () => {
     dispatch({ type: NEW_TRIP_FORM });
   };
-  let tripsDisplay
+  let tripsDisplay;
   if (Array.isArray(trips)) {
-    tripsDisplay = trips
+    tripsDisplay = trips;
   }
 
-  function Item({ store, time, name }) {
+  function Item({ store, time, name, request }) {
     return (
       <View style={styles.trip}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.store}>{store}</Text>
         <Text style={styles.time}>{time}</Text>
+        <TouchableHighlight
+          style={styles.request}
+          onPress={() => {
+            navigation.navigate("Requests", { name: "Requests" });
+          }}
+        >
+          <Text id="trip-button" style={styles.requestButtonText}>
+            {request}
+          </Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -36,12 +53,14 @@ const TripsList = () => {
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
       >
-        <Text className="trip-message" style={styles.tripNote}>{tripMessage}</Text>
+        <Text className="trip-message" style={styles.tripNote}>
+          {tripMessage}
+        </Text>
         {authenticated && (
           <TouchableHighlight style={styles.button} onPress={newTrip}>
             <Text id="new-trip-button" style={styles.buttonText}>
               New Trip
-          </Text>
+            </Text>
           </TouchableHighlight>
         )}
         <FlatList
@@ -52,25 +71,26 @@ const TripsList = () => {
               name={item.name}
               store={item.store}
               time={item.time}
+              request="Ask for items"
             />
           )}
           keyExtractor={item => item.id}
         />
-        < NewTripForm />
+        <NewTripForm />
       </LinearGradient>
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
   },
   item: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: "#f9c2ff",
     padding: 20,
     marginVertical: 8,
-    marginHorizontal: 16,
+    marginHorizontal: 16
   },
   trip: {
     fontSize: 20,
@@ -78,14 +98,14 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 5,
     backgroundColor: "white",
-    shadowColor: 'black',
-    shadowOpacity: 2.0,
+    shadowColor: "black",
+    shadowOpacity: 2.0
   },
   time: {
-    fontSize: 12,
+    fontSize: 12
   },
   store: {
-    fontSize: 12,
+    fontSize: 12
   },
   name: {
     fontSize: 20,
@@ -111,7 +131,25 @@ const styles = StyleSheet.create({
     color: "#black",
     fontSize: 20,
     fontWeight: "600"
+  },
+  request: {
+    height: 30,
+    borderColor: "white",
+    borderWidth: 2,
+    borderRadius: 10,
+    backgroundColor: "#71B280",
+    marginTop: 15,
+    margin: 5,
+    paddingTop: 16,
+    paddingBottom: 18,
+    width: "40%",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  requestButtonText: {
+    color: "#black",
+    fontSize: 15
   }
 });
 
-export default TripsList
+export default TripsList;
