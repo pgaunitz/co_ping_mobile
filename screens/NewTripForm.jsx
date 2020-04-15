@@ -25,7 +25,7 @@ const NewTripForm = () => {
 
   const [timevalue, onChangeText] = React.useState("");
   const [storevalue, onChangeStore] = React.useState("");
-
+  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   const createNewTrip = async e => {
     e.preventDefault();
     let response = await axios.post(
@@ -36,7 +36,7 @@ const NewTripForm = () => {
           store: storevalue
         }
       },
-      { headers: { "Content-Type": "application/json" } }
+      { headers: headers }
     );
     dispatch({
       type: NEW_TRIP_FORM,

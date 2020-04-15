@@ -1,12 +1,17 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TouchableHighlight, View, StyleSheet, Text } from "react-native";
+import { TouchableHighlight, View, StyleSheet, Text, Image } from "react-native";
 import { NEW_TRIP_FORM, SHOW_LOGIN_FORM } from "../state/actions/actionTypes";
 import { onLogout } from "../modules/authentication";
 import { fetchTrips } from "../modules/tripActions"
+import LoginForm from "./LoginForm";
+import NewTripForm from "./NewTripForm";
+import { LinearGradient } from "expo-linear-gradient";
+import Logo from "../assets/images/co_ping_Logo2.png";
 
 
-const HomeScreen = () => {
+
+const HomeScreen = ({navigation}) => {
   const authenticated = useSelector(state => state.authenticated);
   const logoutMessage = useSelector(state => state.logoutMessage);
   const dispatch = useDispatch();
@@ -18,7 +23,15 @@ const HomeScreen = () => {
   };
 
   return (
-    <View>
+      <View style={styles.mainpage}>
+        <LinearGradient
+          colors={["#71b280", "#134e5e"]}
+          style={{ flex: 1 }}
+          start={{ x: 0, y: 1 }}
+          end={{ x: 1, y: 0 }}
+        >
+          <Image style={styles.logo} source={Logo} alt="Co-Ping logo" />
+        </LinearGradient>
       <Text style={styles.logoutMessage}>
         {!authenticated && logoutMessage}
       </Text>
@@ -49,18 +62,32 @@ const HomeScreen = () => {
         </TouchableHighlight>
       )}
       {authenticated && (
-        <TouchableHighlight style={styles.button} onPress={() => fetchTrips(dispatch)}>
+        <TouchableHighlight 
+        style={styles.button} 
+        onPress={() => {fetchTrips(dispatch); navigation.navigate('TripsList', {name: "TripsList"});}}
+        >
           <Text id="trip-list-button" style={styles.buttonText}>
             Trip List
           </Text>
         </TouchableHighlight>
       )}
+      < LoginForm/>
+      < NewTripForm/>
     </View>
   );
 };
 
 
 const styles = StyleSheet.create({
+  mainpage: {
+    flex: 1
+  },
+  logo: {
+    width: 250,
+    height: 100,
+    alignSelf: "center",
+    marginTop: 40
+  },
   button: {
     height: 60,
     borderColor: "white",

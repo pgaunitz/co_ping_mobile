@@ -8,23 +8,25 @@ import { View, Text, StyleSheet, SafeAreaView, FlatList, Item } from "react-nati
 const TripsList = () => {
 
   const trips = useSelector(state => state.trips)
-   let tripsDisplay
-   if (Array.isArray(trips)) {
-     tripsDisplay = trips
-   }
+  const tripMessage = useSelector(state => state.tripMessage)
+  let tripsDisplay
+  if (Array.isArray(trips)) {
+    tripsDisplay = trips
+  }
 
-   function Item({ store, time, name }) {
+  function Item({ store, time, name }) {
     return (
       <>
         <Text style={styles.store}>{store}</Text>
         <Text style={styles.time}>{time}</Text>
         <Text style={styles.name}>{name}</Text>
-        </>
+      </>
     );
   }
 
   return (
-      <SafeAreaView style={styles.container} className="trip-list">
+    <SafeAreaView style={styles.container} className="trip-list">
+      <Text className="trip-message">{tripMessage}</Text>
       <FlatList
         data={tripsDisplay}
         renderItem={({ item }) => (
@@ -37,6 +39,7 @@ const TripsList = () => {
         )}
         keyExtractor={item => item.id}
       />
+
     </SafeAreaView>
   )
 }
