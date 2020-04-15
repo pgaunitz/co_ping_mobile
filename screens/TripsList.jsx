@@ -9,7 +9,7 @@ import {
   TouchableHighlight
 } from "react-native";
 import NewTripForm from "./NewTripForm";
-import { NEW_TRIP_FORM } from "../state/actions/actionTypes";
+import { NEW_TRIP_FORM, SELECTED_TRIP_ID } from "../state/actions/actionTypes";
 import { LinearGradient } from "expo-linear-gradient";
 
 const TripsList = ({ navigation }) => {
@@ -25,7 +25,7 @@ const TripsList = ({ navigation }) => {
     tripsDisplay = trips;
   }
 
-  function Item({ store, time, name, request }) {
+  function Item({ store, time, name, request, id }) {
     return (
       <View style={styles.trip}>
         <Text style={styles.name}>{name}</Text>
@@ -33,7 +33,7 @@ const TripsList = ({ navigation }) => {
         <Text style={styles.time}>{time}</Text>
         <TouchableHighlight
           style={styles.request}
-          onPress={() => {
+          onPress={() => { dispatch({type: SELECTED_TRIP_ID, payload: {selectedTripId: id}});
             navigation.navigate("Requests", { name: "Requests" });
           }}
         >
@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 16
   },
   trip: {
-    fontSize: 20,
     padding: 10,
     margin: 10,
     borderRadius: 5,

@@ -22,7 +22,7 @@ describe("Visitor can", () => {
   });
   it("choose a trip and request three items", () => {
     cy.get("#trip-button").click()
-    cy.get(".request-form").should("contain", "Trip request")
+    cy.get(".request-form").should("contain", "Trip Request")
     cy.get("#item-one").type("Betty needs her bacon")
     cy.get("#item-two").type("Possum wants strawberries")
     cy.get("#item-three").type("Philip wants rice cookies")

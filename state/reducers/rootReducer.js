@@ -34,6 +34,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ...action.payload
       }
+      case actionTypes.SELECTED_TRIP_ID:
+        return {
+          ...state,
+          ...action.payload
+        }
     default:
       return state;
   }
