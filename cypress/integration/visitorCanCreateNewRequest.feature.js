@@ -4,7 +4,7 @@ describe("Visitor can", () => {
     cy.route({
       method: "POST",
       url: "**/**",
-      response: "fixture:new_trip_response.json"
+      response: "fixture:new_request_response.json"
     });
     cy.route({
       method: "GET",
@@ -23,9 +23,9 @@ describe("Visitor can", () => {
   it("choose a trip and request three items", () => {
     cy.get("#trip-button").click()
     cy.get(".request-form").should("contain", "Trip Request")
-    cy.get("#item-one").type("Betty needs her bacon")
-    cy.get("#item-two").type("Possum wants strawberries")
-    cy.get("#item-three").type("Philip wants rice cookies")
+    cy.get("#item-one").type("A")
+    cy.get("#item-two").type("B")
+    cy.get("#item-three").type("C")
     cy.get("#submit-request").click()
     cy.get("#request-message").should("contain", "Your request was added to this trip")
   })

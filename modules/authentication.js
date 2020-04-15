@@ -15,6 +15,7 @@ const onLogin = async (email, password, dispatch) => {
         authenticated: true,
         userEmail: response.data.email,
         userName: response.data.name,
+        userId: response.data.id,
         loginMessage: `Welcome back ${response.data.name}`,
         logoutMessage: "",
       },
