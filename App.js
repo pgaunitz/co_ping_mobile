@@ -7,7 +7,6 @@ import axios from "axios";
 import TripsList from "./screens/TripsList";
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack';
-import { StyleSheet } from "react-native"
 
  axios.default.baseURL = "http://localhost:3000";
 //axios.defaults.baseURL = "https://co-ping.herokuapp.com";
@@ -17,12 +16,6 @@ window.store = store;
 
 const Stack = createStackNavigator();
 
-const styles = StyleSheet.create({
-  home: {
-    flex: 0
-  }
-})
-
 const App = () => {
   return (
     <NavigationContainer>
@@ -31,13 +24,9 @@ const App = () => {
         <Stack.Screen
         name="Home" 
         component={HomeScreen}
-        style={styles.home}
-        //headerMode="false"
-        //headerMode="none"
-        header="null"
         />
         <Stack.Screen
-        name="Trips List"
+        name="TripsList"
         component={TripsList}
         />
       </Stack.Navigator>
