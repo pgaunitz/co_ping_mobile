@@ -8,7 +8,6 @@ import TripsList from "./screens/TripsList";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-//  axios.default.baseURL = "http://localhost:3000";
 axios.defaults.baseURL = "https://co-ping.herokuapp.com";
 
 const store = configureStore();
