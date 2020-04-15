@@ -66,7 +66,6 @@ const LoginForm = () => {
                 Close
               </Text>
             </TouchableHighlight>
-
             <Text id="login-message" style={styles.modelText}>
               {loginMessage}
             </Text>

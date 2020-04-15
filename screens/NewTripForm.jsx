@@ -17,7 +17,6 @@ import {
 
 const NewTripForm = () => {
   const dispatch = useDispatch();
-
   const showTripForm = useSelector(state => state.showTripForm);
   const newTripCreatedMessage = useSelector(
     state => state.newTripCreatedMessage
@@ -25,7 +24,7 @@ const NewTripForm = () => {
 
   const [timevalue, onChangeText] = React.useState("");
   const [storevalue, onChangeStore] = React.useState("");
-
+  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   const createNewTrip = async e => {
     e.preventDefault();
     let response = await axios.post(
@@ -36,7 +35,7 @@ const NewTripForm = () => {
           store: storevalue
         }
       },
-      { headers: { "Content-Type": "application/json" } }
+      { headers: headers }
     );
     dispatch({
       type: NEW_TRIP_FORM,
@@ -74,7 +73,6 @@ const NewTripForm = () => {
               value={storevalue}
               onChangeText={store => onChangeStore(store)}
             />
-
             <TouchableHighlight
               style={styles.button}
               onPress={e => {
@@ -93,7 +91,6 @@ const NewTripForm = () => {
                 Close
               </Text>
             </TouchableHighlight>
-
             <Text id="new-trip-message" style={styles.modelText}>
               {newTripCreatedMessage}
             </Text>

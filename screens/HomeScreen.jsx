@@ -1,56 +1,81 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TouchableHighlight, View, StyleSheet, Text } from "react-native";
-import { NEW_TRIP_FORM, SHOW_LOGIN_FORM } from "../state/actions/actionTypes";
+import { TouchableHighlight, View, StyleSheet, Text, Image } from "react-native";
+import { SHOW_LOGIN_FORM } from "../state/actions/actionTypes";
 import { onLogout } from "../modules/authentication";
+import { fetchTrips } from "../modules/tripActions"
+import LoginForm from "./LoginForm";
+import { LinearGradient } from "expo-linear-gradient";
+import Logo from "../assets/images/co_ping_Logo2.png";
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const authenticated = useSelector(state => state.authenticated);
   const logoutMessage = useSelector(state => state.logoutMessage);
   const dispatch = useDispatch();
-  const newTrip = () => {
-    dispatch({ type: NEW_TRIP_FORM });
-  };
   const login = () => {
     dispatch({ type: SHOW_LOGIN_FORM });
   };
 
   return (
-    <View>
-      <Text style={styles.logoutMessage}>
-        {!authenticated && logoutMessage}
-      </Text>
-      {authenticated && (
-        <TouchableHighlight
-          style={styles.button}
-          onPress={() => onLogout(dispatch)}
-        >
-          <Text id="logout-button" style={styles.buttonText}>
-            Logout
-          </Text>
-        </TouchableHighlight>
-      )}
+    <View style={styles.mainpage}>
+      <LinearGradient
+        colors={["#71b280", "#134e5e"]}
+        style={{ flex: 1 }}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 1, y: 0 }}
+      >
+        <Image style={styles.logo} source={Logo} alt="Co-Ping logo" />
 
-      {!authenticated && (
-        <TouchableHighlight style={styles.button} onPress={login}>
-          <Text id="login-button" style={styles.buttonText}>
-            Login
-          </Text>
-        </TouchableHighlight>
-      )}
+        <Text style={styles.logoutMessage}>
+          {!authenticated && logoutMessage}
+        </Text>
 
-      {authenticated && (
-        <TouchableHighlight style={styles.button} onPress={newTrip}>
-          <Text id="new-trip-button" style={styles.buttonText}>
-            New Trip
+        {authenticated && (
+          <TouchableHighlight
+            style={styles.button}
+            onPress={() => onLogout(dispatch)}
+          >
+            <Text id="logout-button" style={styles.buttonText}>
+              Logout
           </Text>
-        </TouchableHighlight>
-      )}
+          </TouchableHighlight>
+        )}
+
+        {!authenticated && (
+          <TouchableHighlight style={styles.button} onPress={login}>
+            <Text id="login-button" style={styles.buttonText}>
+              Login
+          </Text>
+          </TouchableHighlight>
+        )}
+
+        {authenticated && (
+          <TouchableHighlight
+            style={styles.button}
+            onPress={() => { fetchTrips(dispatch); navigation.navigate('Trips', { name: "Trips" }) }}
+          >
+            <Text id="trip-list-button" style={styles.buttonText}>
+              Trips
+          </Text>
+          </TouchableHighlight>
+        )}
+
+        < LoginForm />
+      </LinearGradient>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  mainpage: {
+    flex: 1
+  },
+  logo: {
+    width: 250,
+    height: 100,
+    alignSelf: "center",
+    marginTop: 40
+  },
   button: {
     height: 60,
     borderColor: "white",
