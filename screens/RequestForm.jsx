@@ -38,10 +38,19 @@ const RequestForm = () => {
       },
       { headers: headers }
     );
+    debugger
+    if (response.status == 200){
     dispatch({
       type: NEW_REQUEST,
       payload: { newRequestCreatedMessage: response.data.message },
-    });
+    })
+  } else {
+    dispatch({
+      type: NEW_REQUEST,
+      payload: { newRequestCreatedMessage: response.data.message },
+    })
+    debugger
+  }
   };
   return (
     <View style={styles.requestPage} className="request-form">

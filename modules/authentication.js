@@ -9,6 +9,7 @@ const onLogin = async (email, password, dispatch) => {
   try {
     event.preventDefault();
     let response = await auth.signIn(email, password);
+    debugger
     dispatch({
       type: AUTHENTICATE,
       payload: {
@@ -21,6 +22,7 @@ const onLogin = async (email, password, dispatch) => {
       },
     });
   } catch (error) {
+    debugger
     let errorMessage = error.response.data.errors[0];
 
     dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage } });
