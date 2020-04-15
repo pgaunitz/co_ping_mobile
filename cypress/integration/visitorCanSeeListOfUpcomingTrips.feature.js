@@ -23,26 +23,27 @@ describe("Visitor can see list of all upcoming active trips", () => {
     cy.get(".trip-list").should("contain", "Systembolaget");
     cy.get(".trip-list").should("contain", "2020-04-14 10:00");
   });
-})
+});
 
-  describe("Visitor can see list of all upcoming active trips", () => {
-    beforeEach(() => {
-      cy.server();
-      cy.route({
-        method: "GET",
-        url: "**/pings",
-        response: {
-          message: "Unfortunately no one has planned to go shopping, so maybe you can?"
-        },
+describe("Visitor can see list of all upcoming active trips", () => {
+  beforeEach(() => {
+    cy.server();
+    cy.route({
+      method: "GET",
+      url: "**/pings",
+      response: {
+        message:
+          "Unfortunately no one has planned to go shopping, so maybe you can?",
+      },
+    });
+    cy.visit("/");
+    cy.window().then((window) => {
+      window.store.dispatch({
+        type: "AUTHENTICATE",
+        payload: { authenticated: true },
       });
-      cy.visit("/");
-      cy.window().then((window) => {
-        window.store.dispatch({
-          type: "AUTHENTICATE",
-          payload: { authenticated: true },
-        });
-      });
-    }); 
+    });
+  });
   it("unsuccessfully", () => {
     cy.get("#trip-list-button").click();
     cy.get(".trip-message").should(

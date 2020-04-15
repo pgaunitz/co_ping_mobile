@@ -1,10 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from "react-redux"
-import { View, Text, StyleSheet, SafeAreaView, FlatList, Item, TouchableHighlight } from "react-native"
+import { View, Text, StyleSheet, SafeAreaView, FlatList, TouchableHighlight } from "react-native"
 import NewTripForm from "./NewTripForm";
 import { NEW_TRIP_FORM } from "../state/actions/actionTypes";
 import { LinearGradient } from "expo-linear-gradient";
-
 
 const TripsList = () => {
   const dispatch = useDispatch()
@@ -23,8 +22,8 @@ const TripsList = () => {
     return (
       <View style={styles.trip}>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.store}>{store}</Text> 
-        <Text style={styles.time}>{time}</Text> 
+        <Text style={styles.store}>{store}</Text>
+        <Text style={styles.time}>{time}</Text>
       </View>
     );
   }
@@ -37,29 +36,28 @@ const TripsList = () => {
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
       >
-      <Text className="trip-message" style={styles.tripNote}>{tripMessage}</Text>
-      {authenticated && (
+        <Text className="trip-message" style={styles.tripNote}>{tripMessage}</Text>
+        {authenticated && (
           <TouchableHighlight style={styles.button} onPress={newTrip}>
             <Text id="new-trip-button" style={styles.buttonText}>
               New Trip
           </Text>
           </TouchableHighlight>
         )}
-      <FlatList
-        data={tripsDisplay}
-        renderItem={({ item }) => (
-          <Item
-            id={item.id}
-            name={item.name}
-            store={item.store}
-            time={item.time}
-            
-          />
-        )}
-        keyExtractor={item => item.id}
-      />
-     < NewTripForm />
-     </LinearGradient>
+        <FlatList
+          data={tripsDisplay}
+          renderItem={({ item }) => (
+            <Item
+              id={item.id}
+              name={item.name}
+              store={item.store}
+              time={item.time}
+            />
+          )}
+          keyExtractor={item => item.id}
+        />
+        < NewTripForm />
+      </LinearGradient>
     </SafeAreaView>
   )
 }

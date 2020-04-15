@@ -8,8 +8,6 @@ import LoginForm from "./LoginForm";
 import { LinearGradient } from "expo-linear-gradient";
 import Logo from "../assets/images/co_ping_Logo2.png";
 
-
-
 const HomeScreen = ({ navigation }) => {
   const authenticated = useSelector(state => state.authenticated);
   const logoutMessage = useSelector(state => state.logoutMessage);
@@ -31,6 +29,7 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles.logoutMessage}>
           {!authenticated && logoutMessage}
         </Text>
+
         {authenticated && (
           <TouchableHighlight
             style={styles.button}
@@ -53,19 +52,19 @@ const HomeScreen = ({ navigation }) => {
         {authenticated && (
           <TouchableHighlight
             style={styles.button}
-            onPress={() => { fetchTrips(dispatch); navigation.navigate('TripsList', { name: "TripsList" }); }}
+            onPress={() => { fetchTrips(dispatch); navigation.navigate('Trips', { name: "Trips" }) }}
           >
             <Text id="trip-list-button" style={styles.buttonText}>
               Trips
           </Text>
           </TouchableHighlight>
         )}
+
         < LoginForm />
       </LinearGradient>
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   mainpage: {

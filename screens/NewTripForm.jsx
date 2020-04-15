@@ -17,7 +17,6 @@ import {
 
 const NewTripForm = () => {
   const dispatch = useDispatch();
-
   const showTripForm = useSelector(state => state.showTripForm);
   const newTripCreatedMessage = useSelector(
     state => state.newTripCreatedMessage
@@ -74,7 +73,6 @@ const NewTripForm = () => {
               value={storevalue}
               onChangeText={store => onChangeStore(store)}
             />
-
             <TouchableHighlight
               style={styles.button}
               onPress={e => {
@@ -93,7 +91,6 @@ const NewTripForm = () => {
                 Close
               </Text>
             </TouchableHighlight>
-
             <Text id="new-trip-message" style={styles.modelText}>
               {newTripCreatedMessage}
             </Text>
