@@ -7,25 +7,18 @@ describe("Visitor can", () => {
       response: "fixture:new_trip_response.json"
     });
     cy.route({
-      method: "POST",
-      url: "**/auth/**",
-      response: "fixture:user_login.json"
-    });
-    cy.route({
       method: "GET",
-      url: "**/auth/**",
-      response: "fixture:user_login.json"
-    });
+      url: "**/pings",
+      response: "fixture:trip_list.json",
+    })
     cy.visit("/");
-    cy.get("#login-button")
-      .contains("Login")
-      .click();
-    cy.get("#email").type("user@mail.com");
-    cy.get("#password").type("password");
-    cy.get("#submit-login")
-      .contains("Submit")
-      .click();
-    cy.get("#close-login-form").click();
+    cy.window().then((window) => {
+      window.store.dispatch({
+        type: "AUTHENTICATE",
+        payload: { authenticated: true },
+      });
+    });
+    cy.get("#trip-list-button").click()
   });
 
   it("successfully create a new trip ping", () => {
@@ -53,25 +46,18 @@ describe("Visitor can", () => {
       response: "fixture:new_trip_error_response.json"
     });
     cy.route({
-      method: "POST",
-      url: "**/auth/**",
-      response: "fixture:user_login.json"
-    });
-    cy.route({
       method: "GET",
-      url: "**/auth/**",
-      response: "fixture:user_login.json"
-    });
+      url: "**/pings",
+      response: "fixture:trip_list.json",
+    })
     cy.visit("/");
-    cy.get("#login-button")
-      .contains("Login")
-      .click();
-    cy.get("#email").type("user@mail.com");
-    cy.get("#password").type("password");
-    cy.get("#submit-login")
-      .contains("Submit")
-      .click();
-    cy.get("#close-login-form").click();
+    cy.window().then((window) => {
+      window.store.dispatch({
+        type: "AUTHENTICATE",
+        payload: { authenticated: true },
+      });
+    });
+    cy.get("#trip-list-button").click()
   });
 
   it("not create a new trip without a time", () => {

@@ -26,7 +26,7 @@ const App = () => {
         component={HomeScreen}
         />
         <Stack.Screen
-        name="TripsList"
+        name="Trips"
         component={TripsList}
         />
       </Stack.Navigator>

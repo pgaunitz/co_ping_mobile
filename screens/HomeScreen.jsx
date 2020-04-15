@@ -56,7 +56,7 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => { fetchTrips(dispatch); navigation.navigate('TripsList', { name: "TripsList" }); }}
           >
             <Text id="trip-list-button" style={styles.buttonText}>
-              Trip List
+              Trips
           </Text>
           </TouchableHighlight>
         )}
