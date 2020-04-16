@@ -25,7 +25,9 @@ const RequestForm = () => {
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   const sendRequest = async (e) => {
     e.preventDefault();
-    let response = await axios.post(
+    let response, _context;
+    try {  
+    response = await axios.post(
       "http://localhost:3000/pongs",
       {
         pong: {
@@ -39,16 +41,18 @@ const RequestForm = () => {
       { headers: headers }
     );
     debugger
-    if (response.status == 200){
     dispatch({
       type: NEW_REQUEST,
       payload: { newRequestCreatedMessage: response.data.message },
     })
-  } else {
+  } catch (error) {
+    debugger
     dispatch({
       type: NEW_REQUEST,
-      payload: { newRequestCreatedMessage: response.data.message },
-    })
+      payload: {
+        newRequestCreatedMessage: _context.t0.response.data.error
+      },
+    });
     debugger
   }
   };
