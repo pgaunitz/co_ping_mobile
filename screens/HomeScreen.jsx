@@ -7,7 +7,6 @@ import { fetchTrips } from "../modules/tripActions"
 import LoginForm from "./LoginForm";
 import { LinearGradient } from "expo-linear-gradient";
 import Logo from "../assets/images/co_ping_Logo2.png";
-import { fetchMyPings, fetchPongsToMyPing } from '../modules/requestActions'
 
 const HomeScreen = ({ navigation }) => {
   const authenticated = useSelector(state => state.authenticated);
@@ -60,9 +59,7 @@ const HomeScreen = ({ navigation }) => {
         {authenticated && (
           <TouchableHighlight
             style={styles.button}
-            onPress={() => { 
-              fetchMyPings(dispatch); 
-              fetchPongsToMyPing(dispatch); 
+            onPress={() => {  
               navigation.navigate('MyshopPingBoard', { name: "MyshopPingBoard" }) }
               }>
             <Text id="request-list-button" style={styles.buttonText}>
