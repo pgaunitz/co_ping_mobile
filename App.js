@@ -7,6 +7,7 @@ import axios from "axios";
 import TripsList from "./screens/TripsList";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import Requests from "./screens/Requests";
 
 axios.defaults.baseURL = "https://co-ping.herokuapp.com";
 
@@ -22,6 +23,7 @@ const App = () => {
         <Stack.Navigator>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Trips" component={TripsList} />
+          <Stack.Screen name="Requests" component={Requests} />
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>

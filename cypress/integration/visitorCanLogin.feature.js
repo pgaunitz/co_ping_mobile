@@ -1,4 +1,4 @@
-describe("User can log in", () => {
+describe("Visitor can log in", () => {
   beforeEach(() => {
     cy.server();
     cy.route({
@@ -28,11 +28,10 @@ describe("User can log in", () => {
     cy.get("#submit-login")
       .contains("Submit")
       .click();
-    cy.get("#login-message").should(
+    cy.get("#auth-message").should(
       "contain",
-      "Welcome back Awesome Possumsson"
+      "Welcome Awesome Possumsson"
     );
-    cy.get("#close-login-form").click();
     cy.get("#email").should("not.exist");
   });
 
@@ -45,17 +44,12 @@ describe("User can log in", () => {
     cy.get("#submit-login")
       .contains("Submit")
       .click();
-    cy.get("#login-message").should(
-      "contain",
-      "Welcome back Awesome Possumsson"
-    );
-    cy.get("#close-login-form").click();
     cy.get("#logout-button").click();
     cy.get("#new-trip-button").should("not.exist");
   });
 });
 
-describe("User can not log in", () => {
+describe("Visitor can not log in", () => {
   beforeEach(() => {
     cy.server();
     cy.route({
@@ -79,7 +73,7 @@ describe("User can not log in", () => {
     cy.get("#submit-login")
       .contains("Submit")
       .click();
-    cy.get("#login-message").should(
+    cy.get("#login-error-message").should(
       "contain",
       "Invalid login credentials. Please try again."
     );

@@ -18,6 +18,7 @@ import {
 const NewTripForm = () => {
   const dispatch = useDispatch();
   const showTripForm = useSelector(state => state.showTripForm);
+  const userId = useSelector(state => state.userId)
   const newTripCreatedMessage = useSelector(
     state => state.newTripCreatedMessage
   );
@@ -32,7 +33,8 @@ const NewTripForm = () => {
       {
         ping: {
           time: timevalue,
-          store: storevalue
+          store: storevalue,
+          user_id: userId
         }
       },
       { headers: headers }

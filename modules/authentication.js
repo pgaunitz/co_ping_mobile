@@ -15,14 +15,15 @@ const onLogin = async (email, password, dispatch) => {
         authenticated: true,
         userEmail: response.data.email,
         userName: response.data.name,
-        loginMessage: `Welcome back ${response.data.name}`,
+        userId: response.data.id,
+        loginMessage: `Welcome ${response.data.name}`,
         logoutMessage: "",
+        showLoginForm: false
       },
     });
   } catch (error) {
     let errorMessage = error.response.data.errors[0];
-
-    dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage } });
+    dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage  } });
   }
 };
 
