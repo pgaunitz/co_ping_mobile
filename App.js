@@ -22,10 +22,10 @@ const App = () => {
     <NavigationContainer>
       <Provider store={store}>
         <Stack.Navigator>
-          <Stack.Screen name="Home" id="home" component={HomeScreen} />
+          <Stack.Screen name="Home" nativeID="home" component={HomeScreen} />
           <Stack.Screen name="Trips" component={TripsList} />
           <Stack.Screen name="Requests" component={Requests} />
-          <Stack.Screen name="MyPongs" component={RequestList} />
+          <Stack.Screen name="MyshopPingBoard" component={RequestList} />
 
         </Stack.Navigator>
       </Provider>

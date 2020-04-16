@@ -1,14 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   View,
   StyleSheet,
-  Text
+  Text,
+  FlatList
 } from "react-native";
-import { useSelector } from "react-redux";
-import RequestForm from "./RequestForm"
+import { useSelector, useDispatch } from "react-redux";
+
 
 const RequestList = () => {
+  const dispatch = useDispatch()
+
+  const userId = useSelector((state) => state.userId);
+  const myPongs = useSelector((state) => state.myPongs)
+  const myPongsMessage = useSelector((state) => state.myPongsMessage)
+
+  function Item({ id, requesterName, requestedItemOne, requestedItemTwo, requestedItemThree, acceptButton, rejectButton }) {
+    return (
+      <View style={styles.pong}>
+
+        <Text style={styles.name}>{requesterName}</Text>
+        <Text style={styles.itemOne}>{requestedItemOne}</Text>
+        <Text style={styles.itemTwo}>{requestedItemTwo}</Text>
+        <Text style={styles.itemThree}>{requestedItemThree}</Text>
+        <TouchableHighlight
+          style={styles.request}
+          onPress={() => {
+            dispatch(acceptRequest(id))
+          }}
+        >
+          <Text id="accept-button" style={styles.requestButtonText}>
+            {acceptButton}
+          </Text>
+        </TouchableHighlight>
+        <TouchableHighlight
+          style={styles.request}
+          onPress={() => {
+            dispatch(rejectRequest(id))
+          }}
+        >
+          <Text id="reject-button" style={styles.requestButtonText}>
+            {rejectButton}
+          </Text>
+        </TouchableHighlight>
+      </View>
+    );
+  }
+
+
   return (
     <View style={styles.container} className="request-form">
       <LinearGradient
@@ -17,7 +57,21 @@ const RequestList = () => {
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
       >
-
+        <FlatList
+          data={myPongs}
+          renderItem={({ item }) => (
+            <Item
+              id={item.id}
+              name={item.user_name}
+              itemOne={item.itemOne}
+              itemTwo={item.itemTwo}
+              itemThree={item.itemThree}
+              acceptButton="Of course!"
+              rejectButton="Sorry, not this time"
+            />
+          )}
+          keyExtractor={item => item.id}
+        />
       </LinearGradient>
     </View>
   );
