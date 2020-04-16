@@ -3,7 +3,7 @@ import { GET_TRIP_LIST } from "../state/actions/actionTypes";
 
 const fetchTrips = async (dispatch) => {
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-  let response = await axios.get("https://co-ping.herokuapp.com/pings", {
+  let response = await axios.get("http://localhost:3000/pings", {
     headers: headers,
   });
   return dispatch({
