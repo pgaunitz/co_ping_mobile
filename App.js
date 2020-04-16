@@ -11,7 +11,6 @@ import Requests from "./screens/Requests";
 
 axios.defaults.baseURL = "https://co-ping.herokuapp.com";
 
-
 const store = configureStore();
 window.store = store;
 

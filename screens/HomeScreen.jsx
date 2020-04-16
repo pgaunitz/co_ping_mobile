@@ -23,44 +23,36 @@ const HomeScreen = ({ navigation }) => {
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}
         start={{ x: 0, y: 1 }}
-        end={{ x: 1, y: 0 }}
-      >
+        end={{ x: 1, y: 0 }}>
         <Image style={styles.logo} source={Logo} alt="Co-Ping logo" />
-
         <Text style={styles.authMessage} nativeID="auth-message">
           {authenticated ? loginMessage : logoutMessage}
         </Text>
-
         {authenticated && (
           <TouchableHighlight
             style={styles.button}
-            onPress={() => onLogout(dispatch)}
-          >
+            onPress={() => onLogout(dispatch)}>
             <Text id="logout-button" style={styles.buttonText}>
               Logout
-          </Text>
+            </Text>
           </TouchableHighlight>
         )}
-
         {!authenticated && (
           <TouchableHighlight style={styles.button} onPress={login}>
             <Text id="login-button" style={styles.buttonText}>
               Login
-          </Text>
+            </Text>
           </TouchableHighlight>
         )}
-
         {authenticated && (
           <TouchableHighlight
             style={styles.button}
-            onPress={() => { fetchTrips(dispatch); navigation.navigate('Trips', { name: "Trips" }) }}
-          >
+            onPress={() => { fetchTrips(dispatch); navigation.navigate('Trips', { name: "Trips" }) }}>
             <Text id="trip-list-button" style={styles.buttonText}>
               Trip Pings
-          </Text>
+            </Text>
           </TouchableHighlight>
         )}
-
         < LoginForm />
       </LinearGradient>
     </View>

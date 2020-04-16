@@ -25,7 +25,7 @@ const TripsList = ({ navigation }) => {
     tripsDisplay = trips;
   }
 
-  function Item({ store, time, name, request, id }) {
+  function Item({ store, time, name, requestButton, id }) {
     return (
       <View style={styles.trip}>
         <Text style={styles.name}>{name}</Text>
@@ -38,7 +38,7 @@ const TripsList = ({ navigation }) => {
           }}
         >
           <Text id="trip-button" style={styles.requestButtonText}>
-            {request}
+            {requestButton}
           </Text>
         </TouchableHighlight>
       </View>
@@ -71,7 +71,7 @@ const TripsList = ({ navigation }) => {
               name={item.user_name}
               store={item.store}
               time={item.time}
-              request="Request Pong"
+              requestButton="Request Pong"
             />
           )}
           keyExtractor={item => item.id}
