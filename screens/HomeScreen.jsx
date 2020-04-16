@@ -53,6 +53,15 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
+        {authenticated && (
+          <TouchableHighlight
+            style={styles.button}
+            onPress={() => { fetchTrips(dispatch); navigation.navigate('MyPongs', { name: "MyPongs" }) }}>
+            <Text id="request-list-button" style={styles.buttonText}>
+              My Pongs
+            </Text>
+          </TouchableHighlight>
+        )}
         < LoginForm />
       </LinearGradient>
     </View>
