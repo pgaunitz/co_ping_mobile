@@ -25,10 +25,8 @@ const RequestForm = () => {
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   const sendRequest = async (e) => {
     e.preventDefault();
-    let response, _context;
-    try {  
-    response = await axios.post(
-      "http://localhost:3000/pongs",
+    let response = await axios.post(
+      "https://co-ping.herokuapp.com/pongs",
       {
         pong: {
           item1: itemOne,
@@ -40,22 +38,12 @@ const RequestForm = () => {
       },
       { headers: headers }
     );
-    debugger
     dispatch({
       type: NEW_REQUEST,
       payload: { newRequestCreatedMessage: response.data.message },
     })
-  } catch (error) {
-    debugger
-    dispatch({
-      type: NEW_REQUEST,
-      payload: {
-        newRequestCreatedMessage: _context.t0.response.data.error
-      },
-    });
-    debugger
   }
-  };
+
   return (
     <View style={styles.requestPage} className="request-form">
       <LinearGradient
@@ -65,7 +53,7 @@ const RequestForm = () => {
         end={{ x: 1, y: 0 }}
       >
         <Text>Trip Request</Text>
-        <Text id="request-message">{newRequestCreatedMessage}</Text>
+        <Text id="request-message" style={styles.responseMessage}>{newRequestCreatedMessage}</Text>
         <TextInput
           placeholder="First item..."
           style={styles.itemInput}
@@ -115,6 +103,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
   },
+  responseMessage: {
+
+  }
 });
 
 export default RequestForm;

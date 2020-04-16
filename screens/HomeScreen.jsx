@@ -11,6 +11,7 @@ import Logo from "../assets/images/co_ping_Logo2.png";
 const HomeScreen = ({ navigation }) => {
   const authenticated = useSelector(state => state.authenticated);
   const logoutMessage = useSelector(state => state.logoutMessage);
+  const loginMessage = useSelector(state => state.loginMessage);
   const dispatch = useDispatch();
   const login = () => {
     dispatch({ type: SHOW_LOGIN_FORM });
@@ -26,8 +27,8 @@ const HomeScreen = ({ navigation }) => {
       >
         <Image style={styles.logo} source={Logo} alt="Co-Ping logo" />
 
-        <Text style={styles.logoutMessage}>
-          {!authenticated && logoutMessage}
+        <Text style={styles.authMessage} nativeID="auth-message">
+          {authenticated ? loginMessage : logoutMessage}
         </Text>
 
         {authenticated && (
@@ -55,7 +56,7 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => { fetchTrips(dispatch); navigation.navigate('Trips', { name: "Trips" }) }}
           >
             <Text id="trip-list-button" style={styles.buttonText}>
-              Trips
+              Trip Pings
           </Text>
           </TouchableHighlight>
         )}
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600"
   },
-  logoutMessage: {
+  authMessage: {
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 25,

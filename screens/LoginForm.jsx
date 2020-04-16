@@ -14,8 +14,8 @@ import { onLogin } from "../modules/authentication";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const loginMessage = useSelector(state => state.loginMessage);
   const showLoginForm = useSelector(state => state.showLoginForm);
+  const loginMessage = useSelector(state => state.loginMessage)
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
 
@@ -66,9 +66,7 @@ const LoginForm = () => {
                 Close
               </Text>
             </TouchableHighlight>
-            <Text id="login-message" style={styles.modelText}>
-              {loginMessage}
-            </Text>
+            <Text id="login-error-message">{loginMessage}</Text>
           </View>
         </Modal>
       )}

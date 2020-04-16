@@ -18,6 +18,7 @@ import {
 const NewTripForm = () => {
   const dispatch = useDispatch();
   const showTripForm = useSelector(state => state.showTripForm);
+  const userId = useSelector(state => state.userId)
   const newTripCreatedMessage = useSelector(
     state => state.newTripCreatedMessage
   );
@@ -28,11 +29,12 @@ const NewTripForm = () => {
   const createNewTrip = async e => {
     e.preventDefault();
     let response = await axios.post(
-      "http://localhost:3000/pings",
+      "https://co-ping.herokuapp.com/pings",
       {
         ping: {
           time: timevalue,
-          store: storevalue
+          store: storevalue,
+          user_id: userId
         }
       },
       { headers: headers }

@@ -59,7 +59,7 @@ const TripsList = ({ navigation }) => {
         {authenticated && (
           <TouchableHighlight style={styles.button} onPress={newTrip}>
             <Text id="new-trip-button" style={styles.buttonText}>
-              New Trip
+              New Ping
             </Text>
           </TouchableHighlight>
         )}
@@ -68,10 +68,10 @@ const TripsList = ({ navigation }) => {
           renderItem={({ item }) => (
             <Item
               id={item.id}
-              name={item.name}
+              name={item.user_name}
               store={item.store}
               time={item.time}
-              request="Ask for items"
+              request="Request Pong"
             />
           )}
           keyExtractor={item => item.id}

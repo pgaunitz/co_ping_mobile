@@ -2,14 +2,13 @@ import JtockAuth from "j-tockauth";
 import { AUTHENTICATE } from "../state/actions/actionTypes";
 
 const auth = new JtockAuth({
-  host: "http://localhost:3000",
+  host: "https://co-ping.herokuapp.com",
 });
 
 const onLogin = async (email, password, dispatch) => {
   try {
     event.preventDefault();
     let response = await auth.signIn(email, password);
-    debugger
     dispatch({
       type: AUTHENTICATE,
       payload: {
@@ -17,15 +16,14 @@ const onLogin = async (email, password, dispatch) => {
         userEmail: response.data.email,
         userName: response.data.name,
         userId: response.data.id,
-        loginMessage: `Welcome back ${response.data.name}`,
+        loginMessage: `Welcome ${response.data.name}`,
         logoutMessage: "",
+        showLoginForm: false
       },
     });
   } catch (error) {
-    debugger
     let errorMessage = error.response.data.errors[0];
-
-    dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage } });
+    dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage  } });
   }
 };
 
