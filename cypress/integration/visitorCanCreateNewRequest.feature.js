@@ -31,6 +31,7 @@ describe("Visitor can", () => {
       "contain",
       "Your request was added to this trip"
     );
+    cy.wait(1000)
   });
 });
 
