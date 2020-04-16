@@ -20,6 +20,7 @@ describe("Visitor can", () => {
     });
     cy.get("#trip-list-button").click();
   });
+
   it("choose a trip and request three items", () => {
     cy.get("#trip-button").click();
     cy.get(".request-form").should("contain", "Trip Request");
@@ -57,6 +58,7 @@ describe("Visitor cannot", () => {
     });
     cy.get("#trip-list-button").click();
   });
+  
   it("send an empty request three items", () => {
     cy.get("#trip-button").click();
     cy.get(".request-form").should("contain", "Trip Request");
