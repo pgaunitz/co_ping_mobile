@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { View, StyleSheet, Text, FlatList, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
@@ -10,9 +10,9 @@ const RequestList = () => {
   const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.userId);
-  const myPongs = useSelector((state) => state.myPongs);
-  const myPongsMessage = useSelector((state) => state.myPongsMessage);
-  const userTrip = useSelector((state) => state.userTrip);
+  // const myPongs = useSelector((state) => state.myPongs);
+  // const myPongsMessage = useSelector((state) => state.myPongsMessage);
+  // const userTrip = useSelector((state) => state.userTrip);
 
   useEffect(() => {
     debugger
@@ -50,6 +50,9 @@ const RequestList = () => {
     };
     getInformation();
   }, []);
+  const myPongs = useSelector((state) => state.myPongs);
+  const myPongsMessage = useSelector((state) => state.myPongsMessage);
+  const userTrip = useSelector((state) => state.userTrip);
 
   function Item({
     id,
@@ -63,9 +66,9 @@ const RequestList = () => {
     return (
       <View style={styles.pong}>
         <Text style={styles.name}>{requesterName}</Text>
-        <Text style={styles.itemOne}>{requestedItemOne}</Text>
-        <Text style={styles.itemTwo}>{requestedItemTwo}</Text>
-        <Text style={styles.itemThree}>{requestedItemThree}</Text>
+        <Text style={styles.item}>{requestedItemOne}</Text>
+        <Text style={styles.item}>{requestedItemTwo}</Text>
+        <Text style={styles.item}>{requestedItemThree}</Text>
         <TouchableHighlight
           style={styles.request}
           onPress={() => {
@@ -85,6 +88,7 @@ const RequestList = () => {
           <Text id="reject-button" style={styles.requestButtonText}>
             {rejectButton}
           </Text>
+          
         </TouchableHighlight>
       </View>
     );
@@ -98,6 +102,8 @@ const RequestList = () => {
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
       >
+        {/* <Text style={styles.title}>My Current Trip</Text>
+        <Text>{userTrip.store}: {userTrip.time}</Text> */}
         <FlatList
           data={myPongs}
           renderItem={({ item }) => (
@@ -128,14 +134,20 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
   },
-  // trip: {
-  //   padding: 10,
-  //   margin: 10,
-  //   borderRadius: 5,
-  //   backgroundColor: "white",
-  //   shadowColor: "black",
-  //   shadowOpacity: 2.0
-  // },
+  title: {
+    textAlign: "center",
+    color: "white",
+    fontSize: 30,
+    margin: 10
+  },
+  pong: {
+    padding: 10,
+    margin: 10,
+    borderRadius: 5,
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOpacity: 2.0
+  },
   // tripNote: {
   //   fontSize: 25,
   //   color: "white",
