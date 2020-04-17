@@ -30,11 +30,11 @@ const getInformation = async (userId, dispatch) => {
   });
 };
 
-const acceptRequest = async (ping_id, pong_id, dispatch) => {
+const acceptRequest = async (pingId, pong_id, dispatch) => {
   let response = await axios.put(`https://co-ping.herokuapp.com/pongs/${pong_id}`,
   {
     params: {
-      ping_id: ping_id,
+      ping_id: pingId,
       status: "accepted"
     }
   },
@@ -44,9 +44,28 @@ const acceptRequest = async (ping_id, pong_id, dispatch) => {
   dispatch({
     type: PONG_STATUS,
     payload: {
-      myPongs: response.data.pongs,
+      myPongs: response.data.ping.pongs,
     },
   });
 }
 
-export { fetchTrips, getInformation, acceptRequest };
+const rejectRequest = async (pingId, pong_id, dispatch) => {
+  let response = await axios.put(`https://co-ping.herokuapp.com/pongs/${pong_id}`,
+  {
+    params: {
+      ping_id: pingId,
+      status: "rejected"
+    }
+  },
+  {
+    headers: headers,
+  });
+  dispatch({
+    type: PONG_STATUS,
+    payload: {
+      myPongs: response.data.ping.pongs,
+    },
+  });
+}
+
+export { fetchTrips, getInformation, acceptRequest, rejectRequest };

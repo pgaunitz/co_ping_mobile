@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { View, StyleSheet, Text, FlatList, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import { GET_TRIP_DETAILS, GET_TRIP_REQUEST_DETAILS } from "../state/actions/actionTypes";
-import { getInformation, acceptRequest } from "../modules/tripActions"
+import { getInformation, acceptRequest, rejectRequest  } from "../modules/tripActions"
 import { CheckBox } from 'react-native-elements'
 
 
@@ -13,21 +11,15 @@ const RequestList = () => {
 
   const userId = useSelector((state) => state.userId);
 
-  // const [userTripState, setUserTrip] = useState({})
-  // const [userTripMessage, setUserTripMessage] = useState("")
-  // const [myPongs, setMyPongs] = useState([])
-  // const [myPongsMessage, setMyPongsMessage] = useState("")
-
-
   useEffect(() => {
     getInformation(userId, dispatch);
   }, []);
 
   const myPongs = useSelector((state) => state.myPongs);
   const userTrip = useSelector((state) => state.userTrip);
+  const pingId = useSelector((state) => state.userTrip.id);
 
   function Item({
-    ping_id,
     pong_id,
     name,
     itemOne,
@@ -43,6 +35,7 @@ const RequestList = () => {
     } else {
       pongStatus = false
     }
+    debugger
     return (
       <View style={styles.pong}>
         <Text style={styles.name}>{name}</Text>
@@ -56,9 +49,9 @@ const RequestList = () => {
               <TouchableHighlight
                 style={styles.request}
                 onPress={() => {
-                  acceptRequest(ping_id, pong_id, dispatch);
+                  acceptRequest(pingId, pong_id, dispatch);
                 }}>
-                <Text id="accept-button" style={styles.requestButtonText}>
+                <Text id={`accept-button-${pong_id}`} style={styles.requestButtonText}>
                   {acceptButton}
                 </Text>
               </TouchableHighlight>
@@ -66,9 +59,9 @@ const RequestList = () => {
               <TouchableHighlight
                 style={styles.request}
                 onPress={() => {
-                  dispatch(rejectRequest(id));
+                  rejectRequest(pingId, pong_id, dispatch);
                 }}>
-                <Text id="reject-button" style={styles.requestButtonText}>
+                <Text id={`reject-button-${pong_id}`} style={styles.requestButtonText}>
                   {rejectButton}
                 </Text>
               </TouchableHighlight>
@@ -96,8 +89,7 @@ const RequestList = () => {
           data={myPongs}
           renderItem={({ item }) => (
             <Item
-              ping_id={item.ping_id}
-              pong_id={item.pong_id}
+              pong_id={item.id}
               name={item.user_name}
               itemOne={item.item1}
               itemTwo={item.item2}
