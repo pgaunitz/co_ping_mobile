@@ -4,71 +4,42 @@ import { View, StyleSheet, Text, FlatList, TouchableHighlight } from "react-nati
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { GET_TRIP_DETAILS, GET_TRIP_REQUEST_DETAILS } from "../state/actions/actionTypes";
-
+import { getInformation } from "../modules/tripActions"
 
 const RequestList = () => {
   const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.userId);
-  // const myPongs = useSelector((state) => state.myPongs);
-  // const myPongsMessage = useSelector((state) => state.myPongsMessage);
-  // const userTrip = useSelector((state) => state.userTrip);
+
+  // const [userTripState, setUserTrip] = useState({})
+  // const [userTripMessage, setUserTripMessage] = useState("")
+  // const [myPongs, setMyPongs] = useState([])
+  // const [myPongsMessage, setMyPongsMessage] = useState("")
+
 
   useEffect(() => {
-    debugger
-    let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-    const getInformation = async () => {
-      let pingResponse = await axios.get(
-        `https://co-ping.herokuapp.com/pings/${userId}`,
-        {
-          headers: headers,
-        }
-      );
-      debugger
-      dispatch({
-        type: GET_TRIP_DETAILS,
-        payload: {
-          userTrip: pingResponse.data.pings,
-          userTripMessage: pingResponse.data.message,
-        },
-      });
-      debugger
-      let pongResponse = await axios.get(
-        `https://co-ping.herokuapp.com/pongs/${pingResponse.data.pings.ping_id}`,
-        {
-          headers: headers,
-        }
-      );
-      debugger
-      dispatch({
-        type: GET_TRIP_REQUEST_DETAILS,
-        payload: {
-          myPongs: pongResponse.data.pongs,
-          myPongsMessage: pongResponse.data.message,
-        },
-      });
-    };
-    getInformation();
+    getInformation(userId,  dispatch);
   }, []);
+
   const myPongs = useSelector((state) => state.myPongs);
   const myPongsMessage = useSelector((state) => state.myPongsMessage);
   const userTrip = useSelector((state) => state.userTrip);
 
   function Item({
     id,
-    requesterName,
-    requestedItemOne,
-    requestedItemTwo,
-    requestedItemThree,
+    name,
+    itemOne,
+    itemTwo,
+    itemThree,
     acceptButton,
     rejectButton,
   }) {
     return (
       <View style={styles.pong}>
-        <Text style={styles.name}>{requesterName}</Text>
-        <Text style={styles.item}>{requestedItemOne}</Text>
-        <Text style={styles.item}>{requestedItemTwo}</Text>
-        <Text style={styles.item}>{requestedItemThree}</Text>
+        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.item}>{itemOne}</Text>
+        <Text style={styles.item}>{itemTwo}</Text>
+        <Text style={styles.item}>{itemThree}</Text>
         <TouchableHighlight
           style={styles.request}
           onPress={() => {
@@ -108,11 +79,11 @@ const RequestList = () => {
           data={myPongs}
           renderItem={({ item }) => (
             <Item
-              id={item.id}
+              id={item.ping_id}
               name={item.user_name}
-              itemOne={item.itemOne}
-              itemTwo={item.itemTwo}
-              itemThree={item.itemThree}
+              itemOne={item.item1}
+              itemTwo={item.item2}
+              itemThree={item.item3}
               acceptButton="Of course!"
               rejectButton="Sorry, not this time"
             />
