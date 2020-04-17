@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { View, StyleSheet, Text, FlatList, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { getInformation, acceptRequest, rejectRequest  } from "../modules/tripActions"
-import { CheckBox } from 'react-native-elements'
+import { getInformation, acceptRequest, rejectRequest } from "../modules/tripActions"
+import { CheckBox, Icon } from 'react-native-elements'
 
 
 const RequestList = () => {
@@ -29,48 +29,68 @@ const RequestList = () => {
     rejectButton,
     status
   }) {
-    let pongStatus;
-    if (status === "pending") {
-      pongStatus = true
-    } else {
-      pongStatus = false
+    let pong
+    switch (status) {
+      case ("pending"):
+        return pong = (
+          <>
+            <View style={styles.pong}>
+              <Text style={styles.name}>{name}</Text>
+              <View style={styles.itemContainer} >
+                <Icon name='ios-cart' type='ionicon' />
+                <Text style={styles.item}>{itemOne}</Text>
+              </View>
+              <View style={styles.itemContainer} >
+                <Icon name='ios-cart' type='ionicon' />
+                <Text style={styles.item}>{itemTwo}</Text>
+              </View>
+              <View style={styles.itemContainer} >
+                <Icon name='ios-cart' type='ionicon' />
+                <Text style={styles.item}>{itemThree}</Text>
+              </View>
+              <View style={styles.buttonContainer}>
+                <TouchableHighlight
+                  style={styles.acceptButton}
+                  onPress={() => {
+                    acceptRequest(pingId, pong_id, dispatch);
+                  }}>
+                  <Text id={`accept-button-${pong_id}`} style={styles.requestButtonText}>
+                    {acceptButton}
+                  </Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight
+                  style={styles.rejectButton}
+                  onPress={() => {
+                    rejectRequest(pingId, pong_id, dispatch);
+                  }}>
+                  <Text id={`reject-button-${pong_id}`} style={styles.requestButtonText}>
+                    {rejectButton}
+                  </Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </>
+        )
+      case ('accepted'):
+        return pong = (
+          <>
+            <View style={styles.pong}>
+              <Text style={styles.name}>{name}</Text>
+              <CheckBox style={styles.item} title={itemOne} />
+              <CheckBox style={styles.item} title={itemTwo} />
+              <CheckBox style={styles.item} title={itemThree} />
+            </View>
+          </>
+        )
+      case ('rejected'):
+        return pong = (
+          <View></View>
+        )
     }
-    debugger
+
     return (
-      <View style={styles.pong}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.item}>{itemOne}</Text>
-        <Text style={styles.item}>{itemTwo}</Text>
-        <Text style={styles.item}>{itemThree}</Text>
-        <Text style={styles.item}>{status}</Text>
-        {pongStatus ?
-          (
-            <>
-              <TouchableHighlight
-                style={styles.request}
-                onPress={() => {
-                  acceptRequest(pingId, pong_id, dispatch);
-                }}>
-                <Text id={`accept-button-${pong_id}`} style={styles.requestButtonText}>
-                  {acceptButton}
-                </Text>
-              </TouchableHighlight>
-
-              <TouchableHighlight
-                style={styles.request}
-                onPress={() => {
-                  rejectRequest(pingId, pong_id, dispatch);
-                }}>
-                <Text id={`reject-button-${pong_id}`} style={styles.requestButtonText}>
-                  {rejectButton}
-                </Text>
-              </TouchableHighlight>
-
-            </>
-          )
-          : <Text id="accepted-action">Will do something later here</Text>
-        }
-      </View>
+      { pong }
     );
   }
 
@@ -132,28 +152,27 @@ const styles = StyleSheet.create({
     shadowOpacity: 2.0
   },
   item: {
-    fontSize: 12
+    fontSize: 18,
+    margin: 10
+  },
+  itemContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'left',
+    marginLeft: 15
   },
   name: {
     fontSize: 18,
     fontWeight: "bold"
   },
-  button: {
-    height: 60,
-    borderColor: "white",
-    borderWidth: 2,
-    borderRadius: 10,
-    backgroundColor: "#71B280",
-    margin: 20,
-    justifyContent: "center",
-    alignItems: "center",
+  buttonContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  buttonText: {
-    color: "#black",
-    fontSize: 20,
-    fontWeight: "600",
-  },
-  request: {
+  acceptButton: {
     height: 30,
     borderColor: "white",
     borderWidth: 2,
@@ -166,6 +185,24 @@ const styles = StyleSheet.create({
     width: "40%",
     justifyContent: "center",
     alignItems: "center",
+  },
+  rejectButton: {
+    height: 30,
+    borderColor: "white",
+    borderWidth: 2,
+    borderRadius: 10,
+    backgroundColor: "#B27183",
+    marginTop: 15,
+    margin: 5,
+    paddingTop: 16,
+    paddingBottom: 18,
+    width: "40%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  requestButtonText: {
+    color: "white",
+    fontSize: 12
   },
   trip: {
     color: "white",

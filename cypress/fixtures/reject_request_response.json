@@ -10,7 +10,7 @@
         "item1": "Bacon",
         "item2": "Butter",
         "item3": "Shampoo",
-        "status": "accepted"
+        "status": "pending"
       },
       {
         "id": 2,
@@ -19,6 +19,14 @@
         "item2": "Caramel",
         "item3": "Salt",
         "status": "accepted"
+      },
+      {
+        "id": 3,
+        "user_name": "Little Boy",
+        "item1": "Beer",
+        "item2": "Wine",
+        "item3": "Godis",
+        "status": "rejected"
       }
     ]
   }

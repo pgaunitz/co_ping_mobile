@@ -46,7 +46,7 @@ describe("Visitor can", () => {
     cy.get("body").should("contain", "Little Boy");
     cy.get("body").should("contain", "Beer");
     cy.get("#accept-button-1").click()
-    cy.get("body").should("contain", "Will do something later here")
+    cy.get("#accept-button-1").should("not.exist")
   });
 
   it("reject a request", () => {
