@@ -8,37 +8,52 @@ describe("Visitor can", () => {
     });
     cy.route({
       method: "GET",
-      url: "**/pongs/**",
+      url: "**/pings/**",
       response: "fixture:trip_details",
     });
+    // cy.route({
+    //   method: "POST",
+    //   url: "**/pings",
+    //   response: "fixture:new_trip_response.json",
+    // });
+    // cy.route({
+    //   method: "POST",
+    //   url: "**/pongs",
+    //   response: "fixture:new_request_response.json",
+    // });
+    // cy.route({
+    //   method: "GET",
+    //   url: "**/pings",
+    //   response: "fixture:trip_list.json",
+    // });
     cy.route({
-      method: "POST",
-      url: "**/pings",
-      response: "fixture:new_trip_response.json",
+      method: "GET",
+      url: "**/pongs/**",
+      response: "fixture:trip_request_list.json",
     });
     cy.route({
       method: "POST",
-      url: "**/pongs",
-      response: "fixture:new_request_response.json",
+      url: "**/auth/**",
+      response: "fixture:user_login.json",
     });
     cy.route({
       method: "GET",
-      url: "**/pings",
-      response: "fixture:trip_list.json",
+      url: "**/auth/**",
+      response: "fixture:user_login.json",
     });
-    cy.route({
-      method: "POST",
-      url: "**/pongs/**",
-      response: "fixture:trip_requests_list.json",
-    })
 
     cy.visit("/");
-    cy.window().then((window) => {
-      window.store.dispatch({
-        type: "AUTHENTICATE",
-        payload: { authenticated: true, userId: 1 },
-      });
-    });
+
+    cy.get("#login-button").contains("Login").click();
+    cy.get("#email").type("user@mail.com");
+    cy.get("#password").type("password");
+    cy.get("#submit-login").contains("Submit").click();
+    // cy.window().then((window) => {
+    //   window.store.dispatch({
+    //     type: "AUTHENTICATE",
+    //     payload: { authenticated: true, userId: 1 },
+    //   });
+    // });
     // cy.get("#trip-list-button").click()
     // cy.get("#new-trip-button").click();
     // cy.get("#time").type("2020-04-13 16:30");
@@ -63,7 +78,7 @@ describe("Visitor can", () => {
     cy.get("#request-list-button").click();
     cy.get("body").should("contain", "ICA");
     cy.get("body").should("contain", "2020-04-13-16:30");
-    cy.get("#1").should("contain", "Awesome Girl")
+    cy.get("#1").should("contain", "Awesome Girl");
   });
 
   xit("reject a request", () => {});

@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { View, StyleSheet, Text, FlatList } from "react-native";
+import { View, StyleSheet, Text, FlatList, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { GET_TRIP_DETAILS, GET_TRIP_REQUEST_DETAILS } from "../state/actions/actionTypes";
+
 
 const RequestList = () => {
   const dispatch = useDispatch();
@@ -10,8 +12,10 @@ const RequestList = () => {
   const userId = useSelector((state) => state.userId);
   const myPongs = useSelector((state) => state.myPongs);
   const myPongsMessage = useSelector((state) => state.myPongsMessage);
+  const userTrip = useSelector((state) => state.userTrip);
 
   useEffect(() => {
+    debugger
     let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
     const getInformation = async () => {
       let pingResponse = await axios.get(
@@ -20,12 +24,7 @@ const RequestList = () => {
           headers: headers,
         }
       );
-      let pongResponse = await axios.get(
-        `https://co-ping.herokuapp.com/pongs/${userTrip.id}`,
-        {
-          headers: headers,
-        }
-      );
+      debugger
       dispatch({
         type: GET_TRIP_DETAILS,
         payload: {
@@ -33,6 +32,14 @@ const RequestList = () => {
           userTripMessage: pingResponse.data.message,
         },
       });
+      debugger
+      let pongResponse = await axios.get(
+        `https://co-ping.herokuapp.com/pongs/${pingResponse.data.pings.ping_id}`,
+        {
+          headers: headers,
+        }
+      );
+      debugger
       dispatch({
         type: GET_TRIP_REQUEST_DETAILS,
         payload: {
