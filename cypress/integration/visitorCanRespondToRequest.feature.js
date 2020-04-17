@@ -11,21 +11,6 @@ describe("Visitor can", () => {
       url: "**/pings/**",
       response: "fixture:trip_details",
     });
-    // cy.route({
-    //   method: "POST",
-    //   url: "**/pings",
-    //   response: "fixture:new_trip_response.json",
-    // });
-    // cy.route({
-    //   method: "POST",
-    //   url: "**/pongs",
-    //   response: "fixture:new_request_response.json",
-    // });
-    // cy.route({
-    //   method: "GET",
-    //   url: "**/pings",
-    //   response: "fixture:trip_list.json",
-    // });
     cy.route({
       method: "GET",
       url: "**/pongs/**",
@@ -76,9 +61,14 @@ describe("Visitor can", () => {
 
   it("accept a request", () => {
     cy.get("#request-list-button").click();
-    cy.get("body").should("contain", "ICA");
-    cy.get("body").should("contain", "2020-04-13-16:30");
-    cy.get("#1").should("contain", "Awesome Girl");
+    // cy.get("").should("contain", "ICA");
+    // cy.get("").should("contain", "2020-04-13-16:30");
+    cy.get("body").should("contain", "Awesome Girl");
+    cy.get("body").should("contain", "Bacon");
+    cy.get("body").should("contain", "Sweet guy");
+    cy.get("body").should("contain", "Caramel");
+    cy.get("#accept-button").click()
+    cy.get("body").should("contain", "Will do something here later")
   });
 
   xit("reject a request", () => {});

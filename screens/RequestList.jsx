@@ -4,7 +4,9 @@ import { View, StyleSheet, Text, FlatList, TouchableHighlight } from "react-nati
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { GET_TRIP_DETAILS, GET_TRIP_REQUEST_DETAILS } from "../state/actions/actionTypes";
-import { getInformation } from "../modules/tripActions"
+import { getInformation, acceptRequest } from "../modules/tripActions"
+import { CheckBox } from 'react-native-elements'
+
 
 const RequestList = () => {
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ const RequestList = () => {
 
 
   useEffect(() => {
-    getInformation(userId,  dispatch);
+    getInformation(userId, dispatch);
   }, []);
 
   const myPongs = useSelector((state) => state.myPongs);
@@ -33,34 +35,48 @@ const RequestList = () => {
     itemThree,
     acceptButton,
     rejectButton,
+    status
   }) {
+    let pongStatus;
+    if (status === "pending") {
+      pongStatus = true
+    } else {
+      pongStatus = false
+    }
     return (
       <View style={styles.pong}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.item}>{itemOne}</Text>
         <Text style={styles.item}>{itemTwo}</Text>
         <Text style={styles.item}>{itemThree}</Text>
-        <TouchableHighlight
-          style={styles.request}
-          onPress={() => {
-            dispatch(acceptRequest(id));
-          }}
-        >
-          <Text id="accept-button" style={styles.requestButtonText}>
-            {acceptButton}
-          </Text>
-        </TouchableHighlight>
-        <TouchableHighlight
-          style={styles.request}
-          onPress={() => {
-            dispatch(rejectRequest(id));
-          }}
-        >
-          <Text id="reject-button" style={styles.requestButtonText}>
-            {rejectButton}
-          </Text>
-          
-        </TouchableHighlight>
+        <Text style={styles.item}>{status}</Text>
+        {pongStatus ?
+          (
+            <>
+              <TouchableHighlight
+                style={styles.request}
+                onPress={() => {
+                  acceptRequest(id, dispatch);
+                }}>
+                <Text id="accept-button" style={styles.requestButtonText}>
+                  {acceptButton}
+                </Text>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                style={styles.request}
+                onPress={() => {
+                  dispatch(rejectRequest(id));
+                }}>
+                <Text id="reject-button" style={styles.requestButtonText}>
+                  {rejectButton}
+                </Text>
+              </TouchableHighlight>
+
+            </>
+          )
+          : <Text>Will do something later here</Text>
+        }
       </View>
     );
   }
@@ -73,8 +89,9 @@ const RequestList = () => {
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
       >
-        {/* <Text style={styles.title}>My Current Trip</Text>
-        <Text>{userTrip.store}: {userTrip.time}</Text> */}
+        <Text style={styles.title}>My Current Trip</Text>
+        <Text style={styles.trip}>
+          Don't forget to go to {userTrip.store} at {userTrip.time}.</Text>
         <FlatList
           data={myPongs}
           renderItem={({ item }) => (
@@ -84,11 +101,13 @@ const RequestList = () => {
               itemOne={item.item1}
               itemTwo={item.item2}
               itemThree={item.item3}
+              status={item.status}
               acceptButton="Of course!"
               rejectButton="Sorry, not this time"
             />
           )}
           keyExtractor={(item) => item.id}
+          id="request"
         />
       </LinearGradient>
     </View>
@@ -119,12 +138,13 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     shadowOpacity: 2.0
   },
-  // tripNote: {
-  //   fontSize: 25,
-  //   color: "white",
-  //   margin: 20,
-  //   textAlign: "center"
-  // },
+  item: {
+    fontSize: 12
+  },
+  name: {
+    fontSize: 18,
+    fontWeight: "bold"
+  },
   button: {
     height: 60,
     borderColor: "white",
@@ -154,10 +174,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  requestButtonText: {
-    color: "#black",
-    fontSize: 15,
-  },
+  trip: {
+    color: "white",
+    margin: 10,
+    textAlign: "center",
+    fontSize: 18
+  }
 });
 
 export default RequestList;

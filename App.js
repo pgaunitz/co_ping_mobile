@@ -25,7 +25,7 @@ const App = () => {
           <Stack.Screen name="Home" nativeID="home" component={HomeScreen} path=""/>
           <Stack.Screen name="Trips" component={TripsList} />
           <Stack.Screen name="Requests" component={Requests} />
-          <Stack.Screen name="MyshopPingBoard" component={RequestList} />
+          <Stack.Screen name="My Ping Board" component={RequestList} />
 
         </Stack.Navigator>
       </Provider>

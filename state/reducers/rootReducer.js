@@ -54,6 +54,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ...action.payload
       }
+    case actionTypes.PONG_STATUS:
+      return{
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }

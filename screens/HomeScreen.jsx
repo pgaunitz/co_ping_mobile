@@ -60,10 +60,10 @@ const HomeScreen = ({ navigation }) => {
           <TouchableHighlight
             style={styles.button}
             onPress={() => {  
-              navigation.navigate('MyshopPingBoard', { name: "MyshopPingBoard" }) }
+              navigation.navigate('My Ping Board', { name: "My Ping Board" }) }
               }>
             <Text id="request-list-button" style={styles.buttonText}>
-              My shopPing Board
+              My Ping Board
             </Text>
           </TouchableHighlight>
         )}

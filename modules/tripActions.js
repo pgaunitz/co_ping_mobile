@@ -1,8 +1,10 @@
 import axios from "axios";
-import { GET_TRIP_LIST, GET_TRIP_DETAILS, GET_TRIP_REQUEST_DETAILS } from "../state/actions/actionTypes";
+import { GET_TRIP_LIST, GET_TRIP_DETAILS, GET_TRIP_REQUEST_DETAILS, PONG_STATUS } from "../state/actions/actionTypes";
+
+let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
 
 const fetchTrips = async (dispatch) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  // let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   let response = await axios.get("https://co-ping.herokuapp.com/pings", {
     headers: headers,
   });
@@ -12,7 +14,6 @@ const fetchTrips = async (dispatch) => {
   });
 };
 
-let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
 const getInformation = async (userId, dispatch) => {
   let pingResponse = await axios.get(
     `https://co-ping.herokuapp.com/pings/${userId}`,
@@ -27,7 +28,6 @@ const getInformation = async (userId, dispatch) => {
       userTripMessage: pingResponse.data.message,
     },
   });
-  debugger
   let pongResponse = await axios.get(
     `https://co-ping.herokuapp.com/pongs/${pingResponse.data.pings.ping_id}`,
     {
@@ -43,4 +43,23 @@ const getInformation = async (userId, dispatch) => {
   });
 };
 
-export { fetchTrips, getInformation };
+const acceptRequest = async (id, dispatch) => {
+  let response = await axios.put("https://co-ping.herokuapp.com/pongs",
+  {
+    params: {
+      ping_id: id,
+      status: "accepted"
+    }
+  },
+  {
+    headers: headers,
+  });
+  dispatch({
+    type: PONG_STATUS,
+    payload: {
+      myPongs: response.data.pongs,
+    },
+  });
+}
+
+export { fetchTrips, getInformation, acceptRequest };
