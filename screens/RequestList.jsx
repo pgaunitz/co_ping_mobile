@@ -1,25 +1,60 @@
 import React, { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  View,
-  StyleSheet,
-  Text,
-  FlatList
-} from "react-native";
+import { View, StyleSheet, Text, FlatList } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-
+import axios from "axios";
 
 const RequestList = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const userId = useSelector((state) => state.userId);
-  const myPongs = useSelector((state) => state.myPongs)
-  const myPongsMessage = useSelector((state) => state.myPongsMessage)
+  const myPongs = useSelector((state) => state.myPongs);
+  const myPongsMessage = useSelector((state) => state.myPongsMessage);
 
-  function Item({ id, requesterName, requestedItemOne, requestedItemTwo, requestedItemThree, acceptButton, rejectButton }) {
+  useEffect(() => {
+    let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+    const getInformation = async () => {
+      let pingResponse = await axios.get(
+        `https://co-ping.herokuapp.com/pings/${userId}`,
+        {
+          headers: headers,
+        }
+      );
+      let pongResponse = await axios.get(
+        `https://co-ping.herokuapp.com/pongs/${userTrip.id}`,
+        {
+          headers: headers,
+        }
+      );
+      dispatch({
+        type: GET_TRIP_DETAILS,
+        payload: {
+          userTrip: pingResponse.data.pings,
+          userTripMessage: pingResponse.data.message,
+        },
+      });
+      dispatch({
+        type: GET_TRIP_REQUEST_DETAILS,
+        payload: {
+          myPongs: pongResponse.data.pongs,
+          myPongsMessage: pongResponse.data.message,
+        },
+      });
+    };
+    getInformation();
+  }, []);
+
+  function Item({
+    id,
+    requesterName,
+    requestedItemOne,
+    requestedItemTwo,
+    requestedItemThree,
+    acceptButton,
+    rejectButton,
+  }) {
     return (
       <View style={styles.pong}>
-
         <Text style={styles.name}>{requesterName}</Text>
         <Text style={styles.itemOne}>{requestedItemOne}</Text>
         <Text style={styles.itemTwo}>{requestedItemTwo}</Text>
@@ -27,7 +62,7 @@ const RequestList = () => {
         <TouchableHighlight
           style={styles.request}
           onPress={() => {
-            dispatch(acceptRequest(id))
+            dispatch(acceptRequest(id));
           }}
         >
           <Text id="accept-button" style={styles.requestButtonText}>
@@ -37,7 +72,7 @@ const RequestList = () => {
         <TouchableHighlight
           style={styles.request}
           onPress={() => {
-            dispatch(rejectRequest(id))
+            dispatch(rejectRequest(id));
           }}
         >
           <Text id="reject-button" style={styles.requestButtonText}>
@@ -47,7 +82,6 @@ const RequestList = () => {
       </View>
     );
   }
-
 
   return (
     <View style={styles.container} className="request-form">
@@ -70,7 +104,7 @@ const RequestList = () => {
               rejectButton="Sorry, not this time"
             />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={(item) => item.id}
         />
       </LinearGradient>
     </View>
@@ -79,13 +113,13 @@ const RequestList = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   item: {
     backgroundColor: "#f9c2ff",
     padding: 20,
     marginVertical: 8,
-    marginHorizontal: 16
+    marginHorizontal: 16,
   },
   // trip: {
   //   padding: 10,
@@ -109,12 +143,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#71B280",
     margin: 20,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonText: {
     color: "#black",
     fontSize: 20,
-    fontWeight: "600"
+    fontWeight: "600",
   },
   request: {
     height: 30,
@@ -128,12 +162,12 @@ const styles = StyleSheet.create({
     paddingBottom: 18,
     width: "40%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   requestButtonText: {
     color: "#black",
-    fontSize: 15
-  }
+    fontSize: 15,
+  },
 });
 
 export default RequestList;
