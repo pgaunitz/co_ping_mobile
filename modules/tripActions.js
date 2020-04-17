@@ -24,30 +24,17 @@ const getInformation = async (userId, dispatch) => {
   dispatch({
     type: GET_TRIP_DETAILS,
     payload: {
-      userTrip: pingResponse.data.pings,
-      userTripMessage: pingResponse.data.message,
-    },
-  });
-  let pongResponse = await axios.get(
-    `https://co-ping.herokuapp.com/pongs/${pingResponse.data.pings.ping_id}`,
-    {
-      headers: headers,
-    }
-  );
-  dispatch({
-    type: GET_TRIP_REQUEST_DETAILS,
-    payload: {
-      myPongs: pongResponse.data.pongs,
-      myPongsMessage: pongResponse.data.message,
+      userTrip: pingResponse.data.ping,
+      myPongs: pingResponse.data.ping.pongs
     },
   });
 };
 
-const acceptRequest = async (id, dispatch) => {
-  let response = await axios.put("https://co-ping.herokuapp.com/pongs",
+const acceptRequest = async (ping_id, pong_id, dispatch) => {
+  let response = await axios.put(`https://co-ping.herokuapp.com/pongs/${pong_id}`,
   {
     params: {
-      ping_id: id,
+      ping_id: ping_id,
       status: "accepted"
     }
   },

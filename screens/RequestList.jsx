@@ -24,11 +24,11 @@ const RequestList = () => {
   }, []);
 
   const myPongs = useSelector((state) => state.myPongs);
-  const myPongsMessage = useSelector((state) => state.myPongsMessage);
   const userTrip = useSelector((state) => state.userTrip);
 
   function Item({
-    id,
+    ping_id,
+    pong_id,
     name,
     itemOne,
     itemTwo,
@@ -56,7 +56,7 @@ const RequestList = () => {
               <TouchableHighlight
                 style={styles.request}
                 onPress={() => {
-                  acceptRequest(id, dispatch);
+                  acceptRequest(ping_id, pong_id, dispatch);
                 }}>
                 <Text id="accept-button" style={styles.requestButtonText}>
                   {acceptButton}
@@ -75,7 +75,7 @@ const RequestList = () => {
 
             </>
           )
-          : <Text>Will do something later here</Text>
+          : <Text id="accepted-action">Will do something later here</Text>
         }
       </View>
     );
@@ -96,7 +96,8 @@ const RequestList = () => {
           data={myPongs}
           renderItem={({ item }) => (
             <Item
-              id={item.ping_id}
+              ping_id={item.ping_id}
+              pong_id={item.pong_id}
               name={item.user_name}
               itemOne={item.item1}
               itemTwo={item.item2}

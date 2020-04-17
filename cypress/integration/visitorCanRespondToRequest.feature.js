@@ -12,11 +12,6 @@ describe("Visitor can", () => {
       response: "fixture:trip_details",
     });
     cy.route({
-      method: "GET",
-      url: "**/pongs/**",
-      response: "fixture:trip_request_list.json",
-    });
-    cy.route({
       method: "POST",
       url: "**/auth/**",
       response: "fixture:user_login.json",
@@ -68,7 +63,7 @@ describe("Visitor can", () => {
     cy.get("body").should("contain", "Sweet guy");
     cy.get("body").should("contain", "Caramel");
     cy.get("#accept-button").click()
-    cy.get("body").should("contain", "Will do something here later")
+    cy.get("body").should("contain", "Will do something later here")
   });
 
   xit("reject a request", () => {});
