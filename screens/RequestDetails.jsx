@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-} from "react-native";
+import { View, StyleSheet, Text, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { getRequestInformation } from "../modules/tripActions";
 import { Icon } from "react-native-elements";
@@ -20,6 +15,20 @@ const RequestDetails = () => {
 
   const myPong = useSelector((state) => state.myPong);
 
+  const pongStatus = myPong.status;
+  debugger;
+  
+  let statusColor 
+    if (pongStatus === "pending") {
+       (statusColor = <><Text style={styles.status}>Your request is </Text><Text style={styles.pending}>{pongStatus}</Text></>);
+    }
+    else if (pongStatus === "accepted") {
+      (statusColor = <><Text style={styles.status}>Your request is </Text><Text style={styles.accepted}>{pongStatus}</Text></>)
+    } else {
+      (statusColor = <><Text style={styles.status}>Your request is </Text><Text style={styles.rejected}>{pongStatus}</Text></>)
+    }   
+    
+  ;
   return (
     <View style={styles.container} className="request-form">
       <LinearGradient
@@ -30,7 +39,9 @@ const RequestDetails = () => {
       >
         <Text style={styles.title}>My Current Pong</Text>
         <View style={styles.pong}>
-          <Text style={styles.status}>Your request is {myPong.status}</Text>
+          <View style={styles.statusContainer}>
+            {statusColor}
+          </View>
           <View style={styles.itemContainer}>
             <Icon name="ios-cart" type="ionicon" />
             <Text style={styles.item}>{myPong.item1}</Text>
@@ -50,10 +61,7 @@ const RequestDetails = () => {
                 cancelRequest(myPong.id, dispatch);
               }}
             >
-              <Text
-                id={"cancel-button"}
-                style={styles.requestButtonText}
-              >
+              <Text id={"cancel-button"} style={styles.requestButtonText}>
                 Cancel Pong Request
               </Text>
             </TouchableHighlight>
@@ -61,8 +69,8 @@ const RequestDetails = () => {
         </View>
       </LinearGradient>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -95,7 +103,6 @@ const styles = StyleSheet.create({
   },
   status: {
     fontSize: 18,
-    fontWeight: "bold",
   },
   buttonContainer: {
     flex: 1,
@@ -121,6 +128,30 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 12,
   },
+  statusContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  pending: {
+    color: "#d27300",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    fontSize: 18
+  },
+  accepted: {
+    color: "#71b280",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    fontSize: 18
+  },
+  rejected: {
+    color: "#B27183",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    fontSize: 18
+  }
   // trip: {
   //   color: "white",
   //   margin: 10,
@@ -129,4 +160,4 @@ const styles = StyleSheet.create({
   // },
 });
 
-export default RequestDetails
+export default RequestDetails;
