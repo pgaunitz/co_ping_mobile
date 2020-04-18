@@ -9,3 +9,4 @@ export const NEW_REQUEST = "NEW_REQUEST";
 export const GET_TRIP_DETAILS = "GET_TRIP_DETAILS";
 export const PONG_STATUS = "PONG_STATUS";
 export const GET_REQUEST_DETAILS = "GET_REQUEST_DETAILS";
+export const LOGOUT = "LOGOUT";

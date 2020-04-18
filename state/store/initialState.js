@@ -2,8 +2,7 @@ const initialState = {
   loginMessage: "",
   userTrip: {},
   myPongs: [],
-  myPongsMessage: "",
-  myPong: {status: "none"}
+  myPong: { status: "none" },
 };
 
 export default initialState;
