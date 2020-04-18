@@ -65,7 +65,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-        { pingId && (
+        { authenticated && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {  
@@ -76,7 +76,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-         { myPongId && (
+         { authenticated && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {  

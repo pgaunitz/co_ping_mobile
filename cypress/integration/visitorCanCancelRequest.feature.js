@@ -21,6 +21,11 @@ describe("Visitor can", () => {
       url: "**/auth/**",
       response: "fixture:user_login.json",
     });
+    cy.route({
+      method: "DELETE",
+      url: "**/pongs/**",
+      response: "fixture:cancel_request_response.json",
+    });
 
     cy.visit("/");
 
