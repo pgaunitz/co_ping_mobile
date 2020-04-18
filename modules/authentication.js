@@ -1,5 +1,5 @@
 import JtockAuth from "j-tockauth";
-import { AUTHENTICATE } from "../state/actions/actionTypes";
+import { AUTHENTICATE, LOGOUT } from "../state/actions/actionTypes";
 
 const auth = new JtockAuth({
   host: "https://co-ping.herokuapp.com",
@@ -18,19 +18,19 @@ const onLogin = async (email, password, dispatch) => {
         userId: response.data.id,
         loginMessage: `Welcome ${response.data.name}`,
         logoutMessage: "",
-        showLoginForm: false
+        showLoginForm: false,
       },
     });
   } catch (error) {
     let errorMessage = error.response.data.errors[0];
-    dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage  } });
+    dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage } });
   }
 };
 
 const onLogout = (dispatch) => {
   auth.signOut().then(() => {
     dispatch({
-      type: AUTHENTICATE,
+      type: LOGOUT,
       payload: {
         authenticated: false,
         userEmail: null,

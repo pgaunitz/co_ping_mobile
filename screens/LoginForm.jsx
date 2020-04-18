@@ -15,7 +15,8 @@ import { onLogin } from "../modules/authentication";
 const LoginForm = () => {
   const dispatch = useDispatch();
   const showLoginForm = useSelector(state => state.showLoginForm);
-  const loginMessage = useSelector(state => state.loginMessage)
+  const loginMessage = useSelector(state => state.loginMessage);
+  const userId = useSelector(state => state.userId)
   const [email, onChangeEmail] = React.useState("");
   const [password, onChangePassword] = React.useState("");
 

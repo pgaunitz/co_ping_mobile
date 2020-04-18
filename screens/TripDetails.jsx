@@ -9,38 +9,31 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getInformation,
+  getTripInformation,
   acceptRequest,
   rejectRequest,
 } from "../modules/tripActions";
 import { CheckBox, Icon } from "react-native-elements";
 
-const RequestList = () => {
+const TripDetails = () => {
   const dispatch = useDispatch();
-
-  const [checked, setChecked] = useState(false);
-
   const userId = useSelector((state) => state.userId);
 
   useEffect(() => {
-    getInformation(userId, dispatch);
+    getTripInformation(userId, dispatch);
   }, []);
-
-  const checkBoy = () => {
-    switch (checked) {
-      case false:
-        return setChecked(true);
-      case true:
-        return setChecked(false);
-      default:
-        return checked;
-    }
-  };
 
   const myPongs = useSelector((state) => state.myPongs);
   const userTrip = useSelector((state) => state.userTrip);
   const pingId = useSelector((state) => state.userTrip.id);
   const noPongsMessage = useSelector((state) => state.noPongsMessage);
+
+  let pingBoardMessage;
+  if (noPongsMessage === "") {
+    pingBoardMessage = `Don't forget to go to ${userTrip.store} at ${userTrip.time}.`
+  } else {
+    pingBoardMessage = `${noPongsMessage}`
+  }
 
   function Item({
     pong_id,
@@ -56,85 +49,73 @@ const RequestList = () => {
     switch (status) {
       case "pending":
         return (pong = (
-          <>
-            <View style={styles.pong}>
-              <Text style={styles.name}>{name}</Text>
-              <View style={styles.itemContainer}>
-                <Icon name="ios-cart" type="ionicon" />
-                <Text style={styles.item}>{itemOne}</Text>
-              </View>
-              <View style={styles.itemContainer}>
-                <Icon name="ios-cart" type="ionicon" />
-                <Text style={styles.item}>{itemTwo}</Text>
-              </View>
-              <View style={styles.itemContainer}>
-                <Icon name="ios-cart" type="ionicon" />
-                <Text style={styles.item}>{itemThree}</Text>
-              </View>
-              <View style={styles.buttonContainer}>
-                <TouchableHighlight
-                  style={styles.acceptButton}
-                  onPress={() => {
-                    acceptRequest(pingId, pong_id, dispatch);
-                  }}
-                >
-                  <Text
-                    id={`accept-button-${pong_id}`}
-                    style={styles.requestButtonText}
-                  >
-                    {acceptButton}
-                  </Text>
-                </TouchableHighlight>
-
-                <TouchableHighlight
-                  style={styles.rejectButton}
-                  onPress={() => {
-                    rejectRequest(pingId, pong_id, dispatch);
-                  }}
-                >
-                  <Text
-                    id={`reject-button-${pong_id}`}
-                    style={styles.requestButtonText}
-                  >
-                    {rejectButton}
-                  </Text>
-                </TouchableHighlight>
-              </View>
+          <View style={styles.pong}>
+            <Text style={styles.name}>{name}</Text>
+            <View style={styles.itemContainer}>
+              <Icon name="ios-cart" type="ionicon" />
+              <Text style={styles.item}>{itemOne}</Text>
             </View>
-          </>
-        ));
+            <View style={styles.itemContainer}>
+              <Icon name="ios-cart" type="ionicon" />
+              <Text style={styles.item}>{itemTwo}</Text>
+            </View>
+            <View style={styles.itemContainer}>
+              <Icon name="ios-cart" type="ionicon" />
+              <Text style={styles.item}>{itemThree}</Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              <TouchableHighlight
+                style={styles.acceptButton}
+                onPress={() => {
+                  acceptRequest(pingId, pong_id, dispatch);
+                }}
+              >
+                <Text
+                  id={`accept-button-${pong_id}`}
+                  style={styles.requestButtonText}
+                >
+                  {acceptButton}
+                </Text>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                style={styles.rejectButton}
+                onPress={() => {
+                  rejectRequest(pingId, pong_id, dispatch);
+                }}
+              >
+                <Text
+                  id={`reject-button-${pong_id}`}
+                  style={styles.requestButtonText}
+                >
+                  {rejectButton}
+                </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        )
+        );
       case "accepted":
         return (pong = (
-          <>
-            <View style={styles.pong}>
-              <Text style={styles.name}>{name}</Text>
-              <CheckBox
-                onPress={() => checkBoy()}
-                checked={checked}
-                style={styles.item}
-                title={itemOne}
-              />
+          <View style={styles.pong}>
+            <Text style={styles.name}>{name}</Text>
+            <CheckBox
+              style={styles.item}
+              title={itemOne}
+            />
+            {itemTwo !== "" &&
               <CheckBox style={styles.item} title={itemTwo} />
+            }
+            {itemThree !== "" &&
               <CheckBox style={styles.item} title={itemThree} />
-            </View>
-          </>
+            }
+          </View>
         ));
       case "rejected":
         return (pong = <View></View>);
     }
 
     return <View>{pong}</View>;
-  }
-
-  let pingBoardMessage;
-  if (noPongsMessage === "") {
-    pingBoardMessage = (
-      <Text style={styles.trip}>
-        Don't forget to go to {userTrip.store} at {userTrip.time}.
-      </Text>
-    );
-  } else {
-    pingBoardMessage = <Text style={styles.trip}>{noPongsMessage}</Text>;
   }
 
   return (
@@ -146,9 +127,7 @@ const RequestList = () => {
         end={{ x: 1, y: 0 }}
       >
         <Text style={styles.title}>My Current Trip</Text>
-
-        {pingBoardMessage}
-
+        <Text style={styles.trip}>{pingBoardMessage}</Text>
         <FlatList
           data={myPongs}
           renderItem={({ item }) => (
@@ -256,4 +235,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RequestList;
+export default TripDetails;
