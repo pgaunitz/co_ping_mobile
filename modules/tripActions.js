@@ -42,7 +42,6 @@ const getInformation = async (userId, dispatch) => {
 };
 
 const acceptRequest = async (pingId, pong_id, dispatch) => {
-  debugger
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   let response = await axios.put(
     `https://co-ping.herokuapp.com/pongs/${pong_id}`,

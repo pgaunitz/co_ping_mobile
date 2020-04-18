@@ -1,9 +1,9 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TouchableHighlight, View, StyleSheet, Text, Image } from "react-native";
 import { SHOW_LOGIN_FORM } from "../state/actions/actionTypes";
 import { onLogout } from "../modules/authentication";
-import { fetchTrips } from "../modules/tripActions"
+import { fetchTrips, getInformation } from "../modules/tripActions"
 import LoginForm from "./LoginForm";
 import { LinearGradient } from "expo-linear-gradient";
 import Logo from "../assets/images/co_ping_Logo2.png";
@@ -12,10 +12,17 @@ const HomeScreen = ({ navigation }) => {
   const authenticated = useSelector(state => state.authenticated);
   const logoutMessage = useSelector(state => state.logoutMessage);
   const loginMessage = useSelector(state => state.loginMessage);
+  const userId = useSelector((state) => state.userId);
   const dispatch = useDispatch();
   const login = () => {
     dispatch({ type: SHOW_LOGIN_FORM });
   };
+
+  useEffect(() => {
+    getInformation(userId, dispatch);
+  }, []);
+
+  const pingId = useSelector((state) => state.userTrip.id);
 
   return (
     <View style={styles.mainpage}>
@@ -44,7 +51,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-        {authenticated && (
+        { authenticated && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => { 
@@ -56,7 +63,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-        {authenticated && (
+        { pingId && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {  
