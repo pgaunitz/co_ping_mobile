@@ -18,14 +18,6 @@ const HomeScreen = ({ navigation }) => {
     dispatch({ type: SHOW_LOGIN_FORM });
   };
 
-  // useEffect(() => {
-  //   getTripInformation(userId, dispatch);
-  //   getRequestInformation(userId, dispatch);
-  // }, []);
-
-  // const pingId = useSelector((state) => state.userTrip.id);
-  // const myPongId = useSelector((state) => state.myPong.id)
-
   return (
     <View style={styles.mainpage}>
       <LinearGradient

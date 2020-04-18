@@ -14,6 +14,7 @@ const RequestDetails = () => {
   }, []);
 
   const myPong = useSelector(state => state.myPong);
+  const myPongMessage = useSelector(state => state.myPongMessage);
   const cancelledRequestResponse = useSelector(
     state => state.cancelledRequestResponse
   );
@@ -53,37 +54,39 @@ const RequestDetails = () => {
         end={{ x: 1, y: 0 }}
       >
         <Text style={styles.title}>My Current Pong</Text>
-            <View style={styles.pong}>
-              <View style={styles.statusContainer}>{statusColor}</View>
-              <View style={styles.itemContainer}>
-                <Icon name="ios-cart" type="ionicon" />
-                <Text style={styles.item}>{myPong.item1}</Text>
-              </View>
-              <View style={styles.itemContainer}>
-                <Icon name="ios-cart" type="ionicon" />
-                <Text style={styles.item}>{myPong.item2}</Text>
-              </View>
-              <View style={styles.itemContainer}>
-                <Icon name="ios-cart" type="ionicon" />
-                <Text style={styles.item}>{myPong.item3}</Text>
-              </View>
-              <View style={styles.buttonContainer}>
-                {cancelledRequestResponse ? (
-                  <Text id="cancel-message">{cancelledRequestResponse}</Text>
-                ) : (
-                    <TouchableHighlight
-                      style={styles.cancelButton}
-                      onPress={() => {
-                        cancelRequest(myPong.id, dispatch);
-                      }}
-                    >
-                      <Text id={"cancel-button"} style={styles.requestButtonText}>
-                        Cancel Pong Request
-                </Text>
-                    </TouchableHighlight>
-                  )}
-              </View>
+        {myPongMessage ? (<Text style={styles.trip}>{myPongMessage}</Text>) :
+          (<View style={styles.pong}>
+            <View style={styles.statusContainer}>{statusColor}</View>
+            <View style={styles.itemContainer}>
+              <Icon name="ios-cart" type="ionicon" />
+              <Text style={styles.item}>{myPong.item1}</Text>
             </View>
+            <View style={styles.itemContainer}>
+              <Icon name="ios-cart" type="ionicon" />
+              <Text style={styles.item}>{myPong.item2}</Text>
+            </View>
+            <View style={styles.itemContainer}>
+              <Icon name="ios-cart" type="ionicon" />
+              <Text style={styles.item}>{myPong.item3}</Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              {cancelledRequestResponse ? (
+                <Text id="cancel-message">{cancelledRequestResponse}</Text>
+              ) : (
+                  <TouchableHighlight
+                    style={styles.cancelButton}
+                    onPress={() => {
+                      cancelRequest(myPong.id, dispatch);
+                    }}
+                  >
+                    <Text id={"cancel-button"} style={styles.requestButtonText}>
+                      Cancel Pong Request
+                </Text>
+                  </TouchableHighlight>
+                )}
+            </View>
+          </View>
+          )}
       </LinearGradient>
     </View>
   );
@@ -168,13 +171,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     fontSize: 18
-  }
-  // trip: {
-  //   color: "white",
-  //   margin: 10,
-  //   textAlign: "center",
-  //   fontSize: 18,
-  // },
+  },
+  trip: {
+    color: "white",
+    margin: 10,
+    textAlign: "center",
+    fontSize: 18,
+  },
 });
 
 export default RequestDetails;

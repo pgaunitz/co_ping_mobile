@@ -96,12 +96,21 @@ const getRequestInformation = async (userId, dispatch) => {
       headers: headers
     }
   );
+  if (pongResponse.data.pong) {
   dispatch({
     type: GET_REQUEST_DETAILS,
     payload: {
       myPong: pongResponse.data.pong
     }
   });
+} else {
+  dispatch({
+    type: GET_REQUEST_DETAILS,
+    payload: {
+      myPongMessage: pongResponse.data.message
+    }
+  });
+}
 };
 
 const cancelRequest = async (pong_id, dispatch) => {

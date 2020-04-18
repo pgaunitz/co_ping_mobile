@@ -17,23 +17,11 @@ import { CheckBox, Icon } from "react-native-elements";
 
 const TripDetails = () => {
   const dispatch = useDispatch();
-  // const [checked, setChecked] = useState(false);
   const userId = useSelector((state) => state.userId);
 
   useEffect(() => {
     getTripInformation(userId, dispatch);
   }, []);
-
-  // const checkBoy = () => {
-  //   switch (checked) {
-  //     case false:
-  //       return setChecked(true);
-  //     case true:
-  //       return setChecked(false);
-  //     default:
-  //       return checked;
-  //   }
-  // };
 
   const myPongs = useSelector((state) => state.myPongs);
   const userTrip = useSelector((state) => state.userTrip);
@@ -61,72 +49,74 @@ const TripDetails = () => {
     switch (status) {
       case "pending":
         return (pong = (
-            <View style={styles.pong}>
-              <Text style={styles.name}>{name}</Text>
-              <View style={styles.itemContainer}>
-                <Icon name="ios-cart" type="ionicon" />
-                <Text style={styles.item}>{itemOne}</Text>
-              </View>
-              <View style={styles.itemContainer}>
-                <Icon name="ios-cart" type="ionicon" />
-                <Text style={styles.item}>{itemTwo}</Text>
-              </View>
-              <View style={styles.itemContainer}>
-                <Icon name="ios-cart" type="ionicon" />
-                <Text style={styles.item}>{itemThree}</Text>
-              </View>
-              <View style={styles.buttonContainer}>
-                <TouchableHighlight
-                  style={styles.acceptButton}
-                  onPress={() => {
-                    acceptRequest(pingId, pong_id, dispatch);
-                  }}
-                >
-                  <Text
-                    id={`accept-button-${pong_id}`}
-                    style={styles.requestButtonText}
-                  >
-                    {acceptButton}
-                  </Text>
-                </TouchableHighlight>
-
-                <TouchableHighlight
-                  style={styles.rejectButton}
-                  onPress={() => {
-                    rejectRequest(pingId, pong_id, dispatch);
-                  }}
-                >
-                  <Text
-                    id={`reject-button-${pong_id}`}
-                    style={styles.requestButtonText}
-                  >
-                    {rejectButton}
-                  </Text>
-                </TouchableHighlight>
-              </View>
+          <View style={styles.pong}>
+            <Text style={styles.name}>{name}</Text>
+            <View style={styles.itemContainer}>
+              <Icon name="ios-cart" type="ionicon" />
+              <Text style={styles.item}>{itemOne}</Text>
             </View>
+            <View style={styles.itemContainer}>
+              <Icon name="ios-cart" type="ionicon" />
+              <Text style={styles.item}>{itemTwo}</Text>
+            </View>
+            <View style={styles.itemContainer}>
+              <Icon name="ios-cart" type="ionicon" />
+              <Text style={styles.item}>{itemThree}</Text>
+            </View>
+            <View style={styles.buttonContainer}>
+              <TouchableHighlight
+                style={styles.acceptButton}
+                onPress={() => {
+                  acceptRequest(pingId, pong_id, dispatch);
+                }}
+              >
+                <Text
+                  id={`accept-button-${pong_id}`}
+                  style={styles.requestButtonText}
+                >
+                  {acceptButton}
+                </Text>
+              </TouchableHighlight>
+
+              <TouchableHighlight
+                style={styles.rejectButton}
+                onPress={() => {
+                  rejectRequest(pingId, pong_id, dispatch);
+                }}
+              >
+                <Text
+                  id={`reject-button-${pong_id}`}
+                  style={styles.requestButtonText}
+                >
+                  {rejectButton}
+                </Text>
+              </TouchableHighlight>
+            </View>
+          </View>
         )
-         );
+        );
       case "accepted":
         return (pong = (
-            <View style={styles.pong}>
-              <Text style={styles.name}>{name}</Text>
-              <CheckBox
-                // onPress={() => checkBoy()}
-                // checked={checked}
-                style={styles.item}
-                title={itemOne}
-              />
+          <View style={styles.pong}>
+            <Text style={styles.name}>{name}</Text>
+            <CheckBox
+              style={styles.item}
+              title={itemOne}
+            />
+            {itemTwo !== "" &&
               <CheckBox style={styles.item} title={itemTwo} />
+            }
+            {itemThree !== "" &&
               <CheckBox style={styles.item} title={itemThree} />
-            </View>
+            }
+          </View>
         ));
       case "rejected":
         return (pong = <View></View>);
     }
 
     return <View>{pong}</View>;
-   }
+  }
 
   return (
     <View style={styles.container} className="request-form">
@@ -147,7 +137,7 @@ const TripDetails = () => {
               itemOne={item.item1}
               itemTwo={item.item2}
               itemThree={item.item3}
-              // status={item.status}
+              status={item.status}
               acceptButton="Of course!"
               rejectButton="Sorry, not this time"
             />
