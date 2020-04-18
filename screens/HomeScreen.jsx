@@ -18,13 +18,13 @@ const HomeScreen = ({ navigation }) => {
     dispatch({ type: SHOW_LOGIN_FORM });
   };
 
-  useEffect(() => {
-    getTripInformation(userId, dispatch);
-    getRequestInformation(userId, dispatch);
-  }, []);
+  // useEffect(() => {
+  //   getTripInformation(userId, dispatch);
+  //   getRequestInformation(userId, dispatch);
+  // }, []);
 
-  const pingId = useSelector((state) => state.userTrip.id);
-  const myPongId = useSelector((state) => state.myPong.id)
+  // const pingId = useSelector((state) => state.userTrip.id);
+  // const myPongId = useSelector((state) => state.myPong.id)
 
   return (
     <View style={styles.mainpage}>
@@ -65,7 +65,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-        { authenticated && (pingId && (
+        { authenticated &&  (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {  
@@ -75,8 +75,8 @@ const HomeScreen = ({ navigation }) => {
               My Ping Board
             </Text>
           </TouchableHighlight>
-        ))}
-         { myPongId && (
+        )}
+         { authenticated && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {  

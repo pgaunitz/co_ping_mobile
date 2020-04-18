@@ -25,7 +25,7 @@ const getTripInformation = async (userId, dispatch) => {
       headers: headers
     }
   );
-  if (pingResponse.data.ping) {
+ if (pingResponse.data.ping) {
     dispatch({
       type: GET_TRIP_DETAILS,
       payload: {

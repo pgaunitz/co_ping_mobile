@@ -17,30 +17,35 @@ import { CheckBox, Icon } from "react-native-elements";
 
 const TripDetails = () => {
   const dispatch = useDispatch();
-
-  const [checked, setChecked] = useState(false);
-
+  // const [checked, setChecked] = useState(false);
   const userId = useSelector((state) => state.userId);
 
   useEffect(() => {
     getTripInformation(userId, dispatch);
   }, []);
 
-  const checkBoy = () => {
-    switch (checked) {
-      case false:
-        return setChecked(true);
-      case true:
-        return setChecked(false);
-      default:
-        return checked;
-    }
-  };
+  // const checkBoy = () => {
+  //   switch (checked) {
+  //     case false:
+  //       return setChecked(true);
+  //     case true:
+  //       return setChecked(false);
+  //     default:
+  //       return checked;
+  //   }
+  // };
 
   const myPongs = useSelector((state) => state.myPongs);
   const userTrip = useSelector((state) => state.userTrip);
   const pingId = useSelector((state) => state.userTrip.id);
   const noPongsMessage = useSelector((state) => state.noPongsMessage);
+
+  let pingBoardMessage;
+  if (noPongsMessage === "") {
+    pingBoardMessage = `Don't forget to go to ${userTrip.store} at ${userTrip.time}.`
+  } else {
+    pingBoardMessage = `${noPongsMessage}`
+  }
 
   function Item({
     pong_id,
@@ -56,7 +61,6 @@ const TripDetails = () => {
     switch (status) {
       case "pending":
         return (pong = (
-          <>
             <View style={styles.pong}>
               <Text style={styles.name}>{name}</Text>
               <View style={styles.itemContainer}>
@@ -101,41 +105,28 @@ const TripDetails = () => {
                 </TouchableHighlight>
               </View>
             </View>
-          </>
-        ));
+        )
+         );
       case "accepted":
         return (pong = (
-          <>
             <View style={styles.pong}>
               <Text style={styles.name}>{name}</Text>
               <CheckBox
-                onPress={() => checkBoy()}
-                checked={checked}
+                // onPress={() => checkBoy()}
+                // checked={checked}
                 style={styles.item}
                 title={itemOne}
               />
               <CheckBox style={styles.item} title={itemTwo} />
               <CheckBox style={styles.item} title={itemThree} />
             </View>
-          </>
         ));
       case "rejected":
         return (pong = <View></View>);
     }
 
     return <View>{pong}</View>;
-  }
-
-  let pingBoardMessage;
-  if (noPongsMessage === "") {
-    pingBoardMessage = (
-      <Text style={styles.trip}>
-        Don't forget to go to {userTrip.store} at {userTrip.time}.
-      </Text>
-    );
-  } else {
-    pingBoardMessage = <Text style={styles.trip}>{noPongsMessage}</Text>;
-  }
+   }
 
   return (
     <View style={styles.container} className="request-form">
@@ -146,9 +137,7 @@ const TripDetails = () => {
         end={{ x: 1, y: 0 }}
       >
         <Text style={styles.title}>My Current Trip</Text>
-
-        {pingBoardMessage}
-
+        <Text style={styles.trip}>{pingBoardMessage}</Text>
         <FlatList
           data={myPongs}
           renderItem={({ item }) => (
@@ -158,7 +147,7 @@ const TripDetails = () => {
               itemOne={item.item1}
               itemTwo={item.item2}
               itemThree={item.item3}
-              status={item.status}
+              // status={item.status}
               acceptButton="Of course!"
               rejectButton="Sorry, not this time"
             />
