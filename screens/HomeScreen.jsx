@@ -65,7 +65,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-        { authenticated && (
+        { authenticated && (pingId && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {  
@@ -75,8 +75,8 @@ const HomeScreen = ({ navigation }) => {
               My Ping Board
             </Text>
           </TouchableHighlight>
-        )}
-         { authenticated && (
+        ))}
+         { myPongId && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {  
