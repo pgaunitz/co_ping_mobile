@@ -24,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
   }, []);
 
   const pingId = useSelector((state) => state.userTrip.id);
-  const myPong = useSelector((state) => state.myPong)
+  const myPongId = useSelector((state) => state.myPong.id)
 
   return (
     <View style={styles.mainpage}>
@@ -76,7 +76,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-         { myPong && (
+         { myPongId && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {  

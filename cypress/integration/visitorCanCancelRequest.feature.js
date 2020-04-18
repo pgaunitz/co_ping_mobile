@@ -28,13 +28,12 @@ describe("Visitor can", () => {
     cy.get("#email").type("user@mail.com");
     cy.get("#password").type("password");
     cy.get("#submit-login").contains("Submit").click();
-    cy.get("#request-button").click();
   });
 
   it("cancel a request", () => {
+    cy.get("#request-button").click();
     cy.get("body").should("contain", "Bacon");
-    cy.get("body").should("contain", "Sweet guy");
-    cy.get("body").should("contain", "Caramel");
+    cy.get("body").should("contain", "Shampoo");
     cy.get("#cancel-button").click()
     cy.get("#cancel-message").should("contain", "Your request has been cancelled")
   });

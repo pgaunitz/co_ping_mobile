@@ -15,7 +15,7 @@ import {
 } from "../modules/tripActions";
 import { CheckBox, Icon } from "react-native-elements";
 
-const RequestList = () => {
+const TripDetails = () => {
   const dispatch = useDispatch();
 
   const [checked, setChecked] = useState(false);
@@ -256,4 +256,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RequestList;
+export default TripDetails;
