@@ -8,7 +8,7 @@ import {
 
 const fetchTrips = async (dispatch) => {
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-  let response = await axios.get("http://localhost:3000/pings", {
+  let response = await axios.get("https://co-ping.herokuapp.com/pings", {
     headers: headers,
   });
   return dispatch({
@@ -19,7 +19,7 @@ const fetchTrips = async (dispatch) => {
 
 const getInformation = async (userId, dispatch) => {
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-  let pingResponse = await axios.get(`http://localhost:3000/pings/${userId}`, {
+  let pingResponse = await axios.get(`https://co-ping.herokuapp.com/pings/${userId}`, {
     headers: headers,
   });
   if (pingResponse.data.ping) {
@@ -45,7 +45,7 @@ const acceptRequest = async (pingId, pong_id, dispatch) => {
   debugger
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   let response = await axios.put(
-    `http://localhost:3000/pongs/${pong_id}`,
+    `https://co-ping.herokuapp.com/pongs/${pong_id}`,
     {
       pong: {
         ping_id: pingId,
@@ -67,7 +67,7 @@ const acceptRequest = async (pingId, pong_id, dispatch) => {
 const rejectRequest = async (pingId, pong_id, dispatch) => {
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   let response = await axios.put(
-    `http://localhost:3000/pongs/${pong_id}`,
+    `https://co-ping.herokuapp.com/pongs/${pong_id}`,
     {
       pong: {
         ping_id: pingId,

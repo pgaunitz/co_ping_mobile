@@ -25,7 +25,7 @@ const RequestForm = () => {
   const sendRequest = async (e) => {
     e.preventDefault();
     let response = await axios.post(
-      "http://localhost:3000/pongs",
+      "https://co-ping.herokuapp.com/pongs",
       {
         pong: {
           item1: itemOne,

@@ -10,8 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Requests from "./screens/Requests";
 import RequestList from "./screens/RequestList";
 
-// axios.defaults.baseURL = "https://co-ping.herokuapp.com";
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://co-ping.herokuapp.com";
 
 const store = configureStore();
 window.store = store;
