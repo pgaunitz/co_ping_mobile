@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getInformation,
+  getTripInformation,
   acceptRequest,
   rejectRequest,
 } from "../modules/tripActions";
@@ -23,7 +23,7 @@ const RequestList = () => {
   const userId = useSelector((state) => state.userId);
 
   useEffect(() => {
-    getInformation(userId, dispatch);
+    getTripInformation(userId, dispatch);
   }, []);
 
   const checkBoy = () => {

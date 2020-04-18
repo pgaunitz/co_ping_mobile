@@ -2,8 +2,8 @@ import axios from "axios";
 import {
   GET_TRIP_LIST,
   GET_TRIP_DETAILS,
-  GET_TRIP_REQUEST_DETAILS,
   PONG_STATUS,
+  GET_REQUEST_DETAILS
 } from "../state/actions/actionTypes";
 
 const fetchTrips = async (dispatch) => {
@@ -17,7 +17,7 @@ const fetchTrips = async (dispatch) => {
   });
 };
 
-const getInformation = async (userId, dispatch) => {
+const getTripInformation = async (userId, dispatch) => {
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   let pingResponse = await axios.get(`https://co-ping.herokuapp.com/pings/${userId}`, {
     headers: headers,
@@ -85,4 +85,18 @@ const rejectRequest = async (pingId, pong_id, dispatch) => {
   });
 };
 
-export { fetchTrips, getInformation, acceptRequest, rejectRequest };
+const getRequestInformation = async (userId, dispatch) => {
+  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let pongResponse = await axios.get(`https://co-ping.herokuapp.com/pongs/${userId}`, {
+    headers: headers,
+  });
+    dispatch({
+      type: GET_REQUEST_DETAILS,
+      payload: {
+        myPong: pongResponse.data.pong
+      },
+    }); 
+};
+
+
+export { fetchTrips, getTripInformation, getRequestInformation, acceptRequest, rejectRequest };

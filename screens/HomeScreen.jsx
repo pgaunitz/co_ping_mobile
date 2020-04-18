@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { TouchableHighlight, View, StyleSheet, Text, Image } from "react-native";
 import { SHOW_LOGIN_FORM } from "../state/actions/actionTypes";
 import { onLogout } from "../modules/authentication";
-import { fetchTrips, getInformation } from "../modules/tripActions"
+import { fetchTrips, getTripInformation, getRequestInformation } from "../modules/tripActions"
 import LoginForm from "./LoginForm";
 import { LinearGradient } from "expo-linear-gradient";
 import Logo from "../assets/images/co_ping_Logo2.png";
@@ -19,10 +19,12 @@ const HomeScreen = ({ navigation }) => {
   };
 
   useEffect(() => {
-    getInformation(userId, dispatch);
+    getTripInformation(userId, dispatch);
+    getRequestInformation(userId, dispatch);
   }, []);
 
   const pingId = useSelector((state) => state.userTrip.id);
+  const myPong = useSelector((state) => state.myPong)
 
   return (
     <View style={styles.mainpage}>
@@ -71,6 +73,17 @@ const HomeScreen = ({ navigation }) => {
               }>
             <Text id="request-list-button" style={styles.buttonText}>
               My Ping Board
+            </Text>
+          </TouchableHighlight>
+        )}
+         { myPong && (
+          <TouchableHighlight
+            style={styles.button}
+            onPress={() => {  
+              navigation.navigate('My Pong Board', { name: "My Pong Board" }) }
+              }>
+            <Text id="request-button" style={styles.buttonText}>
+              My Pong Board
             </Text>
           </TouchableHighlight>
         )}
