@@ -1,0 +1,33 @@
+{
+  "ping": {
+    "id": 1,
+    "time": "2020-04-13-16:30",
+    "store": "ICA",
+    "pongs": [
+      {
+        "id": 1,
+        "user_name": "Awesome Girl",
+        "item1": "Bacon",
+        "item2": "Butter",
+        "item3": "Shampoo",
+        "status": "accepted"
+      },
+      {
+        "id": 2,
+        "user_name": "Sweet guy",
+        "item1": "Cola",
+        "item2": "Caramel",
+        "item3": "Salt",
+        "status": "accepted"
+      },
+      {
+        "id": 3,
+        "user_name": "Little Boy",
+        "item1": "Beer",
+        "item2": "Wine",
+        "item3": "Godis",
+        "status": "pending"
+      }
+    ]
+  }
+}

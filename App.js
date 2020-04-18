@@ -8,6 +8,7 @@ import TripsList from "./screens/TripsList";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Requests from "./screens/Requests";
+import RequestList from "./screens/RequestList";
 
 axios.defaults.baseURL = "https://co-ping.herokuapp.com";
 
@@ -21,9 +22,11 @@ const App = () => {
     <NavigationContainer>
       <Provider store={store}>
         <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Home" nativeID="home" component={HomeScreen} path=""/>
           <Stack.Screen name="Trips" component={TripsList} />
           <Stack.Screen name="Requests" component={Requests} />
+          <Stack.Screen name="My Ping Board" component={RequestList} />
+
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>

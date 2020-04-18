@@ -1,5 +1,8 @@
 const initialState = {
-  loginMessage: ""
+  loginMessage: "",
+  userTrip: {},
+  myPongs: [],
+  myPongsMessage: ""
 };
 
 export default initialState;

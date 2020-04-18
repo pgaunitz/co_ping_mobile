@@ -44,6 +44,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
+    case actionTypes.GET_TRIP_DETAILS:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case actionTypes.GET_TRIP_REQUEST_DETAILS:
+      return {
+        ...state,
+        ...action.payload
+      }
+    case actionTypes.PONG_STATUS:
+      return{
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }
