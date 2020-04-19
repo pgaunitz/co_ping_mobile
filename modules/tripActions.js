@@ -130,11 +130,34 @@ const cancelRequest = async (pong_id, dispatch) => {
   });
 };
 
+const closeTrip = async (pingId, userId, dispatch) => {
+  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let response = await axios.put(
+    `https://co-ping.herokuapp.com/pings/${pingId}`,
+    {
+      ping: {
+        active: false,
+        user_id: userId 
+      }
+    },
+    {
+      headers: headers
+    }
+  );
+  dispatch({
+    type: GET_TRIP_DETAILS,
+    payload: {
+      closeTripMessage: response.data.message
+    }
+  });
+};
+
 export {
   fetchTrips,
   getTripInformation,
   getRequestInformation,
   acceptRequest,
   rejectRequest,
-  cancelRequest
+  cancelRequest,
+  closeTrip
 };

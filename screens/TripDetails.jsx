@@ -12,6 +12,7 @@ import {
   getTripInformation,
   acceptRequest,
   rejectRequest,
+  closeTrip,
 } from "../modules/tripActions";
 import { CheckBox, Icon } from "react-native-elements";
 
@@ -27,13 +28,24 @@ const TripDetails = () => {
   const userTrip = useSelector((state) => state.userTrip);
   const pingId = useSelector((state) => state.userTrip.id);
   const noPongsMessage = useSelector((state) => state.noPongsMessage);
+  const closeTripMessage = useSelector((state) => state.closeTripMessage);
+
+  const [check, setCheck] = useState("unchecked");
 
   let pingBoardMessage;
   if (noPongsMessage === "") {
-    pingBoardMessage = `Don't forget to go to ${userTrip.store} at ${userTrip.time}.`
+    pingBoardMessage = `You're going to ${userTrip.store} at ${userTrip.time}.`;
   } else {
-    pingBoardMessage = `${noPongsMessage}`
+    pingBoardMessage = `${noPongsMessage}`;
   }
+
+  const isChecked = () => {
+    if (check === "checked") {
+      setCheck("unchecked");
+    } else {
+      setCheck("checked");
+    }
+  };
 
   function Item({
     pong_id,
@@ -77,7 +89,6 @@ const TripDetails = () => {
                   {acceptButton}
                 </Text>
               </TouchableHighlight>
-
               <TouchableHighlight
                 style={styles.rejectButton}
                 onPress={() => {
@@ -93,8 +104,7 @@ const TripDetails = () => {
               </TouchableHighlight>
             </View>
           </View>
-        )
-        );
+        ));
       case "accepted":
         return (pong = (
           <View style={styles.pong}>
@@ -102,13 +112,14 @@ const TripDetails = () => {
             <CheckBox
               style={styles.item}
               title={itemOne}
+              onPress={() => {
+                isChecked();
+              }}
             />
-            {itemTwo !== "" &&
-              <CheckBox style={styles.item} title={itemTwo} />
-            }
-            {itemThree !== "" &&
+            {itemTwo !== "" && <CheckBox style={styles.item} title={itemTwo} />}
+            {itemThree !== "" && (
               <CheckBox style={styles.item} title={itemThree} />
-            }
+            )}
           </View>
         ));
       case "rejected":
@@ -128,6 +139,22 @@ const TripDetails = () => {
       >
         <Text style={styles.title}>My Current Trip</Text>
         <Text style={styles.trip}>{pingBoardMessage}</Text>
+        {closeTripMessage ? (
+          <Text id="close-trip-message" style={styles.trip}>
+            {closeTripMessage}
+          </Text>
+        ) : (
+          <TouchableHighlight
+            style={styles.closeButton}
+            onPress={() => {
+              closeTrip(pingId, userId, dispatch);
+            }}
+          >
+            <Text style={styles.buttonText} id="close-trip-button">
+              No More Pongs
+            </Text>
+          </TouchableHighlight>
+        )}
         <FlatList
           data={myPongs}
           renderItem={({ item }) => (
@@ -231,6 +258,18 @@ const styles = StyleSheet.create({
     color: "white",
     margin: 10,
     textAlign: "center",
+    fontSize: 18,
+  },
+  closeButton: {
+    height: 30,
+    borderRadius: 10,
+    backgroundColor: "#71B280",
+    margin: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "#black",
     fontSize: 18,
   },
 });
