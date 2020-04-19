@@ -16,6 +16,7 @@ import {
   closeTrip
 } from "../modules/tripActions";
 import { CheckBox, Icon } from "react-native-elements";
+import axios from "axios"
 
 const TripDetails = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,8 @@ const TripDetails = () => {
   const closeTripMessage = useSelector(state => state.closeTripMessage);
 
   const [check, setCheck] = useState("unchecked");
+  const [totalCost, setTotalCost] = useState()
+
 
   let pingBoardMessage;
   if (noPongsMessage === "") {
@@ -48,6 +51,24 @@ const TripDetails = () => {
     }
   };
 
+  const sendCost = async (totalCost, pongId, dispatch) => {
+    
+    let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+    let response = await axios.put(
+      `https://co-ping.herokuapp.com/pongs/${pongId}`,
+      {
+        pong: {
+          ping_id: pingId,
+          total_cost: totalCost
+        }
+      },
+      {
+        headers: headers
+      }
+    );
+    debugger
+  }
+
   function Item({
     pongId,
     name,
@@ -56,7 +77,7 @@ const TripDetails = () => {
     itemThree,
     acceptButton,
     rejectButton,
-    status
+    status,
   }) {
     let pong;
     switch (status) {
@@ -121,16 +142,22 @@ const TripDetails = () => {
             {itemThree !== "" && (
               <CheckBox style={styles.item} title={itemThree} />
             )}
-            <View style={styles.costContainer}>
+            <View id={`total-cost-container-${pongId}`} style={styles.costContainer}>
               <Text style={styles.item}>Total cost: </Text>
-              <TextInput style={styles.costInput} placeholder="e.g. 50 sek" />
+              <TextInput 
+              style={styles.costInput} 
+              // defaultValue={totalCost}
+              id={`total-cost-${pongId}`}
+              value={totalCost}
+              onChangeText={setTotalCost(totalCost)}
+              />
               <TouchableHighlight
                 style={styles.sendButton}
                 onPress={() => {
-                  sendCost(pongId, totalCost, dispatch);
+                  sendCost(totalCost, pongId, dispatch);
                 }}
               >
-                <Text style={styles.buttonText} id="send-cost-button">
+                <Text style={styles.buttonText} id={`send-cost-button-${pongId}`}>
                   Send
                 </Text>
               </TouchableHighlight>
@@ -182,7 +209,6 @@ const TripDetails = () => {
               status={item.status}
               acceptButton="Of course!"
               rejectButton="Sorry, not this time"
-              // cost="Total cost:"
             />
           )}
           keyExtractor={item => item.id}
