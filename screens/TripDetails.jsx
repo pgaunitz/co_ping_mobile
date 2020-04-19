@@ -6,16 +6,13 @@ import {
   Text,
   FlatList,
   TouchableHighlight,
-  TextInput
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getTripInformation,
-  acceptRequest,
-  rejectRequest,
   closeTrip
 } from "../modules/tripActions";
-import { CheckBox, Icon } from "react-native-elements";
+import { PongToPingDetails } from "./PongToPingDetails"
 import axios from "axios"
 
 const TripDetails = () => {
@@ -33,8 +30,7 @@ const TripDetails = () => {
   const closeTripMessage = useSelector(state => state.closeTripMessage);
 
   const [check, setCheck] = useState("unchecked");
-  const [totalCost, setTotalCost] = useState()
-
+  // const [totalCost, setTotalCost] = useState()
 
   let pingBoardMessage;
   if (noPongsMessage === "") {
@@ -51,23 +47,28 @@ const TripDetails = () => {
     }
   };
 
-  const sendCost = async (totalCost, pongId, dispatch) => {
-    
-    let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-    let response = await axios.put(
-      `https://co-ping.herokuapp.com/pongs/${pongId}`,
-      {
-        pong: {
-          ping_id: pingId,
-          total_cost: totalCost
-        }
-      },
-      {
-        headers: headers
-      }
-    );
-    debugger
-  }
+  // const handleTotalCostChange = async (cost) => {
+  //   await setTotalCost(cost)
+  // }
+
+  // let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  // const sendCostInformation = async (event, pongId) => {
+  //   event.preventDefault();
+  //   debugger
+  //   let response = await axios.put(
+  //     `https://co-ping.herokuapp.com/pongs/${pongId}`,
+  //     {
+  //       pong: {
+  //         ping_id: pingId,
+  //         total_cost: totalCost
+  //       }
+  //     },
+  //     {
+  //       headers: headers
+  //     }
+  //   );
+  //   // debugger
+  // }
 
   function Item({
     pongId,
@@ -79,96 +80,20 @@ const TripDetails = () => {
     rejectButton,
     status,
   }) {
-    let pong;
-    switch (status) {
-      case "pending":
-        return (pong = (
-          <View style={styles.pong}>
-            <Text style={styles.name}>{name}</Text>
-            <View style={styles.itemContainer}>
-              <Icon name="ios-cart" type="ionicon" />
-              <Text style={styles.item}>{itemOne}</Text>
-            </View>
-            <View style={styles.itemContainer}>
-              <Icon name="ios-cart" type="ionicon" />
-              <Text style={styles.item}>{itemTwo}</Text>
-            </View>
-            <View style={styles.itemContainer}>
-              <Icon name="ios-cart" type="ionicon" />
-              <Text style={styles.item}>{itemThree}</Text>
-            </View>
-            <View style={styles.buttonContainer}>
-              <TouchableHighlight
-                style={styles.acceptButton}
-                onPress={() => {
-                  acceptRequest(pingId, pongId, dispatch);
-                }}
-              >
-                <Text
-                  id={`accept-button-${pongId}`}
-                  style={styles.requestButtonText}
-                >
-                  {acceptButton}
-                </Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={styles.rejectButton}
-                onPress={() => {
-                  rejectRequest(pingId, pongId, dispatch);
-                }}
-              >
-                <Text
-                  id={`reject-button-${pongId}`}
-                  style={styles.requestButtonText}
-                >
-                  {rejectButton}
-                </Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        ));
-      case "accepted":
-        return (pong = (
-          <View style={styles.pong}>
-            <Text style={styles.name}>{name}</Text>
-            <CheckBox
-              style={styles.item}
-              title={itemOne}
-              onPress={() => {
-                isChecked();
-              }}
-            />
-            {itemTwo !== "" && <CheckBox style={styles.item} title={itemTwo} />}
-            {itemThree !== "" && (
-              <CheckBox style={styles.item} title={itemThree} />
-            )}
-            <View id={`total-cost-container-${pongId}`} style={styles.costContainer}>
-              <Text style={styles.item}>Total cost: </Text>
-              <TextInput 
-              style={styles.costInput} 
-              // defaultValue={totalCost}
-              id={`total-cost-${pongId}`}
-              value={totalCost}
-              onChangeText={setTotalCost(totalCost)}
-              />
-              <TouchableHighlight
-                style={styles.sendButton}
-                onPress={() => {
-                  sendCost(totalCost, pongId, dispatch);
-                }}
-              >
-                <Text style={styles.buttonText} id={`send-cost-button-${pongId}`}>
-                  Send
-                </Text>
-              </TouchableHighlight>
-            </View>
-          </View>
-        ));
-      case "rejected":
-        return (pong = <View></View>);
-    }
-
-    return <View>{pong}</View>;
+    return (
+      <View>
+        {PongToPingDetails(
+          pongId,
+          name,
+          itemOne,
+          itemTwo,
+          itemThree,
+          acceptButton,
+          rejectButton,
+          status
+        )}
+      </View>
+    )
   }
 
   return (
@@ -186,17 +111,17 @@ const TripDetails = () => {
             {closeTripMessage}
           </Text>
         ) : (
-          <TouchableHighlight
-            style={styles.closeButton}
-            onPress={() => {
-              closeTrip(pingId, userId, dispatch);
-            }}
-          >
-            <Text style={styles.buttonText} id="close-trip-button">
-              No More Pongs
+            <TouchableHighlight
+              style={styles.closeButton}
+              onPress={() => {
+                closeTrip(pingId, userId, dispatch);
+              }}
+            >
+              <Text style={styles.buttonText} id="close-trip-button">
+                No More Pongs
             </Text>
-          </TouchableHighlight>
-        )}
+            </TouchableHighlight>
+          )}
         <FlatList
           data={myPongs}
           renderItem={({ item }) => (
