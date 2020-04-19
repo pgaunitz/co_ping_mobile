@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
+import { GET_TRIP_DETAILS } from "../state/actions/actionTypes"
+import { useSelector, useDispatch } from "react-redux";
+import { Icon, CheckBox } from "react-native-elements";
+import axios from "axios"
 import {
   View,
   StyleSheet,
   Text,
-  FlatList,
   TouchableHighlight,
   TextInput
 } from "react-native";
-import { Icon, CheckBox } from "react-native-elements";
 import {
   acceptRequest,
   rejectRequest
 } from "../modules/tripActions";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios"
 
 const PongToPingDetails = (
   pongId,
@@ -27,6 +27,7 @@ const PongToPingDetails = (
 ) => {
   let pong;
   const pingId = useSelector(state => state.userTrip.id);
+  const costSentMessage = useSelector(state => state.costSentMessage);
   const dispatch = useDispatch();
   const [totalCost, setTotalCost] = useState()
 
@@ -46,7 +47,12 @@ const PongToPingDetails = (
         headers: headers
       }
     );
-     debugger
+    dispatch({
+      type: GET_TRIP_DETAILS,
+      payload: {
+        costSentMessage: response.data.message
+      }
+    });
   }
 
 
@@ -131,6 +137,7 @@ const PongToPingDetails = (
             </Text>
             </TouchableHighlight>
           </View>
+          {totalCost && <Text nativeID="cost-confirmation-message">{costSentMessage}</Text>}
         </View>
       ));
     case "rejected":
@@ -139,15 +146,6 @@ const PongToPingDetails = (
   return ({ pong })
 }
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16
-  },
   title: {
     textAlign: "center",
     color: "white",
@@ -221,14 +219,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 18
   },
-  closeButton: {
-    height: 30,
-    borderRadius: 10,
-    backgroundColor: "#71B280",
-    margin: 10,
-    justifyContent: "center",
-    alignItems: "center"
-  },
   buttonText: {
     color: "#black",
     fontSize: 18
@@ -252,7 +242,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export {PongToPingDetails}
+export { PongToPingDetails }
 
 
 

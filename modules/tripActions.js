@@ -152,22 +152,26 @@ const closeTrip = async (pingId, userId, dispatch) => {
   });
 };
 
-const sendCost = async (totalCost, pongId, dispatch) => {
-  debugger
+const completeTrip = async (pingId, dispatch) => {
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   let response = await axios.put(
-    `https://co-ping.herokuapp.com/pongs/${pongId}`,
+    `https://co-ping.herokuapp.com/pings/${pingId}`,
     {
-      pong: {
-        total_cost: totalCost
+      ping: {
+        completed: true  
       }
     },
     {
       headers: headers
     }
   );
-  debugger
-}
+  dispatch({
+    type: GET_TRIP_DETAILS,
+    payload: {
+      completeTripMessage: response.data.message
+    }
+  });
+};
 
 export {
   fetchTrips,
@@ -176,5 +180,6 @@ export {
   acceptRequest,
   rejectRequest,
   cancelRequest,
-  closeTrip
+  closeTrip,
+  completeTrip
 };

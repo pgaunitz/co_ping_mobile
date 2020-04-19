@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   View,
@@ -10,10 +10,10 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import {
   getTripInformation,
-  closeTrip
+  completeTrip
 } from "../modules/tripActions";
 import { PongToPingDetails } from "./PongToPingDetails"
-import axios from "axios"
+import TripDetailsHeader from "./TripDetailsHeader"
 
 const TripDetails = () => {
   const dispatch = useDispatch();
@@ -24,51 +24,8 @@ const TripDetails = () => {
   }, []);
 
   const myPongs = useSelector(state => state.myPongs);
-  const userTrip = useSelector(state => state.userTrip);
   const pingId = useSelector(state => state.userTrip.id);
-  const noPongsMessage = useSelector(state => state.noPongsMessage);
-  const closeTripMessage = useSelector(state => state.closeTripMessage);
-
-  const [check, setCheck] = useState("unchecked");
-  // const [totalCost, setTotalCost] = useState()
-
-  let pingBoardMessage;
-  if (noPongsMessage === "") {
-    pingBoardMessage = `You're going to ${userTrip.store} at ${userTrip.time}.`;
-  } else {
-    pingBoardMessage = `${noPongsMessage}`;
-  }
-
-  const isChecked = () => {
-    if (check === "checked") {
-      setCheck("unchecked");
-    } else {
-      setCheck("checked");
-    }
-  };
-
-  // const handleTotalCostChange = async (cost) => {
-  //   await setTotalCost(cost)
-  // }
-
-  // let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-  // const sendCostInformation = async (event, pongId) => {
-  //   event.preventDefault();
-  //   debugger
-  //   let response = await axios.put(
-  //     `https://co-ping.herokuapp.com/pongs/${pongId}`,
-  //     {
-  //       pong: {
-  //         ping_id: pingId,
-  //         total_cost: totalCost
-  //       }
-  //     },
-  //     {
-  //       headers: headers
-  //     }
-  //   );
-  //   // debugger
-  // }
+  const completeTripMessage = useSelector(state => state.completeTripMessage)
 
   function Item({
     pongId,
@@ -105,23 +62,9 @@ const TripDetails = () => {
         end={{ x: 1, y: 0 }}
       >
         <Text style={styles.title}>My Current Trip</Text>
-        <Text style={styles.trip}>{pingBoardMessage}</Text>
-        {closeTripMessage ? (
-          <Text id="close-trip-message" style={styles.trip}>
-            {closeTripMessage}
-          </Text>
-        ) : (
-            <TouchableHighlight
-              style={styles.closeButton}
-              onPress={() => {
-                closeTrip(pingId, userId, dispatch);
-              }}
-            >
-              <Text style={styles.buttonText} id="close-trip-button">
-                No More Pongs
-            </Text>
-            </TouchableHighlight>
-          )}
+        {completeTripMessage ?
+          <Text style={styles.trip} id="completion-message">{completeTripMessage}</Text>
+          : <TripDetailsHeader />}
         <FlatList
           data={myPongs}
           renderItem={({ item }) => (
@@ -139,6 +82,16 @@ const TripDetails = () => {
           keyExtractor={item => item.id}
           id="request"
         />
+        <TouchableHighlight
+          style={styles.completeButton}
+          onPress={() => {
+            completeTrip(pingId, dispatch);
+          }}
+        >
+          <Text style={styles.buttonText} id="complete-button">
+            Complete Trip
+            </Text>
+        </TouchableHighlight>
       </LinearGradient>
     </View>
   );
@@ -148,78 +101,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16
-  },
   title: {
     textAlign: "center",
     color: "white",
     fontSize: 30,
     margin: 10
-  },
-  pong: {
-    padding: 10,
-    margin: 10,
-    borderRadius: 5,
-    backgroundColor: "white",
-    shadowColor: "black",
-    shadowOpacity: 2.0
-  },
-  item: {
-    fontSize: 18,
-    margin: 10
-  },
-  itemContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "left",
-    marginLeft: 15
-  },
-  name: {
-    fontSize: 18,
-    fontWeight: "bold"
-  },
-  buttonContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  acceptButton: {
-    height: 30,
-    borderColor: "white",
-    borderWidth: 2,
-    borderRadius: 10,
-    backgroundColor: "#71B280",
-    marginTop: 15,
-    margin: 5,
-    paddingTop: 16,
-    paddingBottom: 18,
-    width: "40%",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  rejectButton: {
-    height: 30,
-    borderColor: "white",
-    borderWidth: 2,
-    borderRadius: 10,
-    backgroundColor: "#B27183",
-    marginTop: 15,
-    margin: 5,
-    paddingTop: 16,
-    paddingBottom: 18,
-    width: "40%",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  requestButtonText: {
-    color: "white",
-    fontSize: 12
   },
   trip: {
     color: "white",
@@ -239,20 +125,11 @@ const styles = StyleSheet.create({
     color: "#black",
     fontSize: 18
   },
-  costContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "left"
-  },
-  costInput: {
-    width: 70
-  },
-  sendButton: {
+  completeButton: {
     height: 30,
-    width: 70,
-    marginLeft: 15,
     borderRadius: 10,
-    backgroundColor: "#71B280",
+    backgroundColor: "#B27183",
+    margin: 10,
     justifyContent: "center",
     alignItems: "center"
   }

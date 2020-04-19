@@ -21,6 +21,11 @@ describe("Visitor can", () => {
       url: "**/pongs/**",
       response: "fixture:complete_trip_pong_response.json",
     });
+    cy.route({
+      method: "PUT",
+      url: "**/pings/**",
+      response: "fixture:complete_trip_ping_response.json",
+    });
 
     cy.visit("/");
     cy.get("#login-button").contains("Login").click();
@@ -31,16 +36,18 @@ describe("Visitor can", () => {
   });
   it("can close a trip to new request", () => {
     cy.wait(500);
-    cy.get(':nth-child(1) > .r-backgroundColor-14lw9ot > .r-alignItems-z6ln5t').within(() => {
+    cy.get(
+      ":nth-child(1) > .r-backgroundColor-14lw9ot > .r-alignItems-z6ln5t"
+    ).within(() => {
       cy.get("#total-cost-1").type("25,80 sek");
       cy.get("#send-cost-button-1").click();
-      cy.get("#cost-confirmation-message").should(
-        "contain",
-        "The cost has been sent to your neighbor!"
-      );
     });
+    cy.get("#cost-confirmation-message").should(
+      "contain",
+      "The total amount was sent to your neighbour"
+    );
     cy.get("#complete-button").click();
-    cy.get("#completion-message").should("contain", "Your trip is completed!");
+    cy.get("#completion-message").should("contain", "Your trip is completed");
   });
 });
 
@@ -61,11 +68,6 @@ xdescribe("Visitor can", () => {
       method: "GET",
       url: "**/auth/**",
       response: "fixture:user_login.json",
-    });
-    cy.route({
-      method: "PUT",
-      url: "**/pongs/**",
-      response: "fixture:complete_trip_pong_response.json",
     });
     cy.visit("/");
     cy.get("#login-button").contains("Login").click();
