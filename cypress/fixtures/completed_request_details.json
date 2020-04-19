@@ -5,7 +5,7 @@
       "item1": "Bacon",
       "item2": "Butter",
       "item3": "Shampoo",
-      "status": "pending",
-      "total_cost": ""
+      "status": "accepted",
+      "total_cost": "25,80 sek"
     }
 }
