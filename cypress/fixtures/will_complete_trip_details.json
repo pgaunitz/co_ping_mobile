@@ -3,6 +3,8 @@
     "id": 1,
     "time": "2020-04-13-16:30",
     "store": "ICA",
+    "status": "inactive",
+    "complete": false,
     "pongs": [
       {
         "id": 1,
@@ -10,7 +12,8 @@
         "item1": "Bacon",
         "item2": "Butter",
         "item3": "Shampoo",
-        "status": "accepted"
+        "status": "accepted",
+        "total_cost": ""
       },
       {
         "id": 2,
@@ -18,7 +21,8 @@
         "item1": "Cola",
         "item2": "Caramel",
         "item3": "Salt",
-        "status": "accepted"
+        "status": "accepted",
+        "total_cost": ""
       },
       {
         "id": 3,
@@ -26,7 +30,8 @@
         "item1": "Beer",
         "item2": "Wine",
         "item3": "Godis",
-        "status": "pending"
+        "status": "rejected",
+        "total_cost": ""
       }
     ]
   }

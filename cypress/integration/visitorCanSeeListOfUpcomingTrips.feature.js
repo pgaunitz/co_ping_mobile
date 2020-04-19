@@ -4,13 +4,13 @@ describe("Visitor can see list of all upcoming active trips", () => {
     cy.route({
       method: "GET",
       url: "**/pings",
-      response: "fixture:trip_list.json",
+      response: "fixture:trip_list.json"
     });
     cy.visit("/");
-    cy.window().then((window) => {
+    cy.window().then(window => {
       window.store.dispatch({
         type: "AUTHENTICATE",
-        payload: { authenticated: true },
+        payload: { authenticated: true }
       });
     });
   });
@@ -33,14 +33,14 @@ describe("Visitor can see list of all upcoming active trips", () => {
       url: "**/pings",
       response: {
         message:
-          "Unfortunately no one has planned to go shopping, so maybe you can?",
-      },
+          "Unfortunately no one has planned to go shopping, so maybe you can?"
+      }
     });
     cy.visit("/");
-    cy.window().then((window) => {
+    cy.window().then(window => {
       window.store.dispatch({
         type: "AUTHENTICATE",
-        payload: { authenticated: true },
+        payload: { authenticated: true }
       });
     });
   });

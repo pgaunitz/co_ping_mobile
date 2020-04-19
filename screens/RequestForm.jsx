@@ -4,25 +4,25 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  TouchableHighlight,
+  TouchableHighlight
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios"
-import { NEW_REQUEST } from "../state/actions/actionTypes"
+import axios from "axios";
+import { NEW_REQUEST } from "../state/actions/actionTypes";
 
 const RequestForm = () => {
-  const dispatch = useDispatch()
-  const selectedTripId = useSelector((state) => state.selectedTripId);
-  const userId = useSelector((state) => state.userId);
+  const dispatch = useDispatch();
+  const selectedTripId = useSelector(state => state.selectedTripId);
+  const userId = useSelector(state => state.userId);
   const newRequestCreatedMessage = useSelector(
-    (state) => state.newRequestCreatedMessage
+    state => state.newRequestCreatedMessage
   );
   const [itemOne, onChangeItemOne] = useState("");
   const [itemTwo, onChangeItemTwo] = useState("");
   const [itemThree, onChangeItemThree] = useState("");
 
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-  const sendRequest = async (e) => {
+  const sendRequest = async e => {
     e.preventDefault();
     let response = await axios.post(
       "https://co-ping.herokuapp.com/pongs",
@@ -32,16 +32,16 @@ const RequestForm = () => {
           item2: itemTwo,
           item3: itemThree,
           ping_id: selectedTripId,
-          user_id: userId,
-        },
+          user_id: userId
+        }
       },
       { headers: headers }
     );
     dispatch({
       type: NEW_REQUEST,
-      payload: { newRequestCreatedMessage: response.data.message },
-    })
-  }
+      payload: { newRequestCreatedMessage: response.data.message }
+    });
+  };
 
   return (
     <View style={styles.requestPage} className="request-form">
@@ -50,31 +50,31 @@ const RequestForm = () => {
         style={styles.itemInput}
         id="item-one"
         value={itemOne}
-        onChangeText={(itemOne) => onChangeItemOne(itemOne)}
+        onChangeText={itemOne => onChangeItemOne(itemOne)}
       />
       <TextInput
         placeholder="Second item..."
         style={styles.itemInput}
         id="item-two"
         value={itemTwo}
-        onChangeText={(itemTwo) => onChangeItemTwo(itemTwo)}
+        onChangeText={itemTwo => onChangeItemTwo(itemTwo)}
       />
       <TextInput
         placeholder="Third item..."
         style={styles.itemInput}
         id="item-three"
         value={itemThree}
-        onChangeText={(itemThree) => onChangeItemThree(itemThree)}
+        onChangeText={itemThree => onChangeItemThree(itemThree)}
       />
       <TouchableHighlight
         style={styles.button}
-        onPress={(e) => {
+        onPress={e => {
           sendRequest(e);
         }}
       >
         <Text id="submit-request" style={styles.buttonText}>
           Submit
-              </Text>
+        </Text>
       </TouchableHighlight>
     </View>
   );
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     margin: 2,
     borderColor: "white",
     borderWidth: 2,
-    borderRadius: 10,
+    borderRadius: 10
   },
   responseMessage: {
     color: "white",

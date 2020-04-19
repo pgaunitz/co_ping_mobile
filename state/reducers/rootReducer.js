@@ -7,61 +7,61 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.payload,
-        showTripForm: true,
+        showTripForm: true
       };
     case actionTypes.CLOSE_NEW_TRIP_FORM:
       return {
         ...state,
-        showTripForm: false,
+        showTripForm: false
       };
     case actionTypes.SHOW_LOGIN_FORM:
       return {
         ...state,
-        showLoginForm: true,
+        showLoginForm: true
       };
     case actionTypes.AUTHENTICATE:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       };
     case actionTypes.CLOSE_LOGIN_FORM:
       return {
         ...state,
-        showLoginForm: false,
+        showLoginForm: false
       };
     case actionTypes.GET_TRIP_LIST:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       };
     case actionTypes.SELECTED_TRIP_ID:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       };
     case actionTypes.NEW_REQUEST:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       };
     case actionTypes.GET_TRIP_DETAILS:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       };
     case actionTypes.GET_REQUEST_DETAILS:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       };
     case actionTypes.PONG_STATUS:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       };
     case actionTypes.LOGOUT:
       return {
-        ...initialState,
+        ...initialState
       };
     default:
       return state;

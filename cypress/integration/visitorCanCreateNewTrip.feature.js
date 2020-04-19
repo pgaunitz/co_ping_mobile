@@ -9,16 +9,16 @@ describe("Visitor can", () => {
     cy.route({
       method: "GET",
       url: "**/pings",
-      response: "fixture:trip_list.json",
-    })
+      response: "fixture:trip_list.json"
+    });
     cy.visit("/");
-    cy.window().then((window) => {
+    cy.window().then(window => {
       window.store.dispatch({
         type: "AUTHENTICATE",
-        payload: { authenticated: true },
+        payload: { authenticated: true }
       });
     });
-    cy.get("#trip-list-button").click()
+    cy.get("#trip-list-button").click();
   });
 
   it("successfully create a new trip ping", () => {
@@ -48,16 +48,16 @@ describe("Visitor can", () => {
     cy.route({
       method: "GET",
       url: "**/pings",
-      response: "fixture:trip_list.json",
-    })
+      response: "fixture:trip_list.json"
+    });
     cy.visit("/");
-    cy.window().then((window) => {
+    cy.window().then(window => {
       window.store.dispatch({
         type: "AUTHENTICATE",
-        payload: { authenticated: true },
+        payload: { authenticated: true }
       });
     });
-    cy.get("#trip-list-button").click()
+    cy.get("#trip-list-button").click();
   });
 
   it("not create a new trip without a time", () => {

@@ -25,7 +25,7 @@ const TripsList = ({ navigation }) => {
     tripsDisplay = trips;
   }
 
-  function Item({ store, time, name, requestButton, id }) {
+  const Item = ({ store, time, name, requestButton, id }) => {
     return (
       <View style={styles.trip}>
         <Text style={styles.name}>{name}</Text>
@@ -33,7 +33,11 @@ const TripsList = ({ navigation }) => {
         <Text style={styles.time}>{time}</Text>
         <TouchableHighlight
           style={styles.request}
-          onPress={() => { dispatch({type: SELECTED_TRIP_ID, payload: {selectedTripId: id}});
+          onPress={() => {
+            dispatch({
+              type: SELECTED_TRIP_ID,
+              payload: { selectedTripId: id }
+            });
             navigation.navigate("Requests", { name: "Requests" });
           }}
         >
@@ -43,7 +47,7 @@ const TripsList = ({ navigation }) => {
         </TouchableHighlight>
       </View>
     );
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container} className="trip-list">

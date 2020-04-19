@@ -1,9 +1,19 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { TouchableHighlight, View, StyleSheet, Text, Image } from "react-native";
+import {
+  TouchableHighlight,
+  View,
+  StyleSheet,
+  Text,
+  Image
+} from "react-native";
 import { SHOW_LOGIN_FORM } from "../state/actions/actionTypes";
 import { onLogout } from "../modules/authentication";
-import { fetchTrips, getTripInformation, getRequestInformation } from "../modules/tripActions"
+import {
+  fetchTrips,
+  getTripInformation,
+  getRequestInformation
+} from "../modules/tripActions";
 import LoginForm from "./LoginForm";
 import { LinearGradient } from "expo-linear-gradient";
 import Logo from "../assets/images/co_ping_Logo2.png";
@@ -12,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
   const authenticated = useSelector(state => state.authenticated);
   const logoutMessage = useSelector(state => state.logoutMessage);
   const loginMessage = useSelector(state => state.loginMessage);
-  const userId = useSelector((state) => state.userId);
+  const userId = useSelector(state => state.userId);
   const dispatch = useDispatch();
   const login = () => {
     dispatch({ type: SHOW_LOGIN_FORM });
@@ -24,7 +34,8 @@ const HomeScreen = ({ navigation }) => {
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}
         start={{ x: 0, y: 1 }}
-        end={{ x: 1, y: 0 }}>
+        end={{ x: 1, y: 0 }}
+      >
         <Image style={styles.logo} source={Logo} alt="Co-Ping logo" />
         <Text style={styles.authMessage} nativeID="auth-message">
           {authenticated ? loginMessage : logoutMessage}
@@ -32,7 +43,8 @@ const HomeScreen = ({ navigation }) => {
         {authenticated && (
           <TouchableHighlight
             style={styles.button}
-            onPress={() => onLogout(dispatch)}>
+            onPress={() => onLogout(dispatch)}
+          >
             <Text id="logout-button" style={styles.buttonText}>
               Logout
             </Text>
@@ -45,41 +57,44 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-        { authenticated && (
+        {authenticated && (
           <TouchableHighlight
             style={styles.button}
-            onPress={() => { 
-              fetchTrips(dispatch); 
-              navigation.navigate('Trips', { name: "Trips" }) }
-              }>
+            onPress={() => {
+              fetchTrips(dispatch);
+              navigation.navigate("Trips", { name: "Trips" });
+            }}
+          >
             <Text id="trip-list-button" style={styles.buttonText}>
               Trip Pings
             </Text>
           </TouchableHighlight>
         )}
-        { authenticated &&  (
+        {authenticated && (
           <TouchableHighlight
             style={styles.button}
-            onPress={() => {  
-              navigation.navigate('My Ping Board', { name: "My Ping Board" }) }
-              }>
+            onPress={() => {
+              navigation.navigate("My Ping Board", { name: "My Ping Board" });
+            }}
+          >
             <Text id="request-list-button" style={styles.buttonText}>
               My Ping Board
             </Text>
           </TouchableHighlight>
         )}
-         { authenticated && (
+        {authenticated && (
           <TouchableHighlight
             style={styles.button}
-            onPress={() => {  
-              navigation.navigate('My Pong Board', { name: "My Pong Board" }) }
-              }>
+            onPress={() => {
+              navigation.navigate("My Pong Board", { name: "My Pong Board" });
+            }}
+          >
             <Text id="request-button" style={styles.buttonText}>
               My Pong Board
             </Text>
           </TouchableHighlight>
         )}
-        < LoginForm />
+        <LoginForm />
       </LinearGradient>
     </View>
   );
