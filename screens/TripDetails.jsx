@@ -5,15 +5,12 @@ import {
   StyleSheet,
   Text,
   FlatList,
-  TouchableHighlight,
+  TouchableHighlight
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getTripInformation,
-  completeTrip
-} from "../modules/tripActions";
-import { PongToPingDetails } from "./PongToPingDetails"
-import TripDetailsHeader from "./TripDetailsHeader"
+import { getTripInformation, completeTrip } from "../modules/tripActions";
+import { PongToPingDetails } from "./PongToPingDetails";
+import TripDetailsHeader from "./TripDetailsHeader";
 
 const TripDetails = () => {
   const dispatch = useDispatch();
@@ -25,9 +22,9 @@ const TripDetails = () => {
 
   const myPongs = useSelector(state => state.myPongs);
   const pingId = useSelector(state => state.userTrip.id);
-  const completeTripMessage = useSelector(state => state.completeTripMessage)
+  const completeTripMessage = useSelector(state => state.completeTripMessage);
 
-  function Item({
+  const Item = ({
     pongId,
     name,
     itemOne,
@@ -35,8 +32,8 @@ const TripDetails = () => {
     itemThree,
     acceptButton,
     rejectButton,
-    status,
-  }) {
+    status
+  }) => {
     return (
       <View>
         {PongToPingDetails(
@@ -50,8 +47,8 @@ const TripDetails = () => {
           status
         )}
       </View>
-    )
-  }
+    );
+  };
 
   return (
     <View style={styles.container} className="request-form">
@@ -62,9 +59,13 @@ const TripDetails = () => {
         end={{ x: 1, y: 0 }}
       >
         <Text style={styles.title}>My Current Trip</Text>
-        {completeTripMessage ?
-          <Text style={styles.trip} id="completion-message">{completeTripMessage}</Text>
-          : <TripDetailsHeader />}
+        {completeTripMessage ? (
+          <Text style={styles.trip} id="completion-message">
+            {completeTripMessage}
+          </Text>
+        ) : (
+          <TripDetailsHeader />
+        )}
         <FlatList
           data={myPongs}
           renderItem={({ item }) => (
@@ -90,7 +91,7 @@ const TripDetails = () => {
         >
           <Text style={styles.buttonText} id="complete-button">
             Complete Trip
-            </Text>
+          </Text>
         </TouchableHighlight>
       </LinearGradient>
     </View>

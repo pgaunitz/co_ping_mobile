@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { GET_TRIP_DETAILS } from "../state/actions/actionTypes"
+import React, { useState } from "react";
+import { GET_TRIP_DETAILS } from "../state/actions/actionTypes";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon, CheckBox } from "react-native-elements";
-import axios from "axios"
+import axios from "axios";
 import {
   View,
   StyleSheet,
@@ -10,10 +10,7 @@ import {
   TouchableHighlight,
   TextInput
 } from "react-native";
-import {
-  acceptRequest,
-  rejectRequest
-} from "../modules/tripActions";
+import { acceptRequest, rejectRequest } from "../modules/tripActions";
 
 const PongToPingDetails = (
   pongId,
@@ -29,12 +26,11 @@ const PongToPingDetails = (
   const pingId = useSelector(state => state.userTrip.id);
   const costSentMessage = useSelector(state => state.costSentMessage);
   const dispatch = useDispatch();
-  const [totalCost, setTotalCost] = useState()
+  const [totalCost, setTotalCost] = useState();
 
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   const sendCostInformation = async (event, pongId) => {
     event.preventDefault();
-    debugger
     let response = await axios.put(
       `https://co-ping.herokuapp.com/pongs/${pongId}`,
       {
@@ -53,8 +49,7 @@ const PongToPingDetails = (
         costSentMessage: response.data.message
       }
     });
-  }
-
+  };
 
   switch (status) {
     case "pending":
@@ -115,36 +110,39 @@ const PongToPingDetails = (
             }}
           />
           {itemTwo && <CheckBox style={styles.item} title={itemTwo} />}
-          {itemThree && (
-            <CheckBox style={styles.item} title={itemThree} />
-          )}
-          <View id={`total-cost-container-${pongId}`} style={styles.costContainer}>
+          {itemThree && <CheckBox style={styles.item} title={itemThree} />}
+          <View
+            id={`total-cost-container-${pongId}`}
+            style={styles.costContainer}
+          >
             <Text style={styles.item}>Total cost: </Text>
             <TextInput
               style={styles.costInput}
               id={`total-cost-${pongId}`}
               value={totalCost}
-              onChangeText={(cost) => setTotalCost(cost)}
+              onChangeText={cost => setTotalCost(cost)}
             />
             <TouchableHighlight
               style={styles.sendButton}
-              onPress={(event) => {
+              onPress={event => {
                 sendCostInformation(event, pongId);
               }}
             >
               <Text style={styles.buttonText} id={`send-cost-button-${pongId}`}>
                 Send
-            </Text>
+              </Text>
             </TouchableHighlight>
           </View>
-          {totalCost && <Text nativeID="cost-confirmation-message">{costSentMessage}</Text>}
+          {totalCost && (
+            <Text nativeID="cost-confirmation-message">{costSentMessage}</Text>
+          )}
         </View>
       ));
     case "rejected":
       return (pong = <View></View>);
   }
-  return ({ pong })
-}
+  return { pong };
+};
 const styles = StyleSheet.create({
   title: {
     textAlign: "center",
@@ -242,7 +240,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export { PongToPingDetails }
-
-
-
+export { PongToPingDetails };

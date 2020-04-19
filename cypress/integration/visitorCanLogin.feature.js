@@ -28,10 +28,7 @@ describe("Visitor can log in", () => {
     cy.get("#submit-login")
       .contains("Submit")
       .click();
-    cy.get("#auth-message").should(
-      "contain",
-      "Welcome Awesome Possumsson"
-    );
+    cy.get("#auth-message").should("contain", "Welcome Awesome Possumsson");
     cy.get("#email").should("not.exist");
   });
 

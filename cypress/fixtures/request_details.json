@@ -1,11 +1,10 @@
 {
-  "pong":
-    {
-      "id": 1,
-      "item1": "Bacon",
-      "item2": "Butter",
-      "item3": "Shampoo",
-      "status": "pending",
-      "total_cost": ""
-    }
+  "pong": {
+    "id": 1,
+    "item1": "Bacon",
+    "item2": "Butter",
+    "item3": "Shampoo",
+    "status": "pending",
+    "total_cost": ""
+  }
 }

@@ -34,7 +34,10 @@ const TripsList = ({ navigation }) => {
         <TouchableHighlight
           style={styles.request}
           onPress={() => {
-            dispatch({ type: SELECTED_TRIP_ID, payload: { selectedTripId: id } });
+            dispatch({
+              type: SELECTED_TRIP_ID,
+              payload: { selectedTripId: id }
+            });
             navigation.navigate("Requests", { name: "Requests" });
           }}
         >
@@ -44,7 +47,7 @@ const TripsList = ({ navigation }) => {
         </TouchableHighlight>
       </View>
     );
-  }
+  };
 
   return (
     <SafeAreaView style={styles.container} className="trip-list">

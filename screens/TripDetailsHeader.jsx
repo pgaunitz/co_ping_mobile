@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import { Text, TouchableHighlight, StyleSheet, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { closeTrip, getTripInformation } from "../modules/tripActions";
@@ -22,13 +22,13 @@ const TripDetailsHeader = () => {
   } else {
     pingBoardMessage = `${noPongsMessage}`;
   }
-  let closeTripInformation
+  let closeTripInformation;
   if (closeTripMessage) {
     closeTripInformation = (
       <Text id="close-trip-message" style={styles.trip}>
         {closeTripMessage}
       </Text>
-    )
+    );
   } else {
     closeTripInformation = (
       <TouchableHighlight
@@ -41,17 +41,16 @@ const TripDetailsHeader = () => {
           No More Pongs
         </Text>
       </TouchableHighlight>
-    )
+    );
   }
-
 
   return (
     <View>
       <Text style={styles.trip}>{pingBoardMessage}</Text>
       {closeTripInformation}
-    </ View>
-  )
-}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   trip: {
@@ -74,4 +73,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TripDetailsHeader 
+export default TripDetailsHeader;

@@ -1,11 +1,10 @@
 {
-  "pong":
-    {
-      "id": 1,
-      "item1": "Bacon",
-      "item2": "Butter",
-      "item3": "Shampoo",
-      "status": "accepted",
-      "total_cost": "25,80 sek"
-    }
+  "pong": {
+    "id": 1,
+    "item1": "Bacon",
+    "item2": "Butter",
+    "item3": "Shampoo",
+    "status": "accepted",
+    "total_cost": "25,80 sek"
+  }
 }

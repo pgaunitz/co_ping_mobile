@@ -72,10 +72,11 @@ const RequestDetails = () => {
               <Text style={styles.item}>{myPong.item3}</Text>
             </View>
             <View style={styles.costContainer}>
-              <Text style={styles.totalCost}>
-                Total cost: 
+              <Text style={styles.totalCost}>Total cost:</Text>
+              <Text id="total-cost" style={styles.totalSum}>
+                {" "}
+                {myPong.total_cost}
               </Text>
-              <Text id="total-cost" style={styles.totalSum}> {myPong.total_cost}</Text>
             </View>
             <View style={styles.buttonContainer}>
               {cancelledRequestResponse ? (
