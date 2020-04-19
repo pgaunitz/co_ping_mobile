@@ -54,8 +54,10 @@ const RequestDetails = () => {
         end={{ x: 1, y: 0 }}
       >
         <Text style={styles.title}>My Current Pong</Text>
-        {myPongMessage ? (<Text style={styles.trip}>{myPongMessage}</Text>) :
-          (<View style={styles.pong}>
+        {myPongMessage ? (
+          <Text style={styles.trip}>{myPongMessage}</Text>
+        ) : (
+          <View style={styles.pong}>
             <View style={styles.statusContainer}>{statusColor}</View>
             <View style={styles.itemContainer}>
               <Icon name="ios-cart" type="ionicon" />
@@ -69,24 +71,30 @@ const RequestDetails = () => {
               <Icon name="ios-cart" type="ionicon" />
               <Text style={styles.item}>{myPong.item3}</Text>
             </View>
+            <View style={styles.costContainer}>
+              <Text style={styles.totalCost}>
+                Total cost: 
+              </Text>
+              <Text id="total-cost" style={styles.totalSum}> {myPong.total_cost}</Text>
+            </View>
             <View style={styles.buttonContainer}>
               {cancelledRequestResponse ? (
                 <Text id="cancel-message">{cancelledRequestResponse}</Text>
               ) : (
-                  <TouchableHighlight
-                    style={styles.cancelButton}
-                    onPress={() => {
-                      cancelRequest(myPong.id, dispatch);
-                    }}
-                  >
-                    <Text id={"cancel-button"} style={styles.requestButtonText}>
-                      Cancel Pong Request
-                </Text>
-                  </TouchableHighlight>
-                )}
+                <TouchableHighlight
+                  style={styles.cancelButton}
+                  onPress={() => {
+                    cancelRequest(myPong.id, dispatch);
+                  }}
+                >
+                  <Text id={"cancel-button"} style={styles.requestButtonText}>
+                    Cancel Pong Request
+                  </Text>
+                </TouchableHighlight>
+              )}
             </View>
           </View>
-          )}
+        )}
       </LinearGradient>
     </View>
   );
@@ -113,6 +121,22 @@ const styles = StyleSheet.create({
   item: {
     fontSize: 18,
     margin: 10
+  },
+  totalSum: {
+    fontSize: 18,
+    margin: 2
+  },
+  totalCost: {
+    fontSize: 18,
+    fontWeight: "bold",
+    margin: 2
+  },
+  costContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 15
   },
   itemContainer: {
     flex: 1,
@@ -176,8 +200,8 @@ const styles = StyleSheet.create({
     color: "white",
     margin: 10,
     textAlign: "center",
-    fontSize: 18,
-  },
+    fontSize: 18
+  }
 });
 
 export default RequestDetails;
