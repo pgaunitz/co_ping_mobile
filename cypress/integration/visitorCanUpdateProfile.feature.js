@@ -15,7 +15,7 @@ describe('visitor can', () => {
   cy.window().then(window => {
     window.store.dispatch({
       type: "AUTHENTICATE",
-      payload: { authenticated: true , userId: 1}
+      payload: { authenticated: true , userId: 1, userName: "Betty"}
     });
   });
 

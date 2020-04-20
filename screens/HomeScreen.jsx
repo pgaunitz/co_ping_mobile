@@ -94,6 +94,18 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
+         {authenticated && (
+          <TouchableHighlight
+            style={styles.button}
+            onPress={() => {
+              navigation.navigate("My Profile", { name: "My Profile" });
+            }}
+          >
+            <Text id="profile-button" style={styles.buttonText}>
+              My Profile
+            </Text>
+          </TouchableHighlight>
+        )}
         <LoginForm />
       </LinearGradient>
     </View>

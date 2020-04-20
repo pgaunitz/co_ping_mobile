@@ -10,3 +10,4 @@ export const GET_TRIP_DETAILS = "GET_TRIP_DETAILS";
 export const PONG_STATUS = "PONG_STATUS";
 export const GET_REQUEST_DETAILS = "GET_REQUEST_DETAILS";
 export const LOGOUT = "LOGOUT";
+export const USER_PROFILE = "USER_PROFILE"
