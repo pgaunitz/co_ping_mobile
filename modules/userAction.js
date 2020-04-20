@@ -44,7 +44,6 @@ const getProfileInformation = async (userId, dispatch) => {
       headers: headers,
     }
   )
-  debugger
   dispatch({
     type: PROFILE_INFO,
     payload: {

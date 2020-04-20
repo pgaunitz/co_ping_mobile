@@ -60,13 +60,12 @@ const UserProfile = () => {
         <Text style={styles.title}>Profile Details</Text>
         <Text style={styles.updateNote} id="profile-update-message">{updateProfileMessage}</Text>
         <View style={styles.profile}>
-        
           <TextInput
             style={styles.dataNameInput}
             nativeID="user-name"
             textContentType="name"
             value={userName}
-            onChangeText={name => onChangeName( name )}
+            onChangeText={name => onChangeName(name)}
           />
           <View style={styles.itemContainer}>
             <Text style={styles.profileItem}>Address: </Text>
@@ -75,7 +74,7 @@ const UserProfile = () => {
               nativeID="user-address"
               textContentType="fullStreetAddress"
               value={userAddress}
-              onChangeText={address => onChangeAddress( address )}
+              onChangeText={address => onChangeAddress(address)}
             />
           </View>
           <View style={styles.itemContainer}>
@@ -85,7 +84,7 @@ const UserProfile = () => {
               nativeID="user-phone"
               textContentType="telephoneNumber"
               value={phone}
-              onChangeText={telephone => onChangeTelephone( telephone )}
+              onChangeText={telephone => onChangeTelephone(telephone)}
             />
           </View>
           <View style={styles.itemContainer}>
@@ -96,30 +95,30 @@ const UserProfile = () => {
               multiline={true}
               maxLength={250}
               value={aboutMe}
-              onChangeText={about => onChangeAbout( about )}
+              onChangeText={about => onChangeAbout(about)}
             />
           </View>
           <View style={styles.itemContainer}>
-          <TouchableHighlight
-            style={styles.request}
-            onPress={() => {
-              updateProfileInformation(name, address, telephone, about, userId, dispatch);
-            }}
-          >
-            <Text id="update-profile-button" style={styles.requestButtonText}>
-              Edit profile
+            <TouchableHighlight
+              style={styles.request}
+              onPress={() => {
+                updateProfileInformation(name, address, telephone, about, userId, dispatch);
+              }}
+            >
+              <Text id="update-profile-button" style={styles.requestButtonText}>
+                Edit profile
             </Text>
-          </TouchableHighlight>
-          <TouchableHighlight
-            style={styles.request}
-            onPress={() => {
-              updateProfileInformation(name, address, telephone, about, userId, dispatch);
-            }}
-          >
-            <Text id="update-profile-button" style={styles.requestButtonText}>
-              Save my updates
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={styles.request}
+              onPress={() => {
+                updateProfileInformation(name, address, telephone, about, userId, dispatch);
+              }}
+            >
+              <Text id="update-profile-button" style={styles.requestButtonText}>
+                Save my updates
             </Text>
-          </TouchableHighlight>
+            </TouchableHighlight>
           </View>
           <View style={styles.statusContainer}>{statusColor}</View>
         </View>
