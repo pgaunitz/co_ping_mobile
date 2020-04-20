@@ -1,12 +1,13 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { View, Text, StyleSheet } from "react-native"
 
 const Receipt = () => {
+  const dispatch = useDispatch()
   const myPong = useSelector((state) => state.myPong)
   return (
     <View style={styles.costContainer}>
-      <Text style={styles.totalCost}>Total cozt:</Text>
+      <Text style={styles.totalCost}>Total cost:</Text>
       <Text id="total-cost" style={styles.totalSum}>
         {" "}
         {myPong.total_cost}

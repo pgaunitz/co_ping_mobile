@@ -1,11 +1,12 @@
 import React from "react"
 import { View, StyleSheet, Text, TouchableHighlight } from "react-native"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { cancelRequest } from "../modules/tripActions"
 import { Icon } from "react-native-elements"
 import Receipt from "./Receipt"
 
 const ActivePongs = () => {
+  const dispatch = useDispatch()
   const myPong = useSelector((state) => state.myPong)
   const cancelledRequestResponse = useSelector(
     (state) => state.cancelledRequestResponse

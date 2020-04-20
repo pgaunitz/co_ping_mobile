@@ -1,4 +1,4 @@
-xdescribe("Visitor can", () => {
+describe("Visitor can", () => {
   beforeEach(() => {
     cy.server();
     cy.route({
