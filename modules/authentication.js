@@ -22,7 +22,7 @@ const onLogin = async (email, password, dispatch) => {
         communityId: response.data.community_id,
         communityStatus: response.data.community_status,
         phone: response.data.phone_number,
-        address: response.data.adress,
+        userAddress: response.data.adress,
         aboutMe: response.data.about_me,
       },
     });

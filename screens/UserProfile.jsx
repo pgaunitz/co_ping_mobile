@@ -1,7 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateProfile } from "../modules/userAction"
-import { View, Text, StyleSheet, TouchableHighlight, TextInput } from "react-native";
+import { updateProfileInformation } from "../modules/userAction";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableHighlight,
+  TextInput
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const UserProfile = () => {
@@ -10,37 +16,36 @@ const UserProfile = () => {
   const userName = useSelector(state => state.userName);
   const communityStatus = useSelector(state => state.communityStatus);
   const phone = useSelector(state => state.phone);
-  const address = useSelector(state => state.address);
+  const userAddress = useSelector(state => state.userAddress);
   const aboutMe = useSelector(state => state.aboutMe);
 
-  const [name, onChangeName] = React.useState({ userName });
+  const [name, onChangeName] = useState();
+  const [address, onChangeAddress] = useState();
+  const [telephone, onChangeTelephone] = useState();
+  const [about, onChangeAbout] = useState();
 
-  // useEffect(() => {
-  //   getProfileInformation(userId, dispatch);
-  // }, []);
-
-  let statusColor
+  let statusColor;
   if (communityStatus === "pending") {
     statusColor = (
       <>
         <Text style={styles.status}>Community Status: </Text>
         <Text style={styles.pending}>{communityStatus}</Text>
       </>
-    )
+    );
   } else if (communityStatus === "accepted") {
     statusColor = (
       <>
         <Text style={styles.status}>Community Status: </Text>
         <Text style={styles.accepted}>{communityStatus}</Text>
       </>
-    )
+    );
   } else {
     statusColor = (
       <>
         <Text style={styles.status}>Community Status: </Text>
         <Text style={styles.rejected}>{communityStatus}</Text>
       </>
-    )
+    );
   }
 
   return (
@@ -53,52 +58,63 @@ const UserProfile = () => {
       >
         <Text style={styles.title}>Profile Details</Text>
         <View style={styles.profile}>
-          
-            <TextInput
-              style={styles.dataNameInput}
-              nativeID="user-name"
-              textContentType="name"
-              value={userName}
-              onChangeText={(name) => onChangeName({ name })}
-            />
-          
+          <TextInput
+            style={styles.dataNameInput}
+            nativeID="user-name"
+            textContentType="name"
+            value={userName}
+            onChangeText={name => onChangeName({ name })}
+          />
+
           <View style={styles.itemContainer}>
-            <Text style={styles.profileItem}>Address:   </Text>
+            <Text style={styles.profileItem}>Address: </Text>
             <TextInput
               style={styles.dataInput}
               nativeID="user-address"
               textContentType="fullStreetAddress"
-              value={address}
-              onChangeText={(text) => onChangeName({ text })}
+              value={userAddress}
+              onChangeText={address => onChangeAddress({ address })}
             />
           </View>
           <View style={styles.itemContainer}>
-            <Text style={styles.profileItem}>Phone:   </Text>
+            <Text style={styles.profileItem}>Phone: </Text>
             <TextInput
               style={styles.dataInput}
               nativeID="user-phone"
               textContentType="telephoneNumber"
               value={phone}
-              onChangeText={(text) => onChangeName({ text })}
+              onChangeText={telephone => onChangeTelephone({ telephone })}
             />
           </View>
           <View style={styles.itemContainer}>
-            <Text style={styles.profileItem}>About Me:   </Text>
+            <Text style={styles.profileItem}>About Me: </Text>
             <TextInput
               style={styles.dataInputText}
               nativeID="user-about"
               multiline={true}
               maxLength={250}
               value={aboutMe}
-              onChangeText={(text) => onChangeName({ text })}
+              onChangeText={about => onChangeAbout({ about })}
             />
           </View>
+
+          <TouchableHighlight
+            style={styles.request}
+            onPress={() => {
+              updateProfileInformation(name, address, telephone, about, userId, dispatch);
+            }}
+          >
+            <Text id="update-profile-button" style={styles.requestButtonText}>
+              Save my updates
+            </Text>
+          </TouchableHighlight>
+
           <View style={styles.statusContainer}>{statusColor}</View>
         </View>
       </LinearGradient>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -114,7 +130,7 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: "row",
     justifyContent: "left",
-    margin: 10,
+    margin: 10
   },
   profile: {
     padding: 10,
@@ -122,7 +138,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "black",
-    shadowOpacity: 2.0,
+    shadowOpacity: 2.0
   },
   dataInput: {
     border: 1,
@@ -158,25 +174,43 @@ const styles = StyleSheet.create({
     color: "#d27300",
     fontWeight: "bold",
     textTransform: "uppercase",
-    fontSize: 18,
+    fontSize: 18
   },
   accepted: {
     color: "#71b280",
     fontWeight: "bold",
     textTransform: "uppercase",
-    fontSize: 18,
+    fontSize: 18
   },
   rejected: {
     color: "#B27183",
     fontWeight: "bold",
     textTransform: "uppercase",
-    fontSize: 18,
+    fontSize: 18
   },
   status: {
     fontWeight: "bold",
     fontSize: 18,
     color: "black"
+  },
+  request: {
+    height: 30,
+    borderColor: "white",
+    borderWidth: 2,
+    borderRadius: 10,
+    backgroundColor: "#71B280",
+    marginTop: 15,
+    margin: 5,
+    paddingTop: 16,
+    paddingBottom: 18,
+    width: "40%",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  requestButtonText: {
+    color: "#black",
+    fontSize: 15
   }
-})
+});
 
-export default UserProfile
+export default UserProfile;

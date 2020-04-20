@@ -59,11 +59,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
-    case actionTypes.USER_PROFILE:
-      return {
-        ...state,
-        ...action.payload,
-      };
     case actionTypes.LOGOUT:
       return {
         ...initialState,
