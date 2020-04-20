@@ -38,7 +38,7 @@ const TripDetailsHeader = () => {
         }}
       >
         <Text style={styles.buttonText} id="close-trip-button">
-          No More Pongs
+          Stop Incoming Pongs
         </Text>
       </TouchableHighlight>
     );
@@ -47,7 +47,7 @@ const TripDetailsHeader = () => {
   return (
     <View>
       <Text style={styles.trip}>{pingBoardMessage}</Text>
-      {closeTripInformation}
+      {pingId && closeTripInformation}
     </View>
   );
 };

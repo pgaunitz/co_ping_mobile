@@ -60,6 +60,7 @@ const UserProfile = () => {
         <Text style={styles.title}>Profile Details</Text>
         <Text style={styles.updateNote} id="profile-update-message">{updateProfileMessage}</Text>
         <View style={styles.profile}>
+        
           <TextInput
             style={styles.dataNameInput}
             nativeID="user-name"
@@ -98,6 +99,17 @@ const UserProfile = () => {
               onChangeText={about => onChangeAbout( about )}
             />
           </View>
+          <View style={styles.itemContainer}>
+          <TouchableHighlight
+            style={styles.request}
+            onPress={() => {
+              updateProfileInformation(name, address, telephone, about, userId, dispatch);
+            }}
+          >
+            <Text id="update-profile-button" style={styles.requestButtonText}>
+              Edit profile
+            </Text>
+          </TouchableHighlight>
           <TouchableHighlight
             style={styles.request}
             onPress={() => {
@@ -108,6 +120,7 @@ const UserProfile = () => {
               Save my updates
             </Text>
           </TouchableHighlight>
+          </View>
           <View style={styles.statusContainer}>{statusColor}</View>
         </View>
       </LinearGradient>
@@ -200,7 +213,7 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     padding: 10,
-    width: "60%",
+    width: "40%",
     justifyContent: "center",
     alignItems: "center"
   },
