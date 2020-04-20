@@ -22,7 +22,7 @@ const PongToPingDetails = (
   rejectButton,
   status
 ) => {
-  let pong;
+  // let pong;
   const pingId = useSelector(state => state.userTrip.id);
   const costSentMessage = useSelector(state => state.costSentMessage);
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ const PongToPingDetails = (
 
   switch (status) {
     case "pending":
-      return (pong = (
+      return (
         <View style={styles.pong}>
           <Text style={styles.name}>{name}</Text>
           <View style={styles.itemContainer}>
@@ -97,20 +97,20 @@ const PongToPingDetails = (
             </TouchableHighlight>
           </View>
         </View>
-      ));
+      )
     case "accepted":
-      return (pong = (
+      return (
         <View style={styles.pong}>
-          <Text style={styles.name}>{name}</Text>
-          <CheckBox
+         <Text style={styles.name}>{name}</Text>
+            <CheckBox
             style={styles.item}
             title={itemOne}
             onPress={() => {
               isChecked();
             }}
           />
-          {itemTwo && <CheckBox style={styles.item} title={itemTwo} />}
-          {itemThree && <CheckBox style={styles.item} title={itemThree} />}
+          {itemTwo !== "" && <CheckBox style={styles.item} title={itemTwo} />}
+          {itemThree !== "" && <CheckBox style={styles.item} title={itemThree} />}
           <View
             id={`total-cost-container-${pongId}`}
             style={styles.costContainer}
@@ -135,14 +135,13 @@ const PongToPingDetails = (
           </View>
           {totalCost && (
             <Text nativeID="cost-confirmation-message">{costSentMessage}</Text>
-          )}
+          )} 
         </View>
-      ));
+      );
     case "rejected":
-      return (pong = <View></View>);
+      return  <View></View>;
   }
-  return { pong };
-};
+}
 const styles = StyleSheet.create({
   title: {
     textAlign: "center",

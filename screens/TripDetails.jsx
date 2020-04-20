@@ -35,18 +35,16 @@ const TripDetails = () => {
     status
   }) => {
     return (
-      <View>
-        {PongToPingDetails(
-          pongId,
-          name,
-          itemOne,
-          itemTwo,
-          itemThree,
-          acceptButton,
-          rejectButton,
-          status
-        )}
-      </View>
+      PongToPingDetails(
+        pongId,
+        name,
+        itemOne,
+        itemTwo,
+        itemThree,
+        acceptButton,
+        rejectButton,
+        status
+      )
     );
   };
 
@@ -64,8 +62,8 @@ const TripDetails = () => {
             {completeTripMessage}
           </Text>
         ) : (
-          <TripDetailsHeader />
-        )}
+            <TripDetailsHeader />
+          )}
         <FlatList
           data={myPongs}
           renderItem={({ item }) => (

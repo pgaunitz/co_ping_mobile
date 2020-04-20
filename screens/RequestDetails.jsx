@@ -74,7 +74,6 @@ const RequestDetails = () => {
             <View style={styles.costContainer}>
               <Text style={styles.totalCost}>Total cost:</Text>
               <Text id="total-cost" style={styles.totalSum}>
-                {" "}
                 {myPong.total_cost}
               </Text>
             </View>
