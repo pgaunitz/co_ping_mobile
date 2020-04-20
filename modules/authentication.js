@@ -19,6 +19,8 @@ const onLogin = async (email, password, dispatch) => {
         loginMessage: `Welcome ${response.data.name}`,
         logoutMessage: "",
         showLoginForm: false,
+        communityId: response.data.community_id,
+        communityStatus: response.data.community_status,
       },
     });
   } catch (error) {

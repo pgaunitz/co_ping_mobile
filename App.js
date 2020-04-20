@@ -10,6 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Requests from "./screens/Requests";
 import TripDetails from "./screens/TripDetails";
 import RequestDetails from "./screens/RequestDetails";
+import UserProfile from "./screens/UserProfile"
 
 axios.defaults.baseURL = "https://co-ping.herokuapp.com";
 
@@ -33,6 +34,7 @@ const App = () => {
           <Stack.Screen name="Requests" component={Requests} />
           <Stack.Screen name="My Ping Board" component={TripDetails} />
           <Stack.Screen name="My Pong Board" component={RequestDetails} />
+          <Stack.Screen name="My Profile" component={UserProfile} />
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>

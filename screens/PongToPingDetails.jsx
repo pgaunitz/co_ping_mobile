@@ -53,7 +53,7 @@ const PongToPingDetails = (
 
   switch (status) {
     case "pending":
-      return (pong = (
+      return (
         <View style={styles.pong}>
           <Text style={styles.name}>{name}</Text>
           <View style={styles.itemContainer}>
@@ -97,12 +97,12 @@ const PongToPingDetails = (
             </TouchableHighlight>
           </View>
         </View>
-      ))
+      )
     case "accepted":
-      return (pong = (
+      return (
         <View style={styles.pong}>
-          <Text style={styles.name}>{name}</Text>
-          <CheckBox
+         <Text style={styles.name}>{name}</Text>
+            <CheckBox
             style={styles.item}
             title={itemOne}
             onPress={() => {
@@ -135,9 +135,9 @@ const PongToPingDetails = (
           </View>
           {totalCost && (
             <Text nativeID="cost-confirmation-message">{costSentMessage}</Text>
-          )}
+          )} 
         </View>
-      ))
+      )
     case "rejected":
       return (pong = <View></View>)
   }
