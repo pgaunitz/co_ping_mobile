@@ -19,6 +19,30 @@ const UserProfile = () => {
   //   getProfileInformation(userId, dispatch);
   // }, []);
 
+  let statusColor
+  if (communityStatus === "pending") {
+    statusColor = (
+      <>
+        <Text style={styles.status}>Community Status: </Text>
+        <Text style={styles.pending}>{communityStatus}</Text>
+      </>
+    )
+  } else if (communityStatus === "accepted") {
+    statusColor = (
+      <>
+        <Text style={styles.status}>Community Status: </Text>
+        <Text style={styles.accepted}>{communityStatus}</Text>
+      </>
+    )
+  } else {
+    statusColor = (
+      <>
+        <Text style={styles.status}>Community Status: </Text>
+        <Text style={styles.rejected}>{communityStatus}</Text>
+      </>
+    )
+  }
+
   return (
     <View style={styles.container} className="request-form">
       <LinearGradient
@@ -29,16 +53,47 @@ const UserProfile = () => {
       >
         <Text style={styles.title}>Profile Details</Text>
         <View style={styles.profile}>
+          
+            <TextInput
+              style={styles.dataNameInput}
+              nativeID="user-name"
+              textContentType="name"
+              value={userName}
+              onChangeText={(name) => onChangeName({ name })}
+            />
+          
           <View style={styles.itemContainer}>
-            <Text>Name: </Text>
+            <Text style={styles.profileItem}>Address:   </Text>
             <TextInput
               style={styles.dataInput}
-              id="user-name"
-              type="name"
-              value={userName}
-              onChangeText={(name) => onChangeName({name})}
+              nativeID="user-address"
+              textContentType="fullStreetAddress"
+              value={address}
+              onChangeText={(text) => onChangeName({ text })}
             />
           </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.profileItem}>Phone:   </Text>
+            <TextInput
+              style={styles.dataInput}
+              nativeID="user-phone"
+              textContentType="telephoneNumber"
+              value={phone}
+              onChangeText={(text) => onChangeName({ text })}
+            />
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.profileItem}>About Me:   </Text>
+            <TextInput
+              style={styles.dataInputText}
+              nativeID="user-about"
+              multiline={true}
+              maxLength={250}
+              value={aboutMe}
+              onChangeText={(text) => onChangeName({ text })}
+            />
+          </View>
+          <View style={styles.statusContainer}>{statusColor}</View>
         </View>
       </LinearGradient>
     </View>
@@ -54,11 +109,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 30,
     margin: 10,
+    marginRight: 5
   },
   itemContainer: {
     flexDirection: "row",
     justifyContent: "left",
-    marginLeft: 15,
+    margin: 10,
   },
   profile: {
     padding: 10,
@@ -70,7 +126,56 @@ const styles = StyleSheet.create({
   },
   dataInput: {
     border: 1,
-    borderColor: "grey"
+    borderColor: "grey",
+    marginleft: 10
+  },
+  dataInputText: {
+    border: 1,
+    borderColor: "grey",
+    marginleft: 5,
+    height: 90,
+    width: 200
+  },
+  dataNameInput: {
+    fontWeight: "bold",
+    justifyContent: "center",
+    alignContent: "center",
+    fontSize: 20,
+    margin: 10
+  },
+  profileItem: {
+    fontWeight: "bold"
+  },
+  statusContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    padding: 5
+  },
+  pending: {
+    color: "#d27300",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    fontSize: 18,
+  },
+  accepted: {
+    color: "#71b280",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    fontSize: 18,
+  },
+  rejected: {
+    color: "#B27183",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    fontSize: 18,
+  },
+  status: {
+    fontWeight: "bold",
+    fontSize: 18,
+    color: "black"
   }
 })
 
