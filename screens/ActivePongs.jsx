@@ -124,6 +124,27 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  pending: {
+    color: "#d27300",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    fontSize: 18,
+  },
+  accepted: {
+    color: "#71b280",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    fontSize: 18,
+  },
+  rejected: {
+    color: "#B27183",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    fontSize: 18,
+  },
+  status: {
+    fontSize: 18,
+  },
 })
 
 export default ActivePongs

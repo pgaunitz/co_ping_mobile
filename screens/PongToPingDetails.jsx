@@ -109,8 +109,8 @@ const PongToPingDetails = (
               isChecked()
             }}
           />
-          {itemTwo && <CheckBox style={styles.item} title={itemTwo} />}
-          {itemThree && <CheckBox style={styles.item} title={itemThree} />}
+          {itemTwo !== "" && <CheckBox style={styles.item} title={itemTwo} />}
+          {itemThree !== "" && <CheckBox style={styles.item} title={itemThree} />}
           <View
             id={`total-cost-container-${pongId}`}
             style={styles.costContainer}

@@ -17,7 +17,7 @@ const Receipt = () => {
 }
 
 const styles = StyleSheet.create({
-  CostContainer: {
+  costContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
