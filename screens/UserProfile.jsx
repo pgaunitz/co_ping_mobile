@@ -18,6 +18,7 @@ const UserProfile = () => {
   const phone = useSelector(state => state.phone);
   const userAddress = useSelector(state => state.userAddress);
   const aboutMe = useSelector(state => state.aboutMe);
+  const updateProfileMessage = useSelector(state => state.updateProfileMessage)
 
   const [name, onChangeName] = useState();
   const [address, onChangeAddress] = useState();
@@ -57,6 +58,7 @@ const UserProfile = () => {
         end={{ x: 1, y: 0 }}
       >
         <Text style={styles.title}>Profile Details</Text>
+        <Text style={styles.updateNote} id="profile-update-message">{updateProfileMessage}</Text>
         <View style={styles.profile}>
           <TextInput
             style={styles.dataNameInput}
@@ -65,7 +67,6 @@ const UserProfile = () => {
             value={userName}
             onChangeText={name => onChangeName({ name })}
           />
-
           <View style={styles.itemContainer}>
             <Text style={styles.profileItem}>Address: </Text>
             <TextInput
@@ -97,7 +98,6 @@ const UserProfile = () => {
               onChangeText={about => onChangeAbout({ about })}
             />
           </View>
-
           <TouchableHighlight
             style={styles.request}
             onPress={() => {
@@ -108,7 +108,6 @@ const UserProfile = () => {
               Save my updates
             </Text>
           </TouchableHighlight>
-
           <View style={styles.statusContainer}>{statusColor}</View>
         </View>
       </LinearGradient>
@@ -143,7 +142,8 @@ const styles = StyleSheet.create({
   dataInput: {
     border: 1,
     borderColor: "grey",
-    marginleft: 10
+    marginleft: 10,
+    width: 200
   },
   dataInputText: {
     border: 1,
@@ -194,22 +194,25 @@ const styles = StyleSheet.create({
     color: "black"
   },
   request: {
-    height: 30,
-    borderColor: "white",
-    borderWidth: 2,
     borderRadius: 10,
     backgroundColor: "#71B280",
     marginTop: 15,
-    margin: 5,
-    paddingTop: 16,
-    paddingBottom: 18,
-    width: "40%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    padding: 10,
+    width: "60%",
     justifyContent: "center",
     alignItems: "center"
   },
   requestButtonText: {
-    color: "#black",
-    fontSize: 15
+    color: "white",
+    fontSize: 18
+  },
+  updateNote: {
+    fontSize: 18,
+    color: "white",
+    margin: 10,
+    textAlign: "center"
   }
 });
 

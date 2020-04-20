@@ -1,5 +1,5 @@
 import axios from "axios";
-import { USER_PROFILE } from "../state/actions/actionTypes";
+import { AUTHENTICATE } from "../state/actions/actionTypes";
 
 const updateProfileInformation = async (
   name,
@@ -10,15 +10,14 @@ const updateProfileInformation = async (
   dispatch
 ) => {
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
-  debugger
   let response = await axios.put(
-    `https://co-ping.herokuapp.com/user/${userId}`,
+    `https://co-ping.herokuapp.com/profiles/${userId}`,
     {
-      user: {
+      profile: {
         user_id: userId,
         name: name,
         phone_number: telephone,
-        adress: address,
+        address: address,
         about_me: about
       }
     },
@@ -26,14 +25,14 @@ const updateProfileInformation = async (
       headers: headers
     }
   );
-  debugger
   dispatch({
     type: AUTHENTICATE,
     payload: {
       userName: response.data.name,
       phone: response.data.phone_number,
-      userAddress: response.data.adress,
-      aboutMe: response.data.about_me
+      userAddress: response.data.address,
+      aboutMe: response.data.about_me,
+      updateProfileMessage: "Your profile has been updated"
     }
   });
 };

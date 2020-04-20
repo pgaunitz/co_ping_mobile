@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   TouchableHighlight,
@@ -7,13 +7,9 @@ import {
   Text,
   Image
 } from "react-native";
-import { SHOW_LOGIN_FORM } from "../state/actions/actionTypes";
+import { SHOW_LOGIN_FORM, AUTHENTICATE } from "../state/actions/actionTypes";
 import { onLogout } from "../modules/authentication";
-import {
-  fetchTrips,
-  getTripInformation,
-  getRequestInformation
-} from "../modules/tripActions";
+import { fetchTrips } from "../modules/tripActions";
 import LoginForm from "./LoginForm";
 import { LinearGradient } from "expo-linear-gradient";
 import Logo from "../assets/images/co_ping_Logo2.png";
@@ -22,7 +18,6 @@ const HomeScreen = ({ navigation }) => {
   const authenticated = useSelector(state => state.authenticated);
   const logoutMessage = useSelector(state => state.logoutMessage);
   const loginMessage = useSelector(state => state.loginMessage);
-  const userId = useSelector(state => state.userId);
   const dispatch = useDispatch();
   const login = () => {
     dispatch({ type: SHOW_LOGIN_FORM });
@@ -99,6 +94,7 @@ const HomeScreen = ({ navigation }) => {
             style={styles.button}
             onPress={() => {
               navigation.navigate("My Profile", { name: "My Profile" });
+              dispatch({ type: AUTHENTICATE, payload: {updateProfileMessage: ""}})
             }}
           >
             <Text id="profile-button" style={styles.buttonText}>
