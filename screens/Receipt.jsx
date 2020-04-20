@@ -18,6 +18,9 @@ const Receipt = () => {
 const styles = StyleSheet.create({
   CostContainer: {
     flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   totalSum: {
     fontSize: 18,

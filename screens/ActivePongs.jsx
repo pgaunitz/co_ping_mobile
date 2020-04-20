@@ -37,8 +37,6 @@ const ActivePongs = () => {
     )
   }
 
-  if ()
-
   return (
     <View style={styles.pong}>
       <View style={styles.statusContainer}>{statusColor}</View>
@@ -54,7 +52,7 @@ const ActivePongs = () => {
         <Icon name="ios-cart" type="ionicon" />
         <Text style={styles.item}>{myPong.item3}</Text>
       </View>
-
+      <Receipt />
       <View style={styles.buttonContainer}>
         {cancelledRequestResponse ? (
           <Text id="cancel-message">{cancelledRequestResponse}</Text>
@@ -71,7 +69,6 @@ const ActivePongs = () => {
           </TouchableHighlight>
         )}
       </View>
-      <Receipt />
     </View>
   )
 }
@@ -125,7 +122,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
 })
 
 export default ActivePongs
