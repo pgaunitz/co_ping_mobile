@@ -63,6 +63,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...initialState,
       };
+    case actionTypes.PROFILE_INFO:
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }

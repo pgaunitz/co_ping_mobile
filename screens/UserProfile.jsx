@@ -65,7 +65,7 @@ const UserProfile = () => {
             nativeID="user-name"
             textContentType="name"
             value={userName}
-            onChangeText={name => onChangeName({ name })}
+            onChangeText={name => onChangeName( name )}
           />
           <View style={styles.itemContainer}>
             <Text style={styles.profileItem}>Address: </Text>
@@ -74,7 +74,7 @@ const UserProfile = () => {
               nativeID="user-address"
               textContentType="fullStreetAddress"
               value={userAddress}
-              onChangeText={address => onChangeAddress({ address })}
+              onChangeText={address => onChangeAddress( address )}
             />
           </View>
           <View style={styles.itemContainer}>
@@ -84,7 +84,7 @@ const UserProfile = () => {
               nativeID="user-phone"
               textContentType="telephoneNumber"
               value={phone}
-              onChangeText={telephone => onChangeTelephone({ telephone })}
+              onChangeText={telephone => onChangeTelephone( telephone )}
             />
           </View>
           <View style={styles.itemContainer}>
@@ -95,7 +95,7 @@ const UserProfile = () => {
               multiline={true}
               maxLength={250}
               value={aboutMe}
-              onChangeText={about => onChangeAbout({ about })}
+              onChangeText={about => onChangeAbout( about )}
             />
           </View>
           <TouchableHighlight

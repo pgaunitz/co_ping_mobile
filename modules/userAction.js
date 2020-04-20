@@ -1,5 +1,5 @@
-import axios from "axios";
-import { AUTHENTICATE } from "../state/actions/actionTypes";
+import axios from "axios"
+import { AUTHENTICATE, PROFILE_INFO } from "../state/actions/actionTypes"
 
 const updateProfileInformation = async (
   name,
@@ -9,22 +9,21 @@ const updateProfileInformation = async (
   userId,
   dispatch
 ) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"))
   let response = await axios.put(
     `https://co-ping.herokuapp.com/profiles/${userId}`,
     {
       profile: {
-        user_id: userId,
         name: name,
         phone_number: telephone,
         address: address,
-        about_me: about
-      }
+        about_me: about,
+      },
     },
     {
-      headers: headers
+      headers: headers,
     }
-  );
+  )
   dispatch({
     type: AUTHENTICATE,
     payload: {
@@ -32,9 +31,29 @@ const updateProfileInformation = async (
       phone: response.data.phone_number,
       userAddress: response.data.address,
       aboutMe: response.data.about_me,
-      updateProfileMessage: "Your profile has been updated"
-    }
-  });
-};
+      updateProfileMessage: "Your profile has been updated",
+    },
+  })
+}
 
-export { updateProfileInformation };
+const getProfileInformation = async (userId, dispatch) => {
+  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"))
+  let response = await axios.get(
+    `https://co-ping.herokuapp.com/profiles/${userId}`,
+    {
+      headers: headers,
+    }
+  )
+  debugger
+  dispatch({
+    type: PROFILE_INFO,
+    payload: {
+      userName: response.data.user.name,
+      phone: response.data.user.phone_number,
+      userAddress: response.data.user.address,
+      aboutMe: response.data.user.about_me
+    },
+  })
+}
+
+export { updateProfileInformation, getProfileInformation }
