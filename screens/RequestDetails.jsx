@@ -1,49 +1,19 @@
-import React, { useEffect } from "react";
-import { LinearGradient } from "expo-linear-gradient";
-import { View, StyleSheet, Text, TouchableHighlight } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import { getRequestInformation, cancelRequest } from "../modules/tripActions";
-import { Icon } from "react-native-elements";
+import React, { useEffect } from "react"
+import { LinearGradient } from "expo-linear-gradient"
+import { View, StyleSheet, Text } from "react-native"
+import { useSelector, useDispatch } from "react-redux"
+import { getRequestInformation } from "../modules/tripActions"
+import ActivePongs from "./ActivePongs"
 
 const RequestDetails = () => {
-  const dispatch = useDispatch();
-  const userId = useSelector(state => state.userId);
+  const dispatch = useDispatch()
+  const userId = useSelector((state) => state.userId)
 
   useEffect(() => {
-    getRequestInformation(userId, dispatch);
-  }, []);
+    getRequestInformation(userId, dispatch)
+  }, [])
 
-  const myPong = useSelector(state => state.myPong);
-  const myPongMessage = useSelector(state => state.myPongMessage);
-  const cancelledRequestResponse = useSelector(
-    state => state.cancelledRequestResponse
-  );
-
-  const pongStatus = myPong.status;
-
-  let statusColor;
-  if (pongStatus === "pending") {
-    statusColor = (
-      <>
-        <Text style={styles.status}>Your request is </Text>
-        <Text style={styles.pending}>{pongStatus}</Text>
-      </>
-    );
-  } else if (pongStatus === "accepted") {
-    statusColor = (
-      <>
-        <Text style={styles.status}>Your request is </Text>
-        <Text style={styles.accepted}>{pongStatus}</Text>
-      </>
-    );
-  } else {
-    statusColor = (
-      <>
-        <Text style={styles.status}>Your request is </Text>
-        <Text style={styles.rejected}>{pongStatus}</Text>
-      </>
-    );
-  }
+  const myPongMessage = useSelector((state) => state.myPongMessage)
 
   return (
     <View style={styles.container} className="request-form">
@@ -57,152 +27,29 @@ const RequestDetails = () => {
         {myPongMessage ? (
           <Text style={styles.trip}>{myPongMessage}</Text>
         ) : (
-          <View style={styles.pong}>
-            <View style={styles.statusContainer}>{statusColor}</View>
-            <View style={styles.itemContainer}>
-              <Icon name="ios-cart" type="ionicon" />
-              <Text style={styles.item}>{myPong.item1}</Text>
-            </View>
-            <View style={styles.itemContainer}>
-              <Icon name="ios-cart" type="ionicon" />
-              <Text style={styles.item}>{myPong.item2}</Text>
-            </View>
-            <View style={styles.itemContainer}>
-              <Icon name="ios-cart" type="ionicon" />
-              <Text style={styles.item}>{myPong.item3}</Text>
-            </View>
-            <View style={styles.costContainer}>
-              <Text style={styles.totalCost}>Total cost:</Text>
-              <Text id="total-cost" style={styles.totalSum}>
-                {" "}
-                {myPong.total_cost}
-              </Text>
-            </View>
-            <View style={styles.buttonContainer}>
-              {cancelledRequestResponse ? (
-                <Text id="cancel-message">{cancelledRequestResponse}</Text>
-              ) : (
-                <TouchableHighlight
-                  style={styles.cancelButton}
-                  onPress={() => {
-                    cancelRequest(myPong.id, dispatch);
-                  }}
-                >
-                  <Text id={"cancel-button"} style={styles.requestButtonText}>
-                    Cancel Pong Request
-                  </Text>
-                </TouchableHighlight>
-              )}
-            </View>
-          </View>
+          <ActivePongs />
         )}
       </LinearGradient>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   title: {
     textAlign: "center",
     color: "white",
     fontSize: 30,
-    margin: 10
-  },
-  pong: {
-    padding: 10,
     margin: 10,
-    borderRadius: 5,
-    backgroundColor: "white",
-    shadowColor: "black",
-    shadowOpacity: 2.0
-  },
-  item: {
-    fontSize: 18,
-    margin: 10
-  },
-  totalSum: {
-    fontSize: 18,
-    margin: 2
-  },
-  totalCost: {
-    fontSize: 18,
-    fontWeight: "bold",
-    margin: 2
-  },
-  costContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: 15
-  },
-  itemContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "left",
-    marginLeft: 15
-  },
-  status: {
-    fontSize: 18
-  },
-  buttonContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  cancelButton: {
-    height: 30,
-    borderColor: "white",
-    borderWidth: 2,
-    borderRadius: 10,
-    backgroundColor: "#B27183",
-    marginTop: 15,
-    margin: 5,
-    paddingTop: 16,
-    paddingBottom: 18,
-    width: "40%",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  requestButtonText: {
-    color: "white",
-    fontSize: 12
-  },
-  statusContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  pending: {
-    color: "#d27300",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    fontSize: 18
-  },
-  accepted: {
-    color: "#71b280",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    fontSize: 18
-  },
-  rejected: {
-    color: "#B27183",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    fontSize: 18
   },
   trip: {
     color: "white",
     margin: 10,
     textAlign: "center",
-    fontSize: 18
-  }
-});
+    fontSize: 18,
+  },
+})
 
-export default RequestDetails;
+export default RequestDetails

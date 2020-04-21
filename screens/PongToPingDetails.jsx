@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { GET_TRIP_DETAILS } from "../state/actions/actionTypes";
-import { useSelector, useDispatch } from "react-redux";
-import { Icon, CheckBox } from "react-native-elements";
-import axios from "axios";
+import React, { useState } from "react"
+import { GET_TRIP_DETAILS } from "../state/actions/actionTypes"
+import { useSelector, useDispatch } from "react-redux"
+import { Icon, CheckBox } from "react-native-elements"
+import axios from "axios"
 import {
   View,
   StyleSheet,
   Text,
   TouchableHighlight,
-  TextInput
-} from "react-native";
-import { acceptRequest, rejectRequest } from "../modules/tripActions";
+  TextInput,
+} from "react-native"
+import { acceptRequest, rejectRequest } from "../modules/tripActions"
 
 const PongToPingDetails = (
   pongId,
@@ -22,38 +22,38 @@ const PongToPingDetails = (
   rejectButton,
   status
 ) => {
-  let pong;
-  const pingId = useSelector(state => state.userTrip.id);
-  const costSentMessage = useSelector(state => state.costSentMessage);
-  const dispatch = useDispatch();
-  const [totalCost, setTotalCost] = useState();
+  let pong
+  const pingId = useSelector((state) => state.userTrip.id)
+  const costSentMessage = useSelector((state) => state.costSentMessage)
+  const dispatch = useDispatch()
+  const [totalCost, setTotalCost] = useState()
 
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"))
   const sendCostInformation = async (event, pongId) => {
-    event.preventDefault();
+    event.preventDefault()
     let response = await axios.put(
       `https://co-ping.herokuapp.com/pongs/${pongId}`,
       {
         pong: {
           ping_id: pingId,
-          total_cost: totalCost
-        }
+          total_cost: totalCost,
+        },
       },
       {
-        headers: headers
+        headers: headers,
       }
-    );
+    )
     dispatch({
       type: GET_TRIP_DETAILS,
       payload: {
-        costSentMessage: response.data.message
-      }
-    });
-  };
+        costSentMessage: response.data.message,
+      },
+    })
+  }
 
   switch (status) {
     case "pending":
-      return (pong = (
+      return (
         <View style={styles.pong}>
           <Text style={styles.name}>{name}</Text>
           <View style={styles.itemContainer}>
@@ -72,11 +72,11 @@ const PongToPingDetails = (
             <TouchableHighlight
               style={styles.acceptButton}
               onPress={() => {
-                acceptRequest(pingId, pongId, dispatch);
+                acceptRequest(pingId, pongId, dispatch)
               }}
             >
               <Text
-                id={`accept-button-${pongId}`}
+                nativeID={`accept-button-${pongId}`}
                 style={styles.requestButtonText}
               >
                 {acceptButton}
@@ -85,11 +85,11 @@ const PongToPingDetails = (
             <TouchableHighlight
               style={styles.rejectButton}
               onPress={() => {
-                rejectRequest(pingId, pongId, dispatch);
+                rejectRequest(pingId, pongId, dispatch)
               }}
             >
               <Text
-                id={`reject-button-${pongId}`}
+                nativeID={`reject-button-${pongId}`}
                 style={styles.requestButtonText}
               >
                 {rejectButton}
@@ -97,20 +97,20 @@ const PongToPingDetails = (
             </TouchableHighlight>
           </View>
         </View>
-      ));
+      )
     case "accepted":
-      return (pong = (
+      return (
         <View style={styles.pong}>
-          <Text style={styles.name}>{name}</Text>
-          <CheckBox
+         <Text style={styles.name}>{name}</Text>
+            <CheckBox
             style={styles.item}
             title={itemOne}
             onPress={() => {
-              isChecked();
+              isChecked()
             }}
           />
-          {itemTwo && <CheckBox style={styles.item} title={itemTwo} />}
-          {itemThree && <CheckBox style={styles.item} title={itemThree} />}
+          {itemTwo !== "" && <CheckBox style={styles.item} title={itemTwo} />}
+          {itemThree !== "" && <CheckBox style={styles.item} title={itemThree} />}
           <View
             id={`total-cost-container-${pongId}`}
             style={styles.costContainer}
@@ -120,12 +120,12 @@ const PongToPingDetails = (
               style={styles.costInput}
               id={`total-cost-${pongId}`}
               value={totalCost}
-              onChangeText={cost => setTotalCost(cost)}
+              onChangeText={(cost) => setTotalCost(cost)}
             />
             <TouchableHighlight
               style={styles.sendButton}
-              onPress={event => {
-                sendCostInformation(event, pongId);
+              onPress={(event) => {
+                sendCostInformation(event, pongId)
               }}
             >
               <Text style={styles.buttonText} id={`send-cost-button-${pongId}`}>
@@ -135,20 +135,20 @@ const PongToPingDetails = (
           </View>
           {totalCost && (
             <Text nativeID="cost-confirmation-message">{costSentMessage}</Text>
-          )}
+          )} 
         </View>
-      ));
+      )
     case "rejected":
-      return (pong = <View></View>);
+      return (pong = <View></View>)
   }
-  return { pong };
-};
+  return { pong }
+}
 const styles = StyleSheet.create({
   title: {
     textAlign: "center",
     color: "white",
     fontSize: 30,
-    margin: 10
+    margin: 10,
   },
   pong: {
     padding: 10,
@@ -156,28 +156,28 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "black",
-    shadowOpacity: 2.0
+    shadowOpacity: 2.0,
   },
   item: {
     fontSize: 18,
-    margin: 10
+    margin: 10,
   },
   itemContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "left",
-    marginLeft: 15
+    marginLeft: 15,
   },
   name: {
     fontSize: 18,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   buttonContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   acceptButton: {
     height: 30,
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     paddingBottom: 18,
     width: "40%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   rejectButton: {
     height: 30,
@@ -205,29 +205,29 @@ const styles = StyleSheet.create({
     paddingBottom: 18,
     width: "40%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   requestButtonText: {
     color: "white",
-    fontSize: 12
+    fontSize: 12,
   },
   trip: {
     color: "white",
     margin: 10,
     textAlign: "center",
-    fontSize: 18
+    fontSize: 18,
   },
   buttonText: {
     color: "#black",
-    fontSize: 18
+    fontSize: 18,
   },
   costContainer: {
     flex: 1,
     flexDirection: "row",
-    alignItems: "left"
+    alignItems: "left",
   },
   costInput: {
-    width: 70
+    width: 70,
   },
   sendButton: {
     height: 30,
@@ -236,8 +236,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#71B280",
     justifyContent: "center",
-    alignItems: "center"
-  }
-});
+    alignItems: "center",
+  },
+})
 
-export { PongToPingDetails };
+export { PongToPingDetails }
