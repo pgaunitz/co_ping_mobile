@@ -22,10 +22,17 @@ To start working on this project you will need to fork [This mobile Repo](https:
 * [RSpec](https://rspec.info/)
 
 ##### ... additional packages and gems includes
-* [Package or gem 1](link)
-* [Package or gem 2](link)
-* [Package or gem 3](link)
-* [Package or gem 4](link)
+* [Expo CLI](link)
+* [Expo Linear Gradient](link)
+* [React Native Elements](link)
+* [J-tockAuth](link)
+* [Axios](link)
+* [React Navigation Stack](link)
+* [React-Redux](link)
+* [React Native Gesture Handler](link)
+* [React Native Vector Icons](link)
+* [React Native Safe Area Context](link)
+* [React Native Screens](link)
 
 ##### we love to deploy with...
 
@@ -40,19 +47,10 @@ To start working on this project you will need to fork [This mobile Repo](https:
 
 ##### Installments
 Now let's get to it shall we?
-
-... get Ruby on Rails
-```
-gem install rails
-```
 ... get the gems needed
 
 ```
 bundle install
-```
-... get RSpec for testing
-```
-rspec-rails
 ```
 ... start the server
 ```
@@ -76,10 +74,10 @@ yarn start
 
 ### Updates and improvements
 There are still some things to check off before we feel "done" with this project (if you're ver done with anything) and that would primarily be:
-* This
-* That
-* Oh and that too
-* Let me just adjust this, then we're ok
+* Integrating camera roll
+* Integrating phone push notifications
+* 
+*
 
 ### Authors
 These are the people behind this amazing application:
