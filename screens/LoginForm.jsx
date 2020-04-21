@@ -1,6 +1,6 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CLOSE_LOGIN_FORM } from "../state/actions/actionTypes";
+import React from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { CLOSE_LOGIN_FORM } from "../state/actions/actionTypes"
 import {
   Alert,
   Modal,
@@ -8,17 +8,17 @@ import {
   Text,
   TouchableHighlight,
   TextInput,
-  View
-} from "react-native";
-import { onLogin } from "../modules/authentication";
+  View,
+} from "react-native"
+import { onLogin } from "../modules/authentication"
 
 const LoginForm = () => {
-  const dispatch = useDispatch();
-  const showLoginForm = useSelector(state => state.showLoginForm);
-  const loginMessage = useSelector(state => state.loginMessage);
-  const userId = useSelector(state => state.userId);
-  const [email, onChangeEmail] = React.useState("");
-  const [password, onChangePassword] = React.useState("");
+  const dispatch = useDispatch()
+  const showLoginForm = useSelector((state) => state.showLoginForm)
+  const loginMessage = useSelector((state) => state.loginMessage)
+  const userId = useSelector((state) => state.userId)
+  const [email, onChangeEmail] = React.useState("")
+  const [password, onChangePassword] = React.useState("")
 
   return (
     <View>
@@ -30,7 +30,7 @@ const LoginForm = () => {
           transparent={true}
           visible={true}
           onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
+            Alert.alert("Modal has been closed.")
           }}
         >
           <View style={styles.modalView} id="login-form">
@@ -40,7 +40,7 @@ const LoginForm = () => {
               style={styles.loginInput}
               id="email"
               value={email}
-              onChangeText={email => onChangeEmail(email)}
+              onChangeText={(email) => onChangeEmail(email)}
             />
             <TextInput
               secureTextEntry={true}
@@ -48,17 +48,28 @@ const LoginForm = () => {
               style={styles.loginInput}
               id="password"
               value={password}
-              onChangeText={password => onChangePassword(password)}
+              onChangeText={(password) => onChangePassword(password)}
             />
-
-            <TouchableHighlight
-              style={styles.button}
-              onPress={e => onLogin(email, password, dispatch)}
-            >
-              <Text id="submit-login" style={styles.buttonText}>
-                Submit
-              </Text>
-            </TouchableHighlight>
+            <View style={styles.itemContainer}>
+              <TouchableHighlight
+                style={styles.button}
+                onPress={(e) => onLogin(email, password, dispatch)}
+              >
+                <Text id="submit-login" style={styles.buttonText}>
+                  Submit
+                </Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={styles.button}
+                onPress={() => {
+                  navigation.navigate("Sign up", { name: "Sign up" })
+                }}
+              >
+                <Text id="request-button" style={styles.buttonText}>
+                  Sign up
+                </Text>
+              </TouchableHighlight>
+            </View>
             <TouchableHighlight
               style={styles.button}
               onPress={() => dispatch({ type: CLOSE_LOGIN_FORM })}
@@ -72,12 +83,12 @@ const LoginForm = () => {
         </Modal>
       )}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   formModal: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
   modalView: {
     backgroundColor: "white",
@@ -87,22 +98,22 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 25
+    fontSize: 25,
   },
   loginInput: {
     textAlign: "left",
@@ -110,7 +121,7 @@ const styles = StyleSheet.create({
     padding: 18,
     margin: 2,
     borderColor: "black",
-    borderWidth: 2
+    borderWidth: 2,
   },
   button: {
     borderRadius: 5,
@@ -118,13 +129,13 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10
+    padding: 10,
   },
   buttonText: {
     color: "#black",
     fontSize: 18,
-    fontWeight: "500"
-  }
-});
+    fontWeight: "500",
+  },
+})
 
-export default LoginForm;
+export default LoginForm

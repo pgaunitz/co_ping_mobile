@@ -33,10 +33,11 @@ const App = () => {
           <Stack.Screen name="Requests" component={Requests} />
           <Stack.Screen name="My Ping Board" component={TripDetails} />
           <Stack.Screen name="My Pong Board" component={RequestDetails} />
+          <Stack.Screen name="Sign up" component={SignUp} />
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>
-  );
+  )
 };
 
 if (window.Cypress) {
