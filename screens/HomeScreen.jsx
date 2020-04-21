@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 100,
     alignSelf: "center",
-    marginTop: 40,
+    marginTop: 76,
   },
   button: {
     height: 60,
