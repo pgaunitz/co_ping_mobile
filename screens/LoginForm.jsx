@@ -10,9 +10,14 @@ import {
   TextInput,
   View,
 } from "react-native"
+import { NavigationContainer } from "@react-navigation/native"
+import { createStackNavigator } from "@react-navigation/stack"
 import { onLogin } from "../modules/authentication"
+import SignUp from "./SignUp"
 
-const LoginForm = () => {
+const Stack = createStackNavigator()
+
+const LoginForm = ({ navigation }) => {
   const dispatch = useDispatch()
   const showLoginForm = useSelector((state) => state.showLoginForm)
   const loginMessage = useSelector((state) => state.loginMessage)
@@ -56,22 +61,12 @@ const LoginForm = () => {
                 onPress={(e) => onLogin(email, password, dispatch)}
               >
                 <Text id="submit-login" style={styles.buttonText}>
-                  Submit
-                </Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={styles.button}
-                onPress={() => {
-                  navigation.navigate("Sign up", { name: "Sign up" })
-                }}
-              >
-                <Text id="request-button" style={styles.buttonText}>
-                  Sign up
+                  Log in
                 </Text>
               </TouchableHighlight>
             </View>
             <TouchableHighlight
-              style={styles.button}
+              style={styles.closeButton}
               onPress={() => dispatch({ type: CLOSE_LOGIN_FORM })}
             >
               <Text id="close-login-form" style={styles.buttonText}>
@@ -123,6 +118,15 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 2,
   },
+  closeButton: {
+    borderRadius: 5,
+    backgroundColor: "#134e5e",
+    margin: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 35,
+  },
   button: {
     borderRadius: 5,
     backgroundColor: "#71B280",
@@ -132,9 +136,16 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   buttonText: {
-    color: "#black",
+    color: "white",
     fontSize: 18,
     fontWeight: "500",
+  },
+  itemContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "left",
+    marginLeft: 15,
   },
 })
 

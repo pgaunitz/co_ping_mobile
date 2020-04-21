@@ -10,6 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Requests from "./screens/Requests";
 import TripDetails from "./screens/TripDetails";
 import RequestDetails from "./screens/RequestDetails";
+import SignUp from "./screens/SignUp"
 
 axios.defaults.baseURL = "https://co-ping.herokuapp.com";
 
