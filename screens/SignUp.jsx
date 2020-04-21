@@ -1,4 +1,6 @@
 import React from "react"
+import { LinearGradient } from "expo-linear-gradient"
+import { TouchableHighlight, View, StyleSheet, Text, Image } from "react-native"
 
 const SignUp = () => {
   return (
@@ -12,5 +14,11 @@ const SignUp = () => {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  mainpage: {
+    flex: 1,
+  },
+})
 
 export default SignUp

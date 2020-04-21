@@ -48,14 +48,14 @@ const HomeScreen = ({ navigation }) => {
           </TouchableHighlight>
         )}
         {!authenticated && (
-          <View style={styles.itemContainer}>
-            <TouchableHighlight style={styles.button} onPress={login}>
+          <View style={styles.authContainer}>
+            <TouchableHighlight style={styles.authButton} onPress={login}>
               <Text id="login-button" style={styles.buttonText}>
                 Login
               </Text>
             </TouchableHighlight>
             <TouchableHighlight
-              style={styles.button}
+              style={styles.authButton}
               onPress={() => {
                 navigation.navigate("Sign up", { name: "Sign up" })
               }}
@@ -103,13 +103,16 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-         {authenticated && (
+        {authenticated && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {
-              navigation.navigate("My Profile", { name: "My Profile" });
-              dispatch({ type: AUTHENTICATE, payload: { updateProfileMessage: "" } });
-              getProfileInformation(userId, dispatch);
+              navigation.navigate("My Profile", { name: "My Profile" })
+              dispatch({
+                type: AUTHENTICATE,
+                payload: { updateProfileMessage: "" },
+              })
+              getProfileInformation(userId, dispatch)
             }}
           >
             <Text id="profile-button" style={styles.buttonText}>
@@ -154,12 +157,21 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white",
   },
-  itemContainer: {
-    flex: 1,
+  authContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "left",
-    marginLeft: 15,
+    justifyContent: "center",
+  },
+  authButton: {
+    height: 60,
+    width: "40%",
+    borderColor: "white",
+    borderWidth: 2,
+    borderRadius: 10,
+    backgroundColor: "#71B280",
+    margin: 5,
+    justifyContent: "center",
+    alignItems: "center",
   }
 })
 
