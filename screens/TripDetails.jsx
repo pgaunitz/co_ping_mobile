@@ -99,19 +99,20 @@ const TripDetails = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   title: {
     textAlign: "center",
     color: "white",
     fontSize: 30,
-    margin: 10
+    margin: 10,
+    marginTop: 40,
   },
   trip: {
     color: "white",
     margin: 10,
     textAlign: "center",
-    fontSize: 18
+    fontSize: 18,
   },
   closeButton: {
     height: 30,
@@ -119,11 +120,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#71B280",
     margin: 10,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonText: {
     color: "#black",
-    fontSize: 18
+    fontSize: 18,
   },
   completeButton: {
     height: 30,
@@ -131,8 +132,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#B27183",
     margin: 10,
     justifyContent: "center",
-    alignItems: "center"
-  }
-});
+    alignItems: "center",
+  },
+})
 
 export default TripDetails;
