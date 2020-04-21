@@ -1,11 +1,6 @@
-# Co-Ping (mobile)
+# Co-Ping (mobile) [![Build Status](https://semaphoreci.com/api/v1/kaylawoodbury/co_ping_client-3/branches/development/badge.svg)](https://semaphoreci.com/kaylawoodbury/co_ping_client-3)
 
-#### Netlify badge
-Visit the settings of your deployed site and copy the deploy badge, put it up right beside the title and delete this paragraph.
-
-#### Image
-Add a printscreen of the deployed site.
-![printscreen of deployed site](link)
+![Co-Ping image](assets/images/copingWide.png)
 
 ### So what is Co-Ping?
 
