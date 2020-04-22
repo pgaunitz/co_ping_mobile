@@ -29,24 +29,24 @@ const sendCommunityCode = async (code, dispatch) => {
   }
 }
 
-const sendSignUp = async (email, password, passwordConfirmation, dispatch) => {
-  try {
-    debugger
-    event.preventDefault()
-    let response = await auth.signUp(email, password, passwordConfirmation)
-    debugger
-    dispatch({
-      type: AUTHENTICATE,
-      payload: {
-        authenticated: true,
-        userId: response.data.id
-      },
-    })
-  } catch (error) {
-    let errorMessage = error.response.data.errors[0]
-    dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage } })
-  }
-}
+// const sendSignUp = async (email, password, passwordConfirmation, dispatch) => {
+//   try {
+//     debugger
+//     event.preventDefault()
+//     let response = await auth.signUp(email, password, passwordConfirmation)
+//     debugger
+//     dispatch({
+//       type: AUTHENTICATE,
+//       payload: {
+//         authenticated: true,
+//         userId: response.data.id
+//       },
+//     })
+//   } catch (error) {
+//     let errorMessage = error.response.data.errors[0]
+//     dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage } })
+//   }
+// }
 
 // const sendSignUp = async (
 //   // name,
@@ -81,36 +81,50 @@ const sendSignUp = async (email, password, passwordConfirmation, dispatch) => {
 //     dispatch({ type: AUTHENTICATE, payload: { signupMessage: errorMessage } })
 //   }
 
-//   // let response = await axios.post("https: //co-ping.herokuapp.com/auth/", {
-//   //   params: {
-//   //     email: email,
-//   //     password: password,
-//   //     password_confirmation: passwordConfirmation,
-//   //     community_id: communityId,
-//   //     phone_number: phoneNumber,
-//   //     address: address,
-//   //     name: name,
-//   //   },
-//   // })
-//   // debugger
-//   // dispatch({
-//   //   type: AUTHENTICATE,
-//   //   payload: {
-//   //     authenticated: true,
-//   //     userEmail: response.data.email,
-//   //     userName: response.data.name,
-//   //     userId: response.data.id,
-//   //     loginMessage: `Welcome ${response.data.name}`,
-//   //     logoutMessage: "",
-//   //     showLoginForm: false,
-//   //     communityId: response.data.community_id,
-//   //     communityStatus: response.data.community_status,
-//   //   },
-//   // })
-//   // debugger
-
-//   // let errorMessage = error.response.data.errors[0]
-//   // dispatch({ type: AUTHENTICATE, payload: { signupMessage: errorMessage } })
-// }
+const sendSignUp = async (
+  name,
+  email,
+  password,
+  passwordConfirmation,
+  communityId,
+  phoneNumber,
+  address,
+  dispatch
+) => {
+  debugger
+  try {
+    let response = await auth.signUp(
+      {
+        email: email,
+        password: password,
+        password_confirmation: passwordConfirmation,
+        community_id: communityId,
+        phone_number: phoneNumber,
+        address: address,
+        name: name,
+      },
+      { "Access-Control-Allow-Origin": "*" }
+    )
+    debugger
+    dispatch({
+      type: AUTHENTICATE,
+      payload: {
+        authenticated: true,
+        userEmail: response.data.data.email,
+        userName: response.data.data.name,
+        userId: response.data.data.id,
+        loginMessage: `Welcome ${response.data.data.name}`,
+        logoutMessage: "",
+        showLoginForm: false,
+        communityId: response.data.data.community_id,
+        communityStatus: response.data.data.community_status,
+      },
+    })
+    debugger
+  } catch (error) {
+    let errorMessage = error.response.data.errors[0]
+    dispatch({ type: AUTHENTICATE, payload: { signupMessage: errorMessage } })
+  }
+}
 
 export { sendCommunityCode, sendSignUp }

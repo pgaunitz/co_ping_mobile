@@ -83,13 +83,13 @@ const SignUp = () => {
               style={styles.request}
               onPress={(event) => {
                 sendSignUp(
-                  // name,
+                  name,
                   email,
                   password,
                   passwordConfirmation,
-                  // communityId,
-                  // phoneNumber,
-                  // address,
+                  communityId,
+                  phoneNumber,
+                  address,
                   dispatch
                 )
               }}
