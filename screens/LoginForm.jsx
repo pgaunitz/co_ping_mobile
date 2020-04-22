@@ -115,13 +115,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 18,
     margin: 2,
-    borderColor: "black",
-    borderWidth: 2,
   },
   closeButton: {
     borderRadius: 5,
     backgroundColor: "#134e5e",
-    margin: 5,
+    marginVertical: 5,
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 10,
@@ -130,10 +128,12 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
     backgroundColor: "#71B280",
-    margin: 5,
+    marginVertical: 5,
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
+    paddingHorizontal: 35,
+    marginRight: 15
   },
   buttonText: {
     color: "white",
