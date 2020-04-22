@@ -1,5 +1,6 @@
 import axios from "axios";
-import { SIGN_UP } from "../state/actions/actionTypes";
+import JtockAuth from "j-tockauth";
+import { SIGN_UP, AUTHENTICATE } from "../state/actions/actionTypes";
 
 const auth = new JtockAuth({
   host: "https://co-ping.herokuapp.com",
@@ -31,7 +32,9 @@ const sendCommunityCode = async (code, dispatch) => {
 const sendSignUp = async (name, email, password, passwordConfirmation, communityId, phoneNumber, address, dispatch) => {
   try {
     event.preventDefault();
+    debugger
     let response = await auth.signUp(name, email, password, passwordConfirmation, communityId, phoneNumber, address);
+    debugger
     dispatch({
       type: AUTHENTICATE,
       payload: {
@@ -46,6 +49,7 @@ const sendSignUp = async (name, email, password, passwordConfirmation, community
         communityStatus: response.data.community_status,
       },
     });
+    debugger
   } catch (error) {
     let errorMessage = error.response.data.errors[0];
     dispatch({ type: AUTHENTICATE, payload: { signupMessage: errorMessage } });
