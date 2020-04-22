@@ -6,6 +6,11 @@ describe("Visitor can", () => {
       url: "**/communities/**",
       response: "fixture:community_code_response.json",
     });
+    cy.route({
+      method: "POST",
+      url: "**/auth",
+      response: "fixture:user_sign_up.json",
+    });
     cy.visit("/");
   });
 
@@ -20,7 +25,7 @@ describe("Visitor can", () => {
     cy.get("#password-confirmation").type("password")
     cy.get("#phone-number").type("111-111 11 11") 
     cy.get("#address").type("adress")
-    cy.get("#sign-up-button").click()
+    cy.get("#sign-up-button").click({force:true})
   });
 });
 

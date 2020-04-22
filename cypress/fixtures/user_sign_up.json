@@ -1,0 +1,11 @@
+{
+  "data": {
+    "id": 1,
+    "name": "Betty Baconsson",
+    "email": "betty@mail.com",
+    "provider": "email",
+    "uid": "betty@mail.com",
+    "allow_password_change": false,
+    "role": "role"
+  }
+}

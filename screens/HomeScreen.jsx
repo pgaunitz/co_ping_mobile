@@ -19,6 +19,7 @@ const HomeScreen = ({ navigation }) => {
   const authenticated = useSelector(state => state.authenticated);
   const logoutMessage = useSelector(state => state.logoutMessage);
   const loginMessage = useSelector(state => state.loginMessage);
+  const communityStatus = useSelector(state => state.communityStatus)
   const userId = useSelector(state => state.userId)
   const dispatch = useDispatch();
   const login = () => {
@@ -66,7 +67,7 @@ const HomeScreen = ({ navigation }) => {
             </TouchableHighlight>
           </View>
         )}
-        {authenticated && (
+        {communityStatus === "accepted" && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {
@@ -79,7 +80,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-        {authenticated && (
+        {communityStatus === "accepted" && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {
@@ -91,7 +92,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-        {authenticated && (
+        {communityStatus === "accepted" && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {

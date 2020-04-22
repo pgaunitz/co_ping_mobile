@@ -4,10 +4,11 @@ import { TouchableHighlight, View, StyleSheet, Text, TextInput } from "react-nat
 import { sendCommunityCode, sendSignUp } from "../modules/signUp"
 import { useSelector, useDispatch } from "react-redux";
 
-const SignUp = () => {
+const SignUp = ({navigation}) => {
   const dispatch = useDispatch();
   const communityId = useSelector(state => state.communityId);
   const codeErrorMessage = useSelector(state => state.codeErrorMessage);
+  const loginMessage = useSelector(state => state.loginMessage)
   const [code, onChangeCode] = useState();
   const [name, onChangeName] = useState();
   const [email, onChangeEmail] = useState();
@@ -48,6 +49,7 @@ const SignUp = () => {
             />
             <TextInput
               placeholder="Password"
+              secureTextEntry={true}
               id="password"
               style={styles.dataInput}
               value={password}
@@ -55,6 +57,7 @@ const SignUp = () => {
             />
             <TextInput
               placeholder="Confirm Password"
+              secureTextEntry={true}
               id="password-confirmation"
               style={styles.dataInput}
               value={passwordConfirmation}
@@ -90,35 +93,36 @@ const SignUp = () => {
                   communityId,
                   phoneNumber,
                   address,
-                  dispatch
-                )
+                  dispatch,
+                  navigation.navigate
+                );
               }}
             >
               <Text style={styles.requestButtonText}>Sign up</Text>
             </TouchableHighlight>
           </View>
         ) : (
-          <>
-            <TextInput
-              placeholder="Enter community code here"
-              id="secret-code"
-              style={styles.dataInput}
-              value={code}
-              onChangeText={(code) => onChangeCode(code)}
-            />
-            <TouchableHighlight
-              style={styles.request}
-              onPress={() => {
-                sendCommunityCode(code, dispatch)
-                onChangeCode("")
-              }}
-            >
-              <Text id="code-submit-button" style={styles.requestButtonText}>
-                Submit code
+            <>
+              <TextInput
+                placeholder="Enter community code here"
+                id="secret-code"
+                style={styles.dataInput}
+                value={code}
+                onChangeText={(code) => onChangeCode(code)}
+              />
+              <TouchableHighlight
+                style={styles.request}
+                onPress={() => {
+                  sendCommunityCode(code, dispatch)
+                  onChangeCode("")
+                }}
+              >
+                <Text id="code-submit-button" style={styles.requestButtonText}>
+                  Submit code
               </Text>
-            </TouchableHighlight>
-          </>
-        )}
+              </TouchableHighlight>
+            </>
+          )}
       </LinearGradient>
     </View>
   )
@@ -161,7 +165,7 @@ const styles = StyleSheet.create({
     height: 90
   },
   dataInputContainer: {
-    backgroundColor:"white",
+    backgroundColor: "white",
     borderRadius: 3,
     padding: 1,
     width: "70%",
