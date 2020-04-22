@@ -68,6 +68,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ...action.payload
       }
+    case actionTypes.SIGN_UP:
+      return {
+        ...state,
+        ...action.payload
+      }
     default:
       return state;
   }

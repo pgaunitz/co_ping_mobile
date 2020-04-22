@@ -19,6 +19,15 @@ const store = configureStore()
 window.store = store
 
 const Stack = createStackNavigator()
+const invisibleHeader = {
+  headerTransparent: true,
+  headerStyle: { borderBottomWidth: 0 },
+  headerTintColor: "#fff",
+  headerTitleStyle: {
+    fontWeight: "thin",
+  },
+  title: ""
+}
 
 const App = () => {
   return (
@@ -30,86 +39,38 @@ const App = () => {
             nativeID="home"
             component={HomeScreen}
             path=""
-            options={{
-              headerTransparent: true,
-              headerStyle: { borderBottomWidth: 0 },
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "thin",
-              },
-            }}
+            options={invisibleHeader}
           />
           <Stack.Screen
             name="Trips"
             component={TripsList}
-            options={{
-              headerTransparent: true,
-              headerStyle: { borderBottomWidth: 0 },
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "thin",
-              },
-            }}
+            options={invisibleHeader}
           />
           <Stack.Screen
             name="Requests"
             component={Requests}
-            options={{
-              headerTransparent: true,
-              headerStyle: { borderBottomWidth: 0 },
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "thin",
-              },
-            }}
+            options={invisibleHeader}
           />
           <Stack.Screen
             name="My Ping Board"
             component={TripDetails}
-            options={{
-              headerTransparent: true,
-              headerStyle: { borderBottomWidth: 0 },
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "thin",
-              },
-            }}
+            options={invisibleHeader}
+
           />
           <Stack.Screen
             name="My Pong Board"
             component={RequestDetails}
-            options={{
-              headerTransparent: true,
-              headerStyle: { borderBottomWidth: 0 },
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "thin",
-              },
-            }}
+            options={invisibleHeader}
           />
           <Stack.Screen
             name="Sign up"
             component={SignUp}
-            options={{
-              headerTransparent: true,
-              headerStyle: { borderBottomWidth: 0 },
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "thin",
-              },
-            }}
+            options={invisibleHeader}
           />
           <Stack.Screen
             name="My Profile"
             component={UserProfile}
-            options={{
-              headerTransparent: true,
-              headerStyle: { borderBottomWidth: 0},
-              headerTintColor: "#fff",
-              headerTitleStyle: {
-                fontWeight: "thin",
-              },
-            }}
+            options={invisibleHeader}
           />
         </Stack.Navigator>
       </Provider>
