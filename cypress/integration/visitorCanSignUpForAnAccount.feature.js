@@ -20,6 +20,7 @@ describe("Visitor can", () => {
     cy.get("#password-confirmation").type("password")
     cy.get("#phone-number").type("111-111 11 11") 
     cy.get("#address").type("adress")
+    cy.get("#sign-up-button").click()
   });
 });
 
