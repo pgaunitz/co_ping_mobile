@@ -4,7 +4,7 @@
 
 ### So what is Co-Ping?
 
-Co-Ping is the cooperate shopping app for amazing neighbor's. With it you can announce when you'll go shopping so that a neighbor who may need one or two items can request you pick it up for them. Next time, when they go shopping, you may be out of something and they can return the favour. This app is about bringing people in a co-operative or neighborhood closer - one kind gesture at a time.
+Co-Ping is the cooperative shopping app for amazing neighbor's. With it you can announce when you'll go shopping so that a neighbor who may need a few items can request you pick it up for them. Next time, when they go shopping, you may be out of something and they can return the favour. This app is about bringing people in a co-operative or neighborhood closer - one kind gesture at a time (while saving time, money and reducing consumption).
 
 ### Let's get started
 
@@ -22,17 +22,17 @@ To start working on this project you will need to fork [This mobile Repo](https:
 * [RSpec](https://rspec.info/)
 
 ##### ... additional packages and gems includes
-* [Expo CLI](link)
-* [Expo Linear Gradient](link)
-* [React Native Elements](link)
-* [J-tockAuth](link)
-* [Axios](link)
-* [React Navigation Stack](link)
-* [React-Redux](link)
-* [React Native Gesture Handler](link)
-* [React Native Vector Icons](link)
-* [React Native Safe Area Context](link)
-* [React Native Screens](link)
+* [Expo CLI](https://docs.expo.io/versions/latest/workflow/expo-cli/)
+* [Expo Linear Gradient](https://docs.expo.io/versions/latest/sdk/linear-gradient/)
+* [React Native Elements](https://react-native-elements.github.io/react-native-elements/)
+* [J-tockAuth](https://www.npmjs.com/package/j-tockauth)
+* [Axios](https://www.npmjs.com/package/axios)
+* [React Navigation Stack](https://reactnavigation.org/docs/stack-navigator/)
+* [React-Redux](https://react-redux.js.org/)
+* [React Native Gesture Handler](https://software-mansion.github.io/react-native-gesture-handler/docs/getting-started.html)
+* [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
+* [React Native Safe Area Context](https://www.npmjs.com/package/react-native-safe-area-context)
+* [React Native Screens](https://reactnative.dev/docs/navigation)
 
 ##### we love to deploy with...
 
@@ -73,11 +73,11 @@ yarn start
 **... There, now you should be good to go. make some coder magic!**
 
 ### Updates and improvements
-There are still some things to check off before we feel "done" with this project (if you're ver done with anything) and that would primarily be:
-* Integrating camera roll
-* Integrating phone push notifications
-* 
-*
+There are still some things to check off before we feel "done" with this project (if you're ever done with anything) and that would primarily be:
+* This
+* That
+* Oh and that too
+* Let me just adjust this, then we're ok
 
 ### Authors
 These are the people behind this amazing application:
