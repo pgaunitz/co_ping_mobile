@@ -22,7 +22,6 @@ describe("Visitor can", () => {
   });
 
   it("choose a trip and request three items", () => {
-    cy.pause()
     cy.get("#trip-button").click();
     cy.get(".request-form").should("contain", "Trip Request");
     cy.get("#item-one").type("A");
