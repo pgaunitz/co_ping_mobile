@@ -41,6 +41,7 @@ const ActivePongs = () => {
   return (
     <View style={styles.pong}>
       <View style={styles.statusContainer}>{statusColor}</View>
+      <Text>Your neighbours number: {myPong.ping_phone}</Text>
       <View style={styles.itemContainer}>
         <Icon name="ios-cart" type="ionicon" />
         <Text style={styles.item}>{myPong.item1}</Text>

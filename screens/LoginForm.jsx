@@ -1,6 +1,6 @@
-import React from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { CLOSE_LOGIN_FORM } from "../state/actions/actionTypes"
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CLOSE_LOGIN_FORM, LOADING } from "../state/actions/actionTypes";
 import {
   Alert,
   Modal,
@@ -9,21 +9,23 @@ import {
   TouchableHighlight,
   TextInput,
   View,
-} from "react-native"
-import { NavigationContainer } from "@react-navigation/native"
-import { createStackNavigator } from "@react-navigation/stack"
-import { onLogin } from "../modules/authentication"
-import SignUp from "./SignUp"
+  ActivityIndicator,
+} from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { onLogin } from "../modules/authentication";
+import SignUp from "./SignUp";
+import LoadingLittleGuy from "./LoadingLittleGuy";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 const LoginForm = ({ navigation }) => {
-  const dispatch = useDispatch()
-  const showLoginForm = useSelector((state) => state.showLoginForm)
-  const loginMessage = useSelector((state) => state.loginMessage)
-  const userId = useSelector((state) => state.userId)
-  const [email, onChangeEmail] = React.useState("")
-  const [password, onChangePassword] = React.useState("")
+  const dispatch = useDispatch();
+  const showLoginForm = useSelector((state) => state.showLoginForm);
+  const loginMessage = useSelector((state) => state.loginMessage);
+  const userId = useSelector((state) => state.userId);
+  const [email, onChangeEmail] = React.useState("");
+  const [password, onChangePassword] = React.useState("");
 
   return (
     <View>
@@ -35,7 +37,7 @@ const LoginForm = ({ navigation }) => {
           transparent={true}
           visible={true}
           onRequestClose={() => {
-            Alert.alert("Modal has been closed.")
+            Alert.alert("Modal has been closed.");
           }}
         >
           <View style={styles.modalView} id="login-form">
@@ -58,7 +60,10 @@ const LoginForm = ({ navigation }) => {
             <View style={styles.itemContainer}>
               <TouchableHighlight
                 style={styles.button}
-                onPress={(e) => onLogin(email, password, dispatch)}
+                onPress={(e) => {
+                  onLogin(email, password, dispatch);
+                  dispatch({ type: LOADING, payload: { loading: "true" } });
+                }}
               >
                 <Text id="submit-login" style={styles.buttonText}>
                   Log in
@@ -73,13 +78,14 @@ const LoginForm = ({ navigation }) => {
                 Close
               </Text>
             </TouchableHighlight>
+            {!userId && <LoadingLittleGuy />}
             <Text id="login-error-message">{loginMessage}</Text>
           </View>
         </Modal>
       )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   formModal: {
@@ -151,6 +157,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginLeft: 15,
   },
-})
+});
 
-export default LoginForm
+export default LoginForm;

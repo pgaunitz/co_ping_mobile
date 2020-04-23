@@ -74,6 +74,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
       };
+    case actionTypes.LOADING:
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }

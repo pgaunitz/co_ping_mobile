@@ -51,8 +51,8 @@ const sendSignUp = async (
         address: address,
         name: name,
       },
-      { "Access-Control-Allow-Origin": "*" }
     );
+    localStorage.setItem("J-tockAuth-Storage", JSON.stringify(response.headers));
     dispatch({
       type: AUTHENTICATE,
       payload: {

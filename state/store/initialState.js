@@ -2,7 +2,8 @@ const initialState = {
   loginMessage: "",
   userTrip: {},
   myPongs: [],
-  myPong: { status: "none" }
+  myPong: { status: "none" },
+  loading: ''
 };
 
 export default initialState;
