@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Alert,
   Modal,
@@ -23,8 +23,9 @@ const NewTripForm = () => {
     state => state.newTripCreatedMessage
   );
 
-  const [timevalue, onChangeText] = React.useState("");
-  const [storevalue, onChangeStore] = React.useState("");
+  const [datevalue, onChangeDate] = useState("");
+  const [timevalue, onChangeText] = useState("");
+  const [storevalue, onChangeStore] = useState("");
   let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
   const createNewTrip = async e => {
     e.preventDefault();
@@ -32,7 +33,7 @@ const NewTripForm = () => {
       "https://co-ping.herokuapp.com/pings",
       {
         ping: {
-          time: timevalue,
+          time: `${datevalue}-${timevalue}`,
           store: storevalue,
           user_id: userId
         }
@@ -61,7 +62,15 @@ const NewTripForm = () => {
           <View style={styles.modalView} id="trip-form">
             <Text style={styles.modalText}>New Shopping Trip Details</Text>
             <TextInput
-              placeholder="Date and Time"
+              placeholder="YYYY-MM-DD"
+              style={styles.dateInput}
+              id="date"
+              type="date"
+              value={datevalue}
+              onChangeText={date => onChangeDate(date)}
+            />
+            <TextInput
+              placeholder="hh:mm"
               style={styles.dateInput}
               id="time"
               type="time"
@@ -75,6 +84,7 @@ const NewTripForm = () => {
               value={storevalue}
               onChangeText={store => onChangeStore(store)}
             />
+            <View style={styles.buttonContainer}>
             <TouchableHighlight
               style={styles.button}
               onPress={e => {
@@ -93,6 +103,7 @@ const NewTripForm = () => {
                 Close
               </Text>
             </TouchableHighlight>
+            </View>
             <Text id="new-trip-message" style={styles.modelText}>
               {newTripCreatedMessage}
             </Text>
@@ -166,6 +177,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     fontFamily: "Futura-Medium",
+  },
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "left",
   },
 })
 

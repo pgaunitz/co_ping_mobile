@@ -18,6 +18,7 @@ import {
 const PongToPingDetails = (
   pongId,
   name,
+  phone,
   itemOne,
   itemTwo,
   itemThree,
@@ -63,6 +64,7 @@ const PongToPingDetails = (
       return (
         <View style={styles.pong}>
           <Text style={styles.name}>{name}</Text>
+          <Text style={styles.phone}>Phone: {phone}</Text>
           <View style={styles.itemContainer}>
             <Icon name="ios-cart" type="ionicon" />
             <Text style={styles.item}>{itemOne}</Text>
@@ -105,6 +107,7 @@ const PongToPingDetails = (
       return (
         <View style={styles.pong}>
           <Text style={styles.name}>{name}</Text>
+          <Text style={styles.phone}>Phone: {phone}</Text>
           <CheckBox
             style={styles.item}
             title={itemOne}
@@ -188,7 +191,11 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 18,
     fontWeight: "bold",
-    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
+  },
+  phone: {
+    fontSize: 12,
     fontWeight: "thin",
     fontFamily: "Futura-Medium",
   },
@@ -255,18 +262,20 @@ const styles = StyleSheet.create({
     alignItems: "left",
   },
   costInput: {
-    width: 70,
+    width: 90,
     fontWeight: "thin",
     fontFamily: "Futura-Medium",
   },
   sendButton: {
-    height: 30,
-    width: 70,
+    height: 35,
+    width: 80,
     marginLeft: 15,
     borderRadius: 10,
     backgroundColor: "#71B280",
     justifyContent: "center",
     alignItems: "center",
+    padding: 5,
+    marginTop: 5
   },
   rejectButtonText: {
     color: "#fff",

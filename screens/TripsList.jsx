@@ -25,12 +25,13 @@ const TripsList = ({ navigation }) => {
     tripsDisplay = trips;
   }
 
-  const Item = ({ store, time, name, requestButton, id }) => {
+  const Item = ({ store, time, name, phone, requestButton, id }) => {
     return (
       <View style={styles.trip}>
         <View style={styles.itemContainer}>
           <View>
             <Text style={styles.name}>{name}</Text>
+            <Text style={styles.store}>Phone: {phone}</Text>
             <Text style={styles.store}>{store}</Text>
             <Text style={styles.time}>{time}</Text>
           </View>
@@ -80,6 +81,7 @@ const TripsList = ({ navigation }) => {
             <Item
               id={item.id}
               name={item.user_name}
+              phone={item.phone_number}
               store={item.store}
               time={item.time}
               requestButton="Request Pong"

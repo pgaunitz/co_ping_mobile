@@ -68,6 +68,16 @@ const UserProfile = () => {
             onChangeText={name => onChangeName(name)}
           />
           <View style={styles.itemContainer}>
+            <Text style={styles.profileItem}>Phone: </Text>
+            <TextInput
+              style={styles.dataInput}
+              nativeID="user-phone"
+              textContentType="telephoneNumber"
+              value={phone}
+              onChangeText={telephone => onChangeTelephone(telephone)}
+            />
+          </View>
+          <View style={styles.itemContainer}>
             <Text style={styles.profileItem}>Address: </Text>
             <TextInput
               style={styles.dataInputAddress}
@@ -77,16 +87,6 @@ const UserProfile = () => {
               maxLength={100}
               value={userAddress}
               onChangeText={address => onChangeAddress(address)}
-            />
-          </View>
-          <View style={styles.itemContainer}>
-            <Text style={styles.profileItem}>Phone: </Text>
-            <TextInput
-              style={styles.dataInput}
-              nativeID="user-phone"
-              textContentType="telephoneNumber"
-              value={phone}
-              onChangeText={telephone => onChangeTelephone(telephone)}
             />
           </View>
           <View style={styles.itemContainer}>

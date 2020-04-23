@@ -27,6 +27,7 @@ const TripDetails = () => {
   const Item = ({
     pongId,
     name,
+    phone,
     itemOne,
     itemTwo,
     itemThree,
@@ -38,6 +39,7 @@ const TripDetails = () => {
       PongToPingDetails(
         pongId,
         name,
+        phone,
         itemOne,
         itemTwo,
         itemThree,
@@ -70,6 +72,7 @@ const TripDetails = () => {
             <Item
               pongId={item.id}
               name={item.user_name}
+              phone={item.phone_number}
               itemOne={item.item1}
               itemTwo={item.item2}
               itemThree={item.item3}
