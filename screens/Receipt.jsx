@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { View, Text, StyleSheet } from "react-native"
 
 const Receipt = () => {
-  const dispatch = useDispatch()
   const myPong = useSelector((state) => state.myPong)
   return (
     <View style={styles.costContainer}>
@@ -26,11 +25,14 @@ const styles = StyleSheet.create({
   totalSum: {
     fontSize: 18,
     margin: 2,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   totalCost: {
     fontSize: 18,
     fontWeight: "bold",
     margin: 2,
+    fontFamily: "Futura-Medium",
   },
 })
 

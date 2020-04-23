@@ -86,12 +86,13 @@ const styles = StyleSheet.create({
   item: {
     fontSize: 18,
     margin: 10,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   itemContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "left",
     marginLeft: 15,
   },
   buttonContainer: {
@@ -110,13 +111,15 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingTop: 16,
     paddingBottom: 18,
-    width: "40%",
+    width: "50%",
     justifyContent: "center",
     alignItems: "center",
   },
   requestButtonText: {
     color: "white",
-    fontSize: 12,
+    fontSize: 15,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   statusContainer: {
     flex: 1,
@@ -129,21 +132,26 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textTransform: "uppercase",
     fontSize: 18,
+    fontFamily: "Futura-Medium",
   },
   accepted: {
     color: "#71b280",
     fontWeight: "bold",
     textTransform: "uppercase",
     fontSize: 18,
+    fontFamily: "Futura-Medium",
   },
   rejected: {
     color: "#B27183",
     fontWeight: "bold",
     textTransform: "uppercase",
     fontSize: 18,
+    fontFamily: "Futura-Medium",
   },
   status: {
     fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
 })
 

@@ -73,12 +73,10 @@ const PongToPingDetails = (
               style={styles.acceptButton}
               onPress={() => {
                 acceptRequest(pingId, pongId, dispatch)
-              }}
-            >
+              }}>
               <Text
                 nativeID={`accept-button-${pongId}`}
-                style={styles.requestButtonText}
-              >
+                style={styles.requestButtonText}>
                 {acceptButton}
               </Text>
             </TouchableHighlight>
@@ -86,12 +84,10 @@ const PongToPingDetails = (
               style={styles.rejectButton}
               onPress={() => {
                 rejectRequest(pingId, pongId, dispatch)
-              }}
-            >
+              }}>
               <Text
                 nativeID={`reject-button-${pongId}`}
-                style={styles.requestButtonText}
-              >
+                style={styles.rejectButtonText}>
                 {rejectButton}
               </Text>
             </TouchableHighlight>
@@ -134,7 +130,7 @@ const PongToPingDetails = (
             </TouchableHighlight>
           </View>
           {totalCost && (
-            <Text nativeID="cost-confirmation-message">{costSentMessage}</Text>
+            <Text style={styles.sentCostMessage} nativeID="cost-confirmation-message">{costSentMessage}</Text>
           )} 
         </View>
       )
@@ -161,17 +157,22 @@ const styles = StyleSheet.create({
   item: {
     fontSize: 18,
     margin: 10,
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   itemContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "left",
     marginLeft: 15,
   },
   name: {
     fontSize: 18,
     fontWeight: "bold",
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   buttonContainer: {
     flex: 1,
@@ -203,23 +204,32 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingTop: 16,
     paddingBottom: 18,
-    width: "40%",
+    width: "50%",
     justifyContent: "center",
     alignItems: "center",
   },
   requestButtonText: {
     color: "white",
     fontSize: 12,
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   trip: {
     color: "white",
     margin: 10,
     textAlign: "center",
     fontSize: 18,
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   buttonText: {
-    color: "#black",
+    color: "#fff",
     fontSize: 18,
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   costContainer: {
     flex: 1,
@@ -228,6 +238,8 @@ const styles = StyleSheet.create({
   },
   costInput: {
     width: 70,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   sendButton: {
     height: 30,
@@ -238,6 +250,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  rejectButtonText: {
+    color: "#fff",
+    fontSize: 12,
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
+  },
+  sentCostMessage: {
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
+  }
 })
 
 export { PongToPingDetails }

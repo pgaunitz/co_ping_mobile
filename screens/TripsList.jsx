@@ -180,7 +180,6 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     flexDirection: "row",
-    justifyContent: "left",
     marginHorizontal: 5,
     marginVertical: 10
   },

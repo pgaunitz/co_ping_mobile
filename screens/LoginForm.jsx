@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "left",
     marginLeft: 15,
   },
 })

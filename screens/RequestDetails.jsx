@@ -44,12 +44,16 @@ const styles = StyleSheet.create({
     fontSize: 30,
     margin: 10,
     marginTop: 40,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   trip: {
     color: "white",
     margin: 10,
     textAlign: "center",
     fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
 })
 

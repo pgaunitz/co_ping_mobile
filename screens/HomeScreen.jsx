@@ -8,7 +8,7 @@ import {
   Image,
   ScrollView
 } from "react-native";
-import { SHOW_LOGIN_FORM, AUTHENTICATE } from "../state/actions/actionTypes";
+import { SHOW_LOGIN_FORM, AUTHENTICATE, SIGN_UP } from "../state/actions/actionTypes";
 import { onLogout } from "../modules/authentication";
 import { fetchTrips } from "../modules/tripActions";
 import { getProfileInformation } from "../modules/userAction"
@@ -71,7 +71,8 @@ const HomeScreen = ({ navigation }) => {
               onPress={() => {
                 navigation.navigate("Sign up", {
                   name: "Sign up",
-                })
+                });
+                dispatch({type: SIGN_UP, payload: {communityId: undefined}})
               }}>
               <Text
                 id="sign-up-button"
