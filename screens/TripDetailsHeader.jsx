@@ -57,7 +57,9 @@ const styles = StyleSheet.create({
     color: "white",
     margin: 10,
     textAlign: "center",
-    fontSize: 18
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   closeButton: {
     height: 30,
@@ -65,12 +67,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#71B280",
     margin: 10,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    shadowColor: "#134e5e",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 5,
   },
   buttonText: {
-    color: "#black",
-    fontSize: 18
-  }
-});
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
+  },
+})
 
 export default TripDetailsHeader;
