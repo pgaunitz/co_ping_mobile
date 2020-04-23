@@ -33,6 +33,9 @@ const PongToPingDetails = (
   )
   const dispatch = useDispatch()
   const [totalCost, setTotalCost] = useState()
+  const [checkedOne, setCheckedOne] = useState("")
+  const [checkedTwo, setCheckedTwo] = useState("")
+  const [checkedThree, setCheckedThree] = useState("")
 
   let headers = JSON.parse(
     localStorage.getItem("J-tockAuth-Storage")
@@ -58,6 +61,8 @@ const PongToPingDetails = (
       },
     })
   }
+
+
 
   switch (status) {
     case "pending":
@@ -111,17 +116,28 @@ const PongToPingDetails = (
           <CheckBox
             style={styles.item}
             title={itemOne}
-            // onPress={() => {
-            //   isChecked()
-            // }}
+            onPress={() => {
+              setCheckedOne(checkedOne === "checked" ? "" : "checked")
+            }}
+            checked={checkedOne}
           />
           {itemTwo !== "" && (
-            <CheckBox style={styles.item} title={itemTwo} />
+            <CheckBox style={styles.item} 
+            title={itemTwo} 
+            onPress={() => {
+              setCheckedTwo(checkedTwo === "checked" ? "" : "checked")
+            }}
+            checked={checkedTwo}
+            />
           )}
           {itemThree !== "" && (
             <CheckBox
               style={styles.item}
               title={itemThree}
+              onPress={() => {
+                setCheckedThree(checkedThree === "checked" ? "" : "checked")
+              }}
+              checked={checkedThree}
             />
           )}
           <View
@@ -169,7 +185,7 @@ const styles = StyleSheet.create({
   },
   pong: {
     padding: 10,
-    margin: 10,
+    margin: 15,
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "black",
@@ -189,13 +205,13 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   name: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     fontWeight: "thin",
     fontFamily: "Futura-Medium",
   },
   phone: {
-    fontSize: 12,
+    fontSize: 16,
     fontWeight: "thin",
     fontFamily: "Futura-Medium",
   },

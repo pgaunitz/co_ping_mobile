@@ -100,7 +100,8 @@ const getRequestInformation = async (userId, dispatch) => {
   dispatch({
     type: GET_REQUEST_DETAILS,
     payload: {
-      myPong: pongResponse.data.pong
+      myPong: pongResponse.data.pong,
+      cancelledRequestResponse: ""
     }
   });
 } else {

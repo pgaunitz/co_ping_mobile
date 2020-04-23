@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   trip: {
     padding: 5,
-    margin: 10,
+    margin: 15,
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "#134e5e",
@@ -119,11 +119,11 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   time: {
-    fontSize: 12,
+    fontSize: 16,
     fontFamily: "Futura-Medium",
   },
   store: {
-    fontSize: 12,
+    fontSize: 16,
     fontFamily: "Futura-Medium",
   },
   name: {
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     fontFamily: "Futura-Medium",
   },
   request: {
-    height: 55,
+    height: 90,
     borderColor: "white",
     borderWidth: 2,
     borderRadius: 10,
@@ -174,16 +174,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginLeft: "auto",
+    alignSelf: "center"
   },
   requestButtonText: {
     color: "#fff",
-    fontSize: 15,
+    fontSize: 20,
+    fontWeight: "400",
     fontFamily: "Futura-Medium",
   },
   itemContainer: {
     flexDirection: "row",
-    marginHorizontal: 5,
-    marginVertical: 10
+    marginHorizontal: 15,
+    marginVertical: 10,
+    justifyContent: "center"
   },
 })
 

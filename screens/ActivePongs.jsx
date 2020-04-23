@@ -76,8 +76,8 @@ const ActivePongs = () => {
 
 const styles = StyleSheet.create({
   pong: {
-    padding: 10,
-    margin: 10,
+    padding: 15,
+    margin: 15,
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "black",

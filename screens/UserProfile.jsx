@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   },
   profile: {
     padding: 10,
-    margin: 10,
+    margin: 15,
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "black",

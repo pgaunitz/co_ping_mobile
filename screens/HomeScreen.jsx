@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { SHOW_LOGIN_FORM, AUTHENTICATE, SIGN_UP } from "../state/actions/actionTypes";
 import { onLogout } from "../modules/authentication";
-import { fetchTrips } from "../modules/tripActions";
+import { fetchTrips, getRequestInformation } from "../modules/tripActions";
 import { getProfileInformation } from "../modules/userAction"
 import LoginForm from "./LoginForm";
 import { LinearGradient } from "expo-linear-gradient";
@@ -118,7 +118,8 @@ const HomeScreen = ({ navigation }) => {
             onPress={() => {
               navigation.navigate("My Pong Board", {
                 name: "My Pong Board",
-              })
+              });
+              getRequestInformation(userId, dispatch)
             }}>
             <Text
               id="request-button"
