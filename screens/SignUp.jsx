@@ -4,7 +4,7 @@ import { TouchableHighlight, View, StyleSheet, Text, TextInput } from "react-nat
 import { sendCommunityCode, sendSignUp } from "../modules/signUp"
 import { useSelector, useDispatch } from "react-redux";
 
-const SignUp = ({navigation}) => {
+const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
   const communityId = useSelector(state => state.communityId);
   const codeErrorMessage = useSelector(state => state.codeErrorMessage);

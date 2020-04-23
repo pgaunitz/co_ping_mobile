@@ -66,9 +66,8 @@ const sendSignUp = async (
         communityId: response.data.data.community_id,
         communityStatus: response.data.data.community_status,
       },
-    }
-    );
-    navigate("Home", { name: "Home" })
+    });
+    navigate("Home", { name: "Home" });
   } catch (error) {
     let errorMessage = error.response.data.errors[0];
     dispatch({ type: AUTHENTICATE, payload: { signupMessage: errorMessage } });
