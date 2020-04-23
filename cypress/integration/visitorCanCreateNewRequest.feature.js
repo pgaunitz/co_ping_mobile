@@ -15,13 +15,14 @@ describe("Visitor can", () => {
     cy.window().then(window => {
       window.store.dispatch({
         type: "AUTHENTICATE",
-        payload: { authenticated: true, userId: 1 }
+        payload: { authenticated: true, userId: 1, communityStatus: "accepted" }
       });
     });
     cy.get("#trip-list-button").click();
   });
 
   it("choose a trip and request three items", () => {
+    cy.pause()
     cy.get("#trip-button").click();
     cy.get(".request-form").should("contain", "Trip Request");
     cy.get("#item-one").type("A");

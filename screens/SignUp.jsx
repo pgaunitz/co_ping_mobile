@@ -136,14 +136,16 @@ const styles = StyleSheet.create({
     color: "white",
     margin: 10,
     textAlign: "center",
-    fontSize: 18
+    fontSize: 18,
   },
   title: {
     textAlign: "center",
     color: "white",
     fontSize: 30,
     marginBottom: 20,
-    marginTop: 50
+    marginTop: 50,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   dataInput: {
     border: 1,
@@ -153,6 +155,8 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     width: 200,
     padding: 10,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   dataInputText: {
     border: 1,
@@ -162,7 +166,7 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     width: 200,
     padding: 10,
-    height: 90
+    height: 90,
   },
   dataInputContainer: {
     backgroundColor: "white",
@@ -170,7 +174,7 @@ const styles = StyleSheet.create({
     padding: 1,
     width: "70%",
     marginHorizontal: "auto",
-    paddingVertical: 15
+    paddingVertical: 15,
   },
   request: {
     borderRadius: 10,
@@ -178,10 +182,23 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginLeft: "auto",
     marginRight: "auto",
-    padding: 10,
+    padding: 6,
     width: "40%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    fontFamily: "Futura-Medium",
+    shadowColor: "#134e5e",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 5,
+  },
+  requestButtonText: {
+    color: "white",
+    fontSize: 18,
+    fontFamily: "Futura-Medium",
   },
 })
 
