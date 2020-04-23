@@ -17,7 +17,8 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "co.crafttacademy.co-ping",
+      "buildNumber": "0.0.1"
     }
   }
 }
