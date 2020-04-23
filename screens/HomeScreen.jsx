@@ -5,8 +5,7 @@ import {
   View,
   StyleSheet,
   Text,
-  Image,
-  ScrollView
+  Image
 } from "react-native";
 import { SHOW_LOGIN_FORM, AUTHENTICATE, SIGN_UP } from "../state/actions/actionTypes";
 import { onLogout } from "../modules/authentication";
