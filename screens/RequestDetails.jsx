@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 30,
     margin: 10,
+    marginTop: 40,
   },
   trip: {
     color: "white",

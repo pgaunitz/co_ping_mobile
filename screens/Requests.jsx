@@ -34,19 +34,20 @@ const Requests = () => {
 
 const styles = StyleSheet.create({
   requestPage: {
-    flex: 1
+    flex: 1,
   },
   responseMessage: {
     color: "white",
     fontSize: 20,
-    textAlign: "center"
+    textAlign: "center",
   },
   title: {
     textAlign: "center",
     color: "white",
     fontSize: 30,
-    margin: 10
-  }
-});
+    margin: 10,
+    marginTop: 40,
+  },
+})
 
 export default Requests;

@@ -70,9 +70,11 @@ const UserProfile = () => {
           <View style={styles.itemContainer}>
             <Text style={styles.profileItem}>Address: </Text>
             <TextInput
-              style={styles.dataInput}
+              style={styles.dataInputAddress}
               nativeID="user-address"
               textContentType="fullStreetAddress"
+              multiline={true}
+              maxLength={100}
               value={userAddress}
               onChangeText={address => onChangeAddress(address)}
             />
@@ -164,6 +166,13 @@ const styles = StyleSheet.create({
     height: 90,
     width: 200
   },
+  dataInputAddress: {
+    border: 1,
+    borderColor: "grey",
+    marginleft: 5,
+    height: 60,
+    width: 200
+  },
   dataNameInput: {
     fontWeight: "bold",
     justifyContent: "center",
@@ -212,7 +221,6 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginRight: "auto",
     padding: 10,
-    width: "40%",
     justifyContent: "center",
     alignItems: "center"
   },

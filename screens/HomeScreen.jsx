@@ -19,6 +19,7 @@ const HomeScreen = ({ navigation }) => {
   const authenticated = useSelector(state => state.authenticated);
   const logoutMessage = useSelector(state => state.logoutMessage);
   const loginMessage = useSelector(state => state.loginMessage);
+  const communityStatus = useSelector(state => state.communityStatus)
   const userId = useSelector(state => state.userId)
   const dispatch = useDispatch();
   const login = () => {
@@ -48,18 +49,30 @@ const HomeScreen = ({ navigation }) => {
           </TouchableHighlight>
         )}
         {!authenticated && (
-          <TouchableHighlight style={styles.button} onPress={login}>
-            <Text id="login-button" style={styles.buttonText}>
-              Login
-            </Text>
-          </TouchableHighlight>
+          <View style={styles.authContainer}>
+            <TouchableHighlight style={styles.authButton} onPress={login}>
+              <Text id="login-button" style={styles.buttonText}>
+                Login
+              </Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={styles.authButton}
+              onPress={() => {
+                navigation.navigate("Sign up", { name: "Sign up" })
+              }}
+            >
+              <Text id="sign-up-button" style={styles.buttonText}>
+                Sign up
+              </Text>
+            </TouchableHighlight>
+          </View>
         )}
-        {authenticated && (
+        {communityStatus === "accepted" && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {
-              fetchTrips(dispatch);
-              navigation.navigate("Trips", { name: "Trips" });
+              fetchTrips(dispatch)
+              navigation.navigate("Trips", { name: "Trips" })
             }}
           >
             <Text id="trip-list-button" style={styles.buttonText}>
@@ -67,11 +80,11 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-        {authenticated && (
+        {communityStatus === "accepted" && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {
-              navigation.navigate("My Ping Board", { name: "My Ping Board" });
+              navigation.navigate("My Ping Board", { name: "My Ping Board" })
             }}
           >
             <Text id="request-list-button" style={styles.buttonText}>
@@ -79,11 +92,11 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-        {authenticated && (
+        {communityStatus === "accepted" && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {
-              navigation.navigate("My Pong Board", { name: "My Pong Board" });
+              navigation.navigate("My Pong Board", { name: "My Pong Board" })
             }}
           >
             <Text id="request-button" style={styles.buttonText}>
@@ -91,13 +104,16 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </TouchableHighlight>
         )}
-         {authenticated && (
+        {authenticated && (
           <TouchableHighlight
             style={styles.button}
             onPress={() => {
-              navigation.navigate("My Profile", { name: "My Profile" });
-              dispatch({ type: AUTHENTICATE, payload: { updateProfileMessage: "" } });
-              getProfileInformation(userId, dispatch);
+              navigation.navigate("My Profile", { name: "My Profile" })
+              dispatch({
+                type: AUTHENTICATE,
+                payload: { updateProfileMessage: "" },
+              })
+              getProfileInformation(userId, dispatch)
             }}
           >
             <Text id="profile-button" style={styles.buttonText}>
@@ -108,18 +124,18 @@ const HomeScreen = ({ navigation }) => {
         <LoginForm />
       </LinearGradient>
     </View>
-  );
+  )
 };
 
 const styles = StyleSheet.create({
   mainpage: {
-    flex: 1
+    flex: 1,
   },
   logo: {
     width: 250,
     height: 100,
     alignSelf: "center",
-    marginTop: 40
+    marginTop: 40,
   },
   button: {
     height: 60,
@@ -129,19 +145,35 @@ const styles = StyleSheet.create({
     backgroundColor: "#71B280",
     margin: 20,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   buttonText: {
     color: "#black",
     fontSize: 20,
-    fontWeight: "600"
+    fontWeight: "600",
   },
   authMessage: {
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 25,
-    color: "white"
+    color: "white",
+  },
+  authContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  authButton: {
+    height: 60,
+    width: "40%",
+    borderColor: "white",
+    borderWidth: 2,
+    borderRadius: 10,
+    backgroundColor: "#71B280",
+    margin: 5,
+    justifyContent: "center",
+    alignItems: "center",
   }
-});
+})
 
 export default HomeScreen;
