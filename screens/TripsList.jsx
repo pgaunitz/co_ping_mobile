@@ -178,7 +178,11 @@ const styles = StyleSheet.create({
   },
   requestButtonText: {
     color: "#fff",
-    fontSize: 20,
+    fontSize: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    marginHorizontal: "auto",
     fontWeight: "400",
     fontFamily: "Futura-Medium",
   },
