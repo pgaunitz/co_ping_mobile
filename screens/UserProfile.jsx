@@ -23,7 +23,7 @@ const UserProfile = () => {
   const [name, onChangeName] = useState();
   const [address, onChangeAddress] = useState();
   const [telephone, onChangeTelephone] = useState();
-  const [about, onChangeAbout] = useState();
+  const [about, onChangeAbout] = useState("");
 
   let statusColor;
   if (communityStatus === "pending") {
@@ -50,7 +50,7 @@ const UserProfile = () => {
   }
 
   return (
-    <View style={styles.container} className="request-form">
+    <View style={styles.container} nativeID="request-form">
       <LinearGradient
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}
@@ -100,28 +100,16 @@ const UserProfile = () => {
               onChangeText={about => onChangeAbout(about)}
             />
           </View>
-          <View style={styles.itemContainer}>
-            <TouchableHighlight
-              style={styles.request}
-              onPress={() => {
-                updateProfileInformation(name, address, telephone, about, userId, dispatch);
-              }}
-            >
-              <Text id="update-profile-button" style={styles.requestButtonText}>
-                Edit profile
+          <TouchableHighlight
+            style={styles.request}
+            onPress={() => {
+              updateProfileInformation(name, address, telephone, about, userId, dispatch);
+            }}
+          >
+            <Text id="update-profile-button" style={styles.requestButtonText}>
+              Save my updates
             </Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.request}
-              onPress={() => {
-                updateProfileInformation(name, address, telephone, about, userId, dispatch);
-              }}
-            >
-              <Text id="update-profile-button" style={styles.requestButtonText}>
-                Save my updates
-            </Text>
-            </TouchableHighlight>
-          </View>
+          </TouchableHighlight>
           <View style={styles.statusContainer}>{statusColor}</View>
         </View>
       </LinearGradient>

@@ -47,7 +47,7 @@ const TripsList = ({ navigation }) => {
               })
             }}>
             <Text
-              id="trip-button"
+              nativeID="trip-button"
               style={styles.requestButtonText}>
               {requestButton}
             </Text>
@@ -58,14 +58,14 @@ const TripsList = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container} className="trip-list">
+    <SafeAreaView style={styles.container} nativeID="trip-list">
       <LinearGradient
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
       >
-        <Text className="trip-message" style={styles.tripNote}>
+        <Text nativeID="trip-message" style={styles.tripNote}>
           {tripMessage}
         </Text>
         {authenticated && (

@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontFamily: "Futura-Medium",
   },
   closeButton: {
-    height: 30,
+    height: 35,
     borderRadius: 10,
     backgroundColor: "#71B280",
     margin: 10,

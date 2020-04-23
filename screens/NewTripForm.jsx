@@ -181,8 +181,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "left",
+    flexDirection: "row"
   },
 })
 

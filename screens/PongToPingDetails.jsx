@@ -258,8 +258,7 @@ const styles = StyleSheet.create({
   },
   costContainer: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "left",
+    flexDirection: "row"
   },
   costInput: {
     width: 90,

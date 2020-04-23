@@ -50,7 +50,7 @@ const RequestForm = () => {
   return (
     <View
       style={styles.requestPage}
-      className="request-form">
+      nativeID="request-form">
       <TextInput
         placeholder="First item..."
         style={styles.itemInput}

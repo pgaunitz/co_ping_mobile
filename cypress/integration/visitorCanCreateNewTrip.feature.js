@@ -27,7 +27,8 @@ describe("Visitor can", () => {
 
   it("successfully create a new trip ping", () => {
     cy.get("#new-trip-button").click()
-    cy.get("#time").type("2020-04-13 16:30")
+    cy.get("#date").type("2020-04-13")
+    cy.get("#time").type("16:30")
     cy.get("#store").type("ICA")
     cy.get("#create-trip-button").contains("Create").click()
     cy.get("#new-trip-message").should(
@@ -68,6 +69,7 @@ describe("Visitor can", () => {
 
   it("not create a new trip without a time", () => {
     cy.get("#new-trip-button").click()
+    cy.get("#date").type(" ")
     cy.get("#time").type(" ")
     cy.get("#store").type("ICA")
     cy.get("#create-trip-button").contains("Create").click()

@@ -51,7 +51,7 @@ const TripDetails = () => {
   };
 
   return (
-    <View style={styles.container} className="request-form">
+    <View style={styles.container} nativeID="request-form">
       <LinearGradient
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     fontFamily: "Futura-Medium",
   },
   completeButton: {
-    height: 30,
+    height: 35,
     borderRadius: 10,
     backgroundColor: "#B27183",
     margin: 10,
