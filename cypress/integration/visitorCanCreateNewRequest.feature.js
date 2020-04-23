@@ -50,12 +50,16 @@ describe("Visitor cannot", () => {
       response: "fixture:trip_list.json"
     });
     cy.visit("/");
-    cy.window().then(window => {
+    cy.window().then((window) => {
       window.store.dispatch({
         type: "AUTHENTICATE",
-        payload: { authenticated: true, userId: 2 }
-      });
-    });
+        payload: {
+          authenticated: true,
+          userId: 1,
+          communityStatus: "accepted",
+        },
+      })
+    })
     cy.get("#trip-list-button").click();
   });
 

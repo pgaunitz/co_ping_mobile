@@ -22,15 +22,18 @@ describe("Visitor can", () => {
       response: "fixture:close_trip_response.json"
     });
 
-    cy.visit("/");
-    cy.get("#login-button")
-      .contains("Login")
-      .click();
-    cy.get("#email").type("user@mail.com");
-    cy.get("#password").type("password");
-    cy.get("#submit-login")
-      .contains("Submit")
-      .click();
+    cy.visit("/")
+    cy.window()
+      .then((window) => {
+        window.store.dispatch({
+          type: "AUTHENTICATE",
+          payload: {
+            authenticated: true,
+            userId: 1,
+            communityStatus: "accepted",
+          },
+        })
+      })
     cy.get("#request-list-button").click();
   });
   it("can close a trip to new request", () => {

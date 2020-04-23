@@ -35,8 +35,18 @@ describe("Visitor can", () => {
     cy.get("#email").type("user@mail.com");
     cy.get("#password").type("password");
     cy.get("#submit-login")
-      .contains("Submit")
+      .contains("Log in")
       .click();
+    cy.window().then((window) => {
+      window.store.dispatch({
+        type: "AUTHENTICATE",
+        payload: {
+          authenticated: true,
+          userId: 1,
+          communityStatus: "accepted",
+        },
+      })
+    })
   });
 
   it("cancel a request", () => {

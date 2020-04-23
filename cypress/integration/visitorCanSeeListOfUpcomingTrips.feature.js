@@ -7,12 +7,16 @@ describe("Visitor can see list of all upcoming active trips", () => {
       response: "fixture:trip_list.json"
     });
     cy.visit("/");
-    cy.window().then(window => {
+    cy.window().then((window) => {
       window.store.dispatch({
         type: "AUTHENTICATE",
-        payload: { authenticated: true }
-      });
-    });
+        payload: {
+          authenticated: true,
+          userId: 1,
+          communityStatus: "accepted",
+        },
+      })
+    })
   });
 
   it("sucessfully.", () => {
@@ -37,12 +41,16 @@ describe("Visitor can see list of all upcoming active trips", () => {
       }
     });
     cy.visit("/");
-    cy.window().then(window => {
+    cy.window().then((window) => {
       window.store.dispatch({
         type: "AUTHENTICATE",
-        payload: { authenticated: true }
-      });
-    });
+        payload: {
+          authenticated: true,
+          userId: 1,
+          communityStatus: "accepted",
+        },
+      })
+    })
   });
   it("unsuccessfully", () => {
     cy.get("#trip-list-button").click();
