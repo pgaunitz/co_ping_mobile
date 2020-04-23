@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
+    width: 90
   },
   buttonText: {
     color: "#fff",
