@@ -16,9 +16,7 @@ const RequestForm = () => {
     (state) => state.selectedTripId
   )
   const userId = useSelector((state) => state.userId)
-  const newRequestCreatedMessage = useSelector(
-    (state) => state.newRequestCreatedMessage
-  )
+  
   const [itemOne, onChangeItemOne] = useState("")
   const [itemTwo, onChangeItemTwo] = useState("")
   const [itemThree, onChangeItemThree] = useState("")
@@ -132,8 +130,8 @@ const styles = StyleSheet.create({
     fontFamily: "Futura-Medium",
   },
   requestPage: {
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 })
 
 export default RequestForm
