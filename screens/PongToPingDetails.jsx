@@ -10,7 +10,10 @@ import {
   TouchableHighlight,
   TextInput,
 } from "react-native"
-import { acceptRequest, rejectRequest } from "../modules/tripActions"
+import {
+  acceptRequest,
+  rejectRequest,
+} from "../modules/tripActions"
 
 const PongToPingDetails = (
   pongId,
@@ -24,11 +27,15 @@ const PongToPingDetails = (
 ) => {
   let pong
   const pingId = useSelector((state) => state.userTrip.id)
-  const costSentMessage = useSelector((state) => state.costSentMessage)
+  const costSentMessage = useSelector(
+    (state) => state.costSentMessage
+  )
   const dispatch = useDispatch()
   const [totalCost, setTotalCost] = useState()
 
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"))
+  let headers = JSON.parse(
+    localStorage.getItem("J-tockAuth-Storage")
+  )
   const sendCostInformation = async (event, pongId) => {
     event.preventDefault()
     let response = await axios.put(
@@ -73,12 +80,10 @@ const PongToPingDetails = (
               style={styles.acceptButton}
               onPress={() => {
                 acceptRequest(pingId, pongId, dispatch)
-              }}
-            >
+              }}>
               <Text
                 nativeID={`accept-button-${pongId}`}
-                style={styles.requestButtonText}
-              >
+                style={styles.requestButtonText}>
                 {acceptButton}
               </Text>
             </TouchableHighlight>
@@ -86,12 +91,10 @@ const PongToPingDetails = (
               style={styles.rejectButton}
               onPress={() => {
                 rejectRequest(pingId, pongId, dispatch)
-              }}
-            >
+              }}>
               <Text
                 nativeID={`reject-button-${pongId}`}
-                style={styles.requestButtonText}
-              >
+                style={styles.rejectButtonText}>
                 {rejectButton}
               </Text>
             </TouchableHighlight>
@@ -101,20 +104,26 @@ const PongToPingDetails = (
     case "accepted":
       return (
         <View style={styles.pong}>
-         <Text style={styles.name}>{name}</Text>
-            <CheckBox
+          <Text style={styles.name}>{name}</Text>
+          <CheckBox
             style={styles.item}
             title={itemOne}
-            onPress={() => {
-              isChecked()
-            }}
+            // onPress={() => {
+            //   isChecked()
+            // }}
           />
-          {itemTwo !== "" && <CheckBox style={styles.item} title={itemTwo} />}
-          {itemThree !== "" && <CheckBox style={styles.item} title={itemThree} />}
+          {itemTwo !== "" && (
+            <CheckBox style={styles.item} title={itemTwo} />
+          )}
+          {itemThree !== "" && (
+            <CheckBox
+              style={styles.item}
+              title={itemThree}
+            />
+          )}
           <View
             id={`total-cost-container-${pongId}`}
-            style={styles.costContainer}
-          >
+            style={styles.costContainer}>
             <Text style={styles.item}>Total cost: </Text>
             <TextInput
               style={styles.costInput}
@@ -126,16 +135,21 @@ const PongToPingDetails = (
               style={styles.sendButton}
               onPress={(event) => {
                 sendCostInformation(event, pongId)
-              }}
-            >
-              <Text style={styles.buttonText} id={`send-cost-button-${pongId}`}>
+              }}>
+              <Text
+                style={styles.buttonText}
+                id={`send-cost-button-${pongId}`}>
                 Send
               </Text>
             </TouchableHighlight>
           </View>
           {totalCost && (
-            <Text nativeID="cost-confirmation-message">{costSentMessage}</Text>
-          )} 
+            <Text
+              style={styles.sentCostMessage}
+              nativeID="cost-confirmation-message">
+              {costSentMessage}
+            </Text>
+          )}
         </View>
       )
     case "rejected":
@@ -161,17 +175,22 @@ const styles = StyleSheet.create({
   item: {
     fontSize: 18,
     margin: 10,
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   itemContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "left",
     marginLeft: 15,
   },
   name: {
     fontSize: 18,
     fontWeight: "bold",
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   buttonContainer: {
     flex: 1,
@@ -203,23 +222,32 @@ const styles = StyleSheet.create({
     margin: 5,
     paddingTop: 16,
     paddingBottom: 18,
-    width: "40%",
+    width: "50%",
     justifyContent: "center",
     alignItems: "center",
   },
   requestButtonText: {
     color: "white",
     fontSize: 12,
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   trip: {
     color: "white",
     margin: 10,
     textAlign: "center",
     fontSize: 18,
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   buttonText: {
-    color: "#black",
+    color: "#fff",
     fontSize: 18,
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   costContainer: {
     flex: 1,
@@ -228,6 +256,8 @@ const styles = StyleSheet.create({
   },
   costInput: {
     width: 70,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   sendButton: {
     height: 30,
@@ -237,6 +267,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#71B280",
     justifyContent: "center",
     alignItems: "center",
+  },
+  rejectButtonText: {
+    color: "#fff",
+    fontSize: 12,
+    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
+  },
+  sentCostMessage: {
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
 })
 

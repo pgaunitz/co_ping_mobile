@@ -107,12 +107,16 @@ const styles = StyleSheet.create({
     fontSize: 30,
     margin: 10,
     marginTop: 40,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   trip: {
     color: "white",
     margin: 10,
     textAlign: "center",
     fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   closeButton: {
     height: 30,
@@ -121,10 +125,18 @@ const styles = StyleSheet.create({
     margin: 10,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#134e5e",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 5,
   },
   buttonText: {
-    color: "#black",
+    color: "#fff",
     fontSize: 18,
+    fontFamily: "Futura-Medium",
   },
   completeButton: {
     height: 30,
@@ -133,6 +145,13 @@ const styles = StyleSheet.create({
     margin: 10,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "#134e5e",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 5,
   },
 })
 

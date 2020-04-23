@@ -131,19 +131,20 @@ const UserProfile = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   title: {
     textAlign: "center",
     color: "white",
     fontSize: 30,
     margin: 10,
-    marginRight: 5
+    marginRight: 5,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   itemContainer: {
     flexDirection: "row",
-    justifyContent: "left",
-    margin: 10
+    margin: 10,
   },
   profile: {
     padding: 10,
@@ -151,37 +152,39 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "black",
-    shadowOpacity: 2.0
+    shadowOpacity: 2.0,
   },
   dataInput: {
-    border: 1,
     borderColor: "grey",
-    marginleft: 10,
-    width: 200
+    width: 200,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   dataInputText: {
-    border: 1,
     borderColor: "grey",
-    marginleft: 5,
     height: 90,
-    width: 200
+    width: 200,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   dataInputAddress: {
-    border: 1,
     borderColor: "grey",
-    marginleft: 5,
     height: 60,
-    width: 200
+    width: 200,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   dataNameInput: {
     fontWeight: "bold",
     justifyContent: "center",
     alignContent: "center",
     fontSize: 20,
-    margin: 10
+    margin: 10,
+    fontFamily: "Futura-Medium",
   },
   profileItem: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontFamily: "Futura-Medium",
   },
   statusContainer: {
     flex: 1,
@@ -189,30 +192,34 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    padding: 5
+    padding: 5,
   },
   pending: {
     color: "#d27300",
     fontWeight: "bold",
     textTransform: "uppercase",
-    fontSize: 18
+    fontSize: 18,
+    fontFamily: "Futura-Medium",
   },
   accepted: {
     color: "#71b280",
     fontWeight: "bold",
     textTransform: "uppercase",
-    fontSize: 18
+    fontSize: 18,
+    fontFamily: "Futura-Medium",
   },
   rejected: {
     color: "#B27183",
     fontWeight: "bold",
     textTransform: "uppercase",
-    fontSize: 18
+    fontSize: 18,
+    fontFamily: "Futura-Medium",
   },
   status: {
     fontWeight: "bold",
     fontSize: 18,
-    color: "black"
+    color: "black",
+    fontFamily: "Futura-Medium",
   },
   request: {
     borderRadius: 10,
@@ -222,18 +229,21 @@ const styles = StyleSheet.create({
     marginRight: "auto",
     padding: 10,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   requestButtonText: {
     color: "white",
-    fontSize: 18
+    fontSize: 18,
+    fontFamily: "Futura-Medium",
   },
   updateNote: {
     fontSize: 18,
     color: "white",
     margin: 10,
-    textAlign: "center"
-  }
-});
+    textAlign: "center",
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
+  },
+})
 
 export default UserProfile;

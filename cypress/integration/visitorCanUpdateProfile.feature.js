@@ -7,16 +7,16 @@ describe("visitor can", () => {
       response: "fixture:profile_updated_response.json"
     });
     cy.visit("/");
-    cy.window().then(window => {
+    cy.window().then((window) => {
       window.store.dispatch({
         type: "AUTHENTICATE",
         payload: {
           authenticated: true,
           userId: 1,
           communityStatus: "accepted",
-        }
-      });
-    });
+        },
+      })
+    })
   });
 
   it("successfully access and update their profile", () => {

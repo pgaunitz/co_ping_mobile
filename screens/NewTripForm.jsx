@@ -105,7 +105,7 @@ const NewTripForm = () => {
 
 const styles = StyleSheet.create({
   formModal: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
   modalView: {
     margin: 20,
@@ -113,41 +113,45 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
+    shadowColor: "#134e5e",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
+    shadowOpacity: 0.8,
+    shadowRadius: 5,
   },
+  shadowOpacity: 0.25,
+  shadowRadius: 3.84,
+  elevation: 5,
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: "Futura-Medium",
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 25
+    fontSize: 25,
+    fontFamily: "Futura-Medium",
   },
   dateInput: {
     textAlign: "left",
     fontSize: 18,
     padding: 18,
     margin: 2,
-    borderColor: "black",
-    borderWidth: 2
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   storeInput: {
     textAlign: "left",
     fontSize: 18,
     padding: 18,
     margin: 2,
-    borderColor: "black",
-    borderWidth: 2
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   button: {
     borderRadius: 5,
@@ -155,13 +159,14 @@ const styles = StyleSheet.create({
     margin: 5,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10
+    padding: 10,
   },
   buttonText: {
-    color: "#black",
+    color: "#fff",
     fontSize: 18,
-    fontWeight: "500"
-  }
-});
+    fontWeight: "500",
+    fontFamily: "Futura-Medium",
+  },
+})
 
 export default NewTripForm;

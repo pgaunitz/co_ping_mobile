@@ -28,17 +28,19 @@ describe("Visitor can", () => {
     });
 
     cy.visit("/");
-    cy.get("#login-button")
-      .contains("Login")
-      .click();
-    cy.get("#email").type("user@mail.com");
-    cy.get("#password").type("password");
-    cy.get("#submit-login")
-      .contains("Submit")
-      .click();
+    cy.window().then((window) => {
+      window.store.dispatch({
+        type: "AUTHENTICATE",
+        payload: {
+          authenticated: true,
+          userId: 1,
+          communityStatus: "accepted",
+        },
+      })
+    })
     cy.get("#request-list-button").click();
   });
-  it("can close a trip to new request", () => {
+  it("can complete a trip ", () => {
     cy.wait(500);
     cy.get(
       ":nth-child(1) > .r-backgroundColor-14lw9ot > .r-alignItems-z6ln5t"
@@ -74,14 +76,16 @@ describe("Visitor can", () => {
       response: "fixture:user_login.json"
     });
     cy.visit("/");
-    cy.get("#login-button")
-      .contains("Login")
-      .click();
-    cy.get("#email").type("user@mail.com");
-    cy.get("#password").type("password");
-    cy.get("#submit-login")
-      .contains("Submit")
-      .click();
+    cy.window().then((window) => {
+      window.store.dispatch({
+        type: "AUTHENTICATE",
+        payload: {
+          authenticated: true,
+          userId: 1,
+          communityStatus: "accepted",
+        },
+      })
+    })
     cy.get("#request-button").click();
   });
 

@@ -103,18 +103,22 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    fontFamily: "Futura-Medium",
   },
   modalText: {
     marginBottom: 15,
     textAlign: "center",
-    fontWeight: "bold",
     fontSize: 25,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   loginInput: {
     textAlign: "left",
     fontSize: 18,
     padding: 18,
     margin: 2,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
   },
   closeButton: {
     borderRadius: 5,
@@ -133,18 +137,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     paddingHorizontal: 35,
-    marginRight: 15
+    marginRight: 15,
   },
   buttonText: {
     color: "white",
     fontSize: 18,
     fontWeight: "500",
+    fontFamily: "Futura-Medium",
   },
   itemContainer: {
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "left",
     marginLeft: 15,
   },
 })

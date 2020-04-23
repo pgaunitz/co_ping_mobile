@@ -28,25 +28,32 @@ const TripsList = ({ navigation }) => {
   const Item = ({ store, time, name, requestButton, id }) => {
     return (
       <View style={styles.trip}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.store}>{store}</Text>
-        <Text style={styles.time}>{time}</Text>
-        <TouchableHighlight
-          style={styles.request}
-          onPress={() => {
-            dispatch({
-              type: SELECTED_TRIP_ID,
-              payload: { selectedTripId: id }
-            });
-            navigation.navigate("Requests", { name: "Requests" });
-          }}
-        >
-          <Text id="trip-button" style={styles.requestButtonText}>
-            {requestButton}
-          </Text>
-        </TouchableHighlight>
+        <View style={styles.itemContainer}>
+          <View>
+            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.store}>{store}</Text>
+            <Text style={styles.time}>{time}</Text>
+          </View>
+          <TouchableHighlight
+            style={styles.request}
+            onPress={() => {
+              dispatch({
+                type: SELECTED_TRIP_ID,
+                payload: { selectedTripId: id },
+              })
+              navigation.navigate("Requests", {
+                name: "Requests",
+              })
+            }}>
+            <Text
+              id="trip-button"
+              style={styles.requestButtonText}>
+              {requestButton}
+            </Text>
+          </TouchableHighlight>
+        </View>
       </View>
-    );
+    )
   };
 
   return (
@@ -88,71 +95,94 @@ const TripsList = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   item: {
     backgroundColor: "#f9c2ff",
     padding: 20,
     marginVertical: 8,
-    marginHorizontal: 16
+    marginHorizontal: 16,
   },
   trip: {
-    padding: 10,
+    padding: 5,
     margin: 10,
     borderRadius: 5,
     backgroundColor: "white",
-    shadowColor: "black",
-    shadowOpacity: 2.0
+    shadowColor: "#134e5e",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 5,
   },
   time: {
-    fontSize: 12
+    fontSize: 12,
+    fontFamily: "Futura-Medium",
   },
   store: {
-    fontSize: 12
+    fontSize: 12,
+    fontFamily: "Futura-Medium",
   },
   name: {
     fontSize: 20,
-    fontWeight: "bold"
+    fontFamily: "Futura-Medium",
   },
   tripNote: {
     fontSize: 25,
     color: "white",
     margin: 20,
-    textAlign: "center"
+    textAlign: "center",
+    fontFamily: "Futura-Medium",
   },
   button: {
     height: 60,
-    borderColor: "white",
-    borderWidth: 2,
     borderRadius: 10,
     backgroundColor: "#71B280",
-    margin: 20,
+    margin: 5,
+    marginTop: 10,
+    width: "80%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    alignSelf: "center",
+    shadowColor: "#134e5e",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.8,
+    shadowRadius: 5,
   },
   buttonText: {
-    color: "#black",
+    color: "white",
     fontSize: 20,
-    fontWeight: "600"
+    fontWeight: "600",
+    fontFamily: "Futura-Medium",
   },
   request: {
-    height: 30,
+    height: 55,
     borderColor: "white",
     borderWidth: 2,
     borderRadius: 10,
     backgroundColor: "#71B280",
-    marginTop: 15,
-    margin: 5,
+    marginBottom: "auto",
     paddingTop: 16,
     paddingBottom: 18,
     width: "40%",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginLeft: "auto",
   },
   requestButtonText: {
-    color: "#black",
-    fontSize: 15
-  }
-});
+    color: "#fff",
+    fontSize: 15,
+    fontFamily: "Futura-Medium",
+  },
+  itemContainer: {
+    flexDirection: "row",
+    marginHorizontal: 5,
+    marginVertical: 10
+  },
+})
 
 export default TripsList;

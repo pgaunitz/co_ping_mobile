@@ -39,7 +39,7 @@ describe("Visitor can log in", () => {
     cy.get("#email").type("user@mail.com");
     cy.get("#password").type("password");
     cy.get("#submit-login")
-      .contains("Submit")
+      .contains("Log in")
       .click();
     cy.get("#logout-button").click();
     cy.get("#new-trip-button").should("not.exist");
@@ -68,7 +68,7 @@ describe("Visitor can not log in", () => {
     cy.get("#email").type("wrongmail.com");
     cy.get("#password").type("wrong");
     cy.get("#submit-login")
-      .contains("Submit")
+      .contains("Log in")
       .click();
     cy.get("#login-error-message").should(
       "contain",
