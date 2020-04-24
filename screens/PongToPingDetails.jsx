@@ -62,8 +62,6 @@ const PongToPingDetails = (
     })
   }
 
-
-
   switch (status) {
     case "pending":
       return (
