@@ -1,5 +1,8 @@
 import axios from "axios"
 import { AUTHENTICATE, PROFILE_INFO } from "state/actions/actionTypes"
+import AsyncStorage from '@react-native-community/async-storage';
+
+const storage = AsyncStorage
 
 const updateProfileInformation = async (
   name,
@@ -9,7 +12,7 @@ const updateProfileInformation = async (
   userId,
   dispatch
 ) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"))
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
   let response = await axios.put(
     `https://co-ping.herokuapp.com/profiles/${userId}`,
     {
@@ -37,7 +40,7 @@ const updateProfileInformation = async (
 }
 
 const getProfileInformation = async (userId, dispatch) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"))
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
   let response = await axios.get(
     `https://co-ping.herokuapp.com/profiles/${userId}`,
     {
