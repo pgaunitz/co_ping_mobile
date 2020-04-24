@@ -8,7 +8,12 @@ import {
   FlatList,
   TouchableHighlight
 } from "react-native";
-import NewTripForm from "./NewTripForm";
+import {
+  NEW_TRIP_FORM,
+  SELECTED_TRIP_ID,
+} from "../state/actions/actionTypes"
+
+import NewTripForm from "screens/NewTripForm";
 import { LinearGradient } from "expo-linear-gradient";
 
 const TripsList = ({ navigation }) => {

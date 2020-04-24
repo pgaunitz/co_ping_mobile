@@ -16,7 +16,7 @@ import {
 } from "state/actions/actionTypes"
 import AsyncStorage from "@react-native-community/async-storage"
 
-const NewTripForm = async () => {
+const NewTripForm = () => {
   const storage = AsyncStorage
   const dispatch = useDispatch()
   const showTripForm = useSelector(
@@ -29,10 +29,10 @@ const NewTripForm = async () => {
 
   const [timevalue, onChangeText] = React.useState("")
   const [storevalue, onChangeStore] = React.useState("")
-  let headers = JSON.parse(
-    await storage.getItem("auth-storage")
-  )
   const createNewTrip = async (e) => {
+    let headers = JSON.parse(
+      await storage.getItem("auth-storage")
+    )
     e.preventDefault()
     let response = await axios.post(
       "https://co-ping.herokuapp.com/pings",

@@ -9,6 +9,7 @@ import {
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
 import { NEW_REQUEST } from "state/actions/actionTypes"
+import AsyncStorage from "@react-native-community/async-storage"
 
 const RequestForm = () => {
   const dispatch = useDispatch()
@@ -21,11 +22,13 @@ const RequestForm = () => {
   const [itemTwo, onChangeItemTwo] = useState("")
   const [itemThree, onChangeItemThree] = useState("")
 
-  let headers = JSON.parse(
-    localStorage.getItem("J-tockAuth-Storage")
-  )
+  const storage = AsyncStorage
+
   const sendRequest = async (e) => {
-    e.preventDefault()
+    let headers = JSON.parse(
+      await storage.getItem("auth-storage")
+    )
+    e.persist()
     let response = await axios.post(
       "https://co-ping.herokuapp.com/pongs",
       {

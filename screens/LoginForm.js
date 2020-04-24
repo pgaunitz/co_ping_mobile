@@ -16,7 +16,7 @@ import SignUp from "./SignUp"
 
 const Stack = createStackNavigator()
 
-const LoginForm = ({ navigation }) => {
+const LoginForm = () => {
   const dispatch = useDispatch()
   const showLoginForm = useSelector((state) => state.showLoginForm)
   const loginMessage = useSelector((state) => state.loginMessage)
