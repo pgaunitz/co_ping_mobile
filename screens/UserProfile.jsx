@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 30,
     margin: 10,
-    marginRight: 5,
+    marginTop: 40,
     fontWeight: "thin",
     fontFamily: "Futura-Medium",
   },
