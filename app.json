@@ -2,7 +2,11 @@
   "expo": {
     "name": "co_ping_mobile",
     "slug": "co_ping_mobile",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -15,10 +19,16 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "bundleIdentifier": "co.crafttacademy.co-ping",
       "buildNumber": "0.0.1"
-    }
+    },
+    "android": {
+      "package": "co.crafttacademy.co-ping"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }

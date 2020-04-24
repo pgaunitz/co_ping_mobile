@@ -1,8 +1,10 @@
 import axios from "axios";
-import JtockAuth from "j-tockauth";
-import { SIGN_UP, AUTHENTICATE } from "../state/actions/actionTypes";
+// import JtockAuth from "j-tockauth";
+import Auth from 'modules/authenticationHelpers'
 
-const auth = new JtockAuth({
+import { SIGN_UP, AUTHENTICATE } from "state/actions/actionTypes";
+
+const auth = new Auth({
   host: "https://co-ping.herokuapp.com",
 });
 

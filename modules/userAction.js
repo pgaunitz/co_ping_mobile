@@ -1,5 +1,5 @@
 import axios from "axios"
-import { AUTHENTICATE, PROFILE_INFO } from "../state/actions/actionTypes"
+import { AUTHENTICATE, PROFILE_INFO } from "state/actions/actionTypes"
 
 const updateProfileInformation = async (
   name,
