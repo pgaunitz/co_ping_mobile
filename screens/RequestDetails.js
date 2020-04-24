@@ -3,7 +3,7 @@ import { LinearGradient } from "expo-linear-gradient"
 import { View, StyleSheet, Text } from "react-native"
 import { useSelector, useDispatch } from "react-redux"
 import { getRequestInformation } from "modules/tripActions"
-import ActivePongs from "./ActivePongs"
+import ActivePongs from "screens/ActivePongs"
 
 const RequestDetails = () => {
   const dispatch = useDispatch()

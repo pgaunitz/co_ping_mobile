@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     shadowColor: "black",
     shadowOpacity: 2.0,
+    height: 350
   },
   item: {
     fontSize: 18,
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   cancelButton: {
-    height: 30,
+    height: 40,
     borderColor: "white",
     borderWidth: 2,
     borderRadius: 10,
@@ -116,8 +117,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   requestButtonText: {
-    color: "white",
-    fontSize: 15,
+    color: "#fff",
+    fontSize: 12,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
