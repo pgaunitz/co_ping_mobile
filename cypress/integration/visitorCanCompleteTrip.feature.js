@@ -42,12 +42,8 @@ describe("Visitor can", () => {
   });
   it("can complete a trip ", () => {
     cy.wait(500);
-    cy.get(
-      ":nth-child(1) > .r-backgroundColor-14lw9ot > .r-alignItems-z6ln5t"
-    ).within(() => {
       cy.get("#total-cost-1").type("25,80 sek");
       cy.get("#send-cost-button-1").click();
-    });
     cy.get("#cost-confirmation-message").should(
       "contain",
       "The total amount was sent to your neighbour"

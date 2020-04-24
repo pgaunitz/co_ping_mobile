@@ -18,6 +18,7 @@ import {
 const PongToPingDetails = (
   pongId,
   name,
+  phone,
   itemOne,
   itemTwo,
   itemThree,
@@ -32,6 +33,9 @@ const PongToPingDetails = (
   )
   const dispatch = useDispatch()
   const [totalCost, setTotalCost] = useState()
+  const [checkedOne, setCheckedOne] = useState("")
+  const [checkedTwo, setCheckedTwo] = useState("")
+  const [checkedThree, setCheckedThree] = useState("")
 
   let headers = JSON.parse(
     localStorage.getItem("J-tockAuth-Storage")
@@ -63,6 +67,7 @@ const PongToPingDetails = (
       return (
         <View style={styles.pong}>
           <Text style={styles.name}>{name}</Text>
+          <Text style={styles.phone}>Phone: {phone}</Text>
           <View style={styles.itemContainer}>
             <Icon name="ios-cart" type="ionicon" />
             <Text style={styles.item}>{itemOne}</Text>
@@ -105,20 +110,32 @@ const PongToPingDetails = (
       return (
         <View style={styles.pong}>
           <Text style={styles.name}>{name}</Text>
+          <Text style={styles.phone}>Phone: {phone}</Text>
           <CheckBox
             style={styles.item}
             title={itemOne}
-            // onPress={() => {
-            //   isChecked()
-            // }}
+            onPress={() => {
+              setCheckedOne(checkedOne === "checked" ? "" : "checked")
+            }}
+            checked={checkedOne}
           />
           {itemTwo !== "" && (
-            <CheckBox style={styles.item} title={itemTwo} />
+            <CheckBox style={styles.item} 
+            title={itemTwo} 
+            onPress={() => {
+              setCheckedTwo(checkedTwo === "checked" ? "" : "checked")
+            }}
+            checked={checkedTwo}
+            />
           )}
           {itemThree !== "" && (
             <CheckBox
               style={styles.item}
               title={itemThree}
+              onPress={() => {
+                setCheckedThree(checkedThree === "checked" ? "" : "checked")
+              }}
+              checked={checkedThree}
             />
           )}
           <View
@@ -166,7 +183,7 @@ const styles = StyleSheet.create({
   },
   pong: {
     padding: 10,
-    margin: 10,
+    margin: 15,
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "black",
@@ -186,9 +203,13 @@ const styles = StyleSheet.create({
     marginLeft: 15,
   },
   name: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
-    fontSize: 18,
+    fontWeight: "thin",
+    fontFamily: "Futura-Medium",
+  },
+  phone: {
+    fontSize: 16,
     fontWeight: "thin",
     fontFamily: "Futura-Medium",
   },
@@ -251,22 +272,23 @@ const styles = StyleSheet.create({
   },
   costContainer: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "left",
+    flexDirection: "row"
   },
   costInput: {
-    width: 70,
+    width: 90,
     fontWeight: "thin",
     fontFamily: "Futura-Medium",
   },
   sendButton: {
-    height: 30,
-    width: 70,
+    height: 35,
+    width: 80,
     marginLeft: 15,
     borderRadius: 10,
     backgroundColor: "#71B280",
     justifyContent: "center",
     alignItems: "center",
+    padding: 5,
+    marginTop: 5
   },
   rejectButtonText: {
     color: "#fff",

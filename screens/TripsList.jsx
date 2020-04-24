@@ -25,12 +25,13 @@ const TripsList = ({ navigation }) => {
     tripsDisplay = trips;
   }
 
-  const Item = ({ store, time, name, requestButton, id }) => {
+  const Item = ({ store, time, name, phone, requestButton, id }) => {
     return (
       <View style={styles.trip}>
         <View style={styles.itemContainer}>
           <View>
             <Text style={styles.name}>{name}</Text>
+            <Text style={styles.store}>Phone: {phone}</Text>
             <Text style={styles.store}>{store}</Text>
             <Text style={styles.time}>{time}</Text>
           </View>
@@ -46,7 +47,7 @@ const TripsList = ({ navigation }) => {
               })
             }}>
             <Text
-              id="trip-button"
+              nativeID="trip-button"
               style={styles.requestButtonText}>
               {requestButton}
             </Text>
@@ -57,14 +58,14 @@ const TripsList = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container} className="trip-list">
+    <SafeAreaView style={styles.container} nativeID="trip-list">
       <LinearGradient
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
       >
-        <Text className="trip-message" style={styles.tripNote}>
+        <Text nativeID="trip-message" style={styles.tripNote}>
           {tripMessage}
         </Text>
         {authenticated && (
@@ -80,6 +81,7 @@ const TripsList = ({ navigation }) => {
             <Item
               id={item.id}
               name={item.user_name}
+              phone={item.phone_number}
               store={item.store}
               time={item.time}
               requestButton="Request Pong"
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
   },
   trip: {
     padding: 5,
-    margin: 10,
+    margin: 15,
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "#134e5e",
@@ -117,11 +119,11 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   time: {
-    fontSize: 12,
+    fontSize: 16,
     fontFamily: "Futura-Medium",
   },
   store: {
-    fontSize: 12,
+    fontSize: 16,
     fontFamily: "Futura-Medium",
   },
   name: {
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
     fontFamily: "Futura-Medium",
   },
   request: {
-    height: 55,
+    height: 90,
     borderColor: "white",
     borderWidth: 2,
     borderRadius: 10,
@@ -172,16 +174,23 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginLeft: "auto",
+    alignSelf: "center"
   },
   requestButtonText: {
     color: "#fff",
-    fontSize: 15,
+    fontSize: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    marginHorizontal: "auto",
+    fontWeight: "400",
     fontFamily: "Futura-Medium",
   },
   itemContainer: {
     flexDirection: "row",
-    marginHorizontal: 5,
-    marginVertical: 10
+    marginHorizontal: 15,
+    marginVertical: 10,
+    justifyContent: "center"
   },
 })
 

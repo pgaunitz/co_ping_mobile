@@ -16,7 +16,7 @@ const RequestDetails = () => {
   const myPongMessage = useSelector((state) => state.myPongMessage)
 
   return (
-    <View style={styles.container} className="request-form">
+    <View style={styles.container} nativeID="request-form">
       <LinearGradient
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}

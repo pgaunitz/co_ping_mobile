@@ -23,7 +23,7 @@ const UserProfile = () => {
   const [name, onChangeName] = useState();
   const [address, onChangeAddress] = useState();
   const [telephone, onChangeTelephone] = useState();
-  const [about, onChangeAbout] = useState();
+  const [about, onChangeAbout] = useState("");
 
   let statusColor;
   if (communityStatus === "pending") {
@@ -50,7 +50,7 @@ const UserProfile = () => {
   }
 
   return (
-    <View style={styles.container} className="request-form">
+    <View style={styles.container} nativeID="request-form">
       <LinearGradient
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}
@@ -68,6 +68,16 @@ const UserProfile = () => {
             onChangeText={name => onChangeName(name)}
           />
           <View style={styles.itemContainer}>
+            <Text style={styles.profileItem}>Phone: </Text>
+            <TextInput
+              style={styles.dataInput}
+              nativeID="user-phone"
+              textContentType="telephoneNumber"
+              value={phone}
+              onChangeText={telephone => onChangeTelephone(telephone)}
+            />
+          </View>
+          <View style={styles.itemContainer}>
             <Text style={styles.profileItem}>Address: </Text>
             <TextInput
               style={styles.dataInputAddress}
@@ -77,16 +87,6 @@ const UserProfile = () => {
               maxLength={100}
               value={userAddress}
               onChangeText={address => onChangeAddress(address)}
-            />
-          </View>
-          <View style={styles.itemContainer}>
-            <Text style={styles.profileItem}>Phone: </Text>
-            <TextInput
-              style={styles.dataInput}
-              nativeID="user-phone"
-              textContentType="telephoneNumber"
-              value={phone}
-              onChangeText={telephone => onChangeTelephone(telephone)}
             />
           </View>
           <View style={styles.itemContainer}>
@@ -100,28 +100,16 @@ const UserProfile = () => {
               onChangeText={about => onChangeAbout(about)}
             />
           </View>
-          <View style={styles.itemContainer}>
-            <TouchableHighlight
-              style={styles.request}
-              onPress={() => {
-                updateProfileInformation(name, address, telephone, about, userId, dispatch);
-              }}
-            >
-              <Text id="update-profile-button" style={styles.requestButtonText}>
-                Edit profile
+          <TouchableHighlight
+            style={styles.request}
+            onPress={() => {
+              updateProfileInformation(name, address, telephone, about, userId, dispatch);
+            }}
+          >
+            <Text id="update-profile-button" style={styles.requestButtonText}>
+              Save my updates
             </Text>
-            </TouchableHighlight>
-            <TouchableHighlight
-              style={styles.request}
-              onPress={() => {
-                updateProfileInformation(name, address, telephone, about, userId, dispatch);
-              }}
-            >
-              <Text id="update-profile-button" style={styles.requestButtonText}>
-                Save my updates
-            </Text>
-            </TouchableHighlight>
-          </View>
+          </TouchableHighlight>
           <View style={styles.statusContainer}>{statusColor}</View>
         </View>
       </LinearGradient>
@@ -138,7 +126,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 30,
     margin: 10,
-    marginRight: 5,
+    marginTop: 40,
     fontWeight: "thin",
     fontFamily: "Futura-Medium",
   },
@@ -148,7 +136,7 @@ const styles = StyleSheet.create({
   },
   profile: {
     padding: 10,
-    margin: 10,
+    margin: 15,
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "black",

@@ -12,3 +12,4 @@ export const GET_REQUEST_DETAILS = "GET_REQUEST_DETAILS";
 export const LOGOUT = "LOGOUT";
 export const PROFILE_INFO = "PROFILE_INFO"
 export const SIGN_UP = "SIGN_UP"
+export const LOADING = 'LOADING'

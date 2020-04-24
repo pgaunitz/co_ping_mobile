@@ -62,17 +62,23 @@ const rootReducer = (state = initialState, action) => {
     case actionTypes.LOGOUT:
       return {
         ...initialState,
+        ...action.payload,
       };
     case actionTypes.PROFILE_INFO:
       return {
         ...state,
-        ...action.payload
-      }
+        ...action.payload,
+      };
     case actionTypes.SIGN_UP:
       return {
         ...state,
-        ...action.payload
-      }
+        ...action.payload,
+      };
+    case actionTypes.LOADING:
+      return {
+        ...state,
+        ...action.payload,
+      };
     default:
       return state;
   }

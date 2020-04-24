@@ -41,6 +41,7 @@ const ActivePongs = () => {
   return (
     <View style={styles.pong}>
       <View style={styles.statusContainer}>{statusColor}</View>
+      <Text>Your neighbours number: {myPong.ping_phone}</Text>
       <View style={styles.itemContainer}>
         <Icon name="ios-cart" type="ionicon" />
         <Text style={styles.item}>{myPong.item1}</Text>
@@ -76,8 +77,8 @@ const ActivePongs = () => {
 
 const styles = StyleSheet.create({
   pong: {
-    padding: 10,
-    margin: 10,
+    padding: 15,
+    margin: 15,
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "black",

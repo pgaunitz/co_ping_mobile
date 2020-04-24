@@ -20,7 +20,7 @@ const Requests = () => {
   return (
     <View
       style={styles.requestPage}
-      className="request-form">
+      nativeID="request-form">
       <LinearGradient
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}
