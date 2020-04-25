@@ -83,8 +83,7 @@ const TripDetails = () => {
           )}
           keyExtractor={item => item.id}
           id="request"
-        />
-        {pingId &&
+        />      
         <TouchableHighlight
           style={styles.completeButton}
           onPress={() => {
@@ -94,7 +93,7 @@ const TripDetails = () => {
           <Text style={styles.buttonText} id="complete-button">
             Complete Trip
           </Text>
-        </TouchableHighlight>}
+        </TouchableHighlight>
       </LinearGradient>
     </View>
   );
