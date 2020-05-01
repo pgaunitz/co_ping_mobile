@@ -1,11 +1,13 @@
-import JtockAuth from "j-tockauth";
-import { AUTHENTICATE, LOGOUT } from "../state/actions/actionTypes";
+// import JtockAuth from "j-tockauth";
+import Auth from 'modules/authenticationHelpers'
+import { AUTHENTICATE, LOGOUT } from "state/actions/actionTypes";
 
-const auth = new JtockAuth({
+const auth = new Auth({
   host: "https://co-ping.herokuapp.com",
 });
 
-const onLogin = async (email, password, dispatch) => {
+
+const onLogin = async (event, email, password, dispatch) => {
   try {
     event.preventDefault();
     let response = await auth.signIn(email, password);
@@ -23,8 +25,26 @@ const onLogin = async (email, password, dispatch) => {
         communityStatus: response.data.community_status,
       },
     });
+
+    // auth.signIn(email, password)
+    //   .then(response => {
+    //     dispatch({
+    //       type: AUTHENTICATE,
+    //       payload: {
+    //         authenticated: true,
+    //         userEmail: response.data.email,
+    //         userName: response.data.name,
+    //         userId: response.data.id,
+    //         loginMessage: `Welcome ${response.data.name}`,
+    //         logoutMessage: "",
+    //         showLoginForm: false,
+    //         communityId: response.data.community_id,
+    //         communityStatus: response.data.community_status,
+    //       },
+    //     });
+    //   })
   } catch (error) {
-    let errorMessage = error.response.data.errors[0];
+    let errorMessage =  error.message//error.response.data.errors[0] || "this did not fly";
     dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage } });
   }
 };
