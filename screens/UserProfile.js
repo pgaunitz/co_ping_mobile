@@ -67,8 +67,9 @@ const UserProfile = () => {
             value={userName}
             onChangeText={name => onChangeName(name)}
           />
+          <View style={styles.statusContainer}>{statusColor}</View>
           <View style={styles.itemContainer}>
-            <Text style={styles.profileItem}>Phone: </Text>
+            <Text style={styles.profileItem}>Phone #: </Text>
             <TextInput
               style={styles.dataInput}
               nativeID="user-phone"
@@ -110,7 +111,6 @@ const UserProfile = () => {
               Save my updates
             </Text>
           </TouchableHighlight>
-          <View style={styles.statusContainer}>{statusColor}</View>
         </View>
       </LinearGradient>
     </View>
@@ -126,8 +126,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 30,
     margin: 10,
-    marginTop: 40,
-    fontWeight: "300",
+    marginTop: 50,
+    fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
   itemContainer: {
@@ -144,42 +144,50 @@ const styles = StyleSheet.create({
   },
   dataInput: {
     borderColor: "grey",
-    width: 200,
+    width: 217,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
+    backgroundColor: "#f0f4f7",
+    borderRadius: 5
   },
   dataInputText: {
     borderColor: "grey",
     height: 90,
-    width: 200,
+    width: 205,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
+    backgroundColor: "#f0f4f7",
+    borderRadius: 5
   },
   dataInputAddress: {
     borderColor: "grey",
     height: 60,
-    width: 200,
+    width: 217,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
+    backgroundColor: "#f0f4f7",
+    borderRadius: 5
   },
   dataNameInput: {
     fontWeight: "bold",
     justifyContent: "center",
-    alignContent: "center",
+    alignSelf: "center",
     fontSize: 20,
-    margin: 10,
+    margin: 5,
     fontFamily: "Futura-Medium",
+    backgroundColor: "#f0f4f7",
+    borderRadius: 5
   },
   profileItem: {
     fontWeight: "bold",
     fontFamily: "Futura-Medium",
   },
   statusContainer: {
-    flex: 1,
+    // flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20,
+    marginTop: 5,
     padding: 5,
   },
   pending: {

@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { GET_TRIP_DETAILS } from "../state/actions/actionTypes"
 import { useSelector, useDispatch } from "react-redux"
 import { Icon, CheckBox } from "react-native-elements"
+import AsyncStorage from "@react-native-community/async-storage"
 import axios from "axios"
 import {
   View,
@@ -32,15 +33,17 @@ const PongToPingDetails = (
     (state) => state.costSentMessage
   )
   const dispatch = useDispatch()
+  const storage = AsyncStorage
   const [totalCost, setTotalCost] = useState()
   const [checkedOne, setCheckedOne] = useState("")
   const [checkedTwo, setCheckedTwo] = useState("")
   const [checkedThree, setCheckedThree] = useState("")
 
-  let headers = JSON.parse(
-    localStorage.getItem("J-tockAuth-Storage")
-  )
+  
   const sendCostInformation = async (event, pongId) => {
+    let headers = JSON.parse(
+      await storage.getItem("auth-storage")
+    )
     event.preventDefault()
     let response = await axios.put(
       `https://co-ping.herokuapp.com/pongs/${pongId}`,

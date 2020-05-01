@@ -29,13 +29,12 @@ const TripsList = ({ navigation }) => {
     tripsDisplay = trips;
   }
 
-  const Item = ({ store, time, name, phone, requestButton, id }) => {
+  const Item = ({ store, time, name, requestButton, id }) => {
     return (
       <View style={styles.trip}>
         <View style={styles.itemContainer}>
           <View>
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.store}>Phone: {phone}</Text>
             <Text style={styles.store}>{store}</Text>
             <Text style={styles.time}>{time}</Text>
           </View>
@@ -51,7 +50,7 @@ const TripsList = ({ navigation }) => {
               })
             }}>
             <Text
-              nativeID="trip-button"
+              id="trip-button"
               style={styles.requestButtonText}>
               {requestButton}
             </Text>
@@ -62,14 +61,14 @@ const TripsList = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container} nativeID="trip-list">
+    <View style={styles.container} className="trip-list">
       <LinearGradient
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}
         start={{ x: 0, y: 1 }}
         end={{ x: 1, y: 0 }}
       >
-        <Text nativeID="trip-message" style={styles.tripNote}>
+        <Text className="trip-message" style={styles.tripNote}>
           {tripMessage}
         </Text>
         {authenticated && (
@@ -81,17 +80,16 @@ const TripsList = ({ navigation }) => {
         )}
         <FlatList
           data={tripsDisplay}
-          renderItem={({ item, index }) => (
+          renderItem={({ item }) => (
             <Item
               id={item.id}
               name={item.user_name}
-              phone={item.phone_number}
               store={item.store}
               time={item.time}
               requestButton="Request Pong"
             />
           )}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={item => item.id}
         />
         <NewTripForm />
       </LinearGradient>
@@ -111,7 +109,7 @@ const styles = StyleSheet.create({
   },
   trip: {
     padding: 5,
-    margin: 15,
+    margin: 10,
     borderRadius: 5,
     backgroundColor: "white",
     shadowColor: "#134e5e",
@@ -123,11 +121,11 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
   },
   time: {
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: "Futura-Medium",
   },
   store: {
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: "Futura-Medium",
   },
   name: {
@@ -166,7 +164,7 @@ const styles = StyleSheet.create({
     fontFamily: "Futura-Medium",
   },
   request: {
-    height: 90,
+    height: 55,
     borderColor: "white",
     borderWidth: 2,
     borderRadius: 10,
@@ -178,23 +176,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginLeft: "auto",
-    alignSelf: "center"
   },
   requestButtonText: {
     color: "#fff",
-    fontSize: 18,
-    alignItems: "center",
-    justifyContent: "center",
-    alignContent: "center",
-    marginHorizontal: "auto",
-    fontWeight: "400",
+    fontSize: 15,
     fontFamily: "Futura-Medium",
   },
   itemContainer: {
     flexDirection: "row",
-    marginHorizontal: 15,
-    marginVertical: 10,
-    justifyContent: "center"
+    marginHorizontal: 5,
+    marginVertical: 10
   },
 })
 

@@ -29,7 +29,8 @@ const NewTripForm = () => {
     (state) => state.newTripCreatedMessage
   )
 
-  const [date, setDate] = useState('');
+   const [date, setDate] = useState('');
+   const [dateMessage, setDateMessage] = useState('');
   // const [time, setTime] = useState("")
   const [storevalue, onChangeStore] = useState("")
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -43,7 +44,7 @@ const NewTripForm = () => {
       "https://co-ping.herokuapp.com/pings",
       {
         ping: {
-          time: `${date}-${timevalue}`,
+          time: `${new Date(date)}`,
           store: storevalue,
           user_id: userId,
         },
@@ -67,7 +68,8 @@ const NewTripForm = () => {
   };
 
     const handleConfirm = (date) => {
-      console.warn("A date has been picked: ", date);
+      setDate(`${date}`);
+      setDateMessage(`You're shopping on: ${date}`);
       hideDatePicker();
     };
 
@@ -87,27 +89,16 @@ const NewTripForm = () => {
           >
             <View style={styles.modalView} id="trip-form">
               <Text style={styles.modalText}>New Shopping Trip Details</Text>
-              <TextInput
-                placeholder="YYYY-MM-DD"
-                style={styles.dateInput}
-                id="date"
-                type="date"
-                value={date}
-                onChangeText={(date) => setDate(date)}
-              />
-              {/* <TextInput
-                placeholder="hh:mm"
-                style={styles.dateInput}
-                id="time"
-                type="time"
-                value={timevalue}
-                onChangeText={(time) => onChangeText(time)}
-                onPress={showTimepicker}
-              /> */}
               <Button
-                title="Pick a date"
+                title="Set the Shopping Time"
                 style={styles.button}
                 onPress={showDatePicker}
+              />
+              <TextInput
+                // placeholder="YYYY-MM-DD"
+                style={styles.dateInput}
+                id="date"
+                value={date}
               />
               <TextInput
                 placeholder="Store"
@@ -139,14 +130,15 @@ const NewTripForm = () => {
                 {newTripCreatedMessage}
               </Text>
             </View>
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="datetime"
+              locale="en_GB"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+            />
           </Modal>
         )}
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          mode="date"
-          onConfirm={handleConfirm}
-          onCancel={hideDatePicker}
-        />
       </View>
     </>
   );
@@ -161,7 +153,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
-    marginTop: 260,
+    marginTop: 150,
     alignItems: "center",
     shadowColor: "#134e5e",
     shadowOffset: {

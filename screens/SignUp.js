@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     padding: 1,
     width: "70%",
-    marginHorizontal: "auto",
+    alignSelf: "center",
     paddingVertical: 15,
   },
   request: {
