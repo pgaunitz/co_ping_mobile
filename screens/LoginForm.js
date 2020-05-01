@@ -1,6 +1,6 @@
-import React from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { CLOSE_LOGIN_FORM } from "../state/actions/actionTypes"
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { CLOSE_LOGIN_FORM } from "../state/actions/actionTypes";
 import {
   Alert,
   Modal,
@@ -9,32 +9,32 @@ import {
   TouchableHighlight,
   TextInput,
   View,
-} from "react-native"
-import { createStackNavigator } from "@react-navigation/stack"
-import { onLogin } from "modules/authentication"
-import SignUp from "./SignUp"
+} from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { onLogin } from "modules/authentication";
+import SignUp from "./SignUp";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 const LoginForm = () => {
-  const dispatch = useDispatch()
-  const showLoginForm = useSelector((state) => state.showLoginForm)
-  const loginMessage = useSelector((state) => state.loginMessage)
-  const userId = useSelector((state) => state.userId)
-  const [email, onChangeEmail] = React.useState("")
-  const [password, onChangePassword] = React.useState("")
+  const dispatch = useDispatch();
+  const showLoginForm = useSelector((state) => state.showLoginForm);
+  const loginMessage = useSelector((state) => state.loginMessage);
+  const userId = useSelector((state) => state.userId);
+  const [email, onChangeEmail] = React.useState("");
+  const [password, onChangePassword] = React.useState("");
 
   return (
     <View>
       {showLoginForm && (
         <Modal
           style={styles.formModal}
-          fullScreen={true}
+          presentationStyle="overFullScreen"
           animationType="fade"
           transparent={true}
           visible={true}
           onRequestClose={() => {
-            Alert.alert("Modal has been closed.")
+            Alert.alert("Modal has been closed.");
           }}
         >
           <View style={styles.modalView} id="login-form">
@@ -54,16 +54,14 @@ const LoginForm = () => {
               value={password}
               onChangeText={(password) => onChangePassword(password)}
             />
-            <View style={styles.itemContainer}>
-              <TouchableHighlight
-                style={styles.button}
-                onPress={(e) => onLogin(e, email, password, dispatch)}
-              >
-                <Text id="submit-login" style={styles.buttonText}>
-                  Log in
-                </Text>
-              </TouchableHighlight>
-            </View>
+            <TouchableHighlight
+              style={styles.button}
+              onPress={(e) => onLogin(e, email, password, dispatch)}
+            >
+              <Text id="submit-login" style={styles.buttonText}>
+                Log in
+              </Text>
+            </TouchableHighlight>
             <TouchableHighlight
               style={styles.closeButton}
               onPress={() => dispatch({ type: CLOSE_LOGIN_FORM })}
@@ -77,8 +75,8 @@ const LoginForm = () => {
         </Modal>
       )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   formModal: {
@@ -88,6 +86,8 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
+    marginTop: 300,
+    marginHorizontal: 10,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -112,10 +112,11 @@ const styles = StyleSheet.create({
     fontFamily: "Futura-Medium",
   },
   loginInput: {
-    textAlign: "left",
     fontSize: 18,
-    padding: 18,
-    margin: 2,
+    paddingVertical: 10,
+    width: 250,
+    margin: 4,
+    alignItems: "flex-start",
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
@@ -134,9 +135,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10,
+    paddingVertical: 10,
     paddingHorizontal: 35,
-    marginRight: 15,
   },
   buttonText: {
     color: "white",
@@ -144,12 +144,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontFamily: "Futura-Medium",
   },
-  itemContainer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: 15,
-  },
-})
+});
 
-export default LoginForm
+export default LoginForm;

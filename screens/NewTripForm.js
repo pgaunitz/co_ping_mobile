@@ -61,7 +61,7 @@ const NewTripForm = () => {
             style={styles.formModal}
             presentationStyle="overFullScreen"
             animationType="fade"
-            transparent={false}
+            transparent={true}
             visible={true}
             onRequestClose={() => {
               Alert.alert("Modal has been closed.")

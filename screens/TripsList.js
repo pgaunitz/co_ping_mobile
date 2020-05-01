@@ -61,7 +61,7 @@ const TripsList = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container} className="trip-list">
+    <View style={styles.container} className="trip-list">
       <LinearGradient
         colors={["#71b280", "#134e5e"]}
         style={{ flex: 1 }}
@@ -93,7 +93,7 @@ const TripsList = ({ navigation }) => {
         />
         <NewTripForm />
       </LinearGradient>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#71B280",
     margin: 5,
-    marginTop: 10,
+    marginTop: 50,
     width: "80%",
     justifyContent: "center",
     alignItems: "center",
