@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
   },
   costInput: {
     width: 90,
-    fontWeight: "thin",
+    fontWeight: "300",
     fontFamily: "Futura-Medium",
   },
   sendButton: {

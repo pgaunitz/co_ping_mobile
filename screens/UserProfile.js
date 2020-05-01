@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     margin: 10,
     marginTop: 40,
-    fontWeight: "thin",
+    fontWeight: "300",
     fontFamily: "Futura-Medium",
   },
   itemContainer: {

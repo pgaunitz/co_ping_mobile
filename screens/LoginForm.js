@@ -61,7 +61,7 @@ const LoginForm = ({ navigation }) => {
             <TouchableHighlight
               style={styles.button}
               onPress={(e) => {
-                onLogin(email, password, dispatch);
+                onLogin(e, email, password, dispatch);
                 dispatch({ type: LOADING, payload: { loading: "true" } });
               }}
             >

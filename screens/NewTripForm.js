@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {
   Alert,
   Modal,
@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   TextInput,
   View,
+  Button
 } from "react-native"
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
@@ -15,6 +16,7 @@ import {
   CLOSE_NEW_TRIP_FORM,
 } from "state/actions/actionTypes"
 import AsyncStorage from "@react-native-community/async-storage"
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const NewTripForm = () => {
   const storage = AsyncStorage
@@ -27,8 +29,12 @@ const NewTripForm = () => {
     (state) => state.newTripCreatedMessage
   )
 
-  const [timevalue, onChangeText] = React.useState("")
-  const [storevalue, onChangeStore] = React.useState("")
+  const [date, setDate] = useState(1598051730000);
+  const [time, setTime] = useState("")
+  const [storevalue, onChangeStore] = useState("")
+  const [show, setShow] = useState(false);
+  const [mode, setMode] = useState("date");
+
   const createNewTrip = async (e) => {
     let headers = JSON.parse(
       await storage.getItem("auth-storage")
@@ -38,7 +44,7 @@ const NewTripForm = () => {
       "https://co-ping.herokuapp.com/pings",
       {
         ping: {
-          time: timevalue,
+          time: `${datevalue}-${timevalue}`,
           store: storevalue,
           user_id: userId,
         },
@@ -52,6 +58,24 @@ const NewTripForm = () => {
       },
     })
   }
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
+
+  const showTimepicker = () => {
+    showMode("time");
+  };
 
   return (
     <>
@@ -64,62 +88,80 @@ const NewTripForm = () => {
             transparent={true}
             visible={true}
             onRequestClose={() => {
-              Alert.alert("Modal has been closed.")
-            }}>
+              Alert.alert("Modal has been closed.");
+            }}
+          >
             <View style={styles.modalView} id="trip-form">
-              <Text style={styles.modalText}>
-                New Shopping Trip Details
-              </Text>
+              <Text style={styles.modalText}>New Shopping Trip Details</Text>
+              {/* <TextInput
+                placeholder="YYYY-MM-DD"
+                style={styles.dateInput}
+                id="date"
+                type="date"
+                value={datevalue}
+                onChangeText={(date) => onChangeDate(date)}
+                onPress={showDatepicker}
+              />
               <TextInput
-                placeholder="Date and Time"
+                placeholder="hh:mm"
                 style={styles.dateInput}
                 id="time"
                 type="time"
                 value={timevalue}
                 onChangeText={(time) => onChangeText(time)}
+                onPress={showTimepicker}
+              /> */}
+              <Button
+                title="Pick a date"
+                style={styles.button}
+                onPress={showDatepicker}
               />
               <TextInput
                 placeholder="Store"
                 style={styles.storeInput}
                 id="store"
                 value={storevalue}
-                onChangeText={(store) =>
-                  onChangeStore(store)
-                }
+                onChangeText={(store) => onChangeStore(store)}
               />
+
               <TouchableHighlight
                 style={styles.button}
                 onPress={(e) => {
-                  createNewTrip(e)
-                }}>
-                <Text
-                  id="create-trip-button"
-                  style={styles.buttonText}>
+                  createNewTrip(e);
+                }}
+              >
+                <Text id="create-trip-button" style={styles.buttonText}>
                   Create
                 </Text>
               </TouchableHighlight>
               <TouchableHighlight
                 style={styles.button}
-                onPress={() =>
-                  dispatch({ type: CLOSE_NEW_TRIP_FORM })
-                }>
-                <Text
-                  id="close-trip-form"
-                  style={styles.buttonText}>
+                onPress={() => dispatch({ type: CLOSE_NEW_TRIP_FORM })}
+              >
+                <Text id="close-trip-form" style={styles.buttonText}>
                   Close
                 </Text>
               </TouchableHighlight>
-              <Text
-                id="new-trip-message"
-                style={styles.modelText}>
+              <Text id="new-trip-message" style={styles.modelText}>
                 {newTripCreatedMessage}
               </Text>
             </View>
           </Modal>
         )}
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            // timeZoneOffsetInMinutes={0}
+            value={date}
+            mode={mode}
+            // is24Hour={true}
+            display="default"
+            onChange={(date) => setDate(date)}
+          />
+        )}
       </View>
     </>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -131,6 +173,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
+    marginTop: 260,
     alignItems: "center",
     shadowColor: "#134e5e",
     shadowOffset: {
@@ -142,7 +185,7 @@ const styles = StyleSheet.create({
   },
   shadowOpacity: 0.25,
   shadowRadius: 3.84,
-  elevation: 5,
+  elevation: 50,
   textStyle: {
     color: "white",
     fontWeight: "bold",
@@ -169,7 +212,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 18,
     margin: 2,
-    fontWeight: "normal",
+    fontWeight: "300",
     fontFamily: "Futura-Medium",
   },
   button: {
@@ -179,6 +222,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 10,
+    width: 90,
   },
   buttonText: {
     color: "#fff",
@@ -186,6 +230,10 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontFamily: "Futura-Medium",
   },
-})
+  buttonContainer: {
+    flex: 1,
+    flexDirection: "row",
+  },
+});
 
 export default NewTripForm
