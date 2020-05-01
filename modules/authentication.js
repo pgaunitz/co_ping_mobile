@@ -9,7 +9,7 @@ const auth = new Auth({
 
 const onLogin = async (event, email, password, dispatch) => {
   try {
-    event.preventDefault();
+    event.persist();
     let response = await auth.signIn(email, password);
     dispatch({
       type: AUTHENTICATE,

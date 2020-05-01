@@ -80,7 +80,7 @@ const TripsList = ({ navigation }) => {
         )}
         <FlatList
           data={tripsDisplay}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <Item
               id={item.id}
               name={item.user_name}
@@ -89,7 +89,7 @@ const TripsList = ({ navigation }) => {
               requestButton="Request Pong"
             />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index.toString()}
         />
         <NewTripForm />
       </LinearGradient>
