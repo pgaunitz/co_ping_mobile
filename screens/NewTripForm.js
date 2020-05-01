@@ -16,7 +16,7 @@ import {
   CLOSE_NEW_TRIP_FORM,
 } from "state/actions/actionTypes"
 import AsyncStorage from "@react-native-community/async-storage"
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const NewTripForm = () => {
   const storage = AsyncStorage
@@ -29,11 +29,10 @@ const NewTripForm = () => {
     (state) => state.newTripCreatedMessage
   )
 
-  const [date, setDate] = useState(1598051730000);
-  const [time, setTime] = useState("")
+  const [date, setDate] = useState('');
+  // const [time, setTime] = useState("")
   const [storevalue, onChangeStore] = useState("")
-  const [show, setShow] = useState(false);
-  const [mode, setMode] = useState("date");
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const createNewTrip = async (e) => {
     let headers = JSON.parse(
@@ -44,7 +43,7 @@ const NewTripForm = () => {
       "https://co-ping.herokuapp.com/pings",
       {
         ping: {
-          time: `${datevalue}-${timevalue}`,
+          time: `${date}-${timevalue}`,
           store: storevalue,
           user_id: userId,
         },
@@ -58,24 +57,19 @@ const NewTripForm = () => {
       },
     })
   }
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
-    setDate(currentDate);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
   };
 
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
   };
 
-  const showDatepicker = () => {
-    showMode("date");
-  };
-
-  const showTimepicker = () => {
-    showMode("time");
-  };
+    const handleConfirm = (date) => {
+      console.warn("A date has been picked: ", date);
+      hideDatePicker();
+    };
 
   return (
     <>
@@ -93,16 +87,15 @@ const NewTripForm = () => {
           >
             <View style={styles.modalView} id="trip-form">
               <Text style={styles.modalText}>New Shopping Trip Details</Text>
-              {/* <TextInput
+              <TextInput
                 placeholder="YYYY-MM-DD"
                 style={styles.dateInput}
                 id="date"
                 type="date"
-                value={datevalue}
-                onChangeText={(date) => onChangeDate(date)}
-                onPress={showDatepicker}
+                value={date}
+                onChangeText={(date) => setDate(date)}
               />
-              <TextInput
+              {/* <TextInput
                 placeholder="hh:mm"
                 style={styles.dateInput}
                 id="time"
@@ -114,7 +107,7 @@ const NewTripForm = () => {
               <Button
                 title="Pick a date"
                 style={styles.button}
-                onPress={showDatepicker}
+                onPress={showDatePicker}
               />
               <TextInput
                 placeholder="Store"
@@ -148,17 +141,12 @@ const NewTripForm = () => {
             </View>
           </Modal>
         )}
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            // timeZoneOffsetInMinutes={0}
-            value={date}
-            mode={mode}
-            // is24Hour={true}
-            display="default"
-            onChange={(date) => setDate(date)}
-          />
-        )}
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
       </View>
     </>
   );
