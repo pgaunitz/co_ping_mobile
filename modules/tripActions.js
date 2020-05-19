@@ -42,6 +42,7 @@ const getTripInformation = async (userId, dispatch) => {
     dispatch({
       type: GET_TRIP_DETAILS,
       payload: {
+        emptyPingId: pingResponse.data.ping_id,
         noPongsMessage: pingResponse.data.message
       }
     });

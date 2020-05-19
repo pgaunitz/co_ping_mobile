@@ -47,11 +47,11 @@ const ActivePongs = () => {
         <Text style={styles.item}>{myPong.item1}</Text>
       </View>
       <View style={styles.itemContainer}>
-        <Icon name="ios-cart" type="ionicon" />
+        {myPong.item2 !== '' && <Icon name="ios-cart" type="ionicon" />}
         <Text style={styles.item}>{myPong.item2}</Text>
       </View>
       <View style={styles.itemContainer}>
-        <Icon name="ios-cart" type="ionicon" />
+        {myPong.item3 !== '' && <Icon name="ios-cart" type="ionicon" />}
         <Text style={styles.item}>{myPong.item3}</Text>
       </View>
       <Receipt />
@@ -105,21 +105,19 @@ const styles = StyleSheet.create({
   },
   cancelButton: {
     height: 40,
-    borderColor: "white",
-    borderWidth: 2,
     borderRadius: 10,
     backgroundColor: "#B27183",
     marginTop: 15,
     margin: 5,
-    paddingTop: 8,
-    paddingBottom: 8,
+    paddingTop: 10,
+    paddingBottom: 10,
     width: "50%",
     justifyContent: "center",
     alignItems: "center",
   },
   requestButtonText: {
-    color: "#fff",
-    fontSize: 14,
+    color: "white",
+    fontSize: 15,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },

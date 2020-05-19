@@ -39,7 +39,7 @@ const NewTripForm = () => {
     let headers = JSON.parse(
       await storage.getItem("auth-storage")
     )
-    e.preventDefault()
+    e.persist()
     let response = await axios.post(
       "https://co-ping.herokuapp.com/pings",
       {

@@ -35,16 +35,16 @@ const PongToPingDetails = (
   const dispatch = useDispatch()
   const storage = AsyncStorage
   const [totalCost, setTotalCost] = useState()
-  const [checkedOne, setCheckedOne] = useState("")
-  const [checkedTwo, setCheckedTwo] = useState("")
-  const [checkedThree, setCheckedThree] = useState("")
+  const [checkedOne, setCheckedOne] = useState(false)
+  const [checkedTwo, setCheckedTwo] = useState(false)
+  const [checkedThree, setCheckedThree] = useState(false)
 
   
   const sendCostInformation = async (event, pongId) => {
     let headers = JSON.parse(
       await storage.getItem("auth-storage")
     )
-    event.preventDefault()
+    event.persist()
     let response = await axios.put(
       `https://co-ping.herokuapp.com/pongs/${pongId}`,
       {
@@ -76,39 +76,43 @@ const PongToPingDetails = (
             <Text style={styles.item}>{itemOne}</Text>
           </View>
           <View style={styles.itemContainer}>
-            <Icon name="ios-cart" type="ionicon" />
+            {itemTwo !== "" && <Icon name="ios-cart" type="ionicon" />}
             <Text style={styles.item}>{itemTwo}</Text>
           </View>
           <View style={styles.itemContainer}>
-            <Icon name="ios-cart" type="ionicon" />
+            {itemThree !== "" && <Icon name="ios-cart" type="ionicon" />}
             <Text style={styles.item}>{itemThree}</Text>
           </View>
           <View style={styles.buttonContainer}>
             <TouchableHighlight
               style={styles.acceptButton}
               onPress={() => {
-                acceptRequest(pingId, pongId, dispatch)
-              }}>
+                acceptRequest(pingId, pongId, dispatch);
+              }}
+            >
               <Text
                 nativeID={`accept-button-${pongId}`}
-                style={styles.requestButtonText}>
+                style={styles.requestButtonText}
+              >
                 {acceptButton}
               </Text>
             </TouchableHighlight>
             <TouchableHighlight
               style={styles.rejectButton}
               onPress={() => {
-                rejectRequest(pingId, pongId, dispatch)
-              }}>
+                rejectRequest(pingId, pongId, dispatch);
+              }}
+            >
               <Text
                 nativeID={`reject-button-${pongId}`}
-                style={styles.rejectButtonText}>
+                style={styles.rejectButtonText}
+              >
                 {rejectButton}
               </Text>
             </TouchableHighlight>
           </View>
         </View>
-      )
+      );
     case "accepted":
       return (
         <View style={styles.pong}>
@@ -118,7 +122,7 @@ const PongToPingDetails = (
             style={styles.item}
             title={itemOne}
             onPress={() => {
-              setCheckedOne(checkedOne === "checked" ? "" : "checked")
+              setCheckedOne(checkedOne === true ? false : true)
             }}
             checked={checkedOne}
           />
@@ -126,7 +130,7 @@ const PongToPingDetails = (
             <CheckBox style={styles.item} 
             title={itemTwo} 
             onPress={() => {
-              setCheckedTwo(checkedTwo === "checked" ? "" : "checked")
+              setCheckedTwo(checkedTwo === true ? false : true)
             }}
             checked={checkedTwo}
             />
@@ -136,7 +140,7 @@ const PongToPingDetails = (
               style={styles.item}
               title={itemThree}
               onPress={() => {
-                setCheckedThree(checkedThree === "checked" ? "" : "checked")
+                setCheckedThree(checkedThree === true ? false : true)
               }}
               checked={checkedThree}
             />
@@ -219,37 +223,32 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   acceptButton: {
-    height: 30,
-    borderColor: "white",
-    borderWidth: 2,
+    height: 40,
     borderRadius: 10,
     backgroundColor: "#71B280",
     marginTop: 15,
     margin: 5,
-    paddingTop: 16,
-    paddingBottom: 18,
-    width: "40%",
+    paddingTop: 10,
+    paddingBottom: 10,
+    width: "50%",
     justifyContent: "center",
     alignItems: "center",
   },
   rejectButton: {
-    height: 30,
-    borderColor: "white",
-    borderWidth: 2,
+    height: 40,
     borderRadius: 10,
     backgroundColor: "#B27183",
     marginTop: 15,
     margin: 5,
-    paddingTop: 16,
-    paddingBottom: 18,
+    paddingTop: 10,
+    paddingBottom: 10,
     width: "50%",
     justifyContent: "center",
     alignItems: "center",
   },
   requestButtonText: {
     color: "white",
-    fontSize: 12,
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
@@ -258,20 +257,18 @@ const styles = StyleSheet.create({
     margin: 10,
     textAlign: "center",
     fontSize: 18,
-    fontSize: 18,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
   buttonText: {
-    color: "#fff",
-    fontSize: 18,
+    color: "white",
     fontSize: 18,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
   costContainer: {
     flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   costInput: {
     width: 90,
@@ -287,12 +284,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
-    marginTop: 5
+    marginTop: 5,
   },
   rejectButtonText: {
     color: "#fff",
-    fontSize: 12,
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
@@ -300,6 +296,6 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
-})
+});
 
 export { PongToPingDetails }

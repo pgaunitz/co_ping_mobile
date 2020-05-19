@@ -22,6 +22,7 @@ const TripDetails = () => {
 
   const myPongs = useSelector(state => state.myPongs);
   const pingId = useSelector(state => state.userTrip.id);
+  const emptyPingId = useSelector((state) => state.emptyPingId);
   const completeTripMessage = useSelector(state => state.completeTripMessage);
 
   const Item = ({
@@ -68,7 +69,7 @@ const TripDetails = () => {
           )}
         <FlatList
           data={myPongs}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <Item
               pongId={item.id}
               name={item.user_name}
@@ -81,13 +82,13 @@ const TripDetails = () => {
               rejectButton="Sorry, not this time"
             />
           )}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index.toString()}
           id="request"
         />      
         <TouchableHighlight
           style={styles.completeButton}
           onPress={() => {
-            completeTrip(pingId, dispatch);
+            completeTrip((pingId || emptyPingId), dispatch);
           }}
         >
           <Text style={styles.buttonText} id="complete-button">
@@ -144,8 +145,7 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 10,
     backgroundColor: "#B27183",
-    marginBottom: 30,
-    marginHorizontal: 15,
+    margin: 30,
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#134e5e",

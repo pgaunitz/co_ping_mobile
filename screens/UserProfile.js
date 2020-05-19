@@ -69,7 +69,7 @@ const UserProfile = () => {
           />
           <View style={styles.statusContainer}>{statusColor}</View>
           <View style={styles.itemContainer}>
-            <Text style={styles.profileItem}>Phone #: </Text>
+            <Text style={styles.profileItem}>Phone: </Text>
             <TextInput
               style={styles.dataInput}
               nativeID="user-phone"
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
   dataInput: {
     borderColor: "grey",
-    width: 217,
+    width: 231,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
     backgroundColor: "#f0f4f7",
