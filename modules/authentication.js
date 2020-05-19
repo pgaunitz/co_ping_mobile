@@ -26,25 +26,8 @@ const onLogin = async (event, email, password, dispatch) => {
       },
     });
 
-    // auth.signIn(email, password)
-    //   .then(response => {
-    //     dispatch({
-    //       type: AUTHENTICATE,
-    //       payload: {
-    //         authenticated: true,
-    //         userEmail: response.data.email,
-    //         userName: response.data.name,
-    //         userId: response.data.id,
-    //         loginMessage: `Welcome ${response.data.name}`,
-    //         logoutMessage: "",
-    //         showLoginForm: false,
-    //         communityId: response.data.community_id,
-    //         communityStatus: response.data.community_status,
-    //       },
-    //     });
-    //   })
   } catch (error) {
-    let errorMessage =  error.message//error.response.data.errors[0] || "this did not fly";
+    let errorMessage =  error.message
     dispatch({ type: AUTHENTICATE, payload: { loginMessage: errorMessage } });
   }
 };

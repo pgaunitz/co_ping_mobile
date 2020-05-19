@@ -9,12 +9,9 @@ import {
   TouchableHighlight,
   TextInput,
   View,
-  ActivityIndicator,
 } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { onLogin } from "../modules/authentication";
-import SignUp from "./SignUp";
 import LoadingLittleGuy from "./LoadingLittleGuy";
 
 const Stack = createStackNavigator();
