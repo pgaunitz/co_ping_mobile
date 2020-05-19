@@ -1,10 +1,13 @@
 import axios from "axios";
-import JtockAuth from "j-tockauth";
-import { SIGN_UP, AUTHENTICATE } from "../state/actions/actionTypes";
+import Auth from 'modules/authenticationHelpers'
+import AsyncStorage from "@react-native-community/async-storage"
 
-const auth = new JtockAuth({
+import { SIGN_UP, AUTHENTICATE } from "state/actions/actionTypes";
+
+const auth = new Auth({
   host: "https://co-ping.herokuapp.com",
 });
+const storage = AsyncStorage
 
 const sendCommunityCode = async (code, dispatch) => {
   let response = await axios.get("https://co-ping.herokuapp.com/communities/", {
@@ -52,7 +55,8 @@ const sendSignUp = async (
         name: name,
       },
     );
-    localStorage.setItem("J-tockAuth-Storage", JSON.stringify(response.headers));
+  
+    await storage.setItem("auth-storage", JSON.stringify(response.headers));
     dispatch({
       type: AUTHENTICATE,
       payload: {

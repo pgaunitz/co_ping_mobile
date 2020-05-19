@@ -1,13 +1,17 @@
 import axios from "axios";
+import AsyncStorage from '@react-native-community/async-storage';
+
 import {
   GET_TRIP_LIST,
   GET_TRIP_DETAILS,
   PONG_STATUS,
   GET_REQUEST_DETAILS
-} from "../state/actions/actionTypes";
+} from "state/actions/actionTypes";
+
+const storage = AsyncStorage
 
 const fetchTrips = async dispatch => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
   let response = await axios.get("https://co-ping.herokuapp.com/pings", {
     headers: headers
   });
@@ -18,7 +22,7 @@ const fetchTrips = async dispatch => {
 };
 
 const getTripInformation = async (userId, dispatch) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
   let pingResponse = await axios.get(
     `https://co-ping.herokuapp.com/pings/${userId}`,
     {
@@ -38,6 +42,7 @@ const getTripInformation = async (userId, dispatch) => {
     dispatch({
       type: GET_TRIP_DETAILS,
       payload: {
+        emptyPingId: pingResponse.data.ping_id,
         noPongsMessage: pingResponse.data.message
       }
     });
@@ -45,7 +50,7 @@ const getTripInformation = async (userId, dispatch) => {
 };
 
 const acceptRequest = async (pingId, pongId, dispatch) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
   let response = await axios.put(
     `https://co-ping.herokuapp.com/pongs/${pongId}`,
     {
@@ -67,7 +72,7 @@ const acceptRequest = async (pingId, pongId, dispatch) => {
 };
 
 const rejectRequest = async (pingId, pongId, dispatch) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
   let response = await axios.put(
     `https://co-ping.herokuapp.com/pongs/${pongId}`,
     {
@@ -89,7 +94,7 @@ const rejectRequest = async (pingId, pongId, dispatch) => {
 };
 
 const getRequestInformation = async (userId, dispatch) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
   let pongResponse = await axios.get(
     `https://co-ping.herokuapp.com/pongs/${userId}`,
     {
@@ -115,7 +120,7 @@ const getRequestInformation = async (userId, dispatch) => {
 };
 
 const cancelRequest = async (pongId, dispatch) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
   let response = await axios.delete(
     `https://co-ping.herokuapp.com/pongs/${pongId}`,
     {
@@ -132,13 +137,13 @@ const cancelRequest = async (pongId, dispatch) => {
 };
 
 const closeTrip = async (pingId, userId, dispatch) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
   let response = await axios.put(
     `https://co-ping.herokuapp.com/pings/${pingId}`,
     {
       ping: {
         active: false,
-        user_id: userId 
+        user_id: userId
       }
     },
     {
@@ -154,12 +159,12 @@ const closeTrip = async (pingId, userId, dispatch) => {
 };
 
 const completeTrip = async (pingId, dispatch) => {
-  let headers = JSON.parse(localStorage.getItem("J-tockAuth-Storage"));
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
   let response = await axios.put(
     `https://co-ping.herokuapp.com/pings/${pingId}`,
     {
       ping: {
-        completed: true  
+        completed: true
       }
     },
     {
