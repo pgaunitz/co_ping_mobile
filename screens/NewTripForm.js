@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   Alert,
   Modal,
@@ -7,39 +7,32 @@ import {
   TouchableHighlight,
   TextInput,
   View,
-  Button
-} from "react-native"
-import { useSelector, useDispatch } from "react-redux"
-import axios from "axios"
-import {
-  NEW_TRIP_FORM,
-  CLOSE_NEW_TRIP_FORM,
-} from "state/actions/actionTypes"
-import AsyncStorage from "@react-native-community/async-storage"
+  Button,
+} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { NEW_TRIP_FORM, CLOSE_NEW_TRIP_FORM } from "state/actions/actionTypes";
+import AsyncStorage from "@react-native-community/async-storage";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
+
 const NewTripForm = () => {
-  const storage = AsyncStorage
-  const dispatch = useDispatch()
-  const showTripForm = useSelector(
-    (state) => state.showTripForm
-  )
-  const userId = useSelector((state) => state.userId)
+  const storage = AsyncStorage;
+  const dispatch = useDispatch();
+  const showTripForm = useSelector((state) => state.showTripForm);
+  const userId = useSelector((state) => state.userId);
   const newTripCreatedMessage = useSelector(
     (state) => state.newTripCreatedMessage
-  )
+  );
 
-   const [date, setDate] = useState('');
-   const [dateMessage, setDateMessage] = useState('');
-  // const [time, setTime] = useState("")
-  const [storevalue, onChangeStore] = useState("")
+  const [date, setDate] = useState("");
+  const [dateMessage, setDateMessage] = useState("");
+  const [storevalue, onChangeStore] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
   const createNewTrip = async (e) => {
-    let headers = JSON.parse(
-      await storage.getItem("auth-storage")
-    )
-    e.persist()
+    let headers = JSON.parse(await storage.getItem("auth-storage"));
+    e.persist();
     let response = await axios.post(
       "https://co-ping.herokuapp.com/pings",
       {
@@ -50,14 +43,14 @@ const NewTripForm = () => {
         },
       },
       { headers: headers }
-    )
+    );
     dispatch({
       type: NEW_TRIP_FORM,
       payload: {
         newTripCreatedMessage: response.data.message,
       },
-    })
-  }
+    });
+  };
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -67,11 +60,11 @@ const NewTripForm = () => {
     setDatePickerVisibility(false);
   };
 
-    const handleConfirm = (date) => {
-      setDate(`${date}`);
-      setDateMessage(`You're shopping on: ${date}`);
-      hideDatePicker();
-    };
+  const handleConfirm = (date) => {
+    setDate(`${date}`);
+    setDateMessage(`You're shopping on: ${date}`);
+    hideDatePicker();
+  };
 
   return (
     <>
@@ -88,18 +81,7 @@ const NewTripForm = () => {
             }}
           >
             <View style={styles.modalView} id="trip-form">
-              <Text style={styles.modalText}>New Shopping Trip Details</Text>
-              <Button
-                title="Set the Shopping Time"
-                style={styles.button}
-                onPress={showDatePicker}
-              />
-              <TextInput
-                // placeholder="YYYY-MM-DD"
-                style={styles.dateInput}
-                id="date"
-                value={date}
-              />
+              <Text style={styles.modalText}>Shopping Trip Details</Text>
               <TextInput
                 placeholder="Store"
                 style={styles.storeInput}
@@ -107,7 +89,17 @@ const NewTripForm = () => {
                 value={storevalue}
                 onChangeText={(store) => onChangeStore(store)}
               />
-
+              <Button
+                title="Set the Shopping Time"
+                style={styles.button}
+                onPress={showDatePicker}
+              />
+              <TextInput
+                style={styles.dateInput}
+                id="date"
+                value={date}
+              />
+              <View style={styles.buttonContainer}>
               <TouchableHighlight
                 style={styles.button}
                 onPress={(e) => {
@@ -126,6 +118,7 @@ const NewTripForm = () => {
                   Close
                 </Text>
               </TouchableHighlight>
+              </View>
               <Text id="new-trip-message" style={styles.modelText}>
                 {newTripCreatedMessage}
               </Text>
@@ -142,7 +135,7 @@ const NewTripForm = () => {
       </View>
     </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   formModal: {
@@ -152,8 +145,8 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 35,
-    marginTop: 150,
+    height: "40%",
+    marginTop: "50%",
     alignItems: "center",
     shadowColor: "#134e5e",
     shadowOffset: {
@@ -173,24 +166,26 @@ const styles = StyleSheet.create({
     fontFamily: "Futura-Medium",
   },
   modalText: {
-    marginBottom: 15,
+    marginBottom: 25,
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 25,
+    paddingTop: 35,
+    paddingHorizontal: 35,
     fontFamily: "Futura-Medium",
   },
   dateInput: {
     textAlign: "left",
     fontSize: 18,
-    padding: 18,
-    margin: 2,
+    paddingHorizontal: 25,
+    margin: 10,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
   storeInput: {
     textAlign: "left",
     fontSize: 18,
-    padding: 18,
+    padding: 15,
     margin: 2,
     fontWeight: "300",
     fontFamily: "Futura-Medium",
@@ -198,11 +193,13 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 5,
     backgroundColor: "#71B280",
-    margin: 5,
+    marginHorizontal: 10,
+    marginVertical: 15,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10,
+    padding: 8,
     width: 90,
+    height: 40
   },
   buttonText: {
     color: "#fff",
@@ -213,7 +210,8 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     flexDirection: "row",
+    marginTop: 40
   },
 });
 
-export default NewTripForm
+export default NewTripForm;

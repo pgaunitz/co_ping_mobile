@@ -91,7 +91,7 @@ const UserProfile = () => {
             />
           </View>
           <View style={styles.itemContainer}>
-            <Text style={styles.profileItem}>About Me: </Text>
+            <Text style={styles.profileItem}>About: </Text>
             <TextInput
               style={styles.dataInputText}
               nativeID="user-about"
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
   dataInput: {
     borderColor: "grey",
-    width: 231,
+    width: 265,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
     backgroundColor: "#f0f4f7",
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
   dataInputText: {
     borderColor: "grey",
     height: 90,
-    width: 205,
+    width: 266,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
     backgroundColor: "#f0f4f7",
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   dataInputAddress: {
     borderColor: "grey",
     height: 60,
-    width: 217,
+    width: 250,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
     backgroundColor: "#f0f4f7",

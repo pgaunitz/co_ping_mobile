@@ -1,6 +1,5 @@
 import axios from "axios";
 import AsyncStorage from '@react-native-community/async-storage';
-
 import {
   GET_TRIP_LIST,
   GET_TRIP_DETAILS,
