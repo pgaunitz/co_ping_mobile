@@ -1,6 +1,6 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
-import { GET_TRIP_LIST, GET_TRIP_DETAILS } from "state/actions/actionTypes";
+import { GET_TRIP_LIST, GET_TRIP_DETAILS, NEW_TRIP_FORM } from "state/actions/actionTypes";
 
 const storage = AsyncStorage;
 
@@ -41,6 +41,28 @@ const getTripInformation = async (userId, dispatch) => {
       },
     });
   }
+};
+
+const createNewTrip = async (e, userId, storevalue, date) => {
+  let headers = JSON.parse(await storage.getItem("auth-storage"));
+  e.persist();
+  let response = await axios.post(
+    "https://co-ping.herokuapp.com/pings",
+    {
+      ping: {
+        time: `${new Date(date)}`,
+        store: storevalue,
+        user_id: userId,
+      },
+    },
+    { headers: headers }
+  );
+  dispatch({
+    type: NEW_TRIP_FORM,
+    payload: {
+      newTripCreatedMessage: response.data.message,
+    },
+  });
 };
 
 const closeTrip = async (pingId, userId, dispatch) => {
@@ -86,4 +108,4 @@ const completeTrip = async (pingId, dispatch) => {
   });
 };
 
-export { fetchTrips, getTripInformation, closeTrip, completeTrip };
+export { fetchTrips, getTripInformation, createNewTrip, closeTrip, completeTrip };

@@ -10,47 +10,22 @@ import {
   Button,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
-import { NEW_TRIP_FORM, CLOSE_NEW_TRIP_FORM } from "state/actions/actionTypes";
-import AsyncStorage from "@react-native-community/async-storage";
+import { CLOSE_NEW_TRIP_FORM } from "state/actions/actionTypes";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { createNewTrip } from 'modules/tripActions'
 
 
 const NewTripForm = () => {
-  const storage = AsyncStorage;
   const dispatch = useDispatch();
-  const showTripForm = useSelector((state) => state.showTripForm);
-  const userId = useSelector((state) => state.userId);
+  const showTripForm = useSelector((state) => state.showTripForm)
   const newTripCreatedMessage = useSelector(
     (state) => state.newTripCreatedMessage
   );
-
+  const userId = useSelector((state) => state.userId);
   const [date, setDate] = useState("");
   const [dateMessage, setDateMessage] = useState("");
   const [storevalue, onChangeStore] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-  const createNewTrip = async (e) => {
-    let headers = JSON.parse(await storage.getItem("auth-storage"));
-    e.persist();
-    let response = await axios.post(
-      "https://co-ping.herokuapp.com/pings",
-      {
-        ping: {
-          time: `${new Date(date)}`,
-          store: storevalue,
-          user_id: userId,
-        },
-      },
-      { headers: headers }
-    );
-    dispatch({
-      type: NEW_TRIP_FORM,
-      payload: {
-        newTripCreatedMessage: response.data.message,
-      },
-    });
-  };
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -103,7 +78,7 @@ const NewTripForm = () => {
               <TouchableHighlight
                 style={styles.button}
                 onPress={(e) => {
-                  createNewTrip(e);
+                  createNewTrip(e, userId, storevalue, date);
                 }}
               >
                 <Text id="create-trip-button" style={styles.buttonText}>
@@ -119,7 +94,7 @@ const NewTripForm = () => {
                 </Text>
               </TouchableHighlight>
               </View>
-              <Text id="new-trip-message" style={styles.modelText}>
+              <Text id="new-trip-message" style={styles.messageText}>
                 {newTripCreatedMessage}
               </Text>
             </View>

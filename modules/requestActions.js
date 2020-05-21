@@ -14,9 +14,7 @@ const acceptRequest = async (pingId, pongId, dispatch) => {
         status: "accepted",
       },
     },
-    {
-      headers: headers,
-    }
+    { headers: headers }
   );
   dispatch({
     type: PONG_STATUS,
@@ -36,9 +34,7 @@ const rejectRequest = async (pingId, pongId, dispatch) => {
         status: "rejected",
       },
     },
-    {
-      headers: headers,
-    }
+    { headers: headers }
   );
   dispatch({
     type: PONG_STATUS,
