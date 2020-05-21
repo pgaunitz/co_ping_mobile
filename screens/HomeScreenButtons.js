@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { TouchableHighlight, StyleSheet, Text } from "react-native";
 import { SHOW_LOGIN_FORM, SIGN_UP, AUTHENTICATE } from "../state/actions/actionTypes";
 import { useNavigation } from "@react-navigation/native";
-import { fetchTrips,  getRequestInformation } from "../modules/tripActions";
+import { fetchTrips } from "../modules/tripActions";
+import { getRequestInformation } from '../modules/requestActions'
 import { getProfileInformation } from "../modules/userAction";
 
 const LogoutButton = () => {

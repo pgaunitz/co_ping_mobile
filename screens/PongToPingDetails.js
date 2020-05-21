@@ -14,7 +14,7 @@ import {
 import {
   acceptRequest,
   rejectRequest,
-} from "modules/tripActions"
+} from "modules/requestActions"
 
 const PongToPingDetails = (
   pongId,
