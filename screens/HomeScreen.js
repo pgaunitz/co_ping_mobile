@@ -9,13 +9,12 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Logo from "../assets/images/co_ping_Logo2.png";
-import { AUTHENTICATE, SIGN_UP } from "../state/actions/actionTypes";
+import { AUTHENTICATE } from "../state/actions/actionTypes";
 import { fetchTrips, getRequestInformation } from "../modules/tripActions";
-// import { onLogout } from "../modules/authentication";
 import { getProfileInformation } from "../modules/userAction";
 import LoginForm from "./LoginForm";
 // import Background from './Background';
-import { LogoutButton, LoginButton } from "./Buttons";
+import { LogoutButton, LoginButton, SignUpButton } from "./Buttons";
 
 const HomeScreen = ({ navigation }) => {
   const authenticated = useSelector((state) => state.authenticated);
@@ -41,22 +40,7 @@ const HomeScreen = ({ navigation }) => {
         {!authenticated && (
           <View style={styles.authContainer}>
             <LoginButton />
-            <TouchableHighlight
-              style={styles.authButton}
-              onPress={() => {
-                navigation.navigate("Sign up", {
-                  name: "Sign up",
-                });
-                dispatch({
-                  type: SIGN_UP,
-                  payload: { communityId: undefined },
-                });
-              }}
-            >
-              <Text id="sign-up-button" style={styles.buttonText}>
-                Sign up
-              </Text>
-            </TouchableHighlight>
+            <SignUpButton/>
           </View>
         )}
         {communityStatus === "accepted" && (

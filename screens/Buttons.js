@@ -2,7 +2,8 @@ import React from "react";
 import { onLogout } from "../modules/authentication";
 import { useDispatch } from "react-redux";
 import { TouchableHighlight, StyleSheet, Text } from "react-native";
-import { SHOW_LOGIN_FORM } from "../state/actions/actionTypes";
+import { SHOW_LOGIN_FORM, SIGN_UP } from "../state/actions/actionTypes";
+import { useNavigation } from "@react-navigation/native";
 
 const LogoutButton = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,29 @@ const LoginButton = () => {
   );
 };
 
+const SignUpButton = () => {
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  return (
+    <TouchableHighlight
+      style={styles.authButton}
+      onPress={() => {
+        navigation.navigate("Sign up", {
+          name: "Sign up",
+        });
+        dispatch({
+          type: SIGN_UP,
+          payload: { communityId: undefined },
+        });
+      }}
+    >
+      <Text id="sign-up-button" style={styles.buttonText}>
+        Sign up
+      </Text>
+    </TouchableHighlight>
+  );
+};
+
 const styles = StyleSheet.create({
   button: {
     height: 60,
@@ -50,7 +74,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontFamily: "Futura-Medium",
     fontSize: 20,
     fontWeight: "600",
   },
@@ -72,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export { LogoutButton, LoginButton };
+export { LogoutButton, LoginButton, SignUpButton };
