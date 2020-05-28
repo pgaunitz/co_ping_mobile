@@ -107,7 +107,6 @@ const cancelRequest = async (pongId, dispatch) => {
   dispatch({
     type: PONG_STATUS,
     payload: {
-      // myPongs: {},
       cancelledRequestResponse: response.data.message,
     },
   });

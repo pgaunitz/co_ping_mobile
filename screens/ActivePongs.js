@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { cancelRequest } from "modules/tripActions";
+import { cancelRequest } from "modules/requestActions";
 import { Icon } from "react-native-elements";
 import Receipt from "screens/Receipt";
 
@@ -16,31 +16,19 @@ const ActivePongs = () => {
 
   let statusColor;
   if (pongStatus === "pending") {
-    statusColor = (
-      <>
-        <Text style={styles.status}>Your request is </Text>
-        <Text style={styles.pending}>{pongStatus}</Text>
-      </>
-    );
+    statusColor = <Text style={styles.pending}>{pongStatus}</Text>;
   } else if (pongStatus === "accepted") {
-    statusColor = (
-      <>
-        <Text style={styles.status}>Your request is </Text>
-        <Text style={styles.accepted}>{pongStatus}</Text>
-      </>
-    );
+    statusColor = <Text style={styles.accepted}>{pongStatus}</Text>;
   } else {
-    statusColor = (
-      <>
-        <Text style={styles.status}>Your request is </Text>
-        <Text style={styles.rejected}>{pongStatus}</Text>
-      </>
-    );
+    statusColor = <Text style={styles.rejected}>{pongStatus}</Text>;
   }
 
   return (
     <View style={styles.pong}>
-      <View style={styles.statusContainer}>{statusColor}</View>
+      <View style={styles.statusContainer}>
+        <Text style={styles.status}>Your request is </Text>
+        {statusColor}
+      </View>
       <Text>Your neighbours number: {myPong.ping_phone}</Text>
       <View style={styles.itemContainer}>
         <Icon name="ios-cart" type="ionicon" />
@@ -59,16 +47,16 @@ const ActivePongs = () => {
         {cancelledRequestResponse ? (
           <Text id="cancel-message">{cancelledRequestResponse}</Text>
         ) : (
-          <TouchableHighlight
+          pongStatus !== "accepted" && (<TouchableHighlight
             style={styles.cancelButton}
             onPress={() => {
               cancelRequest(myPong.id, dispatch);
             }}
           >
-            <Text id={"cancel-button"} style={styles.requestButtonText}>
+            <Text id={"cancel-button"} style={styles.cancelButtonText}>
               Cancel Pong Request
             </Text>
-          </TouchableHighlight>
+          </TouchableHighlight>)
         )}
       </View>
     </View>
@@ -115,7 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  requestButtonText: {
+  cancelButtonText: {
     color: "white",
     fontSize: 15,
     fontWeight: "normal",
