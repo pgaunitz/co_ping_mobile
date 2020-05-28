@@ -1,8 +1,34 @@
 import axios from "axios";
 import AsyncStorage from "@react-native-community/async-storage";
-import { PONG_STATUS, GET_REQUEST_DETAILS } from "state/actions/actionTypes";
+import {  NEW_REQUEST, PONG_STATUS, GET_REQUEST_DETAILS } from "state/actions/actionTypes";
 
 const storage = AsyncStorage;
+
+const sendRequest = async (e, itemOne, itemTwo, itemThree, selectedTripId, userId, dispatch) => {
+  let headers = JSON.parse(
+    await storage.getItem("auth-storage")
+  )
+  e.persist()
+  let response = await axios.post(
+    "https://co-ping.herokuapp.com/pongs",
+    {
+      pong: {
+        item1: itemOne,
+        item2: itemTwo,
+        item3: itemThree,
+        ping_id: selectedTripId,
+        user_id: userId,
+      },
+    },
+    { headers: headers }
+  )
+  dispatch({
+    type: NEW_REQUEST,
+    payload: {
+      newRequestCreatedMessage: response.data.message,
+    },
+  })
+}
 
 const acceptRequest = async (pingId, pongId, dispatch) => {
   let headers = JSON.parse(await storage.getItem("auth-storage"));
@@ -86,4 +112,4 @@ const cancelRequest = async (pongId, dispatch) => {
     },
   });
 };
-export { getRequestInformation, acceptRequest, rejectRequest, cancelRequest };
+export { sendRequest, getRequestInformation, acceptRequest, rejectRequest, cancelRequest };

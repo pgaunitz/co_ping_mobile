@@ -7,9 +7,7 @@ import {
   TouchableHighlight,
 } from "react-native"
 import { useSelector, useDispatch } from "react-redux"
-import axios from "axios"
-import { NEW_REQUEST } from "state/actions/actionTypes"
-import AsyncStorage from "@react-native-community/async-storage"
+import { sendRequest } from 'modules/requestActions'
 
 const RequestForm = () => {
   const dispatch = useDispatch()
@@ -21,34 +19,6 @@ const RequestForm = () => {
   const [itemOne, onChangeItemOne] = useState("")
   const [itemTwo, onChangeItemTwo] = useState("")
   const [itemThree, onChangeItemThree] = useState("")
-
-  const storage = AsyncStorage
-
-  const sendRequest = async (e) => {
-    let headers = JSON.parse(
-      await storage.getItem("auth-storage")
-    )
-    e.persist()
-    let response = await axios.post(
-      "https://co-ping.herokuapp.com/pongs",
-      {
-        pong: {
-          item1: itemOne,
-          item2: itemTwo,
-          item3: itemThree,
-          ping_id: selectedTripId,
-          user_id: userId,
-        },
-      },
-      { headers: headers }
-    )
-    dispatch({
-      type: NEW_REQUEST,
-      payload: {
-        newRequestCreatedMessage: response.data.message,
-      },
-    })
-  }
 
   return (
     <View
@@ -80,7 +50,7 @@ const RequestForm = () => {
       <TouchableHighlight
         style={styles.button}
         onPress={(e) => {
-          sendRequest(e)
+          sendRequest(e, itemOne, itemTwo, itemThree, selectedTripId, userId, dispatch)
         }}>
         <Text id="submit-request" style={styles.buttonText}>
           Submit
