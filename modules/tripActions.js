@@ -43,7 +43,7 @@ const getTripInformation = async (userId, dispatch) => {
   }
 };
 
-const createNewTrip = async (e, userId, storevalue, date) => {
+const createNewTrip = async (e, userId, storevalue, date, dispatch) => {
   let headers = JSON.parse(await storage.getItem("auth-storage"));
   e.persist();
   let response = await axios.post(
@@ -108,4 +108,34 @@ const completeTrip = async (pingId, dispatch) => {
   });
 };
 
-export { fetchTrips, getTripInformation, createNewTrip, closeTrip, completeTrip };
+ const sendCostInformation = async (event, pongId, pingId, totalCost, dispatch) => {
+   let headers = JSON.parse(await storage.getItem("auth-storage"));
+   event.persist();
+   let response = await axios.put(
+     `https://co-ping.herokuapp.com/pongs/${pongId}`,
+     {
+       pong: {
+         ping_id: pingId,
+         total_cost: totalCost,
+       },
+     },
+     {
+       headers: headers,
+     }
+   );
+   dispatch({
+     type: GET_TRIP_DETAILS,
+     payload: {
+       costSentMessage: response.data.message,
+     },
+   });
+ };
+
+export {
+  fetchTrips,
+  getTripInformation,
+  createNewTrip,
+  closeTrip,
+  completeTrip,
+  sendCostInformation,
+};

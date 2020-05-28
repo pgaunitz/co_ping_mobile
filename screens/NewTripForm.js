@@ -78,7 +78,7 @@ const NewTripForm = () => {
               <TouchableHighlight
                 style={styles.button}
                 onPress={(e) => {
-                  createNewTrip(e, userId, storevalue, date);
+                  createNewTrip(e, userId, storevalue, date, dispatch);
                 }}
               >
                 <Text id="create-trip-button" style={styles.buttonText}>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     margin: 20,
     backgroundColor: "white",
     borderRadius: 20,
-    height: "40%",
+    height: "43%",
     marginTop: "50%",
     alignItems: "center",
     shadowColor: "#134e5e",
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     fontSize: 18,
     paddingHorizontal: 25,
-    margin: 10,
+    marginTop: 10,
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
@@ -169,12 +169,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "#71B280",
     marginHorizontal: 10,
-    marginVertical: 15,
     justifyContent: "center",
     alignItems: "center",
     padding: 8,
     width: 90,
-    height: 40
+    height: 40,
   },
   buttonText: {
     color: "#fff",
@@ -185,7 +184,14 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     flexDirection: "row",
-    marginTop: 40
+    marginTop: 40,
+  },
+  messageText: {
+    fontFamily: "Futura-Medium",
+    marginTop: 45,
+    padding: 10,
+    textAlign: "center",
+    color: "#B27183",
   },
 });
 
