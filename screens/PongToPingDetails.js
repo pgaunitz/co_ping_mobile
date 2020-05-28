@@ -71,7 +71,7 @@ const PongToPingDetails = (
             >
               <Text
                 nativeID={`reject-button-${pongId}`}
-                style={styles.rejectButtonText}
+                style={styles.requestButtonText}
               >
                 {rejectButton}
               </Text>
@@ -136,7 +136,6 @@ const PongToPingDetails = (
           </View>
           {totalCost && (
             <Text
-              style={styles.sentCostMessage}
               nativeID="cost-confirmation-message"
             >
               {costSentMessage}
@@ -253,16 +252,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 5,
     marginTop: 5,
-  },
-  rejectButtonText: {
-    color: "#fff",
-    fontSize: 15,
-    fontWeight: "normal",
-    fontFamily: "Futura-Medium",
-  },
-  sentCostMessage: {
-    fontWeight: "normal",
-    fontFamily: "Futura-Medium",
   },
 });
 
