@@ -11,7 +11,7 @@ import TripsList from "screens/TripsList";
 import Requests from "screens/Requests";
 import TripDetails from "screens/TripDetails";
 import RequestDetails from "screens/RequestDetails";
-import SignUp from "screens/SignUp";
+import SignUpDisplay from "screens/SignUpDisplay";
 import UserProfile from "screens/UserProfile";
 
 axios.defaults.baseURL = "https://co-ping.herokuapp.com";
@@ -64,7 +64,7 @@ const App = () => {
           />
           <Stack.Screen
             name="Sign up"
-            component={SignUp}
+            component={SignUpDisplay}
             options={invisibleHeader}
           />
           <Stack.Screen
