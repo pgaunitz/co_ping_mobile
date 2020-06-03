@@ -8,11 +8,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         ...action.payload,
         showTripForm: true,
+        completeTripMessage: null
       };
     case actionTypes.CLOSE_NEW_TRIP_FORM:
       return {
         ...state,
         showTripForm: false,
+        newTripCreatedMessage: ''
       };
     case actionTypes.SHOW_LOGIN_FORM:
       return {
