@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { onLogin } from "../modules/authentication";
-import LoadingLittleGuy from "./LoadingLittleGuy";
+import LoadingLittleGuy from "../components/LoadingLittleGuy";
 
 const Stack = createStackNavigator();
 

@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableHighlight } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { cancelRequest } from "modules/requestActions";
 import { Icon } from "react-native-elements";
-import Receipt from "screens/Receipt";
+import Receipt from "../components/Receipt";
 
 const ActivePongs = () => {
   const dispatch = useDispatch();

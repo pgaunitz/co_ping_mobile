@@ -2,8 +2,8 @@ import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { View, StyleSheet, Text } from "react-native";
 import { useSelector } from "react-redux";
-import SignUpForm from "./SignUpForm";
-import SignUpCommunityCode from "./SignUpCommunityCode";
+import SignUpForm from "../components/SignUpForm";
+import SignUpCommunityCode from "../components/SignUpCommunityCode";
 
 const SignUpDisplay = ({ navigation }) => {
   const communityId = useSelector((state) => state.communityId);

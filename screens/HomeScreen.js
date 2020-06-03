@@ -17,7 +17,7 @@ import {
   PingBoardButton,
   PongBoardButton,
   ProfileButton
-} from "./HomeScreenButtons";
+} from "../components/HomeScreenButtons";
 
 const HomeScreen = () => {
   const authenticated = useSelector((state) => state.authenticated);

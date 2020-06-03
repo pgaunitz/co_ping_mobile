@@ -10,7 +10,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { getTripInformation, completeTrip } from "../modules/tripActions";
 import { PongToPingDetails } from "./PongToPingDetails";
-import TripDetailsHeader from "./TripDetailsHeader";
+import TripDetailsHeader from "../components/TripDetailsHeader";
 
 const TripDetails = () => {
   const dispatch = useDispatch();
