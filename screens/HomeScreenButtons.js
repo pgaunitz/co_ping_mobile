@@ -6,7 +6,7 @@ import { SHOW_LOGIN_FORM, SIGN_UP, AUTHENTICATE } from "../state/actions/actionT
 import { useNavigation } from "@react-navigation/native";
 import { fetchTrips } from "../modules/tripActions";
 import { getRequestInformation } from '../modules/requestActions'
-import { getProfileInformation } from "../modules/userAction";
+import { getProfileInformation } from "../modules/profileActions";
 
 const LogoutButton = () => {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateProfileInformation } from "modules/userAction";
+import { updateProfileInformation } from "modules/profileActions";
 import {
   View,
   Text,
@@ -183,7 +183,6 @@ const styles = StyleSheet.create({
     fontFamily: "Futura-Medium",
   },
   statusContainer: {
-    // flex: 1,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
