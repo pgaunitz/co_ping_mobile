@@ -1,27 +1,25 @@
-import "react-native-gesture-handler"
-import * as React from "react"
-import { Provider } from "react-redux"
-import configureStore from "state/store/configureStore"
+import "react-native-gesture-handler";
+import * as React from "react";
+import { Provider } from "react-redux";
+import configureStore from "state/store/configureStore";
+import axios from "axios";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+// Components for stack navigation
+import HomeScreen from "screens/HomeScreen";
+import TripsList from "screens/TripsList";
+import Requests from "screens/Requests";
+import TripDetails from "screens/TripDetails";
+import RequestDetails from "screens/RequestDetails";
+import SignUpDisplay from "screens/SignUpDisplay";
+import UserProfile from "screens/UserProfile";
 
-import axios from "axios"
-import TripsList from "screens/TripsList"
-import { NavigationContainer } from "@react-navigation/native"
-import { createStackNavigator } from "@react-navigation/stack"
-import Requests from "screens/Requests"
-import TripDetails from "screens/TripDetails"
-import RequestDetails from "screens/RequestDetails"
-import SignUp from "screens/SignUp"
-import UserProfile from "screens/UserProfile"
-import HomeScreen from "screens/HomeScreen"
+axios.defaults.baseURL = "https://co-ping.herokuapp.com";
 
+const store = configureStore();
+window.store = store;
 
-axios.defaults.baseURL = "https://co-ping.herokuapp.com"
-
-const store = configureStore()
-window.store = store
-
-
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 const invisibleHeader = {
   headerTransparent: true,
   headerStyle: { borderBottomWidth: 0 },
@@ -29,8 +27,8 @@ const invisibleHeader = {
   headerTitleStyle: {
     fontWeight: "normal",
   },
-  title: ""
-}
+  title: "",
+};
 
 const App = () => {
   return (
@@ -58,7 +56,6 @@ const App = () => {
             name="My Ping Board"
             component={TripDetails}
             options={invisibleHeader}
-
           />
           <Stack.Screen
             name="My Pong Board"
@@ -67,7 +64,7 @@ const App = () => {
           />
           <Stack.Screen
             name="Sign up"
-            component={SignUp}
+            component={SignUpDisplay}
             options={invisibleHeader}
           />
           <Stack.Screen
@@ -78,11 +75,11 @@ const App = () => {
         </Stack.Navigator>
       </Provider>
     </NavigationContainer>
-  )
-}
+  );
+};
 
 if (window.Cypress) {
-  window.store = store
+  window.store = store;
 }
 
-export default App
+export default App;

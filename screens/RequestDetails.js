@@ -1,19 +1,19 @@
-import React, { useEffect } from "react"
-import { LinearGradient } from "expo-linear-gradient"
-import { View, StyleSheet, Text } from "react-native"
-import { useSelector, useDispatch } from "react-redux"
-import { getRequestInformation } from "modules/tripActions"
-import ActivePongs from "screens/ActivePongs"
+import React, { useEffect } from "react";
+import { LinearGradient } from "expo-linear-gradient";
+import { View, StyleSheet, Text } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { getRequestInformation } from "modules/requestActions";
+import ActivePongs from "screens/ActivePongs";
 
 const RequestDetails = () => {
-  const dispatch = useDispatch()
-  const userId = useSelector((state) => state.userId)
+  const dispatch = useDispatch();
+  const userId = useSelector((state) => state.userId);
 
   useEffect(() => {
-    getRequestInformation(userId, dispatch)
-  }, [])
+    getRequestInformation(userId, dispatch);
+  }, []);
 
-  const myPongMessage = useSelector((state) => state.myPongMessage)
+  const myPongMessage = useSelector((state) => state.myPongMessage);
 
   return (
     <View style={styles.container} nativeID="request-form">
@@ -31,8 +31,8 @@ const RequestDetails = () => {
         )}
       </LinearGradient>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
-})
+});
 
-export default RequestDetails
+export default RequestDetails;

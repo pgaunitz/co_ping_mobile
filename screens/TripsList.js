@@ -4,23 +4,19 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView,
   FlatList,
-  TouchableHighlight
+  TouchableHighlight,
 } from "react-native";
-import {
-  NEW_TRIP_FORM,
-  SELECTED_TRIP_ID,
-} from "../state/actions/actionTypes"
+import { NEW_TRIP_FORM, SELECTED_TRIP_ID } from "../state/actions/actionTypes";
 
 import NewTripForm from "screens/NewTripForm";
 import { LinearGradient } from "expo-linear-gradient";
 
 const TripsList = ({ navigation }) => {
   const dispatch = useDispatch();
-  const authenticated = useSelector(state => state.authenticated);
-  const trips = useSelector(state => state.trips);
-  const tripMessage = useSelector(state => state.tripMessage);
+  const authenticated = useSelector((state) => state.authenticated);
+  const trips = useSelector((state) => state.trips);
+  const tripMessage = useSelector((state) => state.tripMessage);
   const newTrip = () => {
     dispatch({ type: NEW_TRIP_FORM });
   };
@@ -44,20 +40,19 @@ const TripsList = ({ navigation }) => {
               dispatch({
                 type: SELECTED_TRIP_ID,
                 payload: { selectedTripId: id },
-              })
+              });
               navigation.navigate("Requests", {
                 name: "Requests",
-              })
-            }}>
-            <Text
-              id="trip-button"
-              style={styles.requestButtonText}>
+              });
+            }}
+          >
+            <Text id="trip-button" style={styles.requestButtonText}>
               {requestButton}
             </Text>
           </TouchableHighlight>
         </View>
       </View>
-    )
+    );
   };
 
   return (
@@ -170,8 +165,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "#71B280",
     marginBottom: "auto",
-    paddingTop: 16,
-    paddingBottom: 18,
+    paddingVertical: 14,
     width: "40%",
     justifyContent: "center",
     alignItems: "center",
@@ -185,8 +179,8 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: "row",
     marginHorizontal: 5,
-    marginVertical: 10
+    marginVertical: 10,
   },
-})
+});
 
 export default TripsList;

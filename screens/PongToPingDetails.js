@@ -1,20 +1,15 @@
-import React, { useState } from "react"
-import { GET_TRIP_DETAILS } from "../state/actions/actionTypes"
-import { useSelector, useDispatch } from "react-redux"
-import { Icon, CheckBox } from "react-native-elements"
-import AsyncStorage from "@react-native-community/async-storage"
-import axios from "axios"
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Icon, CheckBox } from "react-native-elements";
 import {
   View,
   StyleSheet,
   Text,
   TouchableHighlight,
   TextInput,
-} from "react-native"
-import {
-  acceptRequest,
-  rejectRequest,
-} from "modules/tripActions"
+} from "react-native";
+import { acceptRequest, rejectRequest } from "modules/requestActions";
+import { sendCostInformation } from "modules/tripActions";
 
 const PongToPingDetails = (
   pongId,
@@ -27,43 +22,14 @@ const PongToPingDetails = (
   rejectButton,
   status
 ) => {
-  let pong
-  const pingId = useSelector((state) => state.userTrip.id)
-  const costSentMessage = useSelector(
-    (state) => state.costSentMessage
-  )
-  const dispatch = useDispatch()
-  const storage = AsyncStorage
-  const [totalCost, setTotalCost] = useState()
-  const [checkedOne, setCheckedOne] = useState(false)
-  const [checkedTwo, setCheckedTwo] = useState(false)
-  const [checkedThree, setCheckedThree] = useState(false)
-
-  
-  const sendCostInformation = async (event, pongId) => {
-    let headers = JSON.parse(
-      await storage.getItem("auth-storage")
-    )
-    event.persist()
-    let response = await axios.put(
-      `https://co-ping.herokuapp.com/pongs/${pongId}`,
-      {
-        pong: {
-          ping_id: pingId,
-          total_cost: totalCost,
-        },
-      },
-      {
-        headers: headers,
-      }
-    )
-    dispatch({
-      type: GET_TRIP_DETAILS,
-      payload: {
-        costSentMessage: response.data.message,
-      },
-    })
-  }
+  let pong;
+  const pingId = useSelector((state) => state.userTrip.id);
+  const costSentMessage = useSelector((state) => state.costSentMessage);
+  const dispatch = useDispatch();
+  const [totalCost, setTotalCost] = useState();
+  const [checkedOne, setCheckedOne] = useState(false);
+  const [checkedTwo, setCheckedTwo] = useState(false);
+  const [checkedThree, setCheckedThree] = useState(false);
 
   switch (status) {
     case "pending":
@@ -105,7 +71,7 @@ const PongToPingDetails = (
             >
               <Text
                 nativeID={`reject-button-${pongId}`}
-                style={styles.rejectButtonText}
+                style={styles.requestButtonText}
               >
                 {rejectButton}
               </Text>
@@ -122,17 +88,18 @@ const PongToPingDetails = (
             style={styles.item}
             title={itemOne}
             onPress={() => {
-              setCheckedOne(checkedOne === true ? false : true)
+              setCheckedOne(checkedOne === true ? false : true);
             }}
             checked={checkedOne}
           />
           {itemTwo !== "" && (
-            <CheckBox style={styles.item} 
-            title={itemTwo} 
-            onPress={() => {
-              setCheckedTwo(checkedTwo === true ? false : true)
-            }}
-            checked={checkedTwo}
+            <CheckBox
+              style={styles.item}
+              title={itemTwo}
+              onPress={() => {
+                setCheckedTwo(checkedTwo === true ? false : true);
+              }}
+              checked={checkedTwo}
             />
           )}
           {itemThree !== "" && (
@@ -140,14 +107,15 @@ const PongToPingDetails = (
               style={styles.item}
               title={itemThree}
               onPress={() => {
-                setCheckedThree(checkedThree === true ? false : true)
+                setCheckedThree(checkedThree === true ? false : true);
               }}
               checked={checkedThree}
             />
           )}
           <View
             id={`total-cost-container-${pongId}`}
-            style={styles.costContainer}>
+            style={styles.costContainer}
+          >
             <Text style={styles.item}>Total cost: </Text>
             <TextInput
               style={styles.costInput}
@@ -158,29 +126,24 @@ const PongToPingDetails = (
             <TouchableHighlight
               style={styles.sendButton}
               onPress={(event) => {
-                sendCostInformation(event, pongId)
-              }}>
-              <Text
-                style={styles.buttonText}
-                id={`send-cost-button-${pongId}`}>
+                sendCostInformation(event, pongId, pingId, totalCost, dispatch);
+              }}
+            >
+              <Text style={styles.buttonText} id={`send-cost-button-${pongId}`}>
                 Send
               </Text>
             </TouchableHighlight>
           </View>
           {totalCost && (
-            <Text
-              style={styles.sentCostMessage}
-              nativeID="cost-confirmation-message">
-              {costSentMessage}
-            </Text>
+            <Text nativeID="cost-confirmation-message">{costSentMessage}</Text>
           )}
         </View>
-      )
+      );
     case "rejected":
-      return (pong = <View></View>)
+      return (pong = <View></View>);
   }
-  return { pong }
-}
+  return { pong };
+};
 const styles = StyleSheet.create({
   title: {
     textAlign: "center",
@@ -286,16 +249,6 @@ const styles = StyleSheet.create({
     padding: 5,
     marginTop: 5,
   },
-  rejectButtonText: {
-    color: "#fff",
-    fontSize: 15,
-    fontWeight: "normal",
-    fontFamily: "Futura-Medium",
-  },
-  sentCostMessage: {
-    fontWeight: "normal",
-    fontFamily: "Futura-Medium",
-  },
 });
 
-export { PongToPingDetails }
+export { PongToPingDetails };

@@ -5,25 +5,25 @@ import {
   StyleSheet,
   Text,
   FlatList,
-  TouchableHighlight
+  TouchableHighlight,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { getTripInformation, completeTrip } from "../modules/tripActions";
 import { PongToPingDetails } from "./PongToPingDetails";
-import TripDetailsHeader from "./TripDetailsHeader";
+import TripDetailsHeader from "../components/TripDetailsHeader";
 
 const TripDetails = () => {
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.userId);
+  const userId = useSelector((state) => state.userId);
 
   useEffect(() => {
     getTripInformation(userId, dispatch);
   }, []);
 
-  const myPongs = useSelector(state => state.myPongs);
-  const pingId = useSelector(state => state.userTrip.id);
+  const myPongs = useSelector((state) => state.myPongs);
+  const pingId = useSelector((state) => state.userTrip.id);
   const emptyPingId = useSelector((state) => state.emptyPingId);
-  const completeTripMessage = useSelector(state => state.completeTripMessage);
+  const completeTripMessage = useSelector((state) => state.completeTripMessage);
 
   const Item = ({
     pongId,
@@ -34,20 +34,18 @@ const TripDetails = () => {
     itemThree,
     acceptButton,
     rejectButton,
-    status
+    status,
   }) => {
-    return (
-      PongToPingDetails(
-        pongId,
-        name,
-        phone,
-        itemOne,
-        itemTwo,
-        itemThree,
-        acceptButton,
-        rejectButton,
-        status
-      )
+    return PongToPingDetails(
+      pongId,
+      name,
+      phone,
+      itemOne,
+      itemTwo,
+      itemThree,
+      acceptButton,
+      rejectButton,
+      status
     );
   };
 
@@ -65,8 +63,8 @@ const TripDetails = () => {
             {completeTripMessage}
           </Text>
         ) : (
-            <TripDetailsHeader />
-          )}
+          <TripDetailsHeader />
+        )}
         <FlatList
           data={myPongs}
           renderItem={({ item, index }) => (
@@ -84,17 +82,19 @@ const TripDetails = () => {
           )}
           keyExtractor={(item, index) => index.toString()}
           id="request"
-        />      
-        <TouchableHighlight
-          style={styles.completeButton}
-          onPress={() => {
-            completeTrip((pingId || emptyPingId), dispatch);
-          }}
-        >
-          <Text style={styles.buttonText} id="complete-button">
-            Complete Trip
-          </Text>
-        </TouchableHighlight>
+        />
+        {completeTripMessage !== "Your trip is completed" && (
+          <TouchableHighlight
+            style={styles.completeButton}
+            onPress={() => {
+              completeTrip(pingId || emptyPingId, dispatch);
+            }}
+          >
+            <Text style={styles.buttonText} id="complete-button">
+              Complete Trip
+            </Text>
+          </TouchableHighlight>
+        )}
       </LinearGradient>
     </View>
   );
@@ -156,6 +156,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 5,
   },
-})
+});
 
 export default TripDetails;

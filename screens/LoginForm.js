@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { onLogin } from "../modules/authentication";
-import LoadingLittleGuy from "./LoadingLittleGuy";
+import LoadingLittleGuy from "../components/LoadingLittleGuy";
 
 const Stack = createStackNavigator();
 
@@ -120,11 +120,14 @@ const styles = StyleSheet.create({
   loginInput: {
     fontSize: 18,
     paddingVertical: 10,
+    paddingLeft: 5,
     width: 250,
     margin: 4,
     alignItems: "flex-start",
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
+    backgroundColor: "#f0f4f7",
+    borderRadius: 5,
   },
   closeButton: {
     borderRadius: 5,
