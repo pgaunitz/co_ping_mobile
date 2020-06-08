@@ -1,29 +1,25 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
   Text,
   TextInput,
   TouchableHighlight,
-} from "react-native"
-import { useSelector, useDispatch } from "react-redux"
-import { sendRequest } from 'modules/requestActions'
+} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { sendRequest } from "modules/requestActions";
 
 const RequestForm = () => {
-  const dispatch = useDispatch()
-  const selectedTripId = useSelector(
-    (state) => state.selectedTripId
-  )
-  const userId = useSelector((state) => state.userId)
+  const dispatch = useDispatch();
+  const selectedTripId = useSelector((state) => state.selectedTripId);
+  const userId = useSelector((state) => state.userId);
 
-  const [itemOne, onChangeItemOne] = useState("")
-  const [itemTwo, onChangeItemTwo] = useState("")
-  const [itemThree, onChangeItemThree] = useState("")
+  const [itemOne, onChangeItemOne] = useState("");
+  const [itemTwo, onChangeItemTwo] = useState("");
+  const [itemThree, onChangeItemThree] = useState("");
 
   return (
-    <View
-      style={styles.requestPage}
-      nativeID="request-form">
+    <View style={styles.requestPage} nativeID="request-form">
       <TextInput
         placeholder="First item..."
         style={styles.itemInput}
@@ -43,22 +39,29 @@ const RequestForm = () => {
         style={styles.itemInput}
         id="item-three"
         value={itemThree}
-        onChangeText={(itemThree) =>
-          onChangeItemThree(itemThree)
-        }
+        onChangeText={(itemThree) => onChangeItemThree(itemThree)}
       />
       <TouchableHighlight
         style={styles.button}
         onPress={(e) => {
-          sendRequest(e, itemOne, itemTwo, itemThree, selectedTripId, userId, dispatch)
-        }}>
+          sendRequest(
+            e,
+            itemOne,
+            itemTwo,
+            itemThree,
+            selectedTripId,
+            userId,
+            dispatch
+          );
+        }}
+      >
         <Text id="submit-request" style={styles.buttonText}>
           Submit
         </Text>
       </TouchableHighlight>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   itemInput: {
@@ -105,6 +108,6 @@ const styles = StyleSheet.create({
   requestPage: {
     alignItems: "center",
   },
-})
+});
 
-export default RequestForm
+export default RequestForm;

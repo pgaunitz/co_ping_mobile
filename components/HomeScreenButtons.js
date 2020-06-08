@@ -2,10 +2,14 @@ import React from "react";
 import { onLogout } from "../modules/authentication";
 import { useDispatch, useSelector } from "react-redux";
 import { TouchableHighlight, StyleSheet, Text } from "react-native";
-import { SHOW_LOGIN_FORM, SIGN_UP, AUTHENTICATE } from "../state/actions/actionTypes";
+import {
+  SHOW_LOGIN_FORM,
+  SIGN_UP,
+  AUTHENTICATE,
+} from "../state/actions/actionTypes";
 import { useNavigation } from "@react-navigation/native";
 import { fetchTrips } from "../modules/tripActions";
-import { getRequestInformation } from '../modules/requestActions'
+import { getRequestInformation } from "../modules/requestActions";
 import { getProfileInformation } from "../modules/profileActions";
 
 const LogoutButton = () => {
@@ -124,22 +128,22 @@ const ProfileButton = () => {
   const navigation = useNavigation();
   return (
     <TouchableHighlight
-            style={styles.button}
-            onPress={() => {
-              navigation.navigate("My Profile", {
-                name: "My Profile",
-              });
-              dispatch({
-                type: AUTHENTICATE,
-                payload: { updateProfileMessage: "" },
-              });
-              getProfileInformation(userId, dispatch);
-            }}
-          >
-            <Text id="profile-button" style={styles.buttonText}>
-              My Profile
-            </Text>
-          </TouchableHighlight>
+      style={styles.button}
+      onPress={() => {
+        navigation.navigate("My Profile", {
+          name: "My Profile",
+        });
+        dispatch({
+          type: AUTHENTICATE,
+          payload: { updateProfileMessage: "" },
+        });
+        getProfileInformation(userId, dispatch);
+      }}
+    >
+      <Text id="profile-button" style={styles.buttonText}>
+        My Profile
+      </Text>
+    </TouchableHighlight>
   );
 };
 
@@ -189,5 +193,5 @@ export {
   TripPingsButton,
   PingBoardButton,
   PongBoardButton,
-  ProfileButton
+  ProfileButton,
 };

@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
     backgroundColor: "#f0f4f7",
-    borderRadius: 5
+    borderRadius: 5,
   },
   closeButton: {
     borderRadius: 5,

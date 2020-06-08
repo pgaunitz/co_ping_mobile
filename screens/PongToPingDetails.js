@@ -135,11 +135,7 @@ const PongToPingDetails = (
             </TouchableHighlight>
           </View>
           {totalCost && (
-            <Text
-              nativeID="cost-confirmation-message"
-            >
-              {costSentMessage}
-            </Text>
+            <Text nativeID="cost-confirmation-message">{costSentMessage}</Text>
           )}
         </View>
       );

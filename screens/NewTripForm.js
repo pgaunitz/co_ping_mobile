@@ -12,12 +12,11 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { CLOSE_NEW_TRIP_FORM } from "state/actions/actionTypes";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { createNewTrip } from 'modules/tripActions'
-
+import { createNewTrip } from "modules/tripActions";
 
 const NewTripForm = () => {
   const dispatch = useDispatch();
-  const showTripForm = useSelector((state) => state.showTripForm)
+  const showTripForm = useSelector((state) => state.showTripForm);
   const newTripCreatedMessage = useSelector(
     (state) => state.newTripCreatedMessage
   );
@@ -69,30 +68,26 @@ const NewTripForm = () => {
                 style={styles.button}
                 onPress={showDatePicker}
               />
-              <TextInput
-                style={styles.dateInput}
-                id="date"
-                value={date}
-              />
+              <TextInput style={styles.dateInput} id="date" value={date} />
               <View style={styles.buttonContainer}>
-              <TouchableHighlight
-                style={styles.button}
-                onPress={(e) => {
-                  createNewTrip(e, userId, storevalue, date, dispatch);
-                }}
-              >
-                <Text id="create-trip-button" style={styles.buttonText}>
-                  Create
-                </Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={styles.button}
-                onPress={() => dispatch({ type: CLOSE_NEW_TRIP_FORM })}
-              >
-                <Text id="close-trip-form" style={styles.buttonText}>
-                  Close
-                </Text>
-              </TouchableHighlight>
+                <TouchableHighlight
+                  style={styles.button}
+                  onPress={(e) => {
+                    createNewTrip(e, userId, storevalue, date, dispatch);
+                  }}
+                >
+                  <Text id="create-trip-button" style={styles.buttonText}>
+                    Create
+                  </Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                  style={styles.button}
+                  onPress={() => dispatch({ type: CLOSE_NEW_TRIP_FORM })}
+                >
+                  <Text id="close-trip-form" style={styles.buttonText}>
+                    Close
+                  </Text>
+                </TouchableHighlight>
               </View>
               <Text id="new-trip-message" style={styles.messageText}>
                 {newTripCreatedMessage}

@@ -1,9 +1,9 @@
-import React from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { View, Text, StyleSheet } from "react-native"
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { View, Text, StyleSheet } from "react-native";
 
 const Receipt = () => {
-  const myPong = useSelector((state) => state.myPong)
+  const myPong = useSelector((state) => state.myPong);
   return (
     <View style={styles.costContainer}>
       <Text style={styles.totalCost}>Total cost:</Text>
@@ -12,8 +12,8 @@ const Receipt = () => {
         {myPong.total_cost}
       </Text>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   costContainer: {
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     margin: 2,
     fontFamily: "Futura-Medium",
   },
-})
+});
 
-export default Receipt
+export default Receipt;

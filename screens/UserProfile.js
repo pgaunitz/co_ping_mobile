@@ -6,19 +6,21 @@ import {
   Text,
   StyleSheet,
   TouchableHighlight,
-  TextInput
+  TextInput,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.userId);
-  const userName = useSelector(state => state.userName);
-  const communityStatus = useSelector(state => state.communityStatus);
-  const phone = useSelector(state => state.phone);
-  const userAddress = useSelector(state => state.userAddress);
-  const aboutMe = useSelector(state => state.aboutMe);
-  const updateProfileMessage = useSelector(state => state.updateProfileMessage)
+  const userId = useSelector((state) => state.userId);
+  const userName = useSelector((state) => state.userName);
+  const communityStatus = useSelector((state) => state.communityStatus);
+  const phone = useSelector((state) => state.phone);
+  const userAddress = useSelector((state) => state.userAddress);
+  const aboutMe = useSelector((state) => state.aboutMe);
+  const updateProfileMessage = useSelector(
+    (state) => state.updateProfileMessage
+  );
 
   const [name, onChangeName] = useState();
   const [address, onChangeAddress] = useState();
@@ -58,14 +60,16 @@ const UserProfile = () => {
         end={{ x: 1, y: 0 }}
       >
         <Text style={styles.title}>Profile Details</Text>
-        <Text style={styles.updateNote} id="profile-update-message">{updateProfileMessage}</Text>
+        <Text style={styles.updateNote} id="profile-update-message">
+          {updateProfileMessage}
+        </Text>
         <View style={styles.profile}>
           <TextInput
             style={styles.dataNameInput}
             nativeID="user-name"
             textContentType="name"
             value={userName}
-            onChangeText={name => onChangeName(name)}
+            onChangeText={(name) => onChangeName(name)}
           />
           <View style={styles.statusContainer}>{statusColor}</View>
           <View style={styles.itemContainer}>
@@ -75,7 +79,7 @@ const UserProfile = () => {
               nativeID="user-phone"
               textContentType="telephoneNumber"
               value={phone}
-              onChangeText={telephone => onChangeTelephone(telephone)}
+              onChangeText={(telephone) => onChangeTelephone(telephone)}
             />
           </View>
           <View style={styles.itemContainer}>
@@ -87,7 +91,7 @@ const UserProfile = () => {
               multiline={true}
               maxLength={100}
               value={userAddress}
-              onChangeText={address => onChangeAddress(address)}
+              onChangeText={(address) => onChangeAddress(address)}
             />
           </View>
           <View style={styles.itemContainer}>
@@ -98,13 +102,20 @@ const UserProfile = () => {
               multiline={true}
               maxLength={250}
               value={aboutMe}
-              onChangeText={about => onChangeAbout(about)}
+              onChangeText={(about) => onChangeAbout(about)}
             />
           </View>
           <TouchableHighlight
             style={styles.request}
             onPress={() => {
-              updateProfileInformation(name, address, telephone, about, userId, dispatch);
+              updateProfileInformation(
+                name,
+                address,
+                telephone,
+                about,
+                userId,
+                dispatch
+              );
             }}
           >
             <Text id="update-profile-button" style={styles.requestButtonText}>
@@ -148,7 +159,7 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
     backgroundColor: "#f0f4f7",
-    borderRadius: 5
+    borderRadius: 5,
   },
   dataInputText: {
     borderColor: "grey",
@@ -157,7 +168,7 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
     backgroundColor: "#f0f4f7",
-    borderRadius: 5
+    borderRadius: 5,
   },
   dataInputAddress: {
     borderColor: "grey",
@@ -166,7 +177,7 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
     backgroundColor: "#f0f4f7",
-    borderRadius: 5
+    borderRadius: 5,
   },
   dataNameInput: {
     fontWeight: "bold",
@@ -176,7 +187,7 @@ const styles = StyleSheet.create({
     margin: 5,
     fontFamily: "Futura-Medium",
     backgroundColor: "#f0f4f7",
-    borderRadius: 5
+    borderRadius: 5,
   },
   profileItem: {
     fontWeight: "bold",
@@ -239,6 +250,6 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
-})
+});
 
 export default UserProfile;

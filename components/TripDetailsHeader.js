@@ -5,16 +5,16 @@ import { closeTrip, getTripInformation } from "modules/tripActions";
 
 const TripDetailsHeader = () => {
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.userId);
+  const userId = useSelector((state) => state.userId);
 
   useEffect(() => {
     getTripInformation(userId, dispatch);
   }, []);
 
-  const noPongsMessage = useSelector(state => state.noPongsMessage);
-  const closeTripMessage = useSelector(state => state.closeTripMessage);
-  const userTrip = useSelector(state => state.userTrip);
-  const pingId = useSelector(state => state.userTrip.id);
+  const noPongsMessage = useSelector((state) => state.noPongsMessage);
+  const closeTripMessage = useSelector((state) => state.closeTripMessage);
+  const userTrip = useSelector((state) => state.userTrip);
+  const pingId = useSelector((state) => state.userTrip.id);
 
   let pingBoardMessage;
   if (noPongsMessage === "") {
@@ -83,6 +83,6 @@ const styles = StyleSheet.create({
     fontWeight: "normal",
     fontFamily: "Futura-Medium",
   },
-})
+});
 
 export default TripDetailsHeader;

@@ -1,11 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import {
-  View,
-  StyleSheet,
-  Text,
-  Image,
-} from "react-native";
+import { View, StyleSheet, Text, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Logo from "../assets/images/co_ping_Logo2.png";
 import LoginForm from "./LoginForm";
@@ -16,7 +11,7 @@ import {
   TripPingsButton,
   PingBoardButton,
   PongBoardButton,
-  ProfileButton
+  ProfileButton,
 } from "../components/HomeScreenButtons";
 
 const HomeScreen = () => {
@@ -62,7 +57,7 @@ const styles = StyleSheet.create({
     width: 250,
     height: 100,
     alignSelf: "center",
-    marginTop: 50
+    marginTop: 50,
   },
   authMessage: {
     textAlign: "center",
@@ -70,12 +65,12 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white",
     fontWeight: "normal",
-    marginVertical: 15
+    marginVertical: 15,
   },
   authContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
 });
 

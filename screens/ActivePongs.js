@@ -47,16 +47,18 @@ const ActivePongs = () => {
         {cancelledRequestResponse ? (
           <Text id="cancel-message">{cancelledRequestResponse}</Text>
         ) : (
-          pongStatus !== "accepted" && (<TouchableHighlight
-            style={styles.cancelButton}
-            onPress={() => {
-              cancelRequest(myPong.id, dispatch);
-            }}
-          >
-            <Text id={"cancel-button"} style={styles.cancelButtonText}>
-              Cancel Pong Request
-            </Text>
-          </TouchableHighlight>)
+          pongStatus !== "accepted" && (
+            <TouchableHighlight
+              style={styles.cancelButton}
+              onPress={() => {
+                cancelRequest(myPong.id, dispatch);
+              }}
+            >
+              <Text id={"cancel-button"} style={styles.cancelButtonText}>
+                Cancel Pong Request
+              </Text>
+            </TouchableHighlight>
+          )
         )}
       </View>
     </View>
